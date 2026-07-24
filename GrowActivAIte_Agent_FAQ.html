@@ -462,22 +462,22 @@
     <details>
       <summary><span class="q-label">Q2</span>How do I access the GrowActivAIte platform?</summary>
       <div class="answer">
-        <p>Access is granted through the Accenture internal delivery portal. Follow these steps:</p>
-        <ol>
-          <li>Navigate to the GrowActivAIte platform URL provided by your Engagement Lead or AI Delivery Lead.</li>
-          <li>Sign in using your <strong>Accenture Enterprise ID</strong> (myID) credentials via single sign-on (SSO).</li>
-          <li>Confirm you have been assigned the appropriate role in the project workspace (e.g., Functional Consultant, Technical Developer, Delivery Lead).</li>
-          <li>If you cannot log in, raise an access request through your project's IT Service Desk ticket or contact your AI Delivery Lead directly.</li>
-        </ol>
-        <div class="info-box">Access to individual agents may be role-gated. If an agent tile appears locked, request the relevant role from your Delivery Lead.</div>
+        <p>The platform is <strong>publicly accessible</strong> — no login, SSO, or Accenture credentials are required to open it. Simply open the link in any modern browser:</p>
+        <div class="info-box"><strong>Platform URL:</strong> <a href="https://sapsb98.github.io/CodeX/" target="_blank">https://sapsb98.github.io/CodeX/</a></div>
+        <p>Note that individual agents may have their own credential requirements once launched:</p>
+        <ul>
+          <li><strong>Claude.ai-hosted agents</strong> — require a Claude.ai account when you click Launch</li>
+          <li><strong>Accenture Media Exchange / SharePoint links</strong> — require your Accenture credentials</li>
+        </ul>
       </div>
     </details>
 
     <details>
       <summary><span class="q-label">Q3</span>Do I need a Claude.ai account to use these agents?</summary>
       <div class="answer">
-        <p>Some agents in GrowActivAIte are powered by Anthropic's Claude AI model accessed through Accenture's enterprise licence. You do <strong>not</strong> need a personal Claude.ai account. The platform manages model authentication on your behalf via the enterprise API key.</p>
-        <p>However, you must be connected to the Accenture network (or VPN) so that the platform's backend services can authenticate with the model provider. Using a personal Claude.ai account outside the platform is not supported and would not have access to Accenture's project-specific prompt templates or data.</p>
+        <p><strong>Yes, for most agents.</strong> The majority of agents in GrowActivAIte are hosted directly on Claude.ai as artifacts. When you click <em>Launch Agent</em>, it opens Claude.ai in your browser and you will need to sign in with a Claude.ai account.</p>
+        <p>The GrowActivAIte platform itself (the dashboard) requires no account — it is just a navigator to the agents. The Claude.ai account requirement kicks in only when you launch an individual agent.</p>
+        <div class="info-box">If you do not have a Claude.ai account, sign up at <a href="https://claude.ai" target="_blank">claude.ai</a> using your preferred email.</div>
       </div>
     </details>
 
@@ -498,8 +498,13 @@
     <details>
       <summary><span class="q-label">Q5</span>Can I use GrowActivAIte outside the Accenture network?</summary>
       <div class="answer">
-        <p>Yes, with conditions. You must connect via <strong>Accenture VPN (myAccess)</strong> when working outside an Accenture office or client site. Without VPN, authentication will fail and agent API calls will be blocked by network policy.</p>
-        <p>If your project requires client-side access (e.g., a client consultant using the agents), your Delivery Lead must raise a <strong>client access provisioning request</strong> through the AI Delivery team.</p>
+        <p><strong>Yes, fully.</strong> The GrowActivAIte platform is hosted on GitHub Pages and is publicly accessible from any network, anywhere in the world — no VPN required.</p>
+        <p>However, some content linked from the platform does require Accenture credentials or VPN:</p>
+        <ul>
+          <li><strong>Accenture Media Exchange videos</strong> (e.g., Joule demo videos) — require Accenture login</li>
+          <li><strong>Accenture SharePoint / Stream links</strong> — require Accenture credentials and may need VPN depending on your location</li>
+          <li><strong>Claude.ai agents</strong> — accessible from any network with a Claude.ai account</li>
+        </ul>
       </div>
     </details>
 
@@ -518,12 +523,17 @@
     <details>
       <summary><span class="q-label">Q7</span>How do I report a bug, incorrect output, or platform issue?</summary>
       <div class="answer">
-        <p>Use the in-app <strong>Feedback</strong> button (bottom-right corner of each agent screen) to submit issue reports. For urgent issues:</p>
+        <p>There is no formal ticketing system in place yet. If you encounter a bug, an unexpected output, or any platform issue, please reach out directly to the team via email:</p>
+        <ul>
+          <li><strong>Arpit Srivastava</strong> — <a href="mailto:arpit.c.srivastava@accenture.com">arpit.c.srivastava@accenture.com</a></li>
+          <li><strong>Swarnali Basu</strong> — <a href="mailto:swarnali.basu@accenture.com">swarnali.basu@accenture.com</a></li>
+        </ul>
+        <p>When reaching out, please include:</p>
         <ol>
-          <li>Capture a screenshot and note the agent name, input provided, and the unexpected output or error message.</li>
-          <li>Log a ticket in the project's <strong>ServiceNow</strong> instance under Category: <em>GrowActivAIte Platform Issue</em>.</li>
-          <li>Tag your <strong>AI Delivery Lead</strong> and <strong>GrowActivAIte Support</strong> alias (contact provided during onboarding).</li>
-          <li>For production-impacting issues, escalate to your Engagement Lead immediately.</li>
+          <li>The <strong>agent name</strong> where the issue occurred</li>
+          <li>A brief description of the <strong>input you provided</strong></li>
+          <li>What you <strong>expected vs. what happened</strong></li>
+          <li>A <strong>screenshot</strong> if possible</li>
         </ol>
       </div>
     </details>
@@ -537,28 +547,13 @@
     </details>
 
     <details>
-      <summary><span class="q-label">Q9</span>Is there training available for the platform?</summary>
+      <summary><span class="q-label">Q9</span>Is there a demo available for the platform?</summary>
       <div class="answer">
-        <p>Yes. The following learning resources are available on the Accenture Learning Board:</p>
+        <p>Yes! If you would like a live walkthrough or demo of the GrowActivAIte platform and its agents, please reach out to:</p>
         <ul>
-          <li><strong>GrowActivAIte Platform Walkthrough</strong> — 45-minute self-paced e-learning module</li>
-          <li><strong>Agent-specific Quick Start Guides</strong> — PDF guides available in the platform's Help Centre</li>
-          <li><strong>Live enablement sessions</strong> — scheduled at project kick-off; recordings are archived in the project SharePoint</li>
-          <li><strong>Monthly office hours</strong> — hosted by the AI Delivery team; calendar invites shared via project distribution list</li>
+          <li><strong>Rekha Shukla</strong> — <a href="mailto:Rekha.shukla@accenture.com">Rekha.shukla@accenture.com</a></li>
         </ul>
-      </div>
-    </details>
-
-    <details>
-      <summary><span class="q-label">Q10</span>What is the SLA for platform availability and support?</summary>
-      <div class="answer">
-        <p>The GrowActivAIte platform targets <strong>99.5% uptime</strong> during business hours (06:00–22:00 local project time, Monday–Friday). Planned maintenance windows are communicated at least 48 hours in advance via email and the platform banner.</p>
-        <p>Support response SLAs:</p>
-        <ul>
-          <li><strong>Critical (agent down, blocking delivery):</strong> 2-hour response, 8-hour resolution target</li>
-          <li><strong>High (incorrect outputs affecting key artefacts):</strong> 4-hour response, 24-hour resolution target</li>
-          <li><strong>Medium/Low (usability or minor issues):</strong> 1 business day response</li>
-        </ul>
+        <p>Rekha will be happy to arrange a session tailored to your team's needs and workstream.</p>
       </div>
     </details>
 
