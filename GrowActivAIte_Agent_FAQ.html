@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowActivAIte — Agent FAQ Guide | Accenture S4 HANA Public Cloud AI Delivery</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f5f7;
+    color: #1a1a2e;
+    line-height: 1.7;
+  }
+
+  /* ===== COLOR TOKENS ===== */
+  :root {
+    --primary:       #4F46E5;
+    --primary-dark:  #3730A3;
+    --primary-light: #EEF2FF;
+    --accent:        #7C3AED;
+    --accent-light:  #F5F3FF;
+    --success:       #059669;
+    --warn:          #D97706;
+    --danger:        #DC2626;
+    --neutral-50:    #F9FAFB;
+    --neutral-100:   #F3F4F6;
+    --neutral-200:   #E5E7EB;
+    --neutral-400:   #9CA3AF;
+    --neutral-600:   #4B5563;
+    --neutral-800:   #1F2937;
+    --border:        #E0E7FF;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, var(--accent) 100%);
+    color: #fff;
+    padding: 0;
+    margin-bottom: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 40px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .header-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .header-title span { color: #C7D2FE; }
+  .header-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .header-meta span::before { content: '·'; margin-right: 8px; }
+  .header-meta span:first-child::before { content: ''; margin-right: 0; }
+
+  /* ===== PHASE BANNER ===== */
+  .phase-banner {
+    background: linear-gradient(90deg, var(--primary-dark), var(--accent));
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 40px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* ===== TABLE OF CONTENTS ===== */
+  .toc-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin: 32px 0;
+    box-shadow: 0 2px 12px rgba(79,70,229,0.06);
+  }
+  .toc-card h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+  @media (max-width: 640px) { .toc-grid { grid-template-columns: 1fr; } }
+  .toc-section-label {
+    grid-column: 1 / -1;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--neutral-400);
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--neutral-200);
+  }
+  .toc-section-label:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+  .toc-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 3px 0;
+    transition: color 0.15s;
+  }
+  .toc-link:hover { color: var(--accent); text-decoration: underline; }
+  .toc-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* ===== GENERAL FAQ CARD ===== */
+  .general-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(79,70,229,0.06);
+  }
+  .general-card h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+  }
+  .general-card .section-desc {
+    font-size: 0.9rem;
+    color: var(--neutral-600);
+    margin-bottom: 24px;
+  }
+
+  /* ===== ACCORDION (FAQ Q&A) ===== */
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  details {
+    border: 1px solid var(--neutral-200);
+    border-radius: 8px;
+    background: var(--neutral-50);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  details[open] {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
+    background: #fff;
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    font-weight: 600;
+    font-size: 0.93rem;
+    color: var(--neutral-800);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '＋';
+    font-size: 1.1rem;
+    color: var(--primary);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  details[open] > summary::after { content: '－'; }
+  summary .q-label {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .answer {
+    padding: 0 18px 16px 18px;
+    font-size: 0.9rem;
+    color: var(--neutral-600);
+    border-top: 1px solid var(--neutral-200);
+    margin-top: 2px;
+    padding-top: 14px;
+  }
+  .answer p { margin-bottom: 10px; }
+  .answer p:last-child { margin-bottom: 0; }
+  .answer ul, .answer ol { padding-left: 20px; margin-bottom: 10px; }
+  .answer li { margin-bottom: 4px; }
+  .answer strong { color: var(--neutral-800); }
+  .answer code {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ===== AGENT CARD ===== */
+  .agent-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 12px rgba(79,70,229,0.06);
+    overflow: hidden;
+  }
+  .agent-card + .agent-card { margin-top: 24px; border-radius: 12px; }
+  .agent-header {
+    background: var(--primary-light);
+    border-bottom: 2px solid var(--border);
+    padding: 22px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .agent-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .agent-header-text { flex: 1; }
+  .agent-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+  .agent-name {
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .agent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .tag-phase { background: #DDD6FE; color: #4C1D95; }
+  .tag-type  { background: #D1FAE5; color: #065F46; }
+  .tag-group { background: #FEF3C7; color: #92400E; }
+  .agent-body { padding: 20px 28px 24px; }
+
+  /* ===== PHASE SECTION ===== */
+  .phase-section { margin-top: 48px; }
+  .phase-section:first-child { margin-top: 24px; }
+
+  /* ===== INFO BOXES ===== */
+  .info-box {
+    border-left: 4px solid var(--primary);
+    background: var(--primary-light);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 0.87rem;
+    color: var(--primary-dark);
+  }
+  .warn-box {
+    border-left: 4px solid var(--warn);
+    background: #FFFBEB;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 0.87rem;
+    color: #78350F;
+  }
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--neutral-800);
+    color: var(--neutral-400);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.82rem;
+    margin-top: 60px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .site-footer strong { color: #fff; }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    .page-wrapper { max-width: 100%; padding: 0 12pt; }
+    .site-header { break-inside: avoid; }
+    .toc-card, .general-card, .agent-card { box-shadow: none; break-inside: avoid; }
+    .phase-section { break-before: page; }
+    details { break-inside: avoid; }
+    details[open] { border-color: #ccc; }
+    summary::after { display: none; }
+    .answer { display: block !important; padding-top: 8pt; }
+    details > .answer { display: block; }
+    a { color: #3730A3; text-decoration: none; }
+    .toc-card { display: none; }
+    .agent-icon { background: #4F46E5 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SITE HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-badge">Official Agent Guide — Release 1.0</div>
+    <h1 class="header-title">GrowActivAI<span>te</span> — Agent FAQ Guide</h1>
+    <p class="header-sub">Frequently Asked Questions for all 13 Pilot-Ready AI Agents</p>
+    <div class="header-meta">
+      <span>Accenture</span>
+      <span>S4 HANA Public Cloud AI Delivery</span>
+      <span>Release 1.0</span>
+      <span>July 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrapper">
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<nav class="toc-card" id="toc">
+  <h2>Table of Contents</h2>
+  <div class="toc-grid">
+
+    <div class="toc-section-label">General</div>
+    <a class="toc-link" href="#general-faqs">
+      <span class="toc-num">★</span>General FAQs — Platform, Access &amp; Support
+    </a>
+
+    <div class="toc-section-label">Phase: Discover &amp; Prepare</div>
+    <a class="toc-link" href="#agent-01">
+      <span class="toc-num">1</span>Orion Agent – Prepare Phase I (Security Agent)
+    </a>
+
+    <div class="toc-section-label">Phase: Explore</div>
+    <a class="toc-link" href="#agent-02">
+      <span class="toc-num">2</span>Business Process Design L1 to L5
+    </a>
+    <a class="toc-link" href="#agent-03">
+      <span class="toc-num">3</span>Fit to Standard – Material Generation
+    </a>
+    <a class="toc-link" href="#agent-04">
+      <span class="toc-num">4</span>Functional Design Document Phase 1
+    </a>
+
+    <div class="toc-section-label">Phase: Realize</div>
+    <a class="toc-link" href="#agent-05">
+      <span class="toc-num">5</span>RCEFW Builder – Technical Design
+    </a>
+    <a class="toc-link" href="#agent-06">
+      <span class="toc-num">6</span>RCEFW Builder – RAP Code Generation
+    </a>
+    <a class="toc-link" href="#agent-07">
+      <span class="toc-num">7</span>RCEFW Builder – CAP Code Generation
+    </a>
+    <a class="toc-link" href="#agent-08">
+      <span class="toc-num">8</span>RCEFW Builder – UI Code Generation
+    </a>
+    <a class="toc-link" href="#agent-09">
+      <span class="toc-num">9</span>Form Wizard
+    </a>
+    <a class="toc-link" href="#agent-10">
+      <span class="toc-num">10</span>Interface Mapper
+    </a>
+    <a class="toc-link" href="#agent-11">
+      <span class="toc-num">11</span>S/4HANA Public Cloud Data Migration Agent
+    </a>
+    <a class="toc-link" href="#agent-12">
+      <span class="toc-num">12</span>Defect Resolver – Quality Engineering
+    </a>
+
+    <div class="toc-section-label">Phase: Run</div>
+    <a class="toc-link" href="#agent-13">
+      <span class="toc-num">13</span>Defect Resolver – Run Support
+    </a>
+  </div>
+</nav>
+
+<!-- ===================================================
+     GENERAL FAQs
+     =================================================== -->
+<section id="general-faqs" class="general-card">
+  <h2>General FAQs</h2>
+  <p class="section-desc">Common questions about the GrowActivAIte platform, access, supported browsers, and how to get help.</p>
+
+  <div class="faq-list">
+
+    <details open>
+      <summary><span class="q-label">Q1</span>What is GrowActivAIte and what problem does it solve?</summary>
+      <div class="answer">
+        <p>GrowActivAIte is Accenture's AI-powered delivery acceleration platform for SAP S/4HANA Public Cloud implementations. It bundles 13 pilot-ready AI agents that automate time-consuming, repetitive tasks across every phase of an SAP project — from security setup and business process documentation in the Discover &amp; Prepare and Explore phases, through technical development and testing in Realize, to production support in the Run phase.</p>
+        <p>By automating artefact generation, configuration guidance, and defect analysis, the platform reduces manual effort, accelerates delivery timelines, and promotes consistency across project teams.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q2</span>How do I access the GrowActivAIte platform?</summary>
+      <div class="answer">
+        <p>Access is granted through the Accenture internal delivery portal. Follow these steps:</p>
+        <ol>
+          <li>Navigate to the GrowActivAIte platform URL provided by your Engagement Lead or AI Delivery Lead.</li>
+          <li>Sign in using your <strong>Accenture Enterprise ID</strong> (myID) credentials via single sign-on (SSO).</li>
+          <li>Confirm you have been assigned the appropriate role in the project workspace (e.g., Functional Consultant, Technical Developer, Delivery Lead).</li>
+          <li>If you cannot log in, raise an access request through your project's IT Service Desk ticket or contact your AI Delivery Lead directly.</li>
+        </ol>
+        <div class="info-box">Access to individual agents may be role-gated. If an agent tile appears locked, request the relevant role from your Delivery Lead.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q3</span>Do I need a Claude.ai account to use these agents?</summary>
+      <div class="answer">
+        <p>Some agents in GrowActivAIte are powered by Anthropic's Claude AI model accessed through Accenture's enterprise licence. You do <strong>not</strong> need a personal Claude.ai account. The platform manages model authentication on your behalf via the enterprise API key.</p>
+        <p>However, you must be connected to the Accenture network (or VPN) so that the platform's backend services can authenticate with the model provider. Using a personal Claude.ai account outside the platform is not supported and would not have access to Accenture's project-specific prompt templates or data.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q4</span>Which browsers and devices are supported?</summary>
+      <div class="answer">
+        <p>GrowActivAIte is optimised for desktop use. Supported browsers:</p>
+        <ul>
+          <li><strong>Google Chrome</strong> 110+ (recommended)</li>
+          <li><strong>Microsoft Edge</strong> 110+ (Chromium-based)</li>
+          <li><strong>Mozilla Firefox</strong> 109+</li>
+          <li><strong>Safari</strong> 16+ (macOS/iOS)</li>
+        </ul>
+        <p>Internet Explorer is <strong>not</strong> supported. Mobile browsers are functional for viewing outputs but the agent wizard interfaces are optimised for screens wider than 1024px. Disable browser extensions that block JavaScript or intercept network requests, as these may break the streaming output panel.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q5</span>Can I use GrowActivAIte outside the Accenture network?</summary>
+      <div class="answer">
+        <p>Yes, with conditions. You must connect via <strong>Accenture VPN (myAccess)</strong> when working outside an Accenture office or client site. Without VPN, authentication will fail and agent API calls will be blocked by network policy.</p>
+        <p>If your project requires client-side access (e.g., a client consultant using the agents), your Delivery Lead must raise a <strong>client access provisioning request</strong> through the AI Delivery team.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q6</span>What data can I safely enter into the agents?</summary>
+      <div class="answer">
+        <p>Follow Accenture's Data Classification Policy at all times:</p>
+        <ul>
+          <li><strong>Allowed:</strong> Business process names, functional requirements, technical specifications, non-sensitive configuration parameters, anonymised test data.</li>
+          <li><strong>Not allowed:</strong> Personally Identifiable Information (PII), client credentials, production system passwords, financial data not approved for AI processing, data classified as Restricted or Confidential without explicit approval.</li>
+        </ul>
+        <div class="warn-box"><strong>Important:</strong> Never paste live production credentials, client employee data, or payment card data into any agent input field. When in doubt, consult your project's Data Privacy Lead.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q7</span>How do I report a bug, incorrect output, or platform issue?</summary>
+      <div class="answer">
+        <p>Use the in-app <strong>Feedback</strong> button (bottom-right corner of each agent screen) to submit issue reports. For urgent issues:</p>
+        <ol>
+          <li>Capture a screenshot and note the agent name, input provided, and the unexpected output or error message.</li>
+          <li>Log a ticket in the project's <strong>ServiceNow</strong> instance under Category: <em>GrowActivAIte Platform Issue</em>.</li>
+          <li>Tag your <strong>AI Delivery Lead</strong> and <strong>GrowActivAIte Support</strong> alias (contact provided during onboarding).</li>
+          <li>For production-impacting issues, escalate to your Engagement Lead immediately.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q8</span>Are the outputs from AI agents reviewed before use?</summary>
+      <div class="answer">
+        <p>Yes — <strong>all AI-generated outputs require human review before they are used in deliverables or submitted to clients.</strong> The agents accelerate drafting; they do not replace expert judgement. Functional leads, architects, or senior consultants must validate artefacts for accuracy, completeness, and client-specific context before sign-off.</p>
+        <p>Outputs should be treated as <em>first drafts</em> that need review and refinement, not final documents.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q9</span>Is there training available for the platform?</summary>
+      <div class="answer">
+        <p>Yes. The following learning resources are available on the Accenture Learning Board:</p>
+        <ul>
+          <li><strong>GrowActivAIte Platform Walkthrough</strong> — 45-minute self-paced e-learning module</li>
+          <li><strong>Agent-specific Quick Start Guides</strong> — PDF guides available in the platform's Help Centre</li>
+          <li><strong>Live enablement sessions</strong> — scheduled at project kick-off; recordings are archived in the project SharePoint</li>
+          <li><strong>Monthly office hours</strong> — hosted by the AI Delivery team; calendar invites shared via project distribution list</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="q-label">Q10</span>What is the SLA for platform availability and support?</summary>
+      <div class="answer">
+        <p>The GrowActivAIte platform targets <strong>99.5% uptime</strong> during business hours (06:00–22:00 local project time, Monday–Friday). Planned maintenance windows are communicated at least 48 hours in advance via email and the platform banner.</p>
+        <p>Support response SLAs:</p>
+        <ul>
+          <li><strong>Critical (agent down, blocking delivery):</strong> 2-hour response, 8-hour resolution target</li>
+          <li><strong>High (incorrect outputs affecting key artefacts):</strong> 4-hour response, 24-hour resolution target</li>
+          <li><strong>Medium/Low (usability or minor issues):</strong> 1 business day response</li>
+        </ul>
+      </div>
+    </details>
+
+  </div><!-- /.faq-list -->
+</section>
+
+
+<!-- ===================================================
+     PHASE: DISCOVER & PREPARE
+     =================================================== -->
+<section class="phase-section">
+  <div class="phase-banner">Phase: Discover &amp; Prepare</div>
+
+  <!-- AGENT 1: ORION -->
+  <div class="agent-card" id="agent-01">
+    <div class="agent-header">
+      <div class="agent-icon">🛡️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 01</div>
+        <div class="agent-name">Orion Agent – Prepare Phase I</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Discover &amp; Prepare</span>
+          <span class="tag tag-type">Security Agent</span>
+          <span class="tag tag-group">5 Sub-Bots</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Orion Agent – Prepare Phase I is a security-focused orchestration agent that automates five critical system setup and configuration tasks during the Discover &amp; Prepare phase of an SAP S/4HANA Public Cloud project. It operates through five specialised sub-bots:</p>
+            <ul>
+              <li><strong>SBPA Automation Project MTAR:</strong> Automates the creation and export of SAP Build Process Automation (SBPA) Multi-Target Application (MTAR) project artefacts, reducing manual packaging effort.</li>
+              <li><strong>CALM Project Set-up:</strong> Guides users through configuring an SAP Cloud ALM (CALM) project, including task lists, scope items, and team assignments.</li>
+              <li><strong>CBC Set-up:</strong> Automates Cloud Business Configuration (CBC) environment setup steps, ensuring consistency across tenants.</li>
+              <li><strong>Joule Enablement:</strong> Steps through the configuration tasks needed to activate and configure SAP Joule, Accenture's AI copilot entry point for S/4HANA.</li>
+              <li><strong>User Provisioning:</strong> Generates and validates user provisioning scripts and role assignment templates for the initial system population.</li>
+            </ul>
+            <p>Orion consolidates what previously required multiple consultants working in separate tools into a single guided, AI-assisted workflow.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <p>The Orion Agent is intended for:</p>
+            <ul>
+              <li><strong>Basis / Security Consultants</strong> responsible for system setup and role design in the Prepare phase</li>
+              <li><strong>Technical Leads</strong> overseeing tenant configuration and infrastructure readiness</li>
+              <li><strong>Project Managers</strong> who need to track system readiness milestones in Cloud ALM</li>
+              <li><strong>Delivery Leads</strong> wanting a consolidated view of Prepare phase configuration status</li>
+            </ul>
+            <p>Familiarity with SAP BTP, Cloud ALM, and basic S/4HANA security concepts is recommended before using this agent.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <p>Inputs vary by sub-bot. The most common required inputs are:</p>
+            <ul>
+              <li><strong>SAP BTP Subaccount details:</strong> Subaccount ID, region, subdomain name</li>
+              <li><strong>Cloud ALM tenant URL and API credentials</strong> (service key or OAuth client)</li>
+              <li><strong>Project metadata:</strong> Project name, go-live date, scope items, country/region</li>
+              <li><strong>System landscape details:</strong> Development, Quality, and Production system IDs</li>
+              <li><strong>User list (for User Provisioning):</strong> CSV or Excel file with employee IDs, names, email addresses, and desired roles</li>
+              <li><strong>Joule entitlement details:</strong> BTP entitlement name and service plan confirmed by your SAP account team</li>
+            </ul>
+            <div class="info-box">The agent will prompt you step-by-step for each input. You do not need to prepare all inputs upfront — the sub-bot wizard walks you through sequentially.</div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>SBPA sub-bot:</strong> Downloadable MTAR project file and a configuration validation checklist</li>
+              <li><strong>CALM sub-bot:</strong> Pre-populated Cloud ALM project setup guide and task assignment summary</li>
+              <li><strong>CBC sub-bot:</strong> CBC configuration checklist with step completion status and export-ready configuration notes</li>
+              <li><strong>Joule sub-bot:</strong> Joule activation checklist and a configuration runbook in Word/PDF format</li>
+              <li><strong>User Provisioning sub-bot:</strong> Role assignment matrix, provisioning script (compatible with Identity Authentication Service / IAS), and an audit log template</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>Log in to the GrowActivAIte platform, navigate to the <strong>Discover &amp; Prepare</strong> phase tab, and select the <strong>Orion Agent</strong> tile. Choose the sub-bot you wish to run from the sub-bot selector panel on the left. Each sub-bot has an independent guided wizard; you may run them in any order, though the recommended sequence is: CALM → CBC → SBPA → Joule → User Provisioning.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Active SAP BTP Global Account with subaccounts provisioned for Dev/QA/Prod</li>
+              <li>Cloud ALM tenant provisioned and accessible</li>
+              <li>SAP S/4HANA Public Cloud tenants provisioned (at minimum Dev)</li>
+              <li>Service keys or OAuth credentials for Cloud ALM API (your Basis Lead must generate these)</li>
+              <li>Your Accenture GrowActivAIte login with the <strong>Security Agent</strong> role assigned</li>
+              <li>User data file ready in the supported CSV template format (downloadable from the agent's Help section)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>CALM/CBC connectivity errors:</strong> Verify that the service key is valid and not expired. Re-generate via BTP cockpit if needed.</li>
+              <li><strong>MTAR generation fails:</strong> Confirm you have the SBPA Developer role in BTP and that the project name contains no special characters.</li>
+              <li><strong>Joule sub-bot shows missing entitlements:</strong> Confirm Joule is entitled in your BTP Global Account with your SAP Account Executive.</li>
+              <li><strong>User Provisioning CSV rejected:</strong> Re-download the CSV template from the agent's Help panel — column headers are case-sensitive.</li>
+              <li>For all other issues, use the in-app Feedback button or raise a ServiceNow ticket as described in the General FAQs (Q7).</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-01 -->
+</section>
+
+
+<!-- ===================================================
+     PHASE: EXPLORE
+     =================================================== -->
+<section class="phase-section">
+  <div class="phase-banner">Phase: Explore</div>
+
+  <!-- AGENT 2: BP DESIGN L1-L5 -->
+  <div class="agent-card" id="agent-02">
+    <div class="agent-header">
+      <div class="agent-icon">📊</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 02</div>
+        <div class="agent-name">Business Process Design L1 to L5</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">Process Documentation</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Business Process Design L1–L5 agent generates structured SAP business process documentation across five levels of detail — from high-level process groups down to granular task steps — using AI. It reduces the time functional consultants spend drafting process hierarchies from scratch.</p>
+            <ul>
+              <li><strong>L1 – Process Group:</strong> Top-level grouping (e.g., Order-to-Cash, Procure-to-Pay)</li>
+              <li><strong>L2 – Process:</strong> Major processes within the group (e.g., Sales Order Management)</li>
+              <li><strong>L3 – Process Variant / Scenario:</strong> Specific business scenarios (e.g., Standard Sales Order with Credit Check)</li>
+              <li><strong>L4 – Process Step:</strong> Individual steps within a scenario (e.g., Create Sales Order in VA01)</li>
+              <li><strong>L5 – Task / Activity:</strong> Detailed user actions, system responses, and decision points</li>
+            </ul>
+            <p>The agent can generate the full L1–L5 hierarchy from a brief description or expand a partial hierarchy from an L1 or L2 input.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Functional Consultants</strong> (SD, MM, FI, HR, etc.) drafting process documentation during Explore workshops</li>
+              <li><strong>Solution Architects</strong> defining the process scope and hierarchy for Fit-to-Standard sessions</li>
+              <li><strong>Business Analysts</strong> translating client process requirements into SAP-aligned documentation</li>
+              <li><strong>Delivery Leads</strong> reviewing process completeness prior to Fit-to-Standard workshops</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Industry / client sector</strong> (e.g., Manufacturing, Retail, Professional Services)</li>
+              <li><strong>SAP module or process area</strong> (e.g., Sales &amp; Distribution, Materials Management)</li>
+              <li><strong>Starting level</strong> — specify whether you are starting from L1, L2, or providing a partial hierarchy for the agent to expand</li>
+              <li><strong>Process description or scope statement</strong> (free text, 1–3 sentences is sufficient)</li>
+              <li><strong>Optional:</strong> Client-specific terminology, country localisation requirements, or excluded process variants</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>Structured L1–L5 process hierarchy in a downloadable <strong>Word document</strong> and <strong>Excel spreadsheet</strong></li>
+              <li>Process flow description in paragraph form (suitable for inclusion in a BRD or FDD)</li>
+              <li>Suggested SAP transaction codes (T-codes) and Fiori app references at L4/L5 level</li>
+              <li>Decision point and role/responsibility notes at L5 level</li>
+              <li>Optional: BPMN-compatible process notation export (XML) for import into tools such as Signavio or LeanIX</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>Log in to GrowActivAIte, navigate to the <strong>Explore</strong> phase tab, and click the <strong>Business Process Design L1–L5</strong> tile. The agent opens a two-panel interface: the left panel accepts your inputs via a structured form; the right panel renders the generated hierarchy in real time as the AI produces it. Use the toolbar above the output panel to export in Word, Excel, or XML.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>GrowActivAIte login with the <strong>Functional Consultant</strong> or <strong>Solution Architect</strong> role</li>
+              <li>Basic knowledge of SAP S/4HANA process areas relevant to your project scope</li>
+              <li>Agreed project scope document (or at minimum a high-level scope list) to ensure the generated hierarchy aligns with the client's in-scope processes</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Generated hierarchy is too generic:</strong> Add more context in the process description field. Include the client's industry, sub-industry, and any specific variants (e.g., "intercompany sales with third-party delivery").</li>
+              <li><strong>Wrong SAP module assumed:</strong> Explicitly specify the module (e.g., "SAP SD module, not MM") in the input form's module selector.</li>
+              <li><strong>L5 tasks are missing or thin:</strong> Use the "Expand L5" button on individual L4 nodes to trigger a deeper generation pass.</li>
+              <li><strong>Export fails:</strong> Try a different format (Word vs Excel). Clear browser cache if the download button is unresponsive.</li>
+              <li>Report persistent issues via the in-app Feedback button.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-02 -->
+
+  <!-- AGENT 3: FIT TO STANDARD -->
+  <div class="agent-card" id="agent-03" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">📋</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 03</div>
+        <div class="agent-name">Fit to Standard – Material Generation</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">Workshop Materials</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Fit-to-Standard Material Generation agent automatically produces the workshop slide decks, facilitator guides, and Business Driven Configuration Questionnaire (BDCQ) content used during SAP Fit-to-Standard (FtS) sessions. These sessions are where the project team demonstrates standard SAP functionality to the client and captures configuration decisions and gaps.</p>
+            <p>The agent:</p>
+            <ul>
+              <li>Generates <strong>FtS workshop agenda slides</strong> tailored to the in-scope process areas</li>
+              <li>Creates <strong>BDCQ questionnaire content</strong> — structured questions that capture the client's configuration choices for each scope item</li>
+              <li>Produces <strong>process demonstration scripts</strong> for the consultant facilitating the session</li>
+              <li>Generates <strong>gap capture templates</strong> for recording where standard SAP does not meet client requirements</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Functional Leads and Consultants</strong> preparing FtS workshop materials</li>
+              <li><strong>Solution Architects</strong> ensuring workshop coverage aligns with SAP scope items</li>
+              <li><strong>Delivery / Project Managers</strong> reviewing workshop schedules and content completeness before client sessions</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Agreed scope item list</strong> — SAP S/4HANA scope item IDs (e.g., BJ5, 1GA) or process names</li>
+              <li><strong>Client industry and country/region</strong></li>
+              <li><strong>Workshop date and duration</strong> (for agenda generation)</li>
+              <li><strong>Attendee roles</strong> (e.g., Finance Director, Procurement Manager) — influences the language and depth of BDCQ questions</li>
+              <li><strong>Optional:</strong> Client's existing AS-IS process notes or a brief description of known complexity areas</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>PowerPoint slide deck — FtS workshop agenda and process overview slides (Accenture-branded template)</li>
+              <li>Excel BDCQ — one worksheet per scope item with pre-populated configuration questions, answer options, and notes columns</li>
+              <li>Word facilitator guide — step-by-step session facilitation notes including demo script cues and expected client questions</li>
+              <li>Word gap log template — pre-structured table ready for gap capture during the session</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, go to the <strong>Explore</strong> phase tab and select <strong>Fit to Standard – Material Generation</strong>. The agent displays a multi-step form: (1) Scope Input, (2) Workshop Details, (3) Output Preferences. Complete each step and click <strong>Generate Materials</strong>. Generation typically takes 60–120 seconds depending on the number of scope items. Download links appear once generation is complete.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Signed-off scope item list from your Engagement Lead or Solution Architect</li>
+              <li>GrowActivAIte login with the <strong>Functional Consultant</strong> role or higher</li>
+              <li>Access to the project's SharePoint or document repository to upload the generated materials for client sharing</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>BDCQ questions seem irrelevant:</strong> Verify the scope item IDs entered are correct and match the SAP Scope Item Catalogue. Use the scope item ID lookup helper within the agent.</li>
+              <li><strong>Slide deck uses wrong branding:</strong> Confirm your project profile has the correct client branding settings configured by the Delivery Lead in the platform's Project Settings.</li>
+              <li><strong>Generation times out:</strong> Reduce the number of scope items per batch (max 15 recommended). Split large scope lists into multiple runs.</li>
+              <li><strong>BDCQ Excel is empty:</strong> This typically indicates a scope item ID format error. Ensure IDs follow the format shown in the on-screen example (e.g., <code>1GA</code>, <code>BJ5</code>).</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-03 -->
+
+  <!-- AGENT 4: FDD PHASE 1 -->
+  <div class="agent-card" id="agent-04" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">📝</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 04</div>
+        <div class="agent-name">Functional Design Document Phase 1</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">Design Documentation</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Functional Design Document (FDD) Phase 1 agent generates structured Functional Design Documents for SAP S/4HANA Public Cloud configuration. FDDs are formal deliverables that describe how SAP standard functionality will be configured to meet a client's specific business requirements — and where custom extensions (RCEFW) are needed.</p>
+            <p>The agent produces Phase 1 FDDs, which cover:</p>
+            <ul>
+              <li>Business requirement description</li>
+              <li>Proposed SAP solution approach (standard configuration vs. extension)</li>
+              <li>Configuration parameters and settings to be applied</li>
+              <li>Integration touchpoints</li>
+              <li>Open questions and assumptions</li>
+              <li>Sign-off section for client and Accenture leads</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Functional Leads</strong> responsible for producing configuration design documentation</li>
+              <li><strong>Senior Functional Consultants</strong> drafting FDDs for their workstream</li>
+              <li><strong>Solution Architects</strong> reviewing FDD quality and consistency across workstreams</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Business requirement description</strong> — paste the relevant requirement text from the client's BRD or BDCQ</li>
+              <li><strong>SAP module / functional area</strong> (e.g., FI-GL, SD-OTC, MM-PUR)</li>
+              <li><strong>Client name and project code</strong> (for document header population)</li>
+              <li><strong>Relevant BDCQ answers</strong> — completed questionnaire answers from the FtS session inform the configuration approach</li>
+              <li><strong>Known constraints or client-specific rules</strong> (optional free text)</li>
+              <li><strong>Extension flag:</strong> Indicate if this requirement is expected to require an RCEFW object (the agent will flag this in the FDD)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>A completed <strong>FDD Word document</strong> using the Accenture S/4HANA Public Cloud FDD template (v2.x)</li>
+              <li>An <strong>FDD summary table</strong> (Excel) suitable for inclusion in a project tracker or status report</li>
+              <li>A list of <strong>open questions</strong> that must be resolved before the FDD can be finalised</li>
+              <li><strong>Related RCEFW identification:</strong> If an extension is flagged, the agent pre-populates the RCEFW object name and type for handoff to the RCEFW Builder agents</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, go to <strong>Explore</strong> phase, select the <strong>Functional Design Document Phase 1</strong> tile. Paste or upload your requirement input, select the SAP module from the dropdown, and click <strong>Generate FDD</strong>. You can generate one FDD at a time or use the batch upload feature (CSV of requirements) to generate multiple FDDs in a single run.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Completed BDCQ outputs from the FtS workshops (at least partially completed)</li>
+              <li>Access to the project's Business Requirements Document or scope item descriptions</li>
+              <li>GrowActivAIte login with the <strong>Functional Lead</strong> role assigned</li>
+              <li>Project code and client name confirmed in GrowActivAIte Project Settings</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>FDD content is inaccurate for the SAP module:</strong> Ensure you have selected the correct module in the dropdown — similar requirement descriptions can produce different FDDs depending on the module context.</li>
+              <li><strong>Template version is incorrect:</strong> Check with your Delivery Lead that your project is using FDD template v2.x; older templates (v1.x) are not supported by this agent.</li>
+              <li><strong>Batch upload fails:</strong> Confirm the CSV follows the batch template format. Download the template from the agent's Help panel. Maximum 50 requirements per batch.</li>
+              <li><strong>Generated FDD lacks detail:</strong> Provide more specific BDCQ answers and client constraints in the input fields. The richer the input, the more detailed the output.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-04 -->
+</section>
+
+
+<!-- ===================================================
+     PHASE: REALIZE
+     =================================================== -->
+<section class="phase-section">
+  <div class="phase-banner">Phase: Realize</div>
+
+  <!-- AGENT 5: RCEFW TECHNICAL DESIGN -->
+  <div class="agent-card" id="agent-05">
+    <div class="agent-header">
+      <div class="agent-icon">🏗️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 05</div>
+        <div class="agent-name">RCEFW Builder – Technical Design</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Technical Documentation</span>
+          <span class="tag tag-group">RCEFW Builder</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The RCEFW Builder – Technical Design agent generates Technical Design Documents (TDDs) for RICEFW objects — Reports, Conversions, Enhancements, Forms, Workflows, and Interfaces — required in an SAP S/4HANA Public Cloud implementation. Given the functional specification from an FDD, it produces a structured technical document describing the development approach, data model, logic design, error handling, and test considerations for the object.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Technical Leads</strong> and <strong>Senior ABAP/BTP Developers</strong> who oversee RCEFW object design</li>
+              <li><strong>Technical Architects</strong> reviewing design decisions for extensibility and upgrade safety</li>
+              <li><strong>Functional Leads</strong> who want to review the technical approach before formal sign-off</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>FDD reference number and content</strong> (paste text or upload the FDD document)</li>
+              <li><strong>RCEFW object type</strong> — Report, Conversion, Enhancement, Form, Workflow, or Interface</li>
+              <li><strong>Technical approach preference</strong> — RAP (ABAP RESTful), CAP (BTP Cloud Application Programming), or Classic ABAP (where permitted)</li>
+              <li><strong>Integration endpoints</strong> (source/target systems, APIs) if applicable</li>
+              <li><strong>Performance requirements</strong> — expected data volumes, response time SLAs</li>
+              <li><strong>Development system ID</strong> and transport landscape details</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>Technical Design Document (TDD) in Word format — covers object overview, technical approach, data dictionary, logic pseudocode, error/exception handling, authorisation objects, and unit test scenarios</li>
+              <li>RCEFW object register entry (Excel row) ready to be added to the project's RCEFW tracker</li>
+              <li>Estimated development effort (in person-hours) based on complexity scoring</li>
+              <li>Handoff summary for the code generation agents (Agents 06, 07, 08)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to the <strong>Realize</strong> phase tab, open the <strong>RCEFW Builder</strong> section, and click <strong>Technical Design</strong>. Upload or paste your FDD, complete the object type and technical preference form fields, then click <strong>Generate TDD</strong>. The output renders in the right panel; download when complete.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Completed and reviewed FDD from the Explore phase (Agent 04 output or equivalent)</li>
+              <li>GrowActivAIte login with the <strong>Technical Developer</strong> or <strong>Technical Lead</strong> role</li>
+              <li>Agreed development strategy (RAP vs. CAP vs. Classic) confirmed by your Technical Architect</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>TDD is too high-level:</strong> Provide more detail in the FDD input — especially data flow, business logic rules, and error scenarios.</li>
+              <li><strong>Wrong development approach suggested:</strong> Override the agent's recommendation via the Technical Approach dropdown and regenerate.</li>
+              <li><strong>Effort estimate seems off:</strong> The estimate is a guide only. Adjust in your project plan based on team experience. Use the Feedback button to flag consistently inaccurate estimates so the model can be calibrated.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-05 -->
+
+  <!-- AGENT 6: RCEFW RAP -->
+  <div class="agent-card" id="agent-06" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">⚙️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 06</div>
+        <div class="agent-name">RCEFW Builder – RAP Code Generation</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">ABAP RAP</span>
+          <span class="tag tag-group">RCEFW Builder</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The RCEFW Builder – RAP Code Generation agent generates ABAP code following the RESTful Application Programming (RAP) model for SAP S/4HANA. RAP is SAP's recommended, upgrade-stable development model for S/4HANA extensions. The agent produces:</p>
+            <ul>
+              <li>CDS (Core Data Services) view definitions — interface views, projection views, and metadata extensions</li>
+              <li>Behaviour Definition Language (BDEF) files for managed, unmanaged, or abstract scenarios</li>
+              <li>ABAP behaviour implementation classes (local classes and global handler classes)</li>
+              <li>Service definition and service binding artefacts</li>
+              <li>Unit test class skeletons (ABAP Unit)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>ABAP Developers</strong> building RAP-based extensions for S/4HANA Public Cloud</li>
+              <li><strong>Technical Leads</strong> reviewing generated code before it is transported to the Quality system</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>TDD from Agent 05</strong> — paste or upload the Technical Design Document</li>
+              <li><strong>Database table / CDS view names</strong> to be used as the data source</li>
+              <li><strong>RAP scenario type</strong> — Managed, Unmanaged, Managed with Additional Save, or Abstract</li>
+              <li><strong>Required operations</strong> — Read, Create, Update, Delete, Actions, Validations, Determinations</li>
+              <li><strong>Namespace / naming prefix</strong> agreed for the project (e.g., <code>ZAC_</code>, <code>YPRJ_</code>)</li>
+              <li><strong>Draft handling requirement</strong> — yes/no flag</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>ZIP archive containing all generated ABAP source files — ready to import via ABAP Development Tools (ADT) in Eclipse</li>
+              <li>A <strong>README</strong> inside the ZIP explaining the file structure and import sequence</li>
+              <li>Inline code comments explaining key logic decisions</li>
+              <li>A <strong>code quality checklist</strong> — the agent self-reviews the generated code against SAP RAP best practices and highlights any areas requiring manual review</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, go to <strong>Realize</strong> → <strong>RCEFW Builder</strong> → <strong>RAP Code Generation</strong>. Upload the TDD, complete the form fields, and click <strong>Generate Code</strong>. Download the ZIP when generation completes. Import the artefacts into your S/4HANA development system using ABAP Development Tools (Eclipse).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Completed TDD from the Technical Design agent (Agent 05)</li>
+              <li>ABAP Development Tools (ADT) installed and configured for your development system</li>
+              <li>Developer user with sufficient authorisations in the S/4HANA development client</li>
+              <li>GrowActivAIte login with the <strong>Technical Developer</strong> role</li>
+              <li>Agreed naming convention and namespace documented in the TDD</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Generated code has syntax errors after import:</strong> Review the code quality checklist included in the ZIP — flagged items often indicate where manual adjustment is needed. Check that table/view names entered match exactly (case-sensitive in some contexts).</li>
+              <li><strong>Naming convention not respected:</strong> Double-check the namespace prefix field — ensure you did not include a trailing underscore if the template already adds one.</li>
+              <li><strong>Draft handling code is missing:</strong> Confirm the Draft handling flag was set to <em>Yes</em> before generating.</li>
+              <li>Log persistent code issues via the in-app Feedback button with the generated code attached.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-06 -->
+
+  <!-- AGENT 7: RCEFW CAP -->
+  <div class="agent-card" id="agent-07" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">☁️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 07</div>
+        <div class="agent-name">RCEFW Builder – CAP Code Generation</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">SAP CAP / BTP</span>
+          <span class="tag tag-group">RCEFW Builder</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The RCEFW Builder – CAP Code Generation agent generates SAP Cloud Application Programming (CAP) model code for BTP (Business Technology Platform)-based extensions and side-by-side applications. CAP is the recommended approach for building new cloud-native services that integrate with S/4HANA via APIs. The agent generates:</p>
+            <ul>
+              <li>CDS schema definitions (<code>.cds</code> files) for the data model</li>
+              <li>Service definition files exposing OData V4 APIs</li>
+              <li>Node.js or Java service implementation handlers</li>
+              <li>Database configuration files for SAP HANA Cloud or SQLite (development)</li>
+              <li><code>mta.yaml</code> multi-target application descriptor for BTP deployment</li>
+              <li>Integration event handler code for consuming S/4HANA APIs via SAP Event Mesh or OData</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>BTP Developers</strong> (Node.js / Java) building side-by-side extensions</li>
+              <li><strong>Full-stack developers</strong> combining CAP backend with Fiori frontend (use alongside Agent 08)</li>
+              <li><strong>Integration Architects</strong> defining the BTP service layer for S/4HANA integration</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>TDD from Agent 05</strong></li>
+              <li><strong>Implementation language:</strong> Node.js or Java</li>
+              <li><strong>Database target:</strong> SAP HANA Cloud (production) or SQLite (development/test)</li>
+              <li><strong>S/4HANA APIs to be consumed</strong> — list of SAP Business Accelerator Hub API names (e.g., <code>API_SALES_ORDER_SRV</code>)</li>
+              <li><strong>BTP subaccount and space names</strong> for the <code>mta.yaml</code></li>
+              <li><strong>Authentication method:</strong> XSUAA or IAS</li>
+              <li><strong>Event Mesh requirement:</strong> yes/no flag and event topic names if applicable</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>ZIP archive of the full CAP project folder structure ready for development in SAP Business Application Studio or VS Code</li>
+              <li>Pre-configured <code>package.json</code> / <code>pom.xml</code> with required CAP dependencies</li>
+              <li><code>mta.yaml</code> deployment descriptor</li>
+              <li>Sample OData request collection (Postman/Bruno format) for API testing</li>
+              <li>Deployment guide (Markdown) — step-by-step BTP CF deployment instructions</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to <strong>Realize</strong> → <strong>RCEFW Builder</strong> → <strong>CAP Code Generation</strong>. Upload the TDD, complete the form, and click <strong>Generate Project</strong>. Download the ZIP and open in SAP Business Application Studio or your local VS Code with the CDS plugin installed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Completed TDD from Agent 05</li>
+              <li>SAP Business Application Studio subscription or VS Code with SAP CDS Language Support extension</li>
+              <li>SAP BTP subaccount with Cloud Foundry environment enabled</li>
+              <li>HANA Cloud instance provisioned (for production development)</li>
+              <li>S/4HANA API credentials and destination configuration in BTP</li>
+              <li>GrowActivAIte login with the <strong>Technical Developer</strong> role</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Generated CDS model has entity conflicts:</strong> Check that entity names in the TDD do not clash with existing CDS views in your project namespace.</li>
+              <li><strong>mta.yaml has wrong CF org/space:</strong> Update the <code>mta.yaml</code> directly after download — the agent populates from your input; verify spelling matches your BTP cockpit exactly.</li>
+              <li><strong>S/4HANA API name not recognised:</strong> Verify the API name against the SAP Business Accelerator Hub (<code>api.sap.com</code>). Use the exact service name, not the display name.</li>
+              <li>Report code issues via the in-app Feedback button.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-07 -->
+
+  <!-- AGENT 8: RCEFW UI -->
+  <div class="agent-card" id="agent-08" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🖥️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 08</div>
+        <div class="agent-name">RCEFW Builder – UI Code Generation</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Fiori / UI5</span>
+          <span class="tag tag-group">RCEFW Builder</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The RCEFW Builder – UI Code Generation agent generates SAP Fiori / UI5 frontend code for custom applications and extensions. It produces production-grade UI5 application scaffolding, view definitions, controllers, and routing configuration, aligned with Fiori Design Guidelines. Supported patterns include:</p>
+            <ul>
+              <li>List Report + Object Page (Fiori Elements)</li>
+              <li>Worklist application</li>
+              <li>Custom Fiori Elements extension (extending a standard Fiori app)</li>
+              <li>Freestyle SAPUI5 application</li>
+              <li>Fiori Launchpad plugin (for custom shell plugin scenarios)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>UI5 / Fiori Developers</strong> building custom frontend applications</li>
+              <li><strong>Full-stack BTP developers</strong> combining this agent's output with CAP backend (Agent 07)</li>
+              <li><strong>UX Leads</strong> reviewing application structure and Fiori compliance before development starts</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>TDD from Agent 05</strong> (or a functional UX specification)</li>
+              <li><strong>UI pattern</strong> — List Report, Worklist, Freestyle, Extension, or Plugin</li>
+              <li><strong>OData service / CAP service endpoint</strong> the UI will consume</li>
+              <li><strong>Key entity sets and properties</strong> to be displayed</li>
+              <li><strong>Fiori Launchpad tile configuration</strong> — semantic object, action, and parameters</li>
+              <li><strong>Deployment target</strong> — SAP S/4HANA Public Cloud embedded FLP, or BTP Launchpad Service</li>
+              <li><strong>UI5 version</strong> (latest stable recommended; specify if project requires a pinned version)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>ZIP archive of the full UI5 application — <code>webapp/</code> folder structure with manifest, views, controllers, models, i18n files</li>
+              <li>Pre-configured <code>ui5.yaml</code> build and deployment descriptor</li>
+              <li>Fiori Launchpad tile configuration snippet (JSON)</li>
+              <li>Basic Karma/OPA5 test skeleton</li>
+              <li>Fiori compliance checklist — flags any deviation from SAP Fiori Design Guidelines</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to <strong>Realize</strong> → <strong>RCEFW Builder</strong> → <strong>UI Code Generation</strong>. Upload the TDD or enter the UX specification, complete the form, and click <strong>Generate UI App</strong>. Download the ZIP and import into SAP Business Application Studio using the Fiori project import wizard, or open directly in VS Code with the SAP Fiori Tools extension.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>OData service or CAP service endpoint available and accessible for metadata inspection</li>
+              <li>SAP Business Application Studio or VS Code with SAP Fiori Tools extension pack</li>
+              <li>Fiori Launchpad configuration access (for deployment)</li>
+              <li>GrowActivAIte login with the <strong>Technical Developer</strong> role</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Manifest.json has wrong service URL:</strong> Update the <code>dataSources</code> section of <code>manifest.json</code> after download with the correct service URL from your system.</li>
+              <li><strong>Fiori Launchpad tile not appearing after deployment:</strong> Verify the semantic object and action in the tile configuration match the PFCG role assigned to your test user.</li>
+              <li><strong>UI5 version conflict:</strong> Specify the exact UI5 version used in your system's bootstrap in the agent's UI5 version field before generating.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-08 -->
+
+  <!-- AGENT 9: FORM WIZARD -->
+  <div class="agent-card" id="agent-09" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">📄</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 09</div>
+        <div class="agent-name">Form Wizard</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">SAP Forms</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Form Wizard agent guides users through creating and configuring SAP output forms (such as invoices, purchase orders, delivery notes, and payment advice) for S/4HANA Public Cloud. It uses an AI-guided wizard to collect form requirements, then generates the form template configuration and, where applicable, the Adobe Forms or Smart Forms artefact structure. The wizard covers:</p>
+            <ul>
+              <li>Form type selection and SAP output management configuration</li>
+              <li>Field mapping between SAP data structures and form output fields</li>
+              <li>Layout and branding guidance (logos, fonts, colour zones)</li>
+              <li>Multi-language and multi-currency output configuration</li>
+              <li>PDF output configuration for SAP Document Management</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Functional Consultants</strong> configuring output forms without deep ABAP expertise</li>
+              <li><strong>Technical Consultants</strong> who need to create Adobe Forms or Smart Forms artefacts</li>
+              <li><strong>Project teams</strong> where the client has specific branding requirements for printed or emailed outputs</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Form type</strong> — Invoice, PO, Delivery Note, Payment Advice, Custom (select from list)</li>
+              <li><strong>SAP application component</strong> generating the form (e.g., SD Billing, MM Purchasing)</li>
+              <li><strong>Required output fields</strong> — list of data fields to appear on the form</li>
+              <li><strong>Client branding assets</strong> — logo file (PNG/SVG), brand colours (hex codes), font preferences</li>
+              <li><strong>Languages required</strong> — ISO language codes (e.g., <code>EN</code>, <code>DE</code>, <code>FR</code>)</li>
+              <li><strong>Output channels</strong> — Print, Email (PDF attachment), Archiving</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>Form template configuration guide (Word) — step-by-step instructions for configuring the form in the SAP output management IMG</li>
+              <li>Adobe Forms / Smart Forms artefact skeleton (XML) ready to import into ABAP system</li>
+              <li>Field mapping specification (Excel) — SAP data element to form field cross-reference</li>
+              <li>Preview HTML rendering of the form layout (approximate; final output rendered by SAP)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to <strong>Realize</strong> → <strong>Form Wizard</strong>. The wizard opens in a step-by-step panel. Complete each step and use the <strong>Back</strong> / <strong>Next</strong> buttons to navigate. On the final step, click <strong>Generate Artefacts</strong> to download all outputs as a ZIP.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Form requirements documented (form type, fields, branding) — ideally captured in an FDD</li>
+              <li>Client logo and brand colour values confirmed and available</li>
+              <li>GrowActivAIte login with the <strong>Functional Consultant</strong> or <strong>Technical Developer</strong> role</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Artefact import fails in SAP:</strong> Verify the ABAP system's form tool version matches the artefact format (Adobe Forms vs. Smart Forms). The wizard's Step 1 asks for this — reconfirm with your Basis team.</li>
+              <li><strong>Logo does not render in preview:</strong> Ensure the logo file is under 2 MB and in PNG or SVG format. JPEG logos may render with reduced quality.</li>
+              <li><strong>Field mapping is incomplete:</strong> Add missing fields manually in the field mapping Excel and resubmit to the agent's field mapping step for regeneration.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-09 -->
+
+  <!-- AGENT 10: INTERFACE MAPPER -->
+  <div class="agent-card" id="agent-10" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🔗</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 10</div>
+        <div class="agent-name">Interface Mapper</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Integration</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Interface Mapper agent maps interfaces between SAP S/4HANA and third-party or legacy systems, generating comprehensive interface documentation and field mapping specifications. It automates the time-consuming process of creating interface design documents by:</p>
+            <ul>
+              <li>Analysing source and target system schemas to propose field-level mappings</li>
+              <li>Generating transformation logic descriptions for field type conversions, code translations, and data enrichment</li>
+              <li>Producing interface design documents compliant with the SAP Integration Solution Advisory Methodology (ISA-M)</li>
+              <li>Generating integration flow pseudocode or iFlow configuration hints for SAP Integration Suite</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Integration Architects</strong> designing the interface landscape</li>
+              <li><strong>Integration Developers</strong> building iFlows in SAP Integration Suite</li>
+              <li><strong>Functional Leads</strong> needing to document interface requirements for client review</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Source system details</strong> — system name, type (SAP, non-SAP, legacy), message format (IDoc, BAPI, REST, SOAP, flat file, EDI)</li>
+              <li><strong>Target system details</strong> — same as above</li>
+              <li><strong>Source schema or field list</strong> — upload an XSD, WSDL, OpenAPI spec, or paste field names with data types</li>
+              <li><strong>Target schema or field list</strong> — same as above</li>
+              <li><strong>Business context description</strong> — what data is being exchanged and why (2–5 sentences)</li>
+              <li><strong>Integration middleware</strong> — SAP Integration Suite, SAP Process Orchestration, or third-party (Boomi, MuleSoft, etc.)</li>
+              <li><strong>Mapping rules (if known)</strong> — any existing mapping logic in free text or a legacy mapping document</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>Interface Design Document (IDD) in Word format</li>
+              <li>Field mapping specification in Excel — source field, target field, transformation rule, mandatory flag, and notes columns</li>
+              <li>Integration flow design summary (pseudocode / configuration notes) for SAP Integration Suite</li>
+              <li>Interface register entry (Excel row) for the project's interface tracker</li>
+              <li>Suggested SAP pre-built integration content (SAP Integration Content Catalogue package names) if applicable</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to <strong>Realize</strong> → <strong>Interface Mapper</strong>. Upload or paste your source and target schemas, complete the business context form, and click <strong>Generate Interface Documentation</strong>. Review the proposed field mappings in the interactive mapping table (you can adjust individual rows before downloading the final output).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Source and target system schemas or field lists available (even a partial list enables generation)</li>
+              <li>Interface requirements documented (at minimum a 1-paragraph description of what data flows and when)</li>
+              <li>GrowActivAIte login with the <strong>Integration Consultant</strong> or <strong>Technical Lead</strong> role</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Schema upload fails:</strong> Ensure your XSD/WSDL is well-formed XML. Use an online XML validator before uploading. Maximum file size is 5 MB.</li>
+              <li><strong>Mapping suggestions are incorrect:</strong> Use the interactive mapping table to override individual field assignments. Click <strong>Re-generate</strong> after corrections to update the IDD.</li>
+              <li><strong>Integration Suite iFlow notes are missing:</strong> Confirm you selected <em>SAP Integration Suite</em> as the middleware. Selecting a third-party middleware suppresses SAP-specific content.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-10 -->
+
+  <!-- AGENT 11: DATA MIGRATION -->
+  <div class="agent-card" id="agent-11" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🗄️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 11</div>
+        <div class="agent-name">S/4HANA Public Cloud Data Migration Agent</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Data Migration</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The S/4HANA Public Cloud Data Migration Agent assists with all stages of data migration planning and execution for an S/4HANA Public Cloud go-live. It covers:</p>
+            <ul>
+              <li><strong>Migration scope definition:</strong> Proposes which objects to migrate based on go-live scope (master data and open transactional data)</li>
+              <li><strong>Migration template generation:</strong> Produces pre-filled SAP migration object templates aligned with SAP's Migration Cockpit (LTMC/LTMOM)</li>
+              <li><strong>Source-to-target field mapping:</strong> Maps source system fields to SAP S/4HANA Migration Cockpit migration object fields</li>
+              <li><strong>Data quality rules:</strong> Generates data quality check rules and validation logic for pre-migration cleansing</li>
+              <li><strong>Migration plan and cutover checklist:</strong> Produces a migration plan document and a detailed cutover activity checklist</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Data Migration Leads</strong> responsible for the migration strategy and execution</li>
+              <li><strong>Functional Consultants</strong> (by workstream) validating migration templates for their data objects</li>
+              <li><strong>Technical Migration Developers</strong> building extraction, transformation, and load (ETL) scripts</li>
+              <li><strong>Project / Delivery Managers</strong> using the cutover checklist to track migration readiness</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Migration objects list</strong> — SAP Migration Cockpit object names (e.g., Business Partner, Material, Open AR Items) or a description of what data must be migrated</li>
+              <li><strong>Source system type</strong> — SAP ECC, SAP R/3, non-SAP ERP, or flat file</li>
+              <li><strong>Source field extract or data dictionary</strong> — upload an extract sample (CSV/Excel) or source data dictionary for field mapping</li>
+              <li><strong>Go-live date</strong> — used to calculate migration milestone dates in the plan</li>
+              <li><strong>Volume estimates</strong> — approximate record counts per object (for performance planning)</li>
+              <li><strong>Data quality issues known</strong> (optional) — describe known cleansing challenges</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li>SAP Migration Cockpit-compatible migration templates (XLSX) pre-populated with field mappings</li>
+              <li>Source-to-target field mapping specification (Excel)</li>
+              <li>Data quality rules document (Word) — validation rules with pass/fail criteria for each object</li>
+              <li>Migration plan (Excel/Word) — phased plan with milestones, owners, and dependencies</li>
+              <li>Cutover checklist (Excel) — activity-level checklist with sequencing, duration estimates, and go/no-go criteria</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to <strong>Realize</strong> → <strong>Data Migration Agent</strong>. Select the migration objects you need, upload your source data sample or data dictionary, and complete the migration context form. Click <strong>Generate Migration Package</strong>. All outputs are bundled in a downloadable ZIP.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Agreed migration scope (list of objects to migrate) signed off by the Data Migration Lead and Functional Leads</li>
+              <li>Access to a source data extract or data dictionary (even a sample of 10–50 rows is sufficient for mapping)</li>
+              <li>SAP Migration Cockpit (LTMC) accessible in the Q/Dev system</li>
+              <li>GrowActivAIte login with the <strong>Data Migration Lead</strong> or <strong>Functional Lead</strong> role</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Migration template fields don't match LTMC:</strong> Confirm the SAP S/4HANA Public Cloud release version in the agent's settings matches your system's release. LTMC templates differ between releases.</li>
+              <li><strong>Field mapping is largely incorrect:</strong> Provide a more structured source data dictionary. A CSV with column headers and 5 sample rows significantly improves mapping accuracy.</li>
+              <li><strong>Cutover checklist is missing activities:</strong> Use the checklist's <em>Add Custom Activity</em> rows (pre-formatted in the Excel) and flag the gap via the Feedback button so the model can be improved.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-11 -->
+
+  <!-- AGENT 12: DEFECT RESOLVER QE -->
+  <div class="agent-card" id="agent-12" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🔍</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 12</div>
+        <div class="agent-name">Defect Resolver – Quality Engineering</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Quality Engineering</span>
+          <span class="tag tag-type">Testing</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Defect Resolver – Quality Engineering agent is an AI-powered defect analysis tool used during the testing phase (System Integration Testing, User Acceptance Testing). When a tester raises a defect, the agent analyses the defect description, error logs, and test context to:</p>
+            <ul>
+              <li>Classify the defect by type (configuration, development, data, environment, test script)</li>
+              <li>Identify the probable root cause based on the error message pattern and process context</li>
+              <li>Suggest resolution steps specific to the SAP S/4HANA Public Cloud context</li>
+              <li>Recommend which team (Basis, Functional, Development, Data) should own the fix</li>
+              <li>Draft a defect resolution note ready to be pasted into the defect management tool (e.g., Cloud ALM, JIRA, ServiceNow)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Testers and QE Engineers</strong> raising defects during SIT/UAT</li>
+              <li><strong>Functional Consultants</strong> triaging defects assigned to their workstream</li>
+              <li><strong>Test Managers</strong> reviewing defect analysis quality and resolution progress</li>
+              <li><strong>Developers</strong> receiving defect assignments who need rapid context and suggested fixes</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Defect title and description</strong> — as recorded in the defect management tool</li>
+              <li><strong>Error message or dump</strong> — paste the full SAP error message, short dump text, or application log entry</li>
+              <li><strong>Test scenario and test step</strong> where the defect was observed</li>
+              <li><strong>SAP module and process area</strong> (e.g., FI-AP Invoice Processing)</li>
+              <li><strong>Test data used</strong> — relevant master data or transaction data IDs (anonymise if needed)</li>
+              <li><strong>Screenshot or screen recording</strong> (optional — upload for visual context)</li>
+              <li><strong>System details:</strong> client, release, transport request numbers (if relevant)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Defect classification:</strong> Type, severity assessment (Critical/High/Medium/Low), and probable owner team</li>
+              <li><strong>Root cause analysis:</strong> Likely cause with confidence level (High/Medium/Low) and reasoning</li>
+              <li><strong>Resolution steps:</strong> Step-by-step fix instructions (configuration change, code fix, data correction, or workaround)</li>
+              <li><strong>Defect resolution note:</strong> Pre-formatted text ready to copy into your defect tracking tool</li>
+              <li><strong>Related SAP Notes/KBAs:</strong> Relevant SAP support notes (from SAP's published knowledge base) if the error pattern matches a known issue</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to <strong>Realize</strong> → <strong>Defect Resolver (QE)</strong>. Paste the defect details and error information into the input form, attach any screenshots, and click <strong>Analyse Defect</strong>. The analysis appears within 15–30 seconds. Copy the resolution note directly to your defect management tool.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Active testing phase — the agent is available from the start of SIT preparation</li>
+              <li>GrowActivAIte login with any project role (all team members can use the Defect Resolver during testing)</li>
+              <li>A defect management tool (Cloud ALM, JIRA, ServiceNow) configured for the project — the agent generates the resolution note but does not auto-update the tool</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Root cause analysis is incorrect:</strong> Provide more context — include the full SAP error message (including the message class and number, e.g., <code>MESG FI001</code>), the transport request, and recent configuration changes in that area.</li>
+              <li><strong>Resolution steps don't apply to S/4HANA Public Cloud (cloud vs. on-premise mismatch):</strong> Confirm the SAP System Type is set to <em>S/4HANA Public Cloud</em> in the agent's context selector — some error patterns occur in both environments with different resolutions.</li>
+              <li><strong>No SAP Notes suggested:</strong> This is expected for custom development defects. The SAP Notes feature only applies to standard SAP component errors.</li>
+              <li>If the agent's resolution is consistently off for a specific error type, report this via the Feedback button — it helps improve the model for that error class.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-12 -->
+</section>
+
+
+<!-- ===================================================
+     PHASE: RUN
+     =================================================== -->
+<section class="phase-section">
+  <div class="phase-banner">Phase: Run</div>
+
+  <!-- AGENT 13: DEFECT RESOLVER RUN -->
+  <div class="agent-card" id="agent-13">
+    <div class="agent-header">
+      <div class="agent-icon">🚀</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 13</div>
+        <div class="agent-name">Defect Resolver – Run Support</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Run</span>
+          <span class="tag tag-type">Production Support</span>
+          <span class="tag tag-type">Hypercare</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Defect Resolver – Run Support agent provides AI-powered incident analysis and resolution guidance for production and hypercare support issues after go-live. Unlike the QE variant (Agent 12), this agent is tuned for:</p>
+            <ul>
+              <li><strong>Higher urgency scenarios</strong> — production outages and business-critical process failures</li>
+              <li><strong>Production data context</strong> — guides analysts to investigate production symptoms without exposing sensitive data to the AI (the analyst describes the symptom; the agent provides investigation guidance)</li>
+              <li><strong>SAP support escalation guidance</strong> — when to open a Priority 1/2 ticket with SAP, what to include, and how to speed up SAP's response</li>
+              <li><strong>Workaround identification</strong> — faster path to a temporary workaround to restore business operations while a permanent fix is developed</li>
+              <li><strong>Root cause and permanent fix guidance</strong> — same capability as the QE variant, plus change management and transport guidance for production fixes</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Application Managed Services (AMS) / Run Support team members</strong> handling production incidents</li>
+              <li><strong>Hypercare support consultants</strong> during the weeks immediately following go-live</li>
+              <li><strong>Run Support Leads and Service Delivery Managers</strong> triaging and prioritising incidents</li>
+              <li><strong>Functional and Technical consultants</strong> on hypercare rotation</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Incident title and description</strong> — from the incident management tool (ServiceNow, Cloud ALM)</li>
+              <li><strong>Incident priority</strong> — P1 (Critical), P2 (High), P3 (Medium), P4 (Low)</li>
+              <li><strong>Error message or symptom description</strong> — SAP error text, dump, or user's description of what they see</li>
+              <li><strong>Affected process and transaction</strong> (e.g., "FI Automatic Payment Run — F110 fails with RFFO error")</li>
+              <li><strong>Number of users affected and business impact statement</strong></li>
+              <li><strong>Recent changes</strong> — any transports deployed, configuration changes, or SAP updates applied in the past 7 days</li>
+              <li><strong>Steps already tried</strong> (optional) — to avoid the agent suggesting steps already ruled out</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Incident classification and priority validation</strong> — confirms or suggests a priority adjustment based on the business impact described</li>
+              <li><strong>Immediate workaround steps</strong> — actions to restore business operations as quickly as possible</li>
+              <li><strong>Root cause investigation guide</strong> — ordered list of diagnostic steps for the support analyst to follow</li>
+              <li><strong>Permanent fix recommendation</strong> — configuration change, code fix, or data correction with transport guidance</li>
+              <li><strong>SAP support ticket draft</strong> — pre-filled SAP message template (Component, Short Text, Long Text, Steps to Reproduce) for escalation if needed</li>
+              <li><strong>Incident resolution note</strong> — formatted text for the incident ticket's resolution field</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>In GrowActivAIte, navigate to the <strong>Run</strong> phase tab and select <strong>Defect Resolver – Run Support</strong>. The agent is accessible 24 hours a day, 7 days a week during the contracted support period. Paste the incident details and click <strong>Analyse Incident</strong>. For P1 incidents, the agent displays a <em>High Priority Mode</em> banner and prioritises workaround steps before root cause analysis.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li>Go-live completed and the Run phase activated in the project's GrowActivAIte workspace</li>
+              <li>GrowActivAIte login with the <strong>Run Support</strong> role (assigned by the Service Delivery Manager post go-live)</li>
+              <li>Incident management tool (ServiceNow or Cloud ALM) configured — the agent generates resolution notes but does not auto-update the ticketing tool</li>
+              <li>For P1 incidents: ensure your SAP S-User (support portal user) is available for SAP ticket escalation if needed</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Workaround steps don't apply to Public Cloud (on-premise steps suggested):</strong> Verify the System Type is set to <em>S/4HANA Public Cloud</em>. Some error messages occur in both environments with different resolution paths.</li>
+              <li><strong>Agent is unavailable during a P1 incident:</strong> Contact the GrowActivAIte emergency support line (number provided during onboarding) and use your team's manual incident triage runbook as a fallback. The platform has a target 99.5% uptime SLA.</li>
+              <li><strong>SAP support ticket draft is missing component code:</strong> You can find the correct SAP component code in the SAP Component Hierarchy (accessible via the SAP Support Portal) or by asking your Basis Lead. Enter it manually in the generated draft.</li>
+              <li><strong>Analysis consistently misclassifies incidents in a specific area:</strong> Report this via the Feedback button with two or three examples. The model is retrained on a monthly cadence using validated feedback.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-13 -->
+</section>
+
+
+<!-- ===== BACK TO TOP ===== -->
+<div style="text-align:center; margin-top:40px;">
+  <a href="#toc" style="display:inline-block; background:var(--primary); color:#fff; text-decoration:none; padding:10px 28px; border-radius:6px; font-size:0.88rem; font-weight:600; letter-spacing:0.04em;">↑ Back to Table of Contents</a>
+</div>
+
+</div><!-- /.page-wrapper -->
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <p><strong>GrowActivAIte — Agent FAQ Guide</strong></p>
+  <p style="margin-top:6px;">Accenture · S4 HANA Public Cloud AI Delivery · Release 1.0 · July 2026</p>
+  <p style="margin-top:8px;">© 2026 Accenture. All rights reserved.</p>
+  <p style="margin-top:6px; font-size:0.76rem;">This document contains confidential and proprietary information intended for Accenture project team members. Do not distribute externally without approval from your Engagement Lead.</p>
+</footer>
+
+</body>
+</html>
