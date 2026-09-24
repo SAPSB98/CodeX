@@ -90,11 +90,12 @@ export const phases = [
     agentGroups: [
       {
         name: 'Solution Confirmation Agent',
-        count: 8,
+        count: 9,
         useCases: [
           { id: 'bdcq-agent',          title: 'BDCQ Agent',                            status: 'ideation' },
           { id: 'fit-to-standard',     title: 'Fit to Standard – Material Generation', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/FitToStandard_v5_BDCQ.html' },
           { id: 'kdd-creation',        title: 'KDD Creation',                          status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/670550fc-93f9-4dab-a24e-55f983b2422b' },
+          { id: 'fulcrum-kdd',         title: 'Fulcrum – KDD Generator',               status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/FulcrumAgent.html', description: 'Bulk KDD generation from scope catalog · 5-stage AI pipeline · Cloud PE compliant · Excel export' },
           { id: 'workshop-analysis',   title: 'Workshop Analysis Utility Agent',       status: 'ideation' },
           { id: 'user-stories',        title: 'User Stories',                          status: 'ideation' },
           { id: 'bp-design-l1-l5',    title: 'Business Process Design L1 to L5',      status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/816f329f-30c7-4c38-b4cf-fa144db9b464' },

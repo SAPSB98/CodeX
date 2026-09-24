@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Fulcrum — KDD Generator · SAP S/4HANA Cloud PE</title>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sidebar-w:220px;--sidebar-bg:#14082e;--sidebar-hover:#2a1050;--sidebar-active:#5b21b6;
+  --accent:#7c3aed;--accent-light:#a78bfa;--content-bg:#f4f3f8;--card-bg:#fff;
+  --text:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --success:#059669;--success-bg:#ecfdf5;--warning:#d97706;--warning-bg:#fffbeb;
+  --danger:#dc2626;--danger-bg:#fef2f2;--radius:8px;
+  --shadow:0 1px 3px rgba(0,0,0,.10),0 1px 2px rgba(0,0,0,.06);
+}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;color:var(--text)}
+.layout{display:flex;height:100vh;overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--sidebar-bg);display:flex;flex-direction:column;overflow-y:auto;padding-bottom:24px}
+.brand{display:flex;align-items:center;gap:10px;padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:8px}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
+.brand-name{color:#fff;font-size:14px;font-weight:600}
+.brand-sub{color:rgba(255,255,255,.45);font-size:10px;margin-top:1px}
+.nav{padding:4px 8px;flex:1}
+.nav-section{color:rgba(255,255,255,.35);font-size:10px;font-weight:600;letter-spacing:.08em;padding:14px 8px 4px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--radius);color:rgba(255,255,255,.7);font-size:13.5px;transition:background .15s,color .15s;margin-bottom:2px;cursor:pointer}
+.nav-item:hover{background:var(--sidebar-hover);color:#fff}
+.nav-item.active{background:var(--sidebar-active);color:#fff}
+.nav-icon{font-size:14px;width:18px;text-align:center}
+
+/* Content */
+.content{flex:1;overflow-y:auto;background:var(--content-bg);padding:28px 32px}
+.page-header{margin-bottom:24px}
+.page-title{font-size:22px;font-weight:700;color:var(--text)}
+.page-sub{font-size:13px;color:var(--muted);margin-top:3px}
+
+/* Cards */
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:16px}
+.card-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.card-value{font-size:28px;font-weight:700;color:var(--text)}
+.card-note{font-size:12px;color:var(--muted);margin-top:4px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:6px;font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s;border:none}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#6d28d9}
+.btn-outline{background:#fff;color:var(--accent);border:1px solid var(--accent)}.btn-outline:hover{background:#f5f3ff}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#047857}
+.btn-sm{padding:5px 10px;font-size:12.5px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* Alerts */
+.alert{padding:10px 14px;border-radius:6px;font-size:13px;margin-bottom:12px}
+.alert-warning{background:var(--warning-bg);color:var(--warning);border:1px solid #fde68a}
+.alert-danger{background:var(--danger-bg);color:var(--danger);border:1px solid #fecaca}
+.alert-success{background:var(--success-bg);color:var(--success);border:1px solid #a7f3d0}
+.alert-info{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+
+/* Form */
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
+.form-control{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13.5px;color:var(--text);outline:none;transition:border .15s}
+.form-control:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(124,58,237,.15)}
+.form-hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+
+/* Table */
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#f9fafb;padding:8px 10px;text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid #f3f4f6;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+
+/* Progress */
+.progress-list{list-style:none;margin-top:12px}
+.progress-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #f3f4f6}
+.progress-item:last-child{border-bottom:none}
+.prog-status{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px}
+.prog-running{background:#dbeafe;color:#1d4ed8;animation:spin 1s linear infinite}
+.prog-done{background:var(--success-bg);color:var(--success)}
+.prog-error{background:var(--danger-bg);color:var(--danger)}
+.prog-wait{background:#f3f4f6;color:var(--muted)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.prog-name{font-weight:600;font-size:13px}
+.prog-msg{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:600}
+.badge-fit{background:#dcfce7;color:#15803d}
+.badge-gap{background:#fee2e2;color:#dc2626}
+.badge-partial{background:#fef3c7;color:#d97706}
+.badge-low{background:#f0fdf4;color:#15803d}
+.badge-med{background:#fffbeb;color:#d97706}
+.badge-high{background:#fef2f2;color:#dc2626}
+
+/* LOB filter */
+.lob-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.lob-pill{padding:4px 10px;border-radius:999px;font-size:12px;border:1px solid var(--border);cursor:pointer;background:#fff;color:var(--muted);transition:all .15s}
+.lob-pill.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Checkbox list */
+.item-list{max-height:320px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;padding:4px 0}
+.item-row{display:flex;align-items:center;gap:8px;padding:6px 10px;cursor:pointer;transition:background .1s}
+.item-row:hover{background:#f5f3ff}
+.item-row input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px;flex-shrink:0}
+.item-label{font-size:13px;flex:1}
+.item-lob{font-size:11px;color:var(--muted)}
+
+/* Divider */
+.section-divider{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:20px 0 12px;display:flex;align-items:center;gap:8px}
+.section-divider::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* Upload area */
+.upload-area{border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;cursor:pointer;transition:border .15s;margin-bottom:16px}
+.upload-area:hover,.upload-area.drag{border-color:var(--accent);background:#f5f3ff}
+.upload-icon{font-size:32px;margin-bottom:8px}
+.upload-text{font-size:13.5px;color:var(--muted)}
+.upload-text strong{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="layout">
+  <div class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">⬡</div>
+      <div><div class="brand-name">Fulcrum</div><div class="brand-sub">Explore Phase · S/4HANA Cloud PE</div></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" data-page="home" onclick="navigate('home')"><span class="nav-icon">⌂</span> Home</div>
+      <div class="nav-item" data-page="kdd" onclick="navigate('kdd')"><span class="nav-icon">◈</span> KDD Generator</div>
+      <div class="nav-section">Config</div>
+      <div class="nav-item" data-page="settings" onclick="navigate('settings')"><span class="nav-icon">⚙</span> Settings</div>
+    </nav>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+
+<script>
+"use strict";
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let _catalog   = null;  // { version, processes }
+let _generated = [];    // generated KDD rows (all items)
+let _overviews = [];    // overview rows for Excel sheet 3
+
+// ── Constants ─────────────────────────────────────────────────────────────────
+const LOB_MODULE = {
+  "Finance":"FIN","FAC Finance and Controlling":"FIN","Sales":"SD",
+  "Sourcing and Procurement":"MM","Procurement":"MM","Manufacturing":"PP",
+  "Human Resources":"HCM","Supply Chain":"SCM","Asset Management":"PM",
+  "Service":"CS","IT Management":"IT","Professional Services":"PS",
+  "R&D and Engineering":"RE","Data Management":"DM","Database and Data Management":"DM",
+  "Application Platform and Infrastructure":"IT","Integration":"IT",
+  "Solutions for Specific Industries":"Cross","VEV Vendor Evaluation":"MM","Other":"Cross"
+};
+
+const FORBIDDEN_TERMS = [
+  "ABAP","ECC","R/3","SE16","SM30","SE38","SE80",
+  "user exit","BAdI","CMOD","SMOD","on-premise","on premise",
+  "private cloud","SAP GUI","SAPGUI","SM31","SM34","OBYC",
+  "backend custom","LSMW","BDC","batch input"
+];
+
+const AUTO_REPLACEMENTS = {
+  "SAP GUI":"SAP Fiori","SAPGUI":"SAP Fiori","on-premise":"Cloud PE",
+  "on premise":"Cloud PE","private cloud":"Cloud PE","user exit":"Key User Extension",
+  "BAdI":"BTP Extension","SM30":"SAP Fiori customizing app","SM31":"SAP Fiori customizing app",
+  "SM34":"SAP Fiori customizing app","SE16":"SAP Fiori Display app",
+  "SE38":"ABAP Cloud development","SE80":"ABAP Cloud development",
+  "LSMW":"SAP S/4HANA Migration Cockpit","BDC":"SAP S/4HANA Migration Cockpit",
+  "batch input":"SAP S/4HANA Migration Cockpit","ABAP":"ABAP Cloud",
+  "backend custom":"Key User Extension or BTP Side-by-Side",
+  "ECC":"source system","R/3":"source system"
+};
+
+const ALLOWED_PATTERNS = ["abap cloud","developer abap cloud"];
+
+const KDD_REQUIRED_FIELDS = [
+  "kddId","designQuestion","fitGap","complexity",
+  "decisionOwner","sapActivatePhase","rationale","impactActions","notes"
+];
+
+// ── API key ───────────────────────────────────────────────────────────────────
+function getApiKey() { return localStorage.getItem("fulcrum_api_key") || ""; }
+
+// ── Anthropic API call ────────────────────────────────────────────────────────
+async function callClaude(prompt) {
+  const key = getApiKey();
+  const headers = {
+    "content-type": "application/json",
+    "anthropic-version": "2023-06-01",
+    "anthropic-dangerous-direct-browser-access": "true"
+  };
+  if (key) headers["x-api-key"] = key;
+
+  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      model: "claude-haiku-4-5-20251001",
+      max_tokens: 4096,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await resp.json();
+  if (!resp.ok) throw new Error(data.error?.message || `API error ${resp.status}`);
+  return data.content[0].text;
+}
+
+// ── JSON extraction ───────────────────────────────────────────────────────────
+function extractJSON(raw) {
+  let cleaned = raw.replace(/^```(?:json)?\s*/gm,"").replace(/^```\s*$/gm,"").trim();
+  const s = cleaned.indexOf("["), e = cleaned.lastIndexOf("]");
+  if (s < 0 || e < 0) throw new Error("No JSON array in response");
+  let jsonStr = cleaned.slice(s, e + 1);
+  try { return JSON.parse(jsonStr); } catch(_) {}
+  try {
+    const fixed = jsonStr
+      .replace(/"(?:[^"\\]|\\.)*"/g, m => m.replace(/\n/g,"\\n").replace(/\r/g,"\\r").replace(/\t/g,"\\t"))
+      .replace(/,(\s*[}\]])/g,"$1");
+    return JSON.parse(fixed);
+  } catch(_) {}
+  throw new Error("JSON parse failed. Preview: " + jsonStr.slice(0,200));
+}
+
+// ── Context Agent ─────────────────────────────────────────────────────────────
+function parseContext(item) {
+  const lines = (item.description || "").split("\n").map(l => l.trim()).filter(Boolean);
+  const sec = { overview:[], flow:[], benefits:[] };
+  let cur = null;
+  const STOP = new Set(["Solution Capabilities","Industry Relevance","Diagrams","Accelerators"]);
+  for (const line of lines) {
+    if (line === "Overview")          { cur = "overview";  continue; }
+    if (line === "Key Process Flow")  { cur = "flow";      continue; }
+    if (line === "Business Benefits") { cur = "benefits";  continue; }
+    if (STOP.has(line))               { cur = null;        continue; }
+    if (cur) sec[cur].push(line);
+  }
+  return {
+    overview: sec.overview.join(" ").slice(0,300),
+    flow:     sec.flow.slice(0,10).map((s,i) => `${i+1}. ${s}`).join("\n"),
+    benefits: sec.benefits.slice(0,5).join("; ")
+  };
+}
+
+// ── Cache Agent ───────────────────────────────────────────────────────────────
+function checkCache(item) {
+  try {
+    const raw = localStorage.getItem(`fulcrum_cache_${item.id}`);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    const clean = (cached.rows || []).filter(r => !r.needsRegeneration);
+    return clean.length > 0 ? clean : null;
+  } catch(_) { return null; }
+}
+
+function saveCache(itemId, rows) {
+  try { localStorage.setItem(`fulcrum_cache_${itemId}`, JSON.stringify({ rows, cachedAt: Date.now() })); } catch(_) {}
+}
+
+// ── Library Agent ─────────────────────────────────────────────────────────────
+function getPastDecisions(scopeItemId) {
+  try {
+    const all = JSON.parse(localStorage.getItem("fulcrum_decisions") || "[]");
+    return all.filter(d => d.scopeItemId === scopeItemId).slice(0,5);
+  } catch(_) { return []; }
+}
+
+// ── Validation Agent ──────────────────────────────────────────────────────────
+function isForbiddenInContext(val, term) {
+  const lower = val.toLowerCase(), termLower = term.toLowerCase();
+  if (!lower.includes(termLower)) return false;
+  let idx = 0;
+  while ((idx = lower.indexOf(termLower, idx)) !== -1) {
+    const ctx = lower.slice(Math.max(0, idx-5), idx + termLower.length + 10);
+    if (!ALLOWED_PATTERNS.some(p => ctx.includes(p))) return true;
+    idx += termLower.length;
+  }
+  return false;
+}
+
+const SCANNABLE = ["designQuestion","rationale","impactActions","notes","l1","l2","ricefTitle","extensibilityType"];
+
+function autoFix(rows) {
+  return rows.map(row => {
+    const fixed = { ...row };
+    SCANNABLE.forEach(f => {
+      if (!fixed[f]) return;
+      let val = fixed[f];
+      for (const [term, rep] of Object.entries(AUTO_REPLACEMENTS)) {
+        val = val.replace(new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"), "gi"), rep);
+      }
+      fixed[f] = val;
+    });
+    return fixed;
+  });
+}
+
+function validate(rows) {
+  const VALID_FG = new Set(["Fit","Partial Fit","Gap"]);
+  const VALID_CX = new Set(["Low","Medium","High"]);
+  const VALID_PH = new Set(["Explore","Realize","Deploy"]);
+  const errors = [];
+  if (!Array.isArray(rows) || rows.length !== 15) {
+    errors.push(`Expected 15 rows, got ${Array.isArray(rows) ? rows.length : typeof rows}`);
+    return { errors, fixedRows: rows, autoFixed: false, forbiddenFound: 0 };
+  }
+  rows.forEach((row,i) => {
+    const label = row.kddId || `row ${i+1}`;
+    const missing = KDD_REQUIRED_FIELDS.filter(f => !row[f]);
+    if (missing.length) errors.push(`${label} missing: ${missing.join(", ")}`);
+    if (row.fitGap && !VALID_FG.has(row.fitGap)) errors.push(`${label} invalid fitGap`);
+    if (row.complexity && !VALID_CX.has(row.complexity)) errors.push(`${label} invalid complexity`);
+    if (row.sapActivatePhase && !VALID_PH.has(row.sapActivatePhase)) errors.push(`${label} invalid phase`);
+  });
+  const before = rows.flatMap(row => SCANNABLE.flatMap(f =>
+    FORBIDDEN_TERMS.filter(t => isForbiddenInContext(row[f]||"", t)).map(t => ({row, field:f, term:t}))
+  ));
+  const fixedRows = before.length > 0 ? autoFix(rows) : rows;
+  const after = before.length > 0 ? fixedRows.flatMap(row => SCANNABLE.flatMap(f =>
+    FORBIDDEN_TERMS.filter(t => isForbiddenInContext(row[f]||"", t)).map(t => ({term:t}))
+  )) : [];
+  after.forEach(v => errors.push(`Still contains "${v.term}" — manual review needed`));
+  return { errors, fixedRows, autoFixed: before.length > 0 && after.length === 0, forbiddenFound: before.length };
+}
+
+// ── Generation Agent ──────────────────────────────────────────────────────────
+function fillDefaults(rows, item, mod) {
+  return rows.map((r, i) => ({
+    kddId:            r.kddId            || `${item.id}-KDD-${String(i+1).padStart(3,"0")}`,
+    scopeItemId:      item.id,
+    scopeItemName:    item.name,
+    designQuestion:   r.designQuestion   || "",
+    fitGap:           r.fitGap           || "Fit",
+    complexity:       r.complexity       || "Low",
+    status:           "Open",
+    module:           mod,
+    l1:               r.l1 || item.lob   || "",
+    l2:               r.l2               || "",
+    l3:"", l4:"",
+    decisionOwner:    r.decisionOwner    || "",
+    sapActivatePhase: r.sapActivatePhase || "Explore",
+    rationale:        r.rationale        || "",
+    impactActions:    r.impactActions    || "",
+    notes:            r.notes            || "",
+    decisionMade:"", sapConsultant:"",
+    ricefTitle:"", ricefType:"None", extensibilityType:"None",
+    btpRequired:"No", effortEstimate:"None",
+    source:"SAP for Me - Process Navigator", dataSource:"SAP for Me"
+  }));
+}
+
+async function generateQuestions(item, context, pastDecisions) {
+  const mod = LOB_MODULE[item.lob] || "Cross";
+  const descBlock = [
+    context.overview  && `Overview: ${context.overview}`,
+    context.flow      && `Key Process Flow:\n${context.flow}`,
+    context.benefits  && `Business Benefits: ${context.benefits}`
+  ].filter(Boolean).join("\n\n");
+  const pastBlock = pastDecisions.length > 0
+    ? `\nPast decisions for ${item.id}:\n` + pastDecisions.map(d => `• ${d.question} [${d.fitGap||"?"}]`).join("\n")
+    : "";
+
+  const prompt = `Generate exactly 15 KDD questions for SAP S/4HANA Cloud Public Edition.
+
+Scope: ${item.id} — ${item.name} | LOB: ${item.lob} | Module: ${mod}
+
+${descBlock}
+${pastBlock}
+
+Rules: Cloud PE only. Each question must name a specific Fiori app or BTP service. No ABAP/ECC/SAP GUI/on-premise.
+
+Cover: [2] Fiori Config  [2] Master Data  [2] Approval/Workflow  [1] Outputs/Forms
+       [2] Integration  [1] Reporting  [1] Authorisation  [2] Data Migration
+       [1] Org Structure  [1] Number Ranges
+
+Return ONLY a JSON array of exactly 15 objects with these 6 fields:
+[{
+  "kddId": "${item.id}-KDD-001",
+  "designQuestion": "specific question naming Fiori app (max 150 chars)",
+  "fitGap": "Fit" | "Partial Fit" | "Gap",
+  "complexity": "Low" | "Medium" | "High",
+  "l1": "top-level area e.g. Finance",
+  "l2": "sub-area e.g. Accounts Payable"
+}]
+JSON only. No markdown.`;
+
+  const out = await callClaude(prompt);
+  const rows = extractJSON(out);
+  if (!Array.isArray(rows) || rows.length !== 15) {
+    // retry once
+    const out2 = await callClaude(prompt);
+    const rows2 = extractJSON(out2);
+    if (!Array.isArray(rows2) || rows2.length !== 15) throw new Error(`Expected 15 rows, got ${rows2?.length}`);
+    return rows2;
+  }
+  return rows;
+}
+
+async function enrichQuestions(item, questions) {
+  const prompt = `You are an SAP S/4HANA Cloud Public Edition consultant.
+
+Add detail fields to these ${questions.length} KDD questions for scope item ${item.id} — ${item.name}.
+
+Questions:
+${questions.map((q,i) => `${i+1}. [${q.kddId}] [${q.fitGap}] ${q.designQuestion}`).join("\n")}
+
+Return ONLY a JSON array of exactly ${questions.length} objects:
+[{
+  "kddId": "...",
+  "decisionOwner": "role e.g. Finance Lead / IT Security Lead / Plant Manager",
+  "sapActivatePhase": "Explore" | "Realize" | "Deploy",
+  "rationale": "1 sentence why this matters for Cloud PE (max 100 chars)",
+  "impactActions": "1 sentence consequence if not decided before go-live (max 100 chars)",
+  "notes": "exact Fiori app name or BTP service (max 80 chars)"
+}]
+Cloud PE only. No ABAP/ECC/SAP GUI. JSON only.`;
+
+  const out = await callClaude(prompt);
+  const detail = extractJSON(out);
+  if (!Array.isArray(detail) || detail.length !== questions.length) {
+    return questions.map(q => ({ ...q, decisionOwner:"", sapActivatePhase:"Explore", rationale:"", impactActions:"", notes:"" }));
+  }
+  const byId = {};
+  detail.forEach(d => { byId[d.kddId] = d; });
+  return questions.map((q,i) => {
+    const d = byId[q.kddId] || detail[i] || {};
+    return { ...q, decisionOwner:d.decisionOwner||"", sapActivatePhase:d.sapActivatePhase||"Explore",
+             rationale:d.rationale||"", impactActions:d.impactActions||"", notes:d.notes||"" };
+  });
+}
+
+async function classifyRICEF(item, rows) {
+  const targets = rows.filter(r => r.fitGap === "Gap" || r.fitGap === "Partial Fit");
+  if (!targets.length) return rows;
+  const prompt = `SAP S/4HANA Cloud PE extensibility classifier. Scope: ${item.id} — ${item.name}.
+
+${targets.map((r,i) => `${i+1}. [${r.kddId}] [${r.fitGap}] ${r.designQuestion}`).join("\n")}
+
+Return ONLY JSON array of exactly ${targets.length} objects:
+[{
+  "kddId": "...",
+  "ricefTitle": "short title — ${item.id}",
+  "ricefType": "R"|"I"|"C"|"E"|"F"|"W"|"None",
+  "extensibilityType": "Key User In-App"|"Developer ABAP Cloud"|"Side-by-Side BTP"|"None",
+  "btpRequired": "Yes"|"No"|"Possible",
+  "effortEstimate": "S"|"M"|"L"|"XL"|"None"
+}]
+No on-premise ABAP. JSON only.`;
+  try {
+    const out = await callClaude(prompt);
+    const classified = extractJSON(out);
+    const byId = {};
+    classified.forEach(c => { byId[c.kddId] = c; });
+    return rows.map(r => {
+      const c = byId[r.kddId];
+      if (!c) return r;
+      return { ...r, ricefTitle:c.ricefTitle||"", ricefType:c.ricefType||"None",
+               extensibilityType:c.extensibilityType||"None", btpRequired:c.btpRequired||"No",
+               effortEstimate:c.effortEstimate||"None" };
+    });
+  } catch(e) {
+    console.warn("RICEF skip:", e.message);
+    return rows;
+  }
+}
+
+// ── Pipeline per item ─────────────────────────────────────────────────────────
+async function runPipeline(item, onProgress) {
+  const emit = (msg, stage) => onProgress({ type:"progress", item:item.id, name:item.name, message:msg, stage });
+  const mod = LOB_MODULE[item.lob] || "Cross";
+
+  // Stage 1: Cache
+  emit("[1/5] Cache check…", 1);
+  const cached = checkCache(item);
+  if (cached) {
+    emit("✅ From cache", 1);
+    return { rows: cached, source:"cache", validationPassed:true, validationErrors:[], validationAutoFixed:false };
+  }
+
+  // Stage 2: Library
+  emit("[2/5] Checking decision library…", 2);
+  const pastDecisions = getPastDecisions(item.id);
+
+  // Stage 3: Context
+  emit("[3/5] Parsing SAP process context…", 3);
+  const context = parseContext(item);
+
+  // Stage 4a: Questions
+  emit("[4a/5] Generating 15 questions…", 4);
+  const questions = await generateQuestions(item, context, pastDecisions);
+
+  // Stage 4b: Enrichment
+  emit("[4b/5] Adding rationale & detail…", 4);
+  const enriched = await enrichQuestions(item, questions);
+
+  // Fill defaults
+  const fullRows = fillDefaults(enriched, item, mod);
+
+  // Stage 4c: RICEF
+  emit("[4c/5] Classifying RICEF…", 4);
+  const withRicef = await classifyRICEF(item, fullRows);
+
+  // Stage 5: Validation
+  emit("[5/5] Validating Cloud PE compliance…", 5);
+  let { errors, fixedRows, autoFixed, forbiddenFound } = validate(withRicef);
+  let validationPassed = errors.length === 0;
+
+  // Retry if failed with no rows
+  if (!validationPassed && fixedRows.length === 0) {
+    emit("[4/5] Retrying generation…", 4);
+    const q2 = await generateQuestions(item, context, pastDecisions);
+    const e2 = await enrichQuestions(item, q2);
+    const r2 = fillDefaults(e2, item, mod);
+    const rf2 = await classifyRICEF(item, r2);
+    const v2 = validate(rf2);
+    errors = v2.errors; fixedRows = v2.fixedRows; autoFixed = v2.autoFixed;
+    validationPassed = v2.errors.length === 0;
+  }
+
+  // Cache result
+  if (fixedRows.length > 0) saveCache(item.id, fixedRows);
+
+  return { rows:fixedRows, source:"claude", validationPassed, validationErrors:errors, validationAutoFixed:autoFixed };
+}
+
+// ── Run multiple items (concurrency 3) ────────────────────────────────────────
+async function runAll(items, onProgress) {
+  const allRows = [], allOverviews = [], results = {};
+  const concurrency = 3;
+
+  for (let i = 0; i < items.length; i += concurrency) {
+    const batch = items.slice(i, i + concurrency);
+    await Promise.all(batch.map(async item => {
+      try {
+        onProgress({ type:"start", item:item.id, name:item.name });
+        const r = await runPipeline(item, onProgress);
+        allRows.push(...r.rows);
+        allOverviews.push(buildOverview(item));
+        results[item.id] = { ...r, done:true, error:null };
+        onProgress({ type:"done", item:item.id, name:item.name, count:r.rows.length,
+                     source:r.source, validationPassed:r.validationPassed, autoFixed:r.validationAutoFixed });
+      } catch(err) {
+        results[item.id] = { done:true, error:err.message, rows:[] };
+        onProgress({ type:"error", item:item.id, name:item.name, message:err.message });
+      }
+    }));
+  }
+  return { rows:allRows, overviews:allOverviews };
+}
+
+function buildOverview(item) {
+  const ctx = parseContext(item);
+  return { id:item.id, name:item.name, module:LOB_MODULE[item.lob]||"Cross",
+           lob:item.lob, overview:ctx.overview, keyProcessFlow:ctx.flow, businessBenefits:ctx.benefits };
+}
+
+// ── Excel Export ──────────────────────────────────────────────────────────────
+async function exportExcel(rows, overviews) {
+  const wb = new ExcelJS.Workbook();
+  wb.creator = "Fulcrum";
+
+  // Sheet 1: KDD Log
+  const ws1 = wb.addWorksheet("KDD Log");
+  ws1.columns = [
+    {header:"KDD ID",key:"kddId",width:22},{header:"Scope Item ID",key:"scopeItemId",width:18},
+    {header:"Scope Item Name",key:"scopeItemName",width:30},{header:"Design Question",key:"designQuestion",width:55},
+    {header:"Fit/Gap",key:"fitGap",width:12},{header:"Complexity",key:"complexity",width:12},
+    {header:"Status",key:"status",width:10},{header:"Module",key:"module",width:8},
+    {header:"L1",key:"l1",width:20},{header:"L2",key:"l2",width:20},
+    {header:"Decision Owner",key:"decisionOwner",width:22},{header:"SAP Activate Phase",key:"sapActivatePhase",width:18},
+    {header:"Rationale",key:"rationale",width:40},{header:"Impact/Actions",key:"impactActions",width:40},
+    {header:"Notes",key:"notes",width:30},{header:"Decision Made",key:"decisionMade",width:30},
+    {header:"SAP Consultant",key:"sapConsultant",width:18},{header:"RICEF Title",key:"ricefTitle",width:22},
+    {header:"RICEF Type",key:"ricefType",width:12},{header:"Extensibility",key:"extensibilityType",width:22},
+    {header:"BTP Required",key:"btpRequired",width:12},{header:"Effort",key:"effortEstimate",width:8}
+  ];
+  ws1.getRow(1).font = { bold:true };
+  ws1.getRow(1).fill = { type:"pattern", pattern:"solid", fgColor:{ argb:"FF5B21B6" } };
+  ws1.getRow(1).font = { bold:true, color:{ argb:"FFFFFFFF" } };
+  rows.forEach(r => ws1.addRow(r));
+
+  // Sheet 2: RICEF Register
+  const ws2 = wb.addWorksheet("RICEF Register");
+  ws2.columns = [
+    {header:"RICEF Title",key:"ricefTitle",width:30},{header:"Type",key:"ricefType",width:8},
+    {header:"Extensibility",key:"extensibilityType",width:28},{header:"BTP Required",key:"btpRequired",width:14},
+    {header:"Effort",key:"effortEstimate",width:8},{header:"Design Question",key:"designQuestion",width:55},
+    {header:"Scope Item",key:"scopeItemName",width:28},{header:"Fit/Gap",key:"fitGap",width:12}
+  ];
+  ws2.getRow(1).font = { bold:true };
+  ws2.getRow(1).fill = { type:"pattern", pattern:"solid", fgColor:{ argb:"FF14082E" } };
+  ws2.getRow(1).font = { bold:true, color:{ argb:"FFFFFFFF" } };
+  rows.filter(r => r.ricefType && r.ricefType !== "None").forEach(r => ws2.addRow(r));
+
+  // Sheet 3: Scope Overview
+  const ws3 = wb.addWorksheet("Scope Overview");
+  ws3.columns = [
+    {header:"ID",key:"id",width:18},{header:"Scope Item",key:"name",width:35},
+    {header:"Module",key:"module",width:8},{header:"LOB",key:"lob",width:25},
+    {header:"Overview",key:"overview",width:50},{header:"Key Process Flow",key:"keyProcessFlow",width:50},
+    {header:"Business Benefits",key:"businessBenefits",width:50}
+  ];
+  ws3.getRow(1).font = { bold:true };
+  overviews.forEach(o => ws3.addRow(o));
+
+  // Sheet 4: Stats
+  const ws4 = wb.addWorksheet("Stats");
+  const total = rows.length;
+  const byFG = { Fit:0, "Partial Fit":0, Gap:0 };
+  const byMod = {};
+  rows.forEach(r => {
+    byFG[r.fitGap] = (byFG[r.fitGap]||0)+1;
+    byMod[r.module] = (byMod[r.module]||0)+1;
+  });
+  ws4.addRow(["Metric","Value"]);
+  ws4.addRow(["Total KDDs", total]);
+  ws4.addRow(["Fit", byFG["Fit"]]);
+  ws4.addRow(["Partial Fit", byFG["Partial Fit"]]);
+  ws4.addRow(["Gap", byFG["Gap"]]);
+  ws4.addRow(["RICEF Items", rows.filter(r => r.ricefType !== "None").length]);
+  ws4.addRow([]);
+  ws4.addRow(["Module","KDD Count"]);
+  Object.entries(byMod).sort((a,b)=>b[1]-a[1]).forEach(([mod,cnt]) => ws4.addRow([mod,cnt]));
+
+  // Download
+  const buf = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buf], { type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `KDD_Log_${new Date().toISOString().slice(0,10)}.xlsx`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Router ────────────────────────────────────────────────────────────────────
+function navigate(page) {
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("active", el.dataset.page === page));
+  const el = document.getElementById("content");
+  if (page === "home")     renderHome(el);
+  else if (page === "kdd") renderKDD(el);
+  else if (page === "settings") renderSettings(el);
+}
+
+// ── Home Page ─────────────────────────────────────────────────────────────────
+function renderHome(el) {
+  const cat = _catalog;
+  el.innerHTML = `
+  <div class="page-header">
+    <div class="page-title">Fulcrum</div>
+    <div class="page-sub">SAP S/4HANA Cloud Public Edition · Explore Phase Accelerator</div>
+  </div>
+  ${!cat ? `<div class="alert alert-warning">⚠️ No catalog loaded. Go to <strong>KDD Generator</strong> to upload your scope catalog.</div>` : ""}
+  <div class="stats-grid">
+    <div class="card">
+      <div class="card-title">Catalog Version</div>
+      <div class="card-value">${cat ? cat.version : "—"}</div>
+      <div class="card-note">${cat ? "✅ Loaded" : "Not loaded"}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Scope Items</div>
+      <div class="card-value">${cat ? cat.processes.length.toLocaleString() : "—"}</div>
+      <div class="card-note">${cat ? "SAP processes" : "Upload catalog to start"}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">KDDs Generated</div>
+      <div class="card-value">${_generated.length.toLocaleString()}</div>
+      <div class="card-note">This session</div>
+    </div>
+  </div>
+  <div class="section-divider">Quick Actions</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn btn-primary" onclick="navigate('kdd')">◈ Generate KDD Log</button>
+    <button class="btn btn-outline" onclick="navigate('settings')">⚙ Settings</button>
+  </div>
+  <div class="section-divider" style="margin-top:28px">How it works</div>
+  <div class="card">
+    <ol style="padding-left:18px;line-height:2">
+      <li>Upload your <code>scope-catalog.json</code> (from the SAP Deck Agent Chrome extension)</li>
+      <li>Select the scope items you want to generate KDDs for</li>
+      <li>Click <strong>Generate</strong> — Fulcrum runs a 5-stage AI pipeline per item</li>
+      <li>Download the KDD Excel file with 15 questions per scope item</li>
+    </ol>
+  </div>`;
+}
+
+// ── KDD Generator Page ────────────────────────────────────────────────────────
+let _running = false;
+let _itemStates = {};
+
+function renderKDD(el) {
+  const cat = _catalog;
+  if (!cat) {
+    el.innerHTML = `
+    <div class="page-header"><div class="page-title">KDD Generator</div></div>
+    <div class="card">
+      <div class="section-divider">Load Scope Catalog</div>
+      <div class="upload-area" id="upload-area" onclick="document.getElementById('catalog-file').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)">
+        <div class="upload-icon">📂</div>
+        <div class="upload-text">Click or drag <strong>scope-catalog.json</strong> here</div>
+        <div class="form-hint" style="margin-top:6px">Generated by the SAP Deck Agent Chrome extension</div>
+      </div>
+      <input type="file" id="catalog-file" accept=".json" style="display:none" onchange="loadCatalogFile(this.files[0])">
+    </div>`;
+    return;
+  }
+
+  // Build LOB list
+  const lobs = [...new Set(cat.processes.map(p => p.lob))].sort();
+  const lobCounts = {};
+  cat.processes.forEach(p => { lobCounts[p.lob] = (lobCounts[p.lob]||0)+1; });
+
+  el.innerHTML = `
+  <div class="page-header">
+    <div class="page-title">KDD Generator</div>
+    <div class="page-sub">Catalog v${cat.version} · ${cat.processes.length.toLocaleString()} scope items</div>
+  </div>
+
+  <div class="card">
+    <div class="section-divider">1. Select Scope Items</div>
+    <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center">
+      <input class="form-control" id="search-items" placeholder="Search scope items…" style="max-width:280px" oninput="filterItems()">
+      <button class="btn btn-outline btn-sm" onclick="selectAll()">Select All</button>
+      <button class="btn btn-outline btn-sm" onclick="clearAll()">Clear</button>
+      <span id="sel-count" style="font-size:12px;color:var(--muted)">0 selected</span>
+    </div>
+    <div class="lob-pills" id="lob-pills">
+      <div class="lob-pill active" data-lob="ALL" onclick="filterByLob('ALL',this)">All (${cat.processes.length})</div>
+      ${lobs.map(l => `<div class="lob-pill" data-lob="${l}" onclick="filterByLob('${l.replace(/'/g,"\\'")}',this)">${l} (${lobCounts[l]})</div>`).join("")}
+    </div>
+    <div class="item-list" id="item-list"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-divider">2. Generate</div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+      <button class="btn btn-primary" id="gen-btn" onclick="startGenerate()">◈ Generate KDDs</button>
+      <button class="btn btn-success" id="export-btn" onclick="doExport()" style="display:none">↓ Export Excel</button>
+      <button class="btn btn-outline btn-sm" onclick="clearCatalog()">✕ Change Catalog</button>
+    </div>
+    <ul class="progress-list" id="progress-list"></ul>
+  </div>`;
+
+  renderItemList(cat.processes, "ALL");
+}
+
+let _activeLob = "ALL";
+
+function renderItemList(items, lob) {
+  _activeLob = lob;
+  const search = (document.getElementById("search-items")?.value||"").toLowerCase();
+  const filtered = items.filter(p =>
+    (lob === "ALL" || p.lob === lob) &&
+    (!search || p.name.toLowerCase().includes(search) || p.id.toLowerCase().includes(search))
+  );
+  const selected = getSelected();
+  document.getElementById("item-list").innerHTML = filtered.slice(0,200).map(p => `
+    <div class="item-row" onclick="toggleItem('${p.id}')">
+      <input type="checkbox" id="cb-${p.id}" ${selected.has(p.id) ? "checked" : ""} onclick="event.stopPropagation();toggleItem('${p.id}')">
+      <div class="item-label">${escHtml(p.name)}</div>
+      <div class="item-lob">${p.lob}</div>
+    </div>`).join("") + (filtered.length > 200 ? `<div style="padding:8px 10px;color:var(--muted);font-size:12px">Showing 200 of ${filtered.length} — use search to narrow down</div>` : "");
+  updateSelCount();
+}
+
+function filterItems() {
+  if (!_catalog) return;
+  renderItemList(_catalog.processes, _activeLob);
+}
+
+function filterByLob(lob, el) {
+  document.querySelectorAll(".lob-pill").forEach(p => p.classList.remove("active"));
+  el.classList.add("active");
+  renderItemList(_catalog.processes, lob);
+}
+
+const _selected = new Set();
+function getSelected() { return _selected; }
+function toggleItem(id) {
+  if (_selected.has(id)) _selected.delete(id); else _selected.add(id);
+  const cb = document.getElementById(`cb-${id}`);
+  if (cb) cb.checked = _selected.has(id);
+  updateSelCount();
+}
+function selectAll() {
+  const list = document.querySelectorAll("#item-list input[type=checkbox]");
+  list.forEach(cb => { _selected.add(cb.id.replace("cb-","")); cb.checked = true; });
+  updateSelCount();
+}
+function clearAll() {
+  _selected.clear();
+  document.querySelectorAll("#item-list input[type=checkbox]").forEach(cb => cb.checked = false);
+  updateSelCount();
+}
+function updateSelCount() {
+  const el = document.getElementById("sel-count");
+  if (el) el.textContent = `${_selected.size} selected`;
+}
+
+function escHtml(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
+async function startGenerate() {
+  if (_running) return;
+  const items = _catalog.processes.filter(p => _selected.has(p.id));
+  if (!items.length) { alert("Please select at least one scope item."); return; }
+
+  _running = true;
+  _generated = []; _overviews = [];
+  _itemStates = {};
+  document.getElementById("gen-btn").disabled = true;
+  document.getElementById("export-btn").style.display = "none";
+
+  const plist = document.getElementById("progress-list");
+  items.forEach(item => {
+    _itemStates[item.id] = { status:"wait", name:item.name, msg:"Waiting…" };
+  });
+  renderProgress(plist, items);
+
+  try {
+    const result = await runAll(items, (ev) => {
+      if (ev.type === "start") {
+        _itemStates[ev.item] = { status:"running", name:ev.name, msg:"Starting…" };
+      } else if (ev.type === "progress") {
+        _itemStates[ev.item] = { status:"running", name:ev.name, msg:ev.message };
+      } else if (ev.type === "done") {
+        _itemStates[ev.item] = { status:"done", name:ev.name,
+          msg:`✅ ${ev.count} KDDs · ${ev.source}${ev.autoFixed?" · auto-fixed":""}${!ev.validationPassed?" · ⚠️ review needed":""}` };
+      } else if (ev.type === "error") {
+        _itemStates[ev.item] = { status:"error", name:ev.name, msg:`❌ ${ev.message}` };
+      }
+      renderProgress(plist, items);
+    });
+    _generated = result.rows;
+    _overviews = result.overviews;
+    if (_generated.length > 0) {
+      document.getElementById("export-btn").style.display = "inline-flex";
+    }
+  } catch(err) {
+    alert("Generation error: " + err.message);
+  }
+
+  _running = false;
+  document.getElementById("gen-btn").disabled = false;
+}
+
+function renderProgress(plist, items) {
+  plist.innerHTML = items.map(item => {
+    const s = _itemStates[item.id] || { status:"wait", name:item.name, msg:"Waiting…" };
+    const icon = s.status === "running" ? "↻" : s.status === "done" ? "✓" : s.status === "error" ? "✕" : "○";
+    const cls = `prog-${s.status}`;
+    return `<li class="progress-item">
+      <div class="prog-status ${cls}">${icon}</div>
+      <div><div class="prog-name">${escHtml(s.name)}</div><div class="prog-msg">${escHtml(s.msg)}</div></div>
+    </li>`;
+  }).join("");
+}
+
+async function doExport() {
+  if (!_generated.length) return;
+  try { await exportExcel(_generated, _overviews); }
+  catch(e) { alert("Export error: " + e.message); }
+}
+
+// ── Catalog loading ───────────────────────────────────────────────────────────
+function handleDrop(ev) {
+  ev.preventDefault();
+  document.getElementById("upload-area")?.classList.remove("drag");
+  const file = ev.dataTransfer.files[0];
+  if (file) loadCatalogFile(file);
+}
+
+function loadCatalogFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.processes || !Array.isArray(data.processes)) throw new Error("Invalid catalog — missing processes array");
+      _catalog = data;
+      _selected.clear();
+      navigate("kdd");
+    } catch(err) {
+      alert("Error loading catalog: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function clearCatalog() {
+  if (!confirm("Clear the loaded catalog?")) return;
+  _catalog = null; _selected.clear(); _generated = []; _overviews = [];
+  navigate("kdd");
+}
+
+// ── Settings Page ─────────────────────────────────────────────────────────────
+function renderSettings(el) {
+  const key = getApiKey();
+  el.innerHTML = `
+  <div class="page-header"><div class="page-title">Settings</div></div>
+  <div class="card">
+    <div class="section-divider">Anthropic API Key</div>
+    <div class="alert alert-info" style="margin-bottom:14px">
+      On the <strong>Accenture network</strong>, no API key is needed — the corporate proxy handles authentication automatically.
+      Only set a key if you're working <strong>off-network</strong>.
+    </div>
+    <div class="form-group">
+      <label class="form-label">API Key</label>
+      <input class="form-control" type="password" id="api-key-input" value="${escHtml(key)}" placeholder="sk-ant-… (leave blank on Accenture network)">
+      <div class="form-hint">Stored in browser localStorage. Never sent anywhere except api.anthropic.com.</div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="saveKey()">Save Key</button>
+    ${key ? `<button class="btn btn-outline btn-sm" onclick="clearKey()" style="margin-left:8px">Clear Key</button>` : ""}
+  </div>
+  <div class="card">
+    <div class="section-divider">Cache</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Generated KDDs are cached in localStorage to speed up repeat runs.</p>
+    <button class="btn btn-outline btn-sm" onclick="clearCache()">Clear KDD Cache</button>
+  </div>`;
+}
+
+function saveKey() {
+  const val = document.getElementById("api-key-input").value.trim();
+  if (val) localStorage.setItem("fulcrum_api_key", val);
+  else localStorage.removeItem("fulcrum_api_key");
+  alert("Saved.");
+}
+function clearKey() { localStorage.removeItem("fulcrum_api_key"); renderSettings(document.getElementById("content")); }
+function clearCache() {
+  const keys = Object.keys(localStorage).filter(k => k.startsWith("fulcrum_cache_"));
+  keys.forEach(k => localStorage.removeItem(k));
+  alert(`Cleared ${keys.length} cached items.`);
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+navigate("home");
+</script>
+</body>
+</html>
