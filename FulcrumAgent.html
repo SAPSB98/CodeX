@@ -132,6 +132,7 @@ tr:hover td{background:#fafafa}
       <div class="nav-section">Main</div>
       <div class="nav-item active" data-page="home" onclick="navigate('home')"><span class="nav-icon">⌂</span> Home</div>
       <div class="nav-item" data-page="kdd" onclick="navigate('kdd')"><span class="nav-icon">◈</span> KDD Generator</div>
+      <div class="nav-item" data-page="bdcq" onclick="navigate('bdcq')"><span class="nav-icon">◇</span> BDCQ Agent</div>
       <div class="nav-section">Config</div>
       <div class="nav-item" data-page="settings" onclick="navigate('settings')"><span class="nav-icon">⚙</span> Settings</div>
     </nav>
@@ -640,8 +641,9 @@ async function exportExcel(rows, overviews) {
 function navigate(page) {
   document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("active", el.dataset.page === page));
   const el = document.getElementById("content");
-  if (page === "home")     renderHome(el);
-  else if (page === "kdd") renderKDD(el);
+  if (page === "home")          renderHome(el);
+  else if (page === "kdd")      renderKDD(el);
+  else if (page === "bdcq")     renderBDCQ(el);
   else if (page === "settings") renderSettings(el);
 }
 
@@ -935,6 +937,322 @@ function clearCache() {
   const keys = Object.keys(localStorage).filter(k => k.startsWith("fulcrum_cache_"));
   keys.forEach(k => localStorage.removeItem(k));
   alert(`Cleared ${keys.length} cached items.`);
+}
+
+// ── BDCQ Agent ────────────────────────────────────────────────────────────────
+let _bdcqRows = null;      // BDCQ Questionnaire rows from JSON
+let _bdcqCols = [];        // column headers
+let _bdcqFiltered = [];    // current filtered result
+
+const ISO_DISPLAY = {
+  IN:"India",DE:"Germany",US:"USA",GB:"UK",BR:"Brazil",AE:"UAE",SA:"Saudi Arabia",
+  FR:"France",AU:"Australia",SG:"Singapore",JP:"Japan",CN:"China",KR:"South Korea",
+  VN:"Vietnam",NL:"Netherlands",PL:"Poland",IT:"Italy",ES:"Spain",AT:"Austria",
+  SE:"Sweden",MX:"Mexico",CA:"Canada",ZA:"South Africa",AR:"Argentina",
+  DK:"Denmark",FI:"Finland",NO:"Norway",IE:"Ireland",BE:"Belgium",PT:"Portugal",
+  CH:"Switzerland",IL:"Israel",EG:"Egypt",KW:"Kuwait",QA:"Qatar",OM:"Oman",
+  MY:"Malaysia",ID:"Indonesia",PH:"Philippines",TW:"Taiwan",HK:"Hong Kong",
+  NZ:"New Zealand",KZ:"Kazakhstan",LU:"Luxembourg",CZ:"Czechia",RO:"Romania",
+  HU:"Hungary",HR:"Croatia",BG:"Bulgaria",GR:"Greece",RS:"Serbia",UA:"Ukraine",
+  CL:"Chile",CO:"Colombia",PE:"Peru",MU:"Mauritius"
+};
+
+async function loadBDCQData() {
+  if (_bdcqRows) return true;
+  try {
+    // Try fetching relative to the HTML file (GitHub Pages hosting)
+    const url = new URL("./bdcq-data.json", location.href).href;
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    const sheet = (data.sheets || []).find(s => s.sheet === "BDCQ Questionnaire");
+    if (!sheet) throw new Error("BDCQ Questionnaire sheet not found in JSON");
+    _bdcqRows = sheet.rows;
+    _bdcqCols = sheet.columns || [];
+    return true;
+  } catch(e) {
+    console.warn("BDCQ load error:", e.message);
+    return false;
+  }
+}
+
+function getBDCQDomains() {
+  const s = new Set();
+  (_bdcqRows||[]).forEach(r => { if (r["Business Process Area"]) s.add(r["Business Process Area"]); });
+  return [...s].sort();
+}
+
+function getBDCQCountries() {
+  const s = new Set();
+  (_bdcqRows||[]).forEach(r => {
+    const cr = (r["Country / Region"] || "").trim();
+    if (!cr || cr === "Global") return;
+    const part = cr.replace(/^Local\s*[–-]\s*/i,"").trim();
+    part.split(/[,;]/).map(p=>p.trim()).filter(Boolean).forEach(c=>{
+      const iso = Object.entries(ISO_DISPLAY).find(([,n])=>n.toLowerCase()===c.toLowerCase());
+      if (iso) s.add(iso[0]);
+      else if (/^[A-Z]{2}$/.test(c)) s.add(c);
+    });
+  });
+  return [...s].sort((a,b)=>(ISO_DISPLAY[a]||a).localeCompare(ISO_DISPLAY[b]||b));
+}
+
+function filterBDCQ(domains, countries, scopeText) {
+  const domSet = new Set(domains.map(d=>d.toLowerCase()));
+  const ctrSet = new Set(countries.map(c=>c.toUpperCase()));
+  const scopeIds = scopeText.toUpperCase().split(/[\s,;]+/).filter(Boolean);
+
+  return (_bdcqRows||[]).filter(row => {
+    const domain = (row["Business Process Area"]||"").toLowerCase();
+    if (domSet.size > 0 && !domSet.has(domain)) return false;
+
+    const cr = (row["Country / Region"]||"").trim();
+    if (ctrSet.size > 0) {
+      if (cr === "Global" || !cr) {
+        // Always include Global rows when countries are selected
+      } else {
+        const part = cr.replace(/^Local\s*[–-]\s*/i,"").trim();
+        const rowCodes = part.split(/[,;]/).map(p=>p.trim()).flatMap(c=>{
+          const iso = Object.entries(ISO_DISPLAY).find(([,n])=>n.toLowerCase()===c.toLowerCase());
+          return iso ? [iso[0]] : (/^[A-Z]{2}$/.test(c) ? [c] : []);
+        });
+        if (!rowCodes.some(c=>ctrSet.has(c))) return false;
+      }
+    }
+
+    if (scopeIds.length > 0) {
+      const rowText = Object.values(row).join(" ").toUpperCase();
+      if (!scopeIds.some(id=>rowText.includes(id))) return false;
+    }
+    return true;
+  });
+}
+
+const BDCQ_PREVIEW_COLS = ["Business Process Area","SAP Workstream","Topic","Question","Country / Region","Sample Value","Gap or Fit"];
+
+async function renderBDCQ(el) {
+  el.innerHTML = `<div class="page-header"><div class="page-title">BDCQ Agent</div><div class="page-sub">Business Driven Configuration Questionnaire · SAP S/4HANA Cloud PE</div></div><div class="card"><div style="text-align:center;padding:20px;color:var(--muted)">⟳ Loading BDCQ data…</div></div>`;
+  const ok = await loadBDCQData();
+  if (!ok) {
+    el.innerHTML = `<div class="page-header"><div class="page-title">BDCQ Agent</div></div>
+    <div class="card">
+      <div class="alert alert-danger">Could not load <code>bdcq-data.json</code>. Make sure this page is served from GitHub Pages (not opened as a local file).</div>
+    </div>`;
+    return;
+  }
+
+  const domains   = getBDCQDomains();
+  const countries = getBDCQCountries();
+
+  el.innerHTML = `
+  <div class="page-header">
+    <div class="page-title">BDCQ Agent</div>
+    <div class="page-sub">Business Driven Configuration Questionnaire · ${(_bdcqRows||[]).length} questions · SAP S/4HANA Cloud PE</div>
+  </div>
+  <div class="card">
+    <div class="section-divider">1. Filter Questions</div>
+    <div class="form-group">
+      <label class="form-label">Business Process Area (Domain)</label>
+      <div class="lob-pills" id="bdcq-domains">
+        ${domains.map(d=>`<div class="lob-pill" data-domain="${escHtml(d)}" onclick="toggleBDCQDomain(this)">${escHtml(d)}</div>`).join("")}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Countries (leave blank for Global only)</label>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;max-height:120px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;padding:8px;">
+        ${countries.map(c=>`<label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;white-space:nowrap">
+          <input type="checkbox" id="bdcq-c-${c}" value="${c}" style="accent-color:var(--accent)"> ${ISO_DISPLAY[c]||c}
+        </label>`).join("")}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Scope Item IDs (optional — e.g. J59, BD6)</label>
+      <input class="form-control" id="bdcq-scope" placeholder="Paste scope IDs separated by spaces or commas" style="max-width:500px">
+      <div class="form-hint">Filters rows that reference these SAP scope item IDs</div>
+    </div>
+    <button class="btn btn-primary" onclick="doBDCQFilter()">⊞ Preview Questions</button>
+  </div>
+
+  <div class="card" id="bdcq-result" style="display:none">
+    <div class="section-divider">2. Results</div>
+    <div id="bdcq-summary"></div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <button class="btn btn-success btn-sm" onclick="exportBDCQExcel()">↓ Export Excel</button>
+      <button class="btn btn-outline btn-sm" onclick="enrichBDCQ()">✦ AI Enrich (Standard Value + Watch Out)</button>
+    </div>
+    <div id="bdcq-enrich-status"></div>
+    <div class="table-wrap" id="bdcq-table-wrap"></div>
+  </div>`;
+}
+
+const _bdcqSelectedDomains = new Set();
+
+function toggleBDCQDomain(el) {
+  const d = el.dataset.domain;
+  if (_bdcqSelectedDomains.has(d)) { _bdcqSelectedDomains.delete(d); el.classList.remove("active"); }
+  else { _bdcqSelectedDomains.add(d); el.classList.add("active"); }
+}
+
+function getSelectedBDCQCountries() {
+  return [...document.querySelectorAll("[id^='bdcq-c-']:checked")].map(el=>el.value);
+}
+
+function doBDCQFilter() {
+  const domains   = [..._bdcqSelectedDomains];
+  const countries = getSelectedBDCQCountries();
+  const scope     = document.getElementById("bdcq-scope")?.value || "";
+  _bdcqFiltered   = filterBDCQ(domains, countries, scope);
+
+  const resultEl  = document.getElementById("bdcq-result");
+  const summaryEl = document.getElementById("bdcq-summary");
+  const tableEl   = document.getElementById("bdcq-table-wrap");
+  if (!resultEl) return;
+  resultEl.style.display = "";
+
+  const globalCount = _bdcqFiltered.filter(r=>{const cr=(r["Country / Region"]||"").trim();return !cr||cr==="Global";}).length;
+  const localCount  = _bdcqFiltered.length - globalCount;
+
+  summaryEl.innerHTML = `<div class="alert alert-info" style="margin-bottom:10px">
+    <strong>${_bdcqFiltered.length} questions</strong> matched — ${globalCount} Global · ${localCount} Country-specific
+  </div>`;
+
+  if (!_bdcqFiltered.length) { tableEl.innerHTML = ""; return; }
+
+  const show = _bdcqFiltered.slice(0,100);
+  tableEl.innerHTML = `<table>
+    <tr>${BDCQ_PREVIEW_COLS.map(c=>`<th>${escHtml(c)}</th>`).join("")}</tr>
+    ${show.map(r=>`<tr>${BDCQ_PREVIEW_COLS.map(c=>`<td>${escHtml(String(r[c]||"").slice(0,120))}</td>`).join("")}</tr>`).join("")}
+  </table>${_bdcqFiltered.length > 100 ? `<div style="padding:8px 10px;font-size:12px;color:var(--muted)">Showing 100 of ${_bdcqFiltered.length} — export to see all</div>` : ""}`;
+}
+
+async function enrichBDCQ() {
+  if (!_bdcqFiltered.length) return;
+  const key = getApiKey();
+  const statusEl = document.getElementById("bdcq-enrich-status");
+  statusEl.innerHTML = `<div class="alert alert-info">✦ Enriching ${Math.min(_bdcqFiltered.length, 30)} rows with AI… (may take 30-60s)</div>`;
+
+  const batch = _bdcqFiltered.slice(0, 30);
+  const prompt = `You are an SAP S/4HANA Cloud Public Edition configuration consultant.
+
+For each BDCQ question below, provide:
+- "standardValue": 1-2 sentences. SAP standard default or best Cloud PE answer. Name the Fiori app. No ABAP/T-codes.
+- "watchOut": 1-2 bullet points of key risks or constraints. "" if none.
+
+Domain: ${batch[0]?.["Business Process Area"]||""}
+Questions (${batch.length}):
+${batch.map((r,i)=>`${i+1}. [${r.Topic||""}] ${r["Question"]||""}`).join("\n")}
+
+Return ONLY a JSON array of exactly ${batch.length} objects:
+[{"i":0,"standardValue":"...","watchOut":"..."},...]
+JSON only.`;
+
+  try {
+    const headers = { "content-type":"application/json","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true" };
+    if (key) headers["x-api-key"] = key;
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST", headers,
+      body: JSON.stringify({ model:"claude-haiku-4-5-20251001", max_tokens:4096, messages:[{role:"user",content:prompt}] })
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error?.message||`API ${resp.status}`);
+    const enrichments = extractJSON(data.content[0].text);
+
+    // Merge back by index
+    const byI = {};
+    enrichments.forEach(e=>{ if (typeof e.i==="number") byI[e.i]=e; });
+    batch.forEach((row,i)=>{
+      const e = byI[i] || enrichments[i] || {};
+      row["SAP Standard Value"] = e.standardValue || "";
+      row["Watch Out / Constraint"] = e.watchOut || "";
+    });
+
+    statusEl.innerHTML = `<div class="alert alert-success">✓ Enriched ${batch.length} rows.</div>`;
+    doBDCQFilter(); // re-render table
+  } catch(e) {
+    statusEl.innerHTML = `<div class="alert alert-danger">Enrichment error: ${escHtml(e.message)}</div>`;
+  }
+}
+
+async function exportBDCQExcel() {
+  if (!_bdcqFiltered.length) return;
+  const wb = new ExcelJS.Workbook();
+  wb.creator = "Fulcrum";
+
+  // Cover sheet
+  const cover = wb.addWorksheet("Cover");
+  cover.addRow(["Business Driven Configuration Questionnaire"]);
+  cover.addRow(["SAP S/4HANA Cloud Public Edition · Explore Phase"]);
+  cover.addRow([]);
+  cover.addRow(["Generated", new Date().toLocaleDateString("en-GB")]);
+  cover.addRow(["Total Questions", _bdcqFiltered.length]);
+  const globalCount = _bdcqFiltered.filter(r=>{const cr=(r["Country / Region"]||"").trim();return !cr||cr==="Global";}).length;
+  cover.addRow(["Global Questions", globalCount]);
+  cover.addRow(["Country-Specific", _bdcqFiltered.length - globalCount]);
+  cover.addRow(["Prepared by", "Fulcrum · Accenture"]);
+  cover.getRow(1).font = { bold:true, size:14, color:{ argb:"FFFFFFFF" } };
+  cover.getRow(1).fill = { type:"pattern", pattern:"solid", fgColor:{ argb:"FF5B21B6" } };
+  cover.getRow(1).height = 28;
+  cover.getColumn("A").width = 30;
+  cover.getColumn("B").width = 50;
+
+  // BDCQ Questionnaire sheet
+  const ws = wb.addWorksheet("BDCQ Questionnaire", { views:[{state:"frozen",ySplit:1}] });
+  const aiCols = ["SAP Standard Value","Watch Out / Constraint"];
+  const hasEnrich = _bdcqFiltered.some(r=>r["SAP Standard Value"]);
+  const baseCols = ["#","Business Process Area","SAP Workstream","Topic","Question Category\n(Global / Local)",
+                    "Localization Category\n(CLT / Non-CLT / N/A)","Question","Sample Value",
+                    "Country / Region","Gap or Fit","Business SPOC","Customer Response","Due Date","Consultant's Remarks"];
+  const outCols = hasEnrich ? [...baseCols, ...aiCols] : baseCols;
+
+  ws.columns = outCols.map(col => {
+    const cl = col.toLowerCase();
+    let width = 20;
+    if (cl.includes("question")||cl.includes("standard value")||cl.includes("watch out")) width = 55;
+    else if (cl.includes("topic definition")||cl.includes("sample value")) width = 40;
+    else if (cl === "country / region") width = 30;
+    return { header: col, key: col, width };
+  });
+
+  const hdrRow = ws.getRow(1);
+  hdrRow.height = 22;
+  outCols.forEach((col,i) => {
+    const cell = hdrRow.getCell(i+1);
+    cell.value = col;
+    cell.font  = { bold:true, color:{ argb:"FFFFFFFF" }, size:10 };
+    const isAI = aiCols.includes(col);
+    cell.fill  = { type:"pattern", pattern:"solid", fgColor:{ argb: isAI ? "FF1E40AF" : "FF5B21B6" } };
+    cell.alignment = { vertical:"middle", wrapText:true };
+  });
+
+  _bdcqFiltered.forEach((row, ri) => {
+    const dataRow = ws.addRow(outCols.map((col,ci) => {
+      if (col === "#") return ri + 1;
+      return String(row[col]||"");
+    }));
+    dataRow.height = 36;
+    dataRow.eachCell({includeEmpty:true}, cell => {
+      cell.alignment = { vertical:"top", wrapText:true };
+      cell.font = { size:10 };
+      if (ri % 2 === 1) cell.fill = { type:"pattern", pattern:"solid", fgColor:{ argb:"FFF5F3FF" } };
+    });
+    const cr = (row["Country / Region"]||"").trim();
+    const isCtr = cr && cr !== "Global";
+    if (isCtr) {
+      const crIdx = outCols.indexOf("Country / Region");
+      if (crIdx >= 0) {
+        const cell = dataRow.getCell(crIdx+1);
+        cell.font = { size:10, color:{ argb:"FF065F46" } };
+        cell.fill = { type:"pattern", pattern:"solid", fgColor:{ argb:"FFD1FAE5" } };
+      }
+    }
+  });
+
+  const buf  = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buf], { type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  a.href = url; a.download = `BDCQ_${new Date().toISOString().slice(0,10)}.xlsx`;
+  a.click(); URL.revokeObjectURL(url);
 }
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
