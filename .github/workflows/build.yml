@@ -1,8 +1,7 @@
 name: Build CodeX .exe
 
 on:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
