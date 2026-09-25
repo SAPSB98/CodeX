@@ -94,7 +94,7 @@ export const phases = [
         useCases: [
           { id: 'bdcq-agent',          title: 'BDCQ Agent',                            status: 'ideation' },
           { id: 'fit-to-standard',     title: 'Fit to Standard – Material Generation', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/FitToStandard_v5_BDCQ.html' },
-          { id: 'kdd-creation',        title: 'KDD Creation',                          status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/670550fc-93f9-4dab-a24e-55f983b2422b' },
+          { id: 'kdd-creation',        title: 'KDD Creation',                          status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/FulcrumAgent.html', description: 'Bulk KDD generation from scope catalog · 5-stage AI pipeline · BDCQ Agent · Cloud PE compliant · Excel export' },
           { id: 'fulcrum-user-guide',  title: 'Fulcrum – User Guide',                  status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/ExploreAccelerator/SAP_S4HANA_CloudPE_ExploreAccelerator_UserGuide.html', description: 'SAP S/4HANA Cloud PE Explore Accelerator – full user guide' },
           { id: 'workshop-analysis',   title: 'Workshop Analysis Utility Agent',       status: 'ideation' },
           { id: 'user-stories',        title: 'User Stories',                          status: 'ideation' },
