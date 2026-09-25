@@ -90,9 +90,10 @@ export const phases = [
     agentGroups: [
       {
         name: 'Solution Confirmation Agent',
-        count: 9,
+        count: 10,
         useCases: [
           { id: 'bdcq-agent',          title: 'BDCQ Agent',                            status: 'ideation' },
+          { id: 'project-charter-aws', title: 'Project Charter Agent – AWS',           status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/ProjectCharterAgent_AWS.html', description: 'AI-generated project charter tailored for AWS engagements' },
           { id: 'fit-to-standard',     title: 'Fit to Standard – Material Generation', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/FitToStandard_v5_BDCQ.html' },
           { id: 'kdd-creation',        title: 'KDD Creation',                          status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/670550fc-93f9-4dab-a24e-55f983b2422b' },
           { id: 'fulcrum-user-guide',  title: 'Fulcrum – User Guide',                  status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/ExploreAccelerator/SAP_S4HANA_CloudPE_ExploreAccelerator_UserGuide.html', description: 'SAP S/4HANA Cloud PE Explore Accelerator – full user guide' },
