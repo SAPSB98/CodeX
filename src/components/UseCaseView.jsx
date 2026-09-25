@@ -3,14 +3,12 @@ import UserProvisioningGuide from './UserProvisioningGuide'
 import JouleEnablementGuide from './JouleEnablementGuide'
 import CPITDDAgent from './CPITDDAgent'
 import FunctionalDesignStudio from './FunctionalDesignStudio'
-import FormWiz from './FormWiz'
 
 const INLINE_COMPONENTS = {
   'orion-user-provisioning-guide': UserProvisioningGuide,
   'orion-joule-guide': JouleEnablementGuide,
   'cpi-tdd-agent': CPITDDAgent,
   'functional-design-studio': FunctionalDesignStudio,
-  'form-wiz': FormWiz,
 }
 
 // Map agent IDs to their IPOV slide image paths
