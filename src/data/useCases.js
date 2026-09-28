@@ -9,10 +9,9 @@ export const phases = [
     agentGroups: [
       {
         name: 'PMO Agent',
-        count: 6,
+        count: 5,
         useCases: [
           { id: 'pmo-project-charter', title: 'PMO Agent – Project Charter',        status: 'released', artifactUrl: 'https://claude.ai/artifacts/latest/b8dc19d0-ab38-4752-8a24-1175dc77a9ed' },
-          { id: 'project-charter-agent', title: 'Project Charter Agent',            status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/ProjectCharterAgent.html' },
           { id: 'pmo-kickoff-deck',    title: 'PMO Agent – Project Kick Off Deck',  status: 'ideation' },
           { id: 'pmo-l4-plan',         title: 'PMO – L4 Plan with Milestones',      status: 'ideation' },
           { id: 'pmo-onboarding-kit',  title: 'PMO Agent – Onboarding Kit',         status: 'ideation' },
