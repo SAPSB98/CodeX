@@ -13,7 +13,7 @@ export const phases = [
         useCases: [
           { id: 'pmo-project-charter', title: 'PMO Agent – Project Charter',        status: 'released', artifactUrl: 'https://claude.ai/artifacts/latest/b8dc19d0-ab38-4752-8a24-1175dc77a9ed' },
           { id: 'pmo-kickoff-deck',    title: 'PMO Agent – Project Kick Off Deck',  status: 'ideation' },
-          { id: 'pmo-l4-plan',         title: 'PMO – L4 Plan with Milestones',      status: 'ideation' },
+          { id: 'pmo-l4-plan',         title: 'L4 Plan (MVP)',                      status: 'ideation' },
           { id: 'pmo-onboarding-kit',  title: 'PMO Agent – Onboarding Kit',         status: 'ideation' },
           { id: 'pmo-steerco',         title: 'PMO Agent – Steerco Agent',          status: 'ideation' },
         ]
