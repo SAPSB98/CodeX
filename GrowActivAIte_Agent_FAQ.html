@@ -434,6 +434,9 @@
     <a class="toc-link" href="#agent-12">
       <span class="toc-num">12</span>Defect Resolver – Quality Engineering
     </a>
+    <a class="toc-link" href="#agent-14">
+      <span class="toc-num">14</span>Config Wizard Agent
+    </a>
 
     <div class="toc-section-label">Phase: Run</div>
     <a class="toc-link" href="#agent-13">
@@ -1937,6 +1940,119 @@
   </div><!-- /#agent-13 -->
 </section>
 
+
+<!-- ===================================================
+     PHASE: REALIZE — CONFIG WIZARD
+     =================================================== -->
+<section class="phase-section">
+  <div class="phase-banner">Phase: Realize</div>
+
+  <!-- AGENT 14: CONFIG WIZARD -->
+  <div class="agent-card" id="agent-14">
+    <div class="agent-header">
+      <div class="agent-icon">⚙️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 14</div>
+        <div class="agent-name">Config Wizard Agent</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Configuration</span>
+          <span class="tag tag-group">Desktop Tool</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What does the Config Wizard Agent do?</summary>
+          <div class="answer">
+            <p>The SAP Config Wizard Agent automates the manual configuration work in SAP S/4HANA Cloud Public Edition. Instead of a consultant manually navigating SAP screens, downloading Excel templates, filling them in, and uploading them one by one, the agent does it automatically — driven by a simple browser-based UI running on the consultant's local machine.</p>
+            <p>It supports <strong>three phases</strong>:</p>
+            <ul>
+              <li><strong>Plan</strong> — define your project scope (SSCUI activity IDs) and review the activity list</li>
+              <li><strong>Prepare</strong> — connect to SAP and download the configuration Excel templates automatically</li>
+              <li><strong>Realize</strong> — fill and upload the completed templates back into SAP</li>
+            </ul>
+            <div class="warn-box">Supports <strong>SAP S/4HANA Cloud Public Edition only</strong>. Does not support on-premises SAP or private cloud editions.</div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>What is the Brain and how does it help?</summary>
+          <div class="answer">
+            <p>The Brain is the knowledge base of pre-loaded configuration templates. It has two layers:</p>
+            <ul>
+              <li><strong>Layer 2 (Training Data)</strong> — AI-generated templates from SAP community knowledge. Not yet verified — review field labels before uploading.</li>
+              <li><strong>Layer 3 (Brain Cache)</strong> — templates verified by a real consultant against a real SAP tenant. Trusted and reused automatically across all future projects.</li>
+            </ul>
+            <p>Once one consultant verifies a template, all future consultants on any project get it instantly — without connecting to SAP again. The brain pre-loads <strong>4,233 SAP activities</strong> across <strong>774 scope IDs</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>How does it connect to SAP? Does it store my password?</summary>
+          <div class="answer">
+            <p><strong>No passwords are stored.</strong> The agent connects to your existing Chrome browser session using Chrome DevTools Protocol (CDP). You log into SAP yourself — the agent then drives the already-logged-in browser. Your credentials never touch the tool.</p>
+            <ul>
+              <li>Works with SSO, SAP IDP, and MFA — any login method your company uses</li>
+              <li>You have <strong>5 minutes</strong> to complete the SAP login after clicking "Connect to SAP." If you miss it, simply click again to retry</li>
+              <li>Chrome or Microsoft Edge is required — Chrome exposes the remote debugging port (CDP) that lets the agent interact with open SAP browser tabs</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What does a consultant need installed to use it?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Windows 10 or 11</strong></li>
+              <li><strong>Python 3.11 or newer</strong> — download from python.org; tick "Add Python to PATH" during install</li>
+              <li><strong>Google Chrome or Microsoft Edge</strong></li>
+            </ul>
+            <p><strong>First-time setup:</strong> Run <code>Setup - Run First Time.bat</code> once. This installs Python packages and the Playwright browser engine (takes ~2–3 minutes).</p>
+            <p><strong>Daily use:</strong> Double-click <code>Start SAP Config Agent.bat</code>. The browser opens automatically at <code>http://127.0.0.1:8000</code>.</p>
+            <div class="info-box">A packaged <strong>.exe installer</strong> (no Python required) is on the roadmap — this will make setup a simple double-click install.</div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>What are PATH 1 and PATH 2 templates?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>PATH 1</strong> — templates downloaded directly from your SAP system via "Export Spreadsheet." These are the official SAP configuration files for your tenant. The agent downloads them automatically during the Prepare phase.</li>
+              <li><strong>PATH 2</strong> — AI-generated configuration guidance for activities where no PATH 1 template is available, or where the consultant wants a pre-filled starting point. Consultants review and verify these before they are trusted (Brain Layer 2 → Layer 3).</li>
+            </ul>
+            <p>Not all activities have a template in every SAP tenant. The UI shows coverage clearly — you know exactly what is missing and why.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Is data sent outside my machine?</summary>
+          <div class="answer">
+            <p><strong>No project data leaves your machine.</strong> The app runs entirely locally — projects, templates, and SAP data stay on your computer in a local SQLite database (<code>sap_agent.db</code>).</p>
+            <p>The only external call is to the <strong>Claude AI API</strong> for AI-generated PATH 2 template suggestions — this sends only activity metadata, never SAP credentials or business data.</p>
+            <div class="warn-box">Current version is single-user. Each consultant runs their own local instance. Multi-user shared-backend support is a future roadmap item.</div>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something is not working?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>App starts but browser does not open:</strong> Check the terminal window is still open (closing it stops the server). Try opening <code>http://127.0.0.1:8000</code> manually in Chrome. Check the <code>logs/</code> folder for error details.</li>
+              <li><strong>"Connect to SAP" fails:</strong> Make sure Chrome is open with remote debugging enabled (the <code>start-chrome.bat</code> file does this). Confirm you are already logged into SAP in that Chrome window, and no other agent instance is running.</li>
+              <li><strong>Download gets stuck or partially completes:</strong> Common causes — SAP session timeout, Chrome tab drifted away from the right screen, or the activity is not activated in your tenant. The Prepare phase UI shows exactly which activities downloaded, which failed, and why. Retry individual activities from the UI without restarting the whole download.</li>
+              <li><strong>Statistics show "—" on the dashboard:</strong> The brain is still loading. Wait 15 seconds and refresh (F5).</li>
+              <li><strong>For any issue:</strong> Share the terminal window output with your implementation lead. A "Copy Logs" button for automatic log collection is planned.</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-14 -->
+</section>
 
 <!-- ===== BACK TO TOP ===== -->
 <div style="text-align:center; margin-top:40px;">
