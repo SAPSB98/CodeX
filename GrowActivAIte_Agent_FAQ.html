@@ -411,6 +411,9 @@
     <a class="toc-link" href="#agent-04">
       <span class="toc-num">4</span>Functional Design Document Phase 1
     </a>
+    <a class="toc-link" href="#agent-17">
+      <span class="toc-num">17</span>KDD &amp; BDCQ User Guide – Explore Phase Accelerator
+    </a>
 
     <div class="toc-section-label">Phase: Realize</div>
     <a class="toc-link" href="#agent-05">
@@ -1225,6 +1228,381 @@
       </div>
     </div>
   </div><!-- /#agent-04 -->
+
+  <!-- AGENT 17: KDD & BDCQ USER GUIDE -->
+  <div class="agent-card" id="agent-17" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🔍</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 17</div>
+        <div class="agent-name">KDD &amp; BDCQ User Guide – SAP S/4HANA Cloud PE Explore Phase Accelerator</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">KDD Generation</span>
+          <span class="tag tag-group">Solution Confirmation Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <p style="margin:16px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Getting Started</p>
+
+        <details open>
+          <summary><span class="q-label">Q1</span>Do I need to pay for anything?</summary>
+          <div class="answer">
+            <p>You need a <strong>Claude subscription</strong> (claude.ai — any paid plan). The tool uses your existing subscription with no extra charges per use and no API key required. Node.js is free. The tool itself is free.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>What exactly do I need to install before I can use this?</summary>
+          <div class="answer">
+            <p>Three things, in this order:</p>
+            <ol>
+              <li><strong>Node.js</strong> (LTS) — from nodejs.org. One-time install.</li>
+              <li><strong>Claude CLI</strong> — from claude.ai/code. One-time install. Sign in once when prompted.</li>
+              <li><strong>The tool itself</strong> — unzip, run <code>SETUP.bat</code> once, then <code>START.bat</code> every time you use it.</li>
+              <li><strong>SAP Deck Agent Chrome extension</strong> — only needed to download SAP data files. Load it once in Chrome.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>How do I verify everything is installed correctly?</summary>
+          <div class="answer">
+            <p>Open a new terminal and run these two commands:</p>
+            <p><code>node --version</code> → should return something like <code>v20.x.x</code></p>
+            <p><code>claude --version</code> → should return something like <code>2.x.x (Claude Code)</code></p>
+            <p>If both work, run <code>START.bat</code> and open <code>http://localhost:8321</code> in your browser.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Can I install this on my Accenture laptop?</summary>
+          <div class="answer">
+            <p>Yes. It runs entirely locally, installs nothing to the Windows registry, and doesn't require admin rights beyond the initial Node.js and Claude CLI installers. If IT restrictions block those installers, ask your project lead to raise a request.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Do I need to run SETUP.bat every time?</summary>
+          <div class="answer">
+            <p>No — only once after first unzip, and once again after any update. <code>SETUP.bat</code> installs the app's libraries. After that, just use <code>START.bat</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Can multiple people on the project use this?</summary>
+          <div class="answer">
+            <p>Currently each person installs and runs their own copy locally. The tool is designed for one user per machine. A shared hosted version is on the roadmap.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Chrome Extension (SAP Deck Agent)</p>
+
+        <details>
+          <summary><span class="q-label">Q7</span>Which browser does the Chrome extension work in?</summary>
+          <div class="answer">
+            <p>Chrome only. The web app itself at <code>localhost:8321</code> works in any modern browser, but the SAP Deck Agent extension that downloads SAP data files requires Chrome.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>The extension opened an SAP login tab and the file wasn't saved.</summary>
+          <div class="answer">
+            <p>This is an SAP SSO session refresh. The current version handles this automatically — it waits for the login tab to close, then retries the download. If it still stalls after the tab closes: confirm you are logged into SAP, then click the save button again. Do not close the extension popup while waiting.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>I clicked Save and the folder picker appeared, but the file still didn't save.</summary>
+          <div class="answer">
+            <p>Make sure you selected the <strong>tool folder</strong> (the one containing <code>server.js</code> and <code>START.bat</code>) when the folder picker opened. The extension writes directly into that folder. If you selected the wrong folder, click save again and pick the correct one.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>The extension says "Folder access expired."</summary>
+          <div class="answer">
+            <p>Browser permissions for folder access time out between sessions. Click the save button again — the extension will re-open the folder picker. This is normal browser security behaviour.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>The extension scanned the page but found no files.</summary>
+          <div class="answer">
+            <p>Three things to check:</p>
+            <ol>
+              <li>You are on the correct SAP page — Roadmap Viewer for BDCQ, Process Navigator for scope catalog.</li>
+              <li><strong>Developer mode</strong> is turned on in <code>chrome://extensions</code>.</li>
+              <li>The file list is visible and fully loaded on screen — scroll down so items render, then click <strong>Scan Again</strong>.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>How often do I need to re-download SAP data?</summary>
+          <div class="answer">
+            <p><strong>BDCQ questions:</strong> once per project — they don't change between sessions.</p>
+            <p><strong>Scope catalog:</strong> every 6 months, when SAP releases a new version (February and August). The app will warn you if your catalog is outdated.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">BDCQ Enrichment</p>
+
+        <details>
+          <summary><span class="q-label">Q13</span>What does "enrichment" actually add to the BDCQ questions?</summary>
+          <div class="answer">
+            <p>Three lenses applied to every question:</p>
+            <ul>
+              <li><strong>Country localisation</strong> — flags statutory/mandatory items for the client's country (tax, payroll, banking regulations). Mandatory items come pre-answered.</li>
+              <li><strong>Industry context</strong> — adds sub-questions and considerations specific to the client's sector (Manufacturing, Retail, Pharma etc.).</li>
+              <li><strong>Cloud PE constraints</strong> — highlights where standard SAP configuration is fixed and where BTP extensions are the only path.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>Can I enrich just some domains, not all of them?</summary>
+          <div class="answer">
+            <p>Yes. On the BDCQ screen you can select specific domains before enriching. You don't have to process the entire questionnaire at once.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>What do the "mandatory" flags mean in the output?</summary>
+          <div class="answer">
+            <p>A question marked mandatory has a statutory requirement in the client's country that must be answered in a specific way — for example India GST e-invoicing or Germany XRechnung compliance. These are pre-answered based on localisation rules so you don't have to research them during the workshop.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>Can I run BDCQ enrichment for multiple countries on one project?</summary>
+          <div class="answer">
+            <p>Yes. Select all relevant countries before generating — the enrichment runs in one pass and adds country-specific rows (tagged "Local – India", "Local – Germany" etc.) for each selected country. Useful for rollout projects covering multiple regions.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">KDD Generation</p>
+
+        <details>
+          <summary><span class="q-label">Q17</span>How long does KDD generation take?</summary>
+          <div class="answer">
+            <p>Roughly <strong>60–105 seconds per scope item</strong> in AI mode. Up to 3 scope items run in parallel, so larger sets don't scale linearly. Cache hits (scope items generated before) complete in <strong>under 5 seconds</strong> with no AI call at all. You can monitor live progress in the status panel.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>What is the difference between Fast mode and AI mode?</summary>
+          <div class="answer">
+            <p><strong>Fast mode</strong> — returns cached results instantly. No Claude call is made, no tokens used. Use this when you have already generated for these scope items and want the Excel quickly.</p>
+            <p><strong>AI mode</strong> — runs the full 5-agent pipeline (Cache → Library → Context → Generation → Validation). Use this for first-time generation or when you want fresh, up-to-date output.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>How many scope items should I do in one run?</summary>
+          <div class="answer">
+            <p>5–10 is comfortable. You can do more, but very large sets (20+) take longer and are harder to review in one sitting. Run scope items in batches and combine the outputs in the KDD editor.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>Generation finished but I got 0 KDDs for one scope item.</summary>
+          <div class="answer">
+            <p>Claude's output failed the validation check twice (the tool retries automatically once). Most common causes are an unusually short process description in the catalog or a timeout. Use the <strong>Retry</strong> button on that item in the KDD editor to regenerate it individually.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Can I stop a generation halfway through?</summary>
+          <div class="answer">
+            <p>Closing the browser tab stops the display, but the server continues generating in the background. To cancel completely, close the <code>START.bat</code> console window. Partially completed items are cached — restarting and generating again will only re-run the incomplete ones.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I regenerate just one question without redoing everything?</summary>
+          <div class="answer">
+            <p>Yes. In the KDD editor, click the <strong>retry icon</strong> on any individual row to regenerate that specific question. The rest of the log is untouched.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>The tool keeps generating on-premise terms like ABAP or SAP GUI.</summary>
+          <div class="answer">
+            <p>This shouldn't happen — the Validation Agent automatically catches and replaces 25 forbidden on-premise terms. If you do see them in output, use the <strong>AI Suggest</strong> feature on that row for a Cloud PE-compliant replacement, or edit manually. If this happens frequently, let the tool owner know — the validation rules may need updating.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Output &amp; Files</p>
+
+        <details>
+          <summary><span class="q-label">Q24</span>Where does the Excel file go?</summary>
+          <div class="answer">
+            <p>All output files are saved to the <code>output\</code> folder inside the tool folder, and are also downloadable from the Output Files page in the app.</p>
+            <p>Filename format: <code>Accenture_KDD_&lt;Client&gt;_&lt;Project&gt;_&lt;Date&gt;.xlsx</code></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>Can I re-export to Excel without regenerating?</summary>
+          <div class="answer">
+            <p>Yes. In the KDD editor, use the <strong>Export Excel</strong> button at any time. It exports the current state of the editor — including any manual edits — without calling Claude again.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>What are the 5 sheets in the Excel?</summary>
+          <div class="answer">
+            <ol>
+              <li><strong>Cover</strong> — client, project, date, scope count.</li>
+              <li><strong>Instructions</strong> — column guide and Cloud PE disclaimer.</li>
+              <li><strong>Scope Overview</strong> — one row per scope item with process summary.</li>
+              <li><strong>KDD Master Log</strong> — all KDD rows with every field, RAG status, RICEF classification, and workshop outcome columns.</li>
+              <li><strong>Summary</strong> — aggregated counts (Fit/Gap/Partial, RAG breakdown, complexity, RICEF types).</li>
+            </ol>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>What do the RAG colours mean?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>🟢 Green – Fit:</strong> Standard SAP configuration covers the requirement. No extension needed.</li>
+              <li><strong>🟡 Amber – Partial Fit:</strong> Some configuration or minor extension needed.</li>
+              <li><strong>🔴 Red – Gap:</strong> A gap requiring extension or a design decision with significant delivery impact.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Can I export to PowerPoint?</summary>
+          <div class="answer">
+            <p>Yes — use the <strong>Export PPT</strong> button in the KDD editor. It generates a slide deck from the KDD log suitable for a workshop or steering committee presentation.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>My Excel export failed or is empty.</summary>
+          <div class="answer">
+            <p>Make sure <code>SETUP.bat</code> completed successfully — it installs the Excel builder. Do not delete the <code>output\</code> folder. If the problem persists, check the <code>START.bat</code> console window for an error message and share it with the tool owner.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Performance &amp; Quality</p>
+
+        <details>
+          <summary><span class="q-label">Q30</span>How accurate is the generated output? Do I need to review it?</summary>
+          <div class="answer">
+            <p>Always review before using in a workshop or sharing with a client. The tool generates a strong first draft grounded in the SAP process catalog and Cloud PE rules — but it does not know your specific client requirements. Treat the output as an intelligent starting point, not a finished deliverable.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>Generation is very slow or timed out.</summary>
+          <div class="answer">
+            <p>Check your internet connection first. If the connection is fine, the Claude service may be under load — wait a few minutes and retry. Individual scope items that time out will be flagged; use the Retry button on those items.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>Does the tool learn from my corrections?</summary>
+          <div class="answer">
+            <p>Yes. When you mark a decision as approved in the KDD editor, it is saved to the decisions library. The next time you generate KDDs for the same scope item on any project, the tool surfaces those past decisions as context so Claude produces more consistent, grounded output over time.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>Can I use the output directly in a client workshop?</summary>
+          <div class="answer">
+            <p>The Excel and PPT are formatted for professional use, but always review and apply your own judgement before presenting to a client. Adjust scope, complexity ratings, and decision options to match your specific engagement context.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Data &amp; Security</p>
+
+        <details>
+          <summary><span class="q-label">Q34</span>Does my client's data get sent anywhere?</summary>
+          <div class="answer">
+            <p>The only external call is to <strong>Claude</strong> (via the Claude CLI) for AI generation — the same as any Claude Code session. No data is sent to any other server. The Chrome extension communicates only with SAP domains. Everything else stays on your laptop.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>Where is my data stored?</summary>
+          <div class="answer">
+            <p>Entirely in the tool folder on your disk:</p>
+            <ul>
+              <li><code>bdcq\</code> — BDCQ question files</li>
+              <li><code>output\</code> — generated Excel and PPT files</li>
+              <li><code>decisions\</code> — saved approved decisions (the learning memory)</li>
+              <li><code>scope-catalog.json</code> — SAP process catalog</li>
+            </ul>
+            <p>Nothing is written to the cloud by the tool itself.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q36</span>Can someone else on the network access my running instance?</summary>
+          <div class="answer">
+            <p>No. The app binds to <code>127.0.0.1</code> (loopback only). It is not accessible from any other machine on your network — office, VPN, or client site.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q37</span>Is it safe to use on a client engagement?</summary>
+          <div class="answer">
+            <p>Follow your engagement's data-handling rules for anything you input and export. When processing client-confidential material, check with your project lead first. The tool itself does not log or transmit data beyond the Claude call needed for generation.</p>
+          </div>
+        </details>
+
+        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Common Errors</p>
+
+        <details>
+          <summary><span class="q-label">Q38</span>"Claude CLI not installed" or "Claude CLI not found"</summary>
+          <div class="answer">
+            <ol>
+              <li>Install Claude CLI from claude.ai/code if you haven't already.</li>
+              <li>Open a <strong>new</strong> terminal and run <code>claude --version</code>.</li>
+              <li>If that works but the app still shows the error, close the <code>START.bat</code> console and reopen it — it needs to restart to pick up the updated PATH.</li>
+              <li>If Claude is installed in a non-standard location, set the environment variable <code>CLAUDE_PATH</code> to the full path of <code>claude.exe</code> before running <code>START.bat</code>.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q39</span>"Port 8321 is already in use"</summary>
+          <div class="answer">
+            <p>Another copy of the app is already running. Either use that instance by opening <code>http://localhost:8321</code>, or close the other console window and start again.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q40</span>"npm install failed" in SETUP.bat</summary>
+          <div class="answer">
+            <p>Node.js is not installed or not on your PATH. Install LTS from nodejs.org, open a fresh terminal, confirm <code>node --version</code> returns a version number, then re-run <code>SETUP.bat</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q41</span>Page loads but shows a blank screen or spinner that never finishes.</summary>
+          <div class="answer">
+            <p>The server is still starting up. Wait 5–10 seconds and refresh the browser. If it still doesn't load, check the <code>START.bat</code> console window for errors.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q42</span>"No WRICEF items" when exporting the WRICEF inventory.</summary>
+          <div class="answer">
+            <p>WRICEF items only appear for rows classified as <strong>Gap</strong> or <strong>Partial</strong> with a WRICEF type assigned. Go to the KDD editor, find your Gap rows, and set the <strong>WRICEF Type</strong> column before exporting.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-17 -->
 </section>
 
 
