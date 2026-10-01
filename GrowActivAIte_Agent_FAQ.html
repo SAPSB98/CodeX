@@ -437,6 +437,9 @@
     <a class="toc-link" href="#agent-14">
       <span class="toc-num">14</span>Config Wizard Agent
     </a>
+    <a class="toc-link" href="#agent-15">
+      <span class="toc-num">15</span>Technical Design-Integration (CPI TDD Agent)
+    </a>
 
     <div class="toc-section-label">Phase: Run</div>
     <a class="toc-link" href="#agent-13">
@@ -2052,6 +2055,76 @@
       </div>
     </div>
   </div><!-- /#agent-14 -->
+
+  <!-- AGENT 15: CPI TDD AGENT -->
+  <div class="agent-card" id="agent-15" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🔗</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 15</div>
+        <div class="agent-name">Technical Design-Integration (CPI TDD Agent)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Integration</span>
+          <span class="tag tag-group">Intelligent Build Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>How long does generation take?</summary>
+          <div class="answer">
+            <p>Typically <strong>60–120 seconds</strong> for all 11 sections. Sections generate in parallel where possible.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Can I upload multiple FD files?</summary>
+          <div class="answer">
+            <p>Currently <strong>one FD per session</strong>. If your interface has multiple FD documents, combine them into one file before uploading.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>The iFlow steps look wrong — what should I do?</summary>
+          <div class="answer">
+            <p>Click <strong>🔄 Regen</strong> on Section 4 after verifying your <code>.iflw</code> file is from the correct iFlow. If steps are still off, you can use the inline editor to correct them manually.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Section 10 (Developer Notes) is always blank — is that correct?</summary>
+          <div class="answer">
+            <p><strong>Yes.</strong> Developer Notes is intentionally left blank and is filled in by the developer during implementation. Approve it as-is before downloading.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Can I use this for non-SAP CPI integrations?</summary>
+          <div class="answer">
+            <p>The tool is optimised for <strong>SAP CPI integrations</strong>. While it may work for other middleware, the terminology and section structure are SAP CPI-specific.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Word says the file needs recovery when I open it</summary>
+          <div class="answer">
+            <p>Ensure you are using <strong>Microsoft Word 2016 or later</strong>. The file is a standard OOXML (<code>.docx</code>) — if Word prompts for recovery, click <strong>Yes</strong>; no content should be lost.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>Can I regenerate the whole TDD without starting over?</summary>
+          <div class="answer">
+            <p>Not with a single button — use <strong>🔄 Regen</strong> on each section individually, or click <strong>↩ Start Over</strong> to re-upload your files and regenerate everything fresh.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-15 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
