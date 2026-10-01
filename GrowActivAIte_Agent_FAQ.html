@@ -414,6 +414,9 @@
     <a class="toc-link" href="#agent-17">
       <span class="toc-num">17</span>KDD &amp; BDCQ User Guide – Explore Phase Accelerator
     </a>
+    <a class="toc-link" href="#agent-18">
+      <span class="toc-num">18</span>Functional Design Document – Phase 2 (Form FD Generator)
+    </a>
 
     <div class="toc-section-label">Phase: Realize</div>
     <a class="toc-link" href="#agent-05">
@@ -1603,6 +1606,132 @@
       </div>
     </div>
   </div><!-- /#agent-17 -->
+
+  <!-- AGENT 18: FUNCTIONAL DESIGN PHASE 2 -->
+  <div class="agent-card" id="agent-18" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">📝</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 18</div>
+        <div class="agent-name">Functional Design Document – Phase 2 (Form FD Generator)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">Functional Documentation</span>
+          <span class="tag tag-group">Functional Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>Can I use this for non-Form RICEFW types (R, I, C, E, W)?</summary>
+          <div class="answer">
+            <p>Not in Phase II. Only Form (F) is active. Other RICEFW types (Report, Interface, Conversion, Enhancement, Workflow) will be enabled in future releases.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>My XDP file didn't parse any fields — what's wrong?</summary>
+          <div class="answer">
+            <p>Ensure the file is a valid Adobe LiveCycle XDP (XML-based). Encrypted or corrupted XDPs will not parse. Try opening the XDP in a text editor — it should contain readable XML with <code>&lt;subform&gt;</code> elements. If the file appears valid but fields are still missing, check that the XDP uses a supported subform structure (<code>bdyMain</code> / <code>frmAddress</code> / <code>frmItems</code> etc.).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>The CDS views suggested don't match what I see in Custom Data Browser.</summary>
+          <div class="answer">
+            <p>The AI uses a C2-first priority rule: it checks for a C2-released view (visible in Custom Data Browser, e.g. <code>I_PurchaseOrderAPI01</code>) and falls back to a C1 interface view if no C2 exists. Fields marked <code>[verify]</code> must be confirmed manually in the View Browser app. You can override any CDS reference by typing the correct view name directly in the CDS Field ID input in Step 3 — your value is used verbatim in Section 9.2.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Can I edit the generated FD text directly?</summary>
+          <div class="answer">
+            <p>Yes. Each section has an editable text area once generated. You can type changes directly or use the <strong>Refine</strong> chat to make AI-assisted updates to a specific section without regenerating the entire document. Click <strong>Confirm</strong> once you are satisfied with a section.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>The wireframe blocks are in the wrong order. How do I fix this?</summary>
+          <div class="answer">
+            <p>In Step 3, use the ▲▼ arrows on the left panel block cards to reorder blocks up or down within their zone. Changes take effect immediately in the wireframe preview. Sort overrides are saved for the duration of the session.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>How do I add a field that doesn't exist in the XDP?</summary>
+          <div class="answer">
+            <p>In Step 3, use the <strong>+ Add Field</strong> button and select the target block from the dropdown. Fill in the field name, display label, zone (Header / Body / Footer), and optionally a CDS Field ID. The field will appear in both the left panel and the wireframe, and will be included in Section 9.2 of the FD.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>How do I add a completely new block that doesn't exist in the XDP?</summary>
+          <div class="answer">
+            <p>Click <strong>+ Create New Block</strong> (separate from + Add Field). Give the block a name, choose placement (new column, before an existing block, or after an existing block), and set the anchor block. The new block appears in the wireframe and left panel, and you can add fields to it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Can I save my session and come back later?</summary>
+          <div class="answer">
+            <p>Not yet — the tool is session-based. All state is held in memory and is lost when the browser tab is closed or refreshed. Download the Word FD as soon as it is ready. Session persistence is planned for a future release.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>Why is the email configuration a plain text area?</summary>
+          <div class="answer">
+            <p>The email configuration field passes its content verbatim into Section 8.1 of the FD. A pre-filled skeleton is provided — edit it directly, replacing tokens like <code>{Customer Name}</code> and <code>{Document Date}</code> with values specific to your form. The verbatim approach gives the consultant full control without the tool imposing a rigid structure.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>Page numbers in the downloaded Word document all show '1'. How do I fix this?</summary>
+          <div class="answer">
+            <p>Press <strong>Ctrl+A</strong> then <strong>F9</strong> in Word to recompute all field codes throughout the document. Alternatively, right-click any page number and choose <strong>Update Field</strong>. This is a known Word behaviour when opening documents in MHTML format for the first time.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>The Table of Contents shows dashes instead of page numbers.</summary>
+          <div class="answer">
+            <p>Right-click the TOC → <strong>Update Field</strong> → <strong>Update entire table</strong>. This forces Word to recalculate page references. If the TOC still shows dashes, press <strong>Ctrl+A</strong> then <strong>F9</strong> first to ensure all fields are initialised.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>The wireframe image is missing in Section 9.1 of the Word document.</summary>
+          <div class="answer">
+            <p>You must click <strong>Save Layout as Image</strong> in Step 3 <em>before</em> generating the FD. The image capture must happen before the <strong>Generate FD</strong> button is clicked — the tool embeds whichever image was saved at that point. If no image was saved, Section 9.1 will contain a placeholder note instead.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>The flowchart in Section 6 is a code block, not a rendered diagram. How do I use it?</summary>
+          <div class="answer">
+            <p>The flowchart is output as a Mermaid.js code block. Paste it into <strong>mermaid.live</strong> to render and export as PNG or SVG, then insert the image into your Word document manually. Alternatively, use a diagramming tool that supports Mermaid import (e.g. Miro, Lucidchart, VS Code with Mermaid extension).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>What is the Human-in-the-Loop expectation for this tool?</summary>
+          <div class="answer">
+            <p>The tool accelerates FD authoring — it does not replace consultant judgement. All AI-generated content (CDS view mappings, gap classification, section narrative, test cases) must be reviewed and validated by the consultant before the FD is shared with the client or used for development. Fields marked <code>[verify]</code> in Section 9.2 require explicit confirmation in the SAP View Browser or Custom Data Browser app.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Can I use the tool for SAP S/4HANA On-Premise forms?</summary>
+          <div class="answer">
+            <p>The tool is designed specifically for SAP S/4HANA Public Cloud (clean core, Key User Extensibility). On-premise forms may use a different extensibility model (classical Adobe Form development via SE71/SFP) and the gap analysis, CDS view references, and extensibility recommendations will not be accurate for that context.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-18 -->
 </section>
 
 
