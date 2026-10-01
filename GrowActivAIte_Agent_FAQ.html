@@ -397,6 +397,9 @@
     <a class="toc-link" href="#agent-01">
       <span class="toc-num">1</span>Orion Agent – Prepare Phase I (Security Agent)
     </a>
+    <a class="toc-link" href="#agent-16">
+      <span class="toc-num">16</span>BRRGM – Business Roles Requirement Gathering Matrix Generator
+    </a>
 
     <div class="toc-section-label">Phase: Explore</div>
     <a class="toc-link" href="#agent-02">
@@ -679,6 +682,233 @@
       </div>
     </div>
   </div><!-- /#agent-01 -->
+
+  <!-- AGENT 16: BRRGM -->
+  <div class="agent-card" id="agent-16" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🔐</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 16</div>
+        <div class="agent-name">BRRGM – Business Roles Requirement Gathering Matrix Generator</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Discover &amp; Prepare</span>
+          <span class="tag tag-type">Security</span>
+          <span class="tag tag-group">Security Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What is BRRGM?</summary>
+          <div class="answer">
+            <p>BRRGM (Business Roles Requirement Gathering Matrix Generator) is an Accenture internal tool built for the SAP S/4HANA Public Cloud Security practice. It automates the generation of the Business Roles Requirement Gathering Matrix — a structured Excel workbook that maps in-scope Fiori apps to business process roles. This gives Functional teams a clear baseline to validate requirements with their client process leads, and gives the Security team unambiguous, confirmed inputs to build business roles — eliminating back-and-forth and reducing rework during role design.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use this tool?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Functional Consultants</strong> — to review and validate Fiori app assignments against their business process scope before sign-off with client process leads.</li>
+              <li><strong>Security Architects / Leads / Consultants</strong> — to govern the requirements baseline and ensure role design aligns with the agreed process scope. To receive confirmed, structured role requirements and build business roles without ambiguity or repeated clarification cycles.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Does the tool require any installation?</summary>
+          <div class="answer">
+            <p>No. BRRGM is a single HTML file (<code>S4HANA Cloud BRRM Generator.html</code>) that runs entirely in your browser. Simply open the file in Google Chrome or Microsoft Edge — no server, no installation, and no internet connection is required.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Which browsers are supported?</summary>
+          <div class="answer">
+            <p>Google Chrome and Microsoft Edge (Chromium-based). The tool uses browser APIs (File System Access API) that are only available in these browsers. Firefox, Safari, and Internet Explorer are not supported.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Is any data sent to a server or the internet?</summary>
+          <div class="answer">
+            <p>No. All processing happens locally in your browser. The input file is read locally, the matrix is generated in-memory, and the output Excel file is saved directly to your machine. No data is transmitted externally.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What input file does the tool require?</summary>
+          <div class="answer">
+            <p>The tool requires a SAP S/4HANA scope Excel file — typically the Process Steps or Solution Activities export from SAP Cloud ALM or the client's scope definition file. This file contains columns such as LOB (Line of Business), Business Area, Scope Item ID, Scope Item Description, Solution Activity, Fiori App ID, Fiori App Name, and Business Role ID.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What format must the input file be?</summary>
+          <div class="answer">
+            <p>The file must be in Excel format (<code>.xlsx</code> or <code>.xls</code>). It should contain a header row and one row per Fiori app/role combination in scope. The tool auto-detects column headers using partial matching, so minor naming variations (e.g. "Fiori App" vs "Fiori App ID") are handled automatically.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Does the tool support multiple sheets in the input file?</summary>
+          <div class="answer">
+            <p>The tool reads the first non-empty sheet it finds that contains the expected column headers. If your scope data spans multiple tabs, consolidate them into a single sheet before uploading.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>What if my input file is missing some columns?</summary>
+          <div class="answer">
+            <p>The tool performs flexible column detection and will skip optional columns if they are absent (e.g. Fiori Semantic Action, L4 Task / Activity). Required columns — <strong>Fiori App ID, Fiori App Name, LOB, and Scope Item Description</strong> — must be present. If they are missing, the log panel will show a warning.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>My LOB column uses "&amp;" instead of "and" — will the tool still match taxonomy entries?</summary>
+          <div class="answer">
+            <p>Yes. The tool normalises LOB values before matching: "&amp;" is converted to "and", separators (<code>/</code>, <code>-</code>, <code>.</code>) are treated as spaces, and comparison is case-insensitive. So "Sourcing &amp; Procurement" will correctly match the taxonomy entry "Sourcing and Procurement".</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>What are the steps to generate the workbook?</summary>
+          <div class="answer">
+            <ol>
+              <li><strong>Step 1 — Upload File:</strong> Click "Choose file" and select your scope Excel file.</li>
+              <li><strong>Step 2 — Select Countries:</strong> Choose all countries in scope for this implementation.</li>
+              <li><strong>Step 3 — Select Scope Items:</strong> Review and confirm which Scope Item IDs are in scope.</li>
+              <li><strong>Step 4 — Generate:</strong> Click the Generate button. The tool processes the file and produces the Excel workbook.</li>
+              <li><strong>Step 5 — Download:</strong> Once generation is complete, click Download to save the BRRGM workbook to your selected folder.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>How long does generation take?</summary>
+          <div class="answer">
+            <p>For a typical scope file with 2,000–10,000 rows, generation takes <strong>10–60 seconds</strong> depending on the number of Fiori apps and countries. A progress bar and log panel show real-time status. Very large files (20,000+ rows) may take up to 2–3 minutes.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>Can I re-generate with different settings without re-uploading the file?</summary>
+          <div class="answer">
+            <p>Yes. After the first generation the uploaded file remains loaded. You can change country or scope item selections and click Generate again without re-uploading.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>What does the log panel show during generation?</summary>
+          <div class="answer">
+            <p>The log panel shows a step-by-step trace of the generation process including: number of rows read, LOBs matched to the taxonomy, number of custom role columns created, country-scoped rows detected, and any warnings about missing data. Reviewing the log is useful for verifying the output is complete and correct.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>What sheets does the generated workbook contain?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>ReadMe</strong> — Instructions and column descriptions. Read this sheet first.</li>
+              <li><strong>Change Log</strong> — Version history. Log every change with version number, date, author, and description.</li>
+              <li><strong>CustomBusinessProcRolesMatrix</strong> — Core deliverable. One row per in-scope Fiori app; process role columns show X where access is required.</li>
+              <li><strong>HR Job Roles Mapping</strong> — Cross-reference matrix mapping process roles to standard HR job titles.</li>
+              <li><strong>SODMatrix</strong> — Segregation of Duties conflict reference. One row per conflicting Fiori app pair.</li>
+              <li><strong>Org.Elements</strong> — Organisational data by country (Company Code, Plant, Purchasing Org, etc.).</li>
+              <li><strong>SolutionActivityMap-Reference</strong> — Lookup table mapping each Fiori app to its SAP Solution Activity.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>What is the CustomBusinessProcRolesMatrix?</summary>
+          <div class="answer">
+            <p>The CustomBusinessProcRolesMatrix is the primary deliverable. Each row represents a unique in-scope Fiori app. The dynamic process role columns are derived from the L3 Process values in the scope file — one column per unique process. An X in a cell means that process role requires access to that Fiori app. Functional Leads review each row and populate the Validate Fiori App Requirement, Functional Restriction Required, Business Process Owner (BPO), and comment columns.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>How does the tool decide which HR titles to mark with X?</summary>
+          <div class="answer">
+            <p>X marks are auto-populated using two rules: (1) Cross-functional titles — IT Manager, Business Analyst, Project Manager, and ERP Administrator — are marked for every process role. (2) LOB-specific titles — e.g. Finance process roles are marked for Chief Financial Officer, Finance Director, Finance Manager, Financial Controller, and Treasury Manager. Functional Leads should review and adjust the X marks to reflect their organisation's actual assignments before sign-off.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>What is the SODMatrix?</summary>
+          <div class="answer">
+            <p>The SODMatrix sheet lists pairs of Fiori apps that create a Segregation of Duties (SOD) conflict when assigned to the same user. The pairs are generated automatically from the apps in scope. Reviewers should check this sheet before finalising role assignments to ensure no conflicting app pairs are combined in a single custom role.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>What is "Validate Fiori App Requirement" and how do I fill it?</summary>
+          <div class="answer">
+            <p>This column captures the review outcome for each Fiori app row. Select one of: <strong>In-Scope</strong>, <strong>Out-of-Scope</strong>, or <strong>TBD</strong>. Every row must have a value before the matrix is submitted for security role build.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>What format should I use for comment columns?</summary>
+          <div class="answer">
+            <p>Use the format: <code>[Reviewer Name / Date]: Comment text</code>. For BPO Approval Comments, prefix with the outcome: <code>[APPROVED / REJECTED / ON-HOLD] — [Name] — [Date]: Comment</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>How does country scoping work?</summary>
+          <div class="answer">
+            <p>When you select countries in Step 2, the tool adds one column per country showing whether each Fiori app is applicable to that country. Classification uses three detection methods: (1) App ID suffix conventions, (2) App title keywords (e.g. "Japan", "Russia"), and (3) SAP business role suffix patterns. Hardcoded overrides in <code>APP_COUNTRY_OVERRIDE</code> take absolute priority.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Why are some SAP roles not appearing in the output?</summary>
+          <div class="answer">
+            <p>The tool filters out: (1) Critical / admin roles (<code>SAP_BASIS_*</code>, test user roles); (2) TBR (To Be Reviewed) configuration-level roles; (3) Excluded apps listed in <code>EXCLUDED_APP_IDS</code> — pure configuration or admin tools such as Data Replication, Migration Cockpit, and Communication Arrangements.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>Excel shows a repair dialog when I open the generated file — what should I do?</summary>
+          <div class="answer">
+            <p>If Excel reports "Repaired Records", click OK and review the file. This issue has been resolved in tool version 2.x. Make sure you are using the latest version of the BRRGM HTML file. If the issue persists, contact the tool administrator.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>The tool does not respond after I click Generate — what should I check?</summary>
+          <div class="answer">
+            <p>Ensure you are using Chrome or Edge. Then check: (1) the file was successfully uploaded, (2) at least one country is selected, (3) at least one scope item is selected. If the issue persists, open the browser developer console (F12), check for error messages, and contact the tool administrator with those details.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>Can I save to a network or SharePoint folder directly?</summary>
+          <div class="answer">
+            <p>Yes. The tool supports the File System Access API, allowing you to select a folder — including OneDrive-synced or mapped network folders — as the download destination. Click the folder icon next to the Download button to choose a directory; all subsequent downloads in that session will go there automatically.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>How is the tool distributed and how do I get the latest version?</summary>
+          <div class="answer">
+            <p>The tool is distributed as a single standalone HTML file: <code>S4HANA Cloud BRRM Generator.html</code>. Share it via your team SharePoint, OneDrive, or email. Contact the Accenture S/4HANA Security practice tool owner to receive the latest version. The version number is shown in the footer of the tool interface.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>Can the tool be customised for a specific client?</summary>
+          <div class="answer">
+            <p>Yes. The tool source supports several customisation points: LOB name overrides (<code>LOB_RECLASSIFY</code>), country-specific app overrides (<code>APP_COUNTRY_OVERRIDE</code>), excluded app IDs (<code>EXCLUDED_APP_IDS</code>), and the LOB-to-job-role taxonomy (<code>LOB_JOB_ROLE_TAXONOMY</code>). Contact the tool administrator for guidance.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-16 -->
 </section>
 
 
