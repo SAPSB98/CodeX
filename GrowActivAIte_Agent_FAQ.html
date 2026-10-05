@@ -400,6 +400,12 @@
     <a class="toc-link" href="#agent-16">
       <span class="toc-num">16</span>BRRGM – Business Roles Requirement Gathering Matrix Generator
     </a>
+    <a class="toc-link" href="#agent-19">
+      <span class="toc-num">19</span>PMO Agent – Project Charter
+    </a>
+    <a class="toc-link" href="#agent-20">
+      <span class="toc-num">20</span>L4 Plan Agent (MVP)
+    </a>
 
     <div class="toc-section-label">Phase: Explore</div>
     <a class="toc-link" href="#agent-02">
@@ -915,6 +921,217 @@
       </div>
     </div>
   </div><!-- /#agent-16 -->
+
+  <!-- AGENT 19: PMO AGENT – PROJECT CHARTER -->
+  <div class="agent-card" id="agent-19" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">📋</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 19</div>
+        <div class="agent-name">PMO Agent – Project Charter</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Discover &amp; Prepare</span>
+          <span class="tag tag-type">Project Governance</span>
+          <span class="tag tag-group">PMO Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>It turns a Statement of Work (SOW) into a review-ready first-draft SAP PM_15 Project Charter. It reads the SOW and any supporting documents, captures the facts with their sources, then drafts each of the 11 charter components, checks each against a fixed specification, and revises until every required item is covered.</p>
+            <p>It works strictly from what your documents contain — it never invents content. Where the SOW is silent, it writes <em>"not covered in SOW"</em> rather than filling the gap. Financial values are excluded throughout. Alongside the charter it produces a companion Annex (a coverage report, the source-tagged fact registry, a fill checklist, and PM review notes).</p>
+            <p><em>The output is a strong first draft for a human to review and complete — not a signed or final document.</em></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <p>It is built for the people who normally author or review project charters:</p>
+            <ul>
+              <li><strong>Project / Programme Managers</strong> preparing the initial charter for a new SAP engagement.</li>
+              <li><strong>PMO and delivery leads</strong> who need a consistent, spec-complete first draft to review and refine.</li>
+              <li>Anyone responsible for turning a signed SOW into a governance-ready charter quickly.</li>
+            </ul>
+            <p>No technical skill is needed — you attach a document and press one button. A reviewer with SOW knowledge then completes and validates the draft.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <p>The SOW is the only required input. The other three below are usually already covered within the SOW — but if your SOW does not contain them (or covers them thinly), it is recommended to add them as separate inputs:</p>
+            <ul>
+              <li><strong>SOW (recommended primary)</strong> — the Statement of Work. A scrubbed SOW is recommended (see prerequisites).</li>
+              <li><strong>Risks / Issues</strong> — a risk or issue log, if maintained separately.</li>
+              <li><strong>Stakeholder Register</strong> — sponsor, steering board, process owners, key users.</li>
+              <li><strong>Process Scope</strong> — in-scope lines of business, scope items, integrations, migration.</li>
+            </ul>
+            <p>Files can be PDF, Word (.docx), PowerPoint (.pptx), Excel, or images — or you can paste text directly. Tables and schedules that appear inside pictures are read as well.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <p>Two Word documents, produced together:</p>
+            <ul>
+              <li><strong>The Project Charter (SAP PM_15)</strong> — cover, document identification, the full charter across all 11 components, and authorization &amp; acceptance signature blocks.</li>
+              <li><strong>A companion Annex</strong> — an audit trail containing the SOW coverage report, the source-tagged fact registry, a consistency check, a fill checklist of any redacted values, and PM review notes.</li>
+            </ul>
+            <p>Everything is source-traceable — each line ties back to the SOW clause, page, or figure it came from. Values that were scrubbed from the SOW appear as <code>[FILL: …]</code> tokens, gathered in the Annex checklist so a reviewer can complete them in one pass. The average run takes on the order of minutes rather than the days manual authoring can take.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>It runs live in your browser — there is nothing to install. Open the shared link, attach your SOW (or paste its text), and press <strong>"Run agent loop."</strong> You can watch the agent work through its steps, then download the charter and Annex when it finishes.</p>
+            <p>It runs on any machine with a modern browser. Because updates are shared as new versions, make sure you are using the latest link provided for your pilot.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>A signed or near-final SOW</strong> — the richer the SOW, the more complete the draft.</li>
+              <li><strong>A scrubbed SOW is recommended</strong> — remove or mask client-identifying details before running, after alignment with your project / client team. The agent processes the document in-session and stores no document content, but scrubbing keeps sensitive data out of processing in the first place.</li>
+              <li><strong>A modern web browser</strong> — no installation, plug-in, or license key required.</li>
+            </ul>
+            <p>There is no setup beyond opening the link. Note that scrubbed values are not lost — they surface as <code>[FILL: …]</code> tokens for a reviewer to complete.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <p>A few common situations and what they mean:</p>
+            <ul>
+              <li><strong>A section reads "not covered in SOW"</strong> — this is by design, not an error: the SOW genuinely did not contain that information. Add the relevant document or complete it during review.</li>
+              <li><strong>The charter looks thin</strong> — the SOW may be light on that topic, or a supporting input (Risks, Stakeholders, Process Scope) would help. Add it and re-run.</li>
+              <li><strong>A value shows as [FILL: …]</strong> — that value was scrubbed or absent; complete it using the Annex fill checklist.</li>
+              <li><strong>A figure is flagged "UNREADABLE"</strong> — a chart or image was too dense to read reliably; check that source manually.</li>
+              <li><strong>A run is taking long, or you want to stop</strong> — press Stop; the run halts and you can still download whatever was drafted so far.</li>
+            </ul>
+            <p><em>Above all, treat the output as a first draft: review it against the SOW, complete the flagged items, and validate before use. If a problem persists, report it to your pilot lead with the SOW and a note of what you expected.</em></p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-19 -->
+
+  <!-- AGENT 20: L4 PLAN AGENT (MVP) -->
+  <div class="agent-card" id="agent-20" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">📅</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 20</div>
+        <div class="agent-name">L4 Plan Agent (MVP)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Discover &amp; Prepare</span>
+          <span class="tag tag-type">Project Planning</span>
+          <span class="tag tag-group">PMO Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>It turns a list of SAP scope-item IDs and project dates into a review-ready first-draft SAP Activate Level-4 (L4) project plan for S/4HANA Public Cloud. This MVP produces a deterministic plan: it reconciles the scope against the SAP live feed and a built-in library, classifies project size, sizes each phase, sequences the work by dependency, schedules tests, workshops and workstreams, and applies SAP PM_19 scheduling rules.</p>
+            <p>It works strictly from library data, the live feed and your inputs — it never invents. Unknown items are flagged "pending" and effort figures are estimates (AI-estimated ones flagged <code>[AI-est]</code>). It also includes an AI review / co-pilot (the co-pilot can export a separate AI-proposed plan); those AI actions run inside Claude or with a pasted Anthropic key.</p>
+            <p><em>The output is a strong first draft for PM review and completion — not an approved baseline.</em></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <p>It is built for the people who normally plan or review SAP delivery:</p>
+            <ul>
+              <li><strong>Project / Programme Managers</strong> preparing an initial L4 schedule for a new SAP engagement.</li>
+              <li><strong>PMO and delivery leads</strong> who need a consistent, rules-based first-draft plan to review and refine.</li>
+              <li><strong>Solution and scope leads</strong> turning a scope-item list into a sequenced, sized plan quickly.</li>
+            </ul>
+            <p>No technical skill is needed — enter scope, set dates, press Generate. A reviewer with delivery knowledge then completes and validates the draft.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <p>The SAP live feed and your scope IDs are required (plus a project start date); everything else refines the plan:</p>
+            <ul>
+              <li><strong>SAP live feed</strong> — imported first, via the SAP Live Fetch browser extension: the L4 Scenario Bundle (live scope, country availability, cross-SID dependencies and configuration activities).</li>
+              <li><strong>Scope Item IDs</strong> — pasted as text, or browsed and ticked by line of business.</li>
+              <li><strong>Project parameters</strong> — start date, optional end date, project type, and SIT / UAT test cycles (sprint duration and holidays use MVP defaults).</li>
+              <li><strong>Project shape</strong> — Prepare / Explore / Deploy profile tags.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <p>The deterministic engine produces the L4 plan as <strong>Excel</strong> (Download L4 Plan (Excel)) — columns include WBS, L1 Phase, L2 Workstream, Scope Item ID, Task, Activity Type, Owner, Team, Start/End Date, Start/End Sprint, Days, Work Days, Predecessor, Go-Live Relevance, Priority, LOB, Config Days, UT Days and Purpose.</p>
+            <p>On Generate you get a Project sizing &amp; fit-check popup; the results panel then shows the Download button and the AI review / co-pilot. The AI co-pilot's separate AI proposal (Export AI proposal) is also included; it runs when the AI layer has model access (inside Claude or a pasted key).</p>
+            <p>Everything is traceable — each task ties back to its scope item and the rule that placed it. Effort is flagged <code>[AI-est]</code> / <code>[AI-draft]</code> / pending where applicable. A run takes on the order of seconds to minutes, rather than the days manual planning can take.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>It runs live in your browser — the app itself needs nothing installed, though the required live SAP feed uses a separate <strong>SAP Live Fetch</strong> browser extension (installed once). Open the shared link, import the live feed, enter scope and dates, press Generate, then download the plan.</p>
+            <p>Because updates are shared as new versions, make sure you are using the latest link provided for your pilot.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>The SAP live feed</strong> — the L4 Scenario Bundle, pulled by the SAP Live Fetch browser extension (a one-time install) and imported first.</li>
+              <li><strong>A scope-item list</strong> — the more accurate the scope, the better the plan.</li>
+              <li><strong>Project dates and basic parameters</strong> — start date, optional end date, project type, and SIT / UAT test cycles.</li>
+              <li><strong>A modern web browser</strong> — no install or license key for the app itself (the required live SAP feed uses the SAP Live Fetch extension, a one-time install).</li>
+            </ul>
+            <p>There is no setup beyond opening the link. Unknown scope IDs surface as "pending" for you to resolve, and effort figures are estimates (AI-estimated ones flagged <code>[AI-est]</code>).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>Is the AI review / co-pilot available in this MVP?</summary>
+          <div class="answer">
+            <p>Yes. Both AI review and AI co-pilot (which can export a separate AI-proposed plan) are included in this MVP. Because they call the model, they run when the tool is opened inside Claude, or when you paste an Anthropic API key. The deterministic plan (Generate then Download L4 Plan (Excel)) needs no key and is fully reproducible. For key-free AI on plain hosting, deploy the provided gateway (<code>main.py</code>) and set <code>PROXY_URL</code>; the deterministic plan needs no key regardless.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>A scope ID reads "pending"</strong> — it is not in the library or the feed; add a library row, or confirm the ID (watch letter O versus zero).</li>
+              <li><strong>The plan looks too short or too long</strong> — check the busiest-LOB effort, the <code>[AI-est]</code> days, and the size classification.</li>
+              <li><strong>An overrun you can't remove</strong> — the work does not fit the dates; extend dates, cut scope, or add parallelism.</li>
+              <li><strong>Effort shows [AI-est]</strong> — that is expected (SAP publishes none); review with workstream leads before baselining.</li>
+              <li><strong>Dependencies look off</strong> — the live Availability feed is authoritative; confirm the live-vs-library difference.</li>
+            </ul>
+            <p><em>Above all, treat the output as a first draft: resolve pending items, review the estimates and overruns, and validate against your delivery experience before baselining. If a problem persists, report it to your pilot lead with the inputs used and a note of what you expected.</em></p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-20 -->
 </section>
 
 
