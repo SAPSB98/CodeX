@@ -406,6 +406,9 @@
     <a class="toc-link" href="#agent-20">
       <span class="toc-num">20</span>L4 Plan Agent (MVP)
     </a>
+    <a class="toc-link" href="#agent-21">
+      <span class="toc-num">21</span>PMO Agent – Onboarding &amp; Offboarding (Resource Lifecycle)
+    </a>
 
     <div class="toc-section-label">Phase: Explore</div>
     <a class="toc-link" href="#agent-02">
@@ -1132,6 +1135,126 @@
       </div>
     </div>
   </div><!-- /#agent-20 -->
+
+  <!-- AGENT 21: PMO AGENT – ONBOARDING & OFFBOARDING -->
+  <div class="agent-card" id="agent-21" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🧑‍💼</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 21</div>
+        <div class="agent-name">PMO Agent – Onboarding &amp; Offboarding (Resource Lifecycle Management)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Discover &amp; Prepare</span>
+          <span class="tag tag-type">Resource Management</span>
+          <span class="tag tag-group">PMO Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What does this agent do?</summary>
+          <div class="answer">
+            <p>The Onboarding &amp; Offboarding Agent manages the full lifecycle of project resources — from joining to exit — under a single governed process with a complete audit trail.</p>
+            <p><strong>Key capabilities include:</strong></p>
+            <ul>
+              <li>Validates every request against live project, WBS, location and contact data</li>
+              <li>Routes approvals through a nine-state, role-gated workflow</li>
+              <li>Closes out assets, access and knowledge transfer on exit</li>
+              <li>Generates personalized notifications to all relevant stakeholders</li>
+              <li>Logs every write with actor identity and before/after values</li>
+              <li>AI assists in drafting and suggesting but never approves or sends autonomously</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Who should use it?</summary>
+          <div class="answer">
+            <p>This agent is designed for the following personas:</p>
+            <ul>
+              <li><strong>Project Leads, Project Managers, Project PMOs, Project Ops Team &amp; Delivery Leads</strong> — to onboard and offboard team members with structured approvals</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>What inputs do I need to provide?</summary>
+          <div class="answer">
+            <p><strong>Project &amp; Resource Details:</strong></p>
+            <ul>
+              <li>Project &amp; WBS code, resource name &amp; role</li>
+              <li>Start / end dates, last working day, exit reason &amp; handover</li>
+              <li>Location, FTE, supervisor / lead / HR contact</li>
+            </ul>
+            <p><strong>Setup &amp; Configuration (one-time admin):</strong></p>
+            <ul>
+              <li>Mandatory training, skills &amp; resource levels</li>
+              <li>Assets &amp; access systems</li>
+              <li>Email template &amp; branding, recipient &amp; trigger rules</li>
+              <li>Tracker CSV upload (seven master-data types, behind a mandatory dry-run)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>What outputs will I get?</summary>
+          <div class="answer">
+            <p><strong>Governed Records:</strong></p>
+            <p>Approved onboarding/offboarding records with full workflow history; resource roster with derived effective FTE.</p>
+            <p><strong>Checklists &amp; Notifications:</strong></p>
+            <p>Personalized emails to TO, CC and BCC recipients; training checklists before start date; asset-return and access-revocation checklists dated per item.</p>
+            <p><strong>Reporting &amp; Audit:</strong></p>
+            <p>Self-service pivot reports with six visualizations and CSV export; queryable, exportable audit trail; delivery log with per-attempt outcome and failure category.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I access it?</summary>
+          <div class="answer">
+            <p>The agent is available as a web-based tool accessible to authorized project and HR stakeholders.</p>
+            <p><strong>Access model:</strong></p>
+            <ul>
+              <li>Access is role-gated — your permissions determine which workflow states and actions are visible to you</li>
+              <li>Admin-configurable settings allow your IT or operations team to set up templates, branding and trigger rules without developer involvement</li>
+            </ul>
+            <p><strong>To get started:</strong> Reach out to your Delivery Lead or AMS Administrator to request access and complete the initial configuration.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>What are the prerequisites?</summary>
+          <div class="answer">
+            <p>Before raising a request, ensure the following are in place:</p>
+            <ul>
+              <li><strong>Live project and valid WBS code</strong> in the system</li>
+              <li><strong>Mandatory training</strong> requirements defined for the role</li>
+              <li>Asset and access system details configured by an admin</li>
+              <li>Email templates and recipient rules set up and tested in sandbox</li>
+              <li><strong>CSV tracker</strong> master data uploaded (dry-run completed and approved)</li>
+            </ul>
+            <p><em>No request will be dispatched until all prerequisites and approval gates are met — compliance is assured by design.</em></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>What should I do if something doesn't work as expected?</summary>
+          <div class="answer">
+            <p><strong>For failed notifications:</strong><br>
+            The system retries with escalating backoff automatically. Persistently failed sends are dead-lettered and logged — check the delivery log in Reporting &amp; Audit.</p>
+            <p><strong>For workflow issues:</strong><br>
+            Review the nine-state workflow history on the record. Each state transition is logged with actor and timestamp.</p>
+            <p><strong>For data or configuration errors:</strong><br>
+            Contact your AMS Administrator. Since the agent is admin-configurable (not developer-dependent), most fixes can be applied without raising a technical ticket.</p>
+            <p><strong>For audit or compliance queries:</strong><br>
+            The audit trail is queryable and exportable at any time — pull a report or escalate to your Delivery Lead with the exported log.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-21 -->
 </section>
 
 
