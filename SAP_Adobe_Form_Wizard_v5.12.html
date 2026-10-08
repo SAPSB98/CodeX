@@ -1,8 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SAP Adobe Form Wizard v5.12</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.33.0/dist/tabler-icons.min.css">
-<link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@3.33.0/dist/tabler-icons.min.css">
+<title>SAP Adobe Form Wizard v5.11 — Claude Chat Edition</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 :root{--bg1:#fff;--bg2:#f7f7f5;--bg3:#f0efec;--txt1:#1a1a1a;--txt2:#555;--txt3:#999;--bdr1:rgba(0,0,0,.14);--bdr2:rgba(0,0,0,.24);--r8:8px;--r12:12px;--blue:#185FA5;--blue-bg:#E6F1FB;--blue-bdr:#B5D4F4;--blue-txt:#0C447C;--amber-bg:#FAEEDA;--amber-bdr:#FAC775;--amber-txt:#854F0B;--green-bg:#EAF3DE;--green-txt:#3B6D11;--red:#E24B4A;}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -122,131 +121,44 @@ code{background:var(--bg3);padding:1px 4px;border-radius:4px;font-family:"SF Mon
 .dl-modal-fname{font-family:"SF Mono",monospace;font-size:12px;color:var(--txt2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:640px){.cmp-grid{grid-template-columns:1fr}.pos-grid{grid-template-columns:1fr}.mst-lbl{min-width:110px;max-width:110px}.cf-col-hdr,.cf-field-row{grid-template-columns:1fr}.lc-pair{grid-template-columns:1fr}}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* icon font blocked (offline / corporate proxy) — hide glyphs instead of tofu boxes */
-body.no-ti .ti{display:none!important}
-
-/* ══ USER GUIDE (v5.12) ═══════════════════════════════════════════════════════
-   Inline-flow overlay — no position:fixed, so it works inside the claude.ai
-   artifact iframe / Claude Code preview pane exactly like the download modal. */
-.ug-open{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:6px 13px;border-radius:var(--r8);border:.5px solid var(--blue-bdr);background:var(--blue-bg);color:var(--blue-txt);cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
-.ug-open:hover{background:#D7E7FA;border-color:var(--blue)}
-.ug-live{display:none;align-items:center;gap:5px;font-size:11px;color:var(--txt3);margin-left:auto;flex-shrink:0}
-.ug-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green-txt)}
-@media(min-width:760px){.ug-live{display:flex}.ug-open{margin-left:14px}}
-
-.ug-wrap{display:none;margin-bottom:1rem}
-body.ug-on .ug-wrap{display:block}
-body.ug-on .prog{display:none}
-body.ug-on .step{display:none!important}
-body.ug-on .dl-modal-overlay{display:none!important}
-body.ug-on .pw{max-width:1230px}
-
-.ug-modal{background:var(--bg1);border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 16px 46px rgba(0,0,0,.13)}
-
-/* ── header bar ── */
-.ug-top{display:flex;align-items:center;gap:12px;padding:13px 16px;background:linear-gradient(100deg,#0A3A6B 0%,#185FA5 58%,#2E82D4 100%);color:#fff}
-.ug-top-ico{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.17);border:.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.ug-top-txt{min-width:0}
-.ug-top-txt h2{font-size:15px;font-weight:600;line-height:1.25}
-.ug-top-txt .ug-top-sub{font-size:11px;opacity:.85;margin-top:2px}
-.ug-top-acts{margin-left:auto;display:flex;gap:7px;flex-shrink:0}
-.ug-tb{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:6px 12px;border-radius:var(--r8);cursor:pointer;font-family:inherit;border:.5px solid rgba(255,255,255,.38);background:rgba(255,255,255,.13);color:#fff;transition:background .15s;white-space:nowrap}
-.ug-tb:hover{background:rgba(255,255,255,.24)}
-.ug-tb.solid{background:#fff;color:var(--blue-txt);border-color:#fff}
-.ug-tb.solid:hover{background:#EAF2FB}
-
-/* ── two-pane body ── */
-.ug-main{display:flex;align-items:stretch;min-height:0}
-.ug-nav{flex:0 0 236px;width:236px;border-right:.5px solid var(--bdr1);background:var(--bg2);padding:9px;display:flex;flex-direction:column;gap:10px;max-height:68vh;overflow-y:auto;overscroll-behavior:contain}
-.ug-nav-list{display:flex;flex-direction:column;gap:2px}
-.ug-nl{display:flex;gap:8px;align-items:flex-start;padding:7px 9px;border-radius:var(--r8);font-size:12px;color:var(--txt2);cursor:pointer;line-height:1.45;border-left:2.5px solid transparent;user-select:none;transition:background .12s}
-.ug-nl:hover{background:var(--bg3)}
-.ug-nl.on{background:var(--blue-bg);color:var(--blue-txt);font-weight:500;border-left-color:var(--blue)}
-.ug-nl i{font-size:14px;flex-shrink:0;margin-top:1px;opacity:.85}
-.ug-qr{border:.5px solid var(--bdr1);background:var(--bg1);border-radius:var(--r8);padding:9px 10px;margin-top:auto}
-.ug-qr-h{font-size:9.5px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-.ug-qr-r{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:11px;padding:4px 0;border-top:.5px solid var(--bdr1);line-height:1.4}
-.ug-qr-r.first{border-top:0}
-.ug-qr-r span{color:var(--txt2)}
-.ug-qr-r strong{color:var(--blue);font-weight:600;text-align:right;white-space:nowrap}
-
-.ug-cont{flex:1 1 auto;min-width:0;padding:16px 20px 22px;max-height:68vh;overflow-y:auto;overscroll-behavior:contain}
-.ug-sec{display:none}
-.ug-sec.on{display:block}
-.ug-sec h3{font-size:16px;font-weight:600;display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:.5px solid var(--bdr1);margin-bottom:13px;color:var(--txt1)}
-.ug-sec h3 i{color:var(--blue);font-size:18px}
-.ug-sec h4{font-size:13px;font-weight:600;margin:15px 0 5px;color:var(--txt1)}
-.ug-sec h4:first-child{margin-top:0}
-.ug-sec p{font-size:13px;line-height:1.75;color:var(--txt2);margin-bottom:9px}
-.ug-sec ul,.ug-sec ol{margin:0 0 10px;padding-left:18px}
-.ug-sec li{font-size:12.5px;line-height:1.7;color:var(--txt2);margin-bottom:4px}
-.ug-sec strong{color:var(--txt1);font-weight:500}
-.ug-sec code{font-family:"SF Mono","Courier New",monospace;font-size:11.5px;background:var(--bg3);padding:1px 5px;border-radius:4px;color:var(--blue-txt);word-break:break-word}
-.ug-sec a{color:var(--blue);text-decoration:none;border-bottom:.5px solid var(--blue-bdr)}
-.ug-sec a:hover{border-bottom-color:var(--blue)}
-
-.ug-t2{width:100%;border-collapse:collapse;font-size:12px;margin:7px 0 13px;border:.5px solid var(--bdr1);border-radius:var(--r8);overflow:hidden}
-.ug-t2 th{background:var(--bg2);font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--txt3);font-weight:600;text-align:left;padding:7px 10px;border-bottom:.5px solid var(--bdr1)}
-.ug-t2 td{padding:7px 10px;border-bottom:.5px solid var(--bdr1);vertical-align:top;color:var(--txt2);line-height:1.6}
-.ug-t2 tr:last-child td{border-bottom:0}
-.ug-t2 td strong{font-weight:500}
-
-.ug-note{background:var(--blue-bg);border:.5px solid var(--blue-bdr);border-radius:var(--r8);padding:9px 12px;font-size:12px;color:var(--blue-txt);line-height:1.65;display:flex;gap:8px;align-items:flex-start;margin:9px 0 12px}
-.ug-warn{background:var(--amber-bg);border:.5px solid var(--amber-bdr);border-radius:var(--r8);padding:9px 12px;font-size:12px;color:var(--amber-txt);line-height:1.65;display:flex;gap:8px;align-items:flex-start;margin:9px 0 12px}
-.ug-note i,.ug-warn i{flex-shrink:0;margin-top:1px;font-size:14px}
-
-/* ── step cards ── */
-.ug-sc{border:.5px solid var(--bdr1);border-radius:var(--r8);margin-bottom:10px;overflow:hidden}
-.ug-sc-h{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--bg2);border-bottom:.5px solid var(--bdr1)}
-.ug-num{width:22px;height:22px;border-radius:6px;background:var(--blue);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ug-sc-h .ug-sc-t{font-size:13px;font-weight:500;flex:1;min-width:0}
-.ug-jump{font-size:11px;padding:4px 10px;border-radius:6px;border:.5px solid var(--bdr1);background:var(--bg1);color:var(--blue);cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;flex-shrink:0;white-space:nowrap}
-.ug-jump:hover{background:var(--blue-bg);border-color:var(--blue-bdr)}
-.ug-sc-b{padding:10px 13px;background:var(--bg1)}
-.ug-sc-b p{font-size:12.5px;margin-bottom:7px}
-.ug-sc-b p:last-child{margin-bottom:0}
-.ug-arrows{list-style:none;padding-left:0;margin:0}
-.ug-arrows li{position:relative;padding-left:16px;font-size:12.5px;line-height:1.65;color:var(--txt2);margin-bottom:5px}
-.ug-arrows li::before{content:"→";position:absolute;left:0;color:var(--blue);font-size:12px}
-.ug-arrows li ul{list-style:none;padding-left:14px;margin:4px 0 0}
-.ug-arrows li ul li::before{content:"↳";color:var(--txt3)}
-
-/* ── demo video ── */
-.ug-vid-hero{border:.5px solid var(--blue-bdr);border-radius:var(--r12);overflow:hidden;background:var(--blue-bg);margin-bottom:12px}
-.ug-vid-box{position:relative;width:100%;aspect-ratio:16/9;max-height:330px;background:#0B0B0C;overflow:hidden}
-.ug-vid-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.ug-vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#0A3A6B,#185FA5 60%,#2E82D4);cursor:pointer;color:#fff;text-decoration:none}
-.ug-vid-ph::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) .5px,transparent .5px),linear-gradient(90deg,rgba(255,255,255,.07) .5px,transparent .5px);background-size:26px 26px}
-.ug-vid-ph .ug-pl{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--blue-txt);display:flex;align-items:center;justify-content:center;font-size:23px;z-index:2;box-shadow:0 6px 20px rgba(0,0,0,.3);transition:transform .15s}
-.ug-vid-ph:hover .ug-pl{transform:scale(1.08)}
-.ug-vid-ph .ug-pt{font-size:12.5px;font-weight:500;z-index:2;opacity:.95}
-.ug-vid-meta{padding:11px 13px;background:var(--bg1);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ug-vid-meta .ug-vm-t{font-size:12.5px;font-weight:500}
-.ug-vid-meta .ug-vm-s{font-size:11px;color:var(--txt3);margin-top:2px}
-.ug-vid-meta .ug-vm-a{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap}
-.ug-vid-meta .btn{font-size:12px;padding:5px 12px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-bottom:0}
-.ug-link-row{display:flex;align-items:center;gap:7px;font-size:11.5px;background:var(--bg2);border:.5px solid var(--bdr1);border-radius:var(--r8);padding:7px 10px;margin-bottom:12px}
-.ug-link-row code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:none;padding:0}
-
-/* ── footer ── */
-.ug-foot{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:.5px solid var(--bdr1);background:var(--bg2);flex-wrap:wrap}
-.ug-foot .ug-foot-t{font-size:11px;color:var(--txt3)}
-.ug-foot .btn{margin-left:auto}
-
-/* ── responsive ── */
-@media(max-width:900px){
-  .ug-main{flex-direction:column}
-  .ug-nav{flex:0 0 auto;width:100%;border-right:0;border-bottom:.5px solid var(--bdr1);max-height:none;flex-direction:column}
-  .ug-nav-list{flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:3px}
-  .ug-nl{white-space:nowrap;border-left:0;border-bottom:2.5px solid transparent;border-radius:var(--r8)}
-  .ug-nl.on{border-left:0;border-bottom-color:var(--blue)}
-  .ug-nl .ug-nl-x{display:none}
-  .ug-qr{display:none}   /* keep content above the fold on narrow screens */
-  .ug-cont{max-height:none;padding:14px 14px 18px}
-  .ug-top{flex-wrap:wrap}
-  .ug-top-acts{margin-left:0;width:100%}
-  .ug-top-acts .ug-tb{flex:1;justify-content:center}
-}
+/* ── User Guide ─────────────────────────────────────────────────────────── */
+.ug-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;display:none;align-items:flex-start;justify-content:center;padding:2vh 1rem;overflow-y:auto}
+.ug-overlay.show{display:flex}
+.ug-modal{background:var(--bg1);width:min(980px,98vw);display:flex;flex-direction:column;border-radius:var(--r12);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.4);max-height:94vh}
+.ug-hdr{background:#1e3a5f;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ug-hdr-icon{width:32px;height:32px;border:1.5px solid rgba(255,255,255,.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ug-hdr-titles{flex:1;min-width:0}
+.ug-hdr-titles h2{font-size:14px;font-weight:500;margin-bottom:2px}
+.ug-hdr-titles p{font-size:11px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ug-hdr-btns{display:flex;gap:8px;flex-shrink:0}
+.ug-hdr-btn{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:var(--r8);padding:5px 13px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;transition:background .15s;text-decoration:none}
+.ug-hdr-btn:hover{background:rgba(255,255,255,.12)}
+.ug-hdr-btn.close-x{padding:5px 10px}
+.ug-body{display:flex;flex:1;overflow:hidden;min-height:0}
+.ug-nav{width:210px;flex-shrink:0;border-right:.5px solid var(--bdr1);overflow-y:auto;padding:8px 0;background:var(--bg1)}
+.ug-nav-item{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:12px;color:var(--txt2);cursor:pointer;transition:background .12s;line-height:1.4}
+.ug-nav-item:hover{background:var(--bg2)}
+.ug-nav-item.active{background:var(--blue-bg);color:var(--blue);font-weight:500;border-right:2px solid var(--blue)}
+.ug-nav-item i{flex-shrink:0;font-size:13px;opacity:.7}
+.ug-nav-item.active i{opacity:1}
+.ug-nav-sep{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;padding:14px 14px 4px}
+.ug-content{flex:1;overflow-y:auto;padding:22px 26px}
+.ug-section{display:none}.ug-section.active{display:block}
+.ug-section h2{font-size:15px;font-weight:600;margin-bottom:14px;padding-bottom:10px;border-bottom:.5px solid var(--bdr1);display:flex;align-items:center;gap:8px;color:var(--txt1)}
+.ug-section h3{font-size:13px;font-weight:600;margin:16px 0 6px;color:var(--txt1)}
+.ug-section p{font-size:13px;line-height:1.75;color:var(--txt1);margin-bottom:10px}
+.ug-section ul,.ug-section ol{padding-left:20px;font-size:13px;line-height:1.85;color:var(--txt1);margin-bottom:10px}
+.ug-section li{margin-bottom:3px}
+.ug-section strong{font-weight:600}
+.ug-placeholder{padding:40px 20px;text-align:center;color:var(--txt3);font-size:13px}
+.ug-placeholder i{font-size:32px;margin-bottom:10px;display:block;opacity:.4}
+.ug-ftr{border-top:.5px solid var(--bdr1);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--bg2)}
+.ug-ftr-txt{font-size:11px;color:var(--txt3)}
+.ug-close-btn{background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:7px 16px;font-size:13px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:background .15s}
+.ug-close-btn:hover{background:var(--blue-txt)}
+/* ug trigger btn in header */
+.ug-trigger{background:var(--bg1);border:.5px solid var(--bdr2);color:var(--txt1);border-radius:var(--r8);padding:5px 12px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;transition:background .15s;white-space:nowrap}
+.ug-trigger:hover{background:var(--bg2)}
 </style>
 </head><body>
 
@@ -254,8 +166,10 @@ body.ug-on .pw{max-width:1230px}
 <div class="ph">
   <div class="lm"><i class="ti ti-file-settings"></i></div>
   <div><h1>SAP S/4HANA Public Cloud — Adobe Form Wizard</h1><p>RICEFW Type: F — Output Form specification generator &nbsp;|&nbsp; v5.12</p></div>
-  <span class="ug-live">Claude AI · RICEFW Type F</span>
-  <button class="ug-open" onclick="ugToggle()" title="Open the user guide"><i class="ti ti-book-2"></i> User Guide</button>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0">
+    <span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:5px;white-space:nowrap"><span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;flex-shrink:0"></span>Claude AI · RICEFW Type F</span>
+    <button class="ug-trigger" onclick="openUserGuide()"><i class="ti ti-book"></i> User Guide</button>
+  </div>
 </div>
 <div class="prog" id="prog">
   <div class="ps active" onclick="go(0)">Basics</div>
@@ -394,7 +308,7 @@ body.ug-on .pw{max-width:1230px}
       <datalist id="bizCtxList"></datalist>
       <div style="font-size:11px;color:var(--txt3);margin-top:3px;line-height:1.5"><i class="ti ti-info-circle" style="font-size:12px"></i> Verify this matches exactly in <strong>Custom Fields and Logic</strong> app → <em>Context</em> field. Determines custom field suffix (e.g. <code>_PDH</code>) and XDP binding path.</div>
     </div>
-    <div class="sbox"><strong>Custom field creation steps:</strong><ol><li>"Custom Fields and Logic" app → <strong>New Field</strong></li><li>Context: <em id="cfBizCtxHint">select domain/type in Basics</em></li><li>Name: <code id="cfSfxHint">YY1_&lt;NAME&gt;_PDH</code> (hdr) / <code id="cfSfxHintI">YY1_&lt;NAME&gt;_PDI</code> (itm)</li><li>Enable <strong>Output Form</strong> → <strong>Publish</strong></li><li>XDP bind: <code id="cfSfxBind">ref="$.YY1_FIELDNAME_PDH"</code></li></ol></div>
+    <div class="sbox"><strong>Custom field creation steps:</strong><ol><li>"Custom Fields and Logic" app → <strong>New Field</strong></li><li>Context: <em id="cfBizCtxHint">select domain/type in Basics</em></li><li>Name: <code id="cfSfxHint">YY1_&lt;NAME&gt;_PDH</code> (hdr) / <code id="cfSfxHintI">YY1_&lt;NAME&gt;_PDI</code> (itm)</li><li>Enable <strong>Output Form</strong> → <strong>Publish</strong></li><li>XDP bind: <code id="cfSfxBind">ref="$.YY1_FIELDNAME_PDH"</code></ol></div>
   </div>
   <div id="cfAutoFillBanner" style="display:none" class="autofill-strip"><i class="ti ti-table"></i><span id="cfAutoFillMsg"></span><button class="btn sec" style="font-size:12px;padding:4px 12px;margin-left:auto" onclick="autoFillCF()"><i class="ti ti-bolt"></i> Auto-fill</button></div>
   <div class="cf-section">
@@ -457,11 +371,11 @@ body.ug-on .pw{max-width:1230px}
     <div class="ibox"><i class="ti ti-info-circle"></i> XDP changes applied in-browser. If direct download is blocked a save dialog will appear — copy content and save as <strong>.xdp</strong>.</div>
   </div>
   <div class="card" id="aiCfgCard">
-    <h3><i class="ti ti-wand"></i> Claude AI — Structural changes</h3>
+    <h3><i class="ti ti-wand"></i> Claude Chat — Task file flow</h3>
     <div class="ibox" style="flex-direction:column;gap:8px">
-      <div><i class="ti ti-device-desktop-code" style="color:var(--green-txt)"></i> <strong>Claude Code preview panel</strong> — Click <em>Send task to Claude</em>: Claude decodes the XDP, applies all changes, and saves <code>[filename]_CUSTOM.xdp</code> directly to your Downloads folder. Works for every team member who opens the wizard here.</div>
-      <div><i class="ti ti-brand-claude" style="color:var(--blue)"></i> <strong>claude.ai artifact</strong> — Click <em>Send task to Claude</em>: task is sent to the chat. Claude returns the modified XDP — paste it back using the area below.</div>
-      <div><i class="ti ti-world" style="color:var(--txt3)"></i> <strong>Standalone browser</strong> — Click <em>Send task to Claude</em>: downloads a task <code>.txt</code> file. Open it in any Claude session, then paste Claude's XDP response back below.</div>
+      <div><i class="ti ti-brand-claude" style="color:var(--blue)"></i> <strong>How it works:</strong> Click <em>Send task to Claude</em> below. The wizard downloads a self-contained <code>.txt</code> task file with the XDP embedded (base64) plus all instructions.</div>
+      <div><i class="ti ti-upload" style="color:var(--green-txt)"></i> <strong>Then:</strong> Drag the downloaded task file into this Claude chat. Claude decodes the XDP, applies every change, and returns the modified <code>_CUSTOM.xdp</code> as a downloadable file — no paths, no paste-back, no disk access needed.</div>
+      <div style="color:var(--txt3);font-size:11px"><i class="ti ti-info-circle"></i> Prerequisite: upload the XDP file in the Basics step (Step 0) — its content travels inside the task file.</div>
     </div>
   </div>
   <div class="card">
@@ -469,16 +383,10 @@ body.ug-on .pw{max-width:1230px}
     <div id="genContentStatus" class="ibox" style="display:none"><i class="ti ti-circle-check"></i><span id="genContentMsg"></span></div>
     <div id="aiContentWait" class="ibox" style="display:none;flex-direction:column;gap:10px">
       <div style="display:flex;align-items:center;gap:8px"><i class="ti ti-circle-check" style="color:var(--green-txt)"></i><span id="aiContentWaitMsg" style="font-weight:500"></span></div>
-      <div id="aiContentInstruction" style="display:none;background:var(--bg2);border-radius:var(--r8);padding:10px 12px;font-size:12px;line-height:1.8">
-        <div style="font-weight:600;margin-bottom:4px"><i class="ti ti-terminal-2"></i> In the Claude Code chat, run:</div>
+      <div id="aiContentInstruction" style="background:var(--bg2);border-radius:var(--r8);padding:10px 12px;font-size:12px;line-height:1.8">
+        <div style="font-weight:600;margin-bottom:4px"><i class="ti ti-upload"></i> Next step — drop the downloaded task file into Claude chat:</div>
         <code id="aiContentCmd" style="font-size:12px;color:var(--blue-txt);word-break:break-all"></code>
-        <button class="btn sec" style="font-size:11px;padding:3px 9px;margin-top:6px;align-self:flex-start" onclick="copyCmd('aiContentCmd')"><i class="ti ti-copy"></i> Copy</button>
-        <div style="margin-top:6px;color:var(--txt3);font-size:11px">Claude will apply all changes and save <strong id="aiContentOutName"></strong> to your Downloads folder automatically.</div>
-      </div>
-      <div id="aiContentPasteArea" style="display:none;flex-direction:column;gap:6px">
-        <div style="font-size:12px;color:var(--blue-txt)">Paste Claude's XDP response below and click Apply:</div>
-        <textarea id="aiContentPaste" placeholder="Paste Claude's XDP response here…" style="height:80px;font-size:12px"></textarea>
-        <button class="btn sec" style="font-size:12px;padding:5px 12px;align-self:flex-start" onclick="applyPastedAIResponse('content')"><i class="ti ti-check"></i> Apply pasted response</button>
+        <div style="margin-top:6px;color:var(--txt3);font-size:11px">Claude will decode the embedded XDP, apply all changes, and return <strong id="aiContentOutName"></strong> as a downloadable file in the chat.</div>
       </div>
     </div>
     <div id="genContentMissing" class="wbox" style="display:none"><i class="ti ti-alert-triangle"></i> No content XDP uploaded — go to Basics and upload one.</div>
@@ -492,16 +400,10 @@ body.ug-on .pw{max-width:1230px}
     <div id="genMasterStatus" class="ibox" style="display:none"><i class="ti ti-circle-check"></i><span id="genMasterMsg"></span></div>
     <div id="aiMasterWait" class="ibox" style="display:none;flex-direction:column;gap:10px">
       <div style="display:flex;align-items:center;gap:8px"><i class="ti ti-circle-check" style="color:var(--green-txt)"></i><span id="aiMasterWaitMsg" style="font-weight:500"></span></div>
-      <div id="aiMasterInstruction" style="display:none;background:var(--bg2);border-radius:var(--r8);padding:10px 12px;font-size:12px;line-height:1.8">
-        <div style="font-weight:600;margin-bottom:4px"><i class="ti ti-terminal-2"></i> In the Claude Code chat, run:</div>
+      <div id="aiMasterInstruction" style="background:var(--bg2);border-radius:var(--r8);padding:10px 12px;font-size:12px;line-height:1.8">
+        <div style="font-weight:600;margin-bottom:4px"><i class="ti ti-upload"></i> Next step — drop the downloaded task file into Claude chat:</div>
         <code id="aiMasterCmd" style="font-size:12px;color:var(--blue-txt);word-break:break-all"></code>
-        <button class="btn sec" style="font-size:11px;padding:3px 9px;margin-top:6px;align-self:flex-start" onclick="copyCmd('aiMasterCmd')"><i class="ti ti-copy"></i> Copy</button>
-        <div style="margin-top:6px;color:var(--txt3);font-size:11px">Claude will apply all changes and save <strong id="aiMasterOutName"></strong> to your Downloads folder automatically.</div>
-      </div>
-      <div id="aiMasterPasteArea" style="display:none;flex-direction:column;gap:6px">
-        <div style="font-size:12px;color:var(--blue-txt)">Paste Claude's XDP response below and click Apply:</div>
-        <textarea id="aiMasterPaste" placeholder="Paste Claude's XDP response here…" style="height:80px;font-size:12px"></textarea>
-        <button class="btn sec" style="font-size:12px;padding:5px 12px;align-self:flex-start" onclick="applyPastedAIResponse('master')"><i class="ti ti-check"></i> Apply pasted response</button>
+        <div style="margin-top:6px;color:var(--txt3);font-size:11px">Claude will decode the embedded XDP, apply all changes, and return <strong id="aiMasterOutName"></strong> as a downloadable file in the chat.</div>
       </div>
     </div>
     <div id="genMasterMissing" class="wbox" style="display:none"><i class="ti ti-alert-triangle"></i> No master XDP uploaded — go to Basics and upload one.</div>
@@ -547,12 +449,11 @@ body.ug-on .pw{max-width:1230px}
     <button class="btn p" onclick="sendTSDToCI()"><i class="ti ti-send"></i> Generate TSD with Claude</button>
   </div>
   <div id="tsdWait" class="ibox" style="display:none;flex-direction:column;gap:10px;margin-top:.7rem">
-    <div style="display:flex;align-items:center;gap:8px"><i class="ti ti-circle-check" style="color:var(--green-txt)"></i><span style="font-weight:500">Task file downloaded — reference it in the Claude Code chat:</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><i class="ti ti-circle-check" style="color:var(--green-txt)"></i><span style="font-weight:500">Task file downloaded — drop it into Claude chat:</span></div>
     <div style="background:var(--bg2);border-radius:var(--r8);padding:10px 12px;font-size:12px;line-height:1.8">
-      <div style="font-weight:600;margin-bottom:4px"><i class="ti ti-terminal-2"></i> In the Claude Code chat, run:</div>
+      <div style="font-weight:600;margin-bottom:4px"><i class="ti ti-upload"></i> Upload this file into Claude chat:</div>
       <code id="tsdCmd" style="font-size:12px;color:var(--blue-txt);word-break:break-all"></code>
-      <button class="btn sec" style="font-size:11px;padding:3px 9px;margin-top:6px;align-self:flex-start" onclick="copyCmd('tsdCmd')"><i class="ti ti-copy"></i> Copy</button>
-      <div style="margin-top:6px;color:var(--txt3);font-size:11px">Claude will read your template, fill all sections with the wizard data and save the completed TSD to your Downloads folder automatically.</div>
+      <div style="margin-top:6px;color:var(--txt3);font-size:11px">The task file contains the embedded template plus mapping-sheet narrative. Claude will populate the section and return the completed TSD as a downloadable file in the chat.</div>
     </div>
   </div>
   <div class="brow"><button class="btn" onclick="go(5)"><i class="ti ti-arrow-left"></i> Back</button><button class="btn p" onclick="go(7)">Pre-requisites <i class="ti ti-arrow-right"></i></button></div>
@@ -657,472 +558,6 @@ body.ug-on .pw{max-width:1230px}
     <div class="dl-modal-ftr"><span class="dl-modal-fname" id="dlModalFname2"></span><button class="btn sec" onclick="tryDlLink()"><i class="ti ti-download"></i> Try direct download</button><button class="btn p" onclick="copyDlContent()"><i class="ti ti-copy"></i> Copy to clipboard</button></div>
   </div>
 </div>
-
-<!-- ══ USER GUIDE ═══════════════════════════════════════════════════════════ -->
-<div class="ug-wrap" id="ugWrap">
-<div class="ug-modal">
-
-  <div class="ug-top">
-    <div class="ug-top-ico"><i class="ti ti-book-2"></i></div>
-    <div class="ug-top-txt">
-      <h2>User Guide — SAP Adobe Form Wizard</h2>
-      <div class="ug-top-sub">SAP S/4HANA Public Cloud &middot; RICEFW Type F &middot; v5.12 &middot; Accenture SAP Practice</div>
-    </div>
-    <div class="ug-top-acts">
-      <button class="ug-tb solid" onclick="ugVideo()"><i class="ti ti-player-play"></i> Demo Video</button>
-      <button class="ug-tb" onclick="ugClose()"><i class="ti ti-x"></i> Close</button>
-    </div>
-  </div>
-
-  <div class="ug-main">
-
-    <!-- ── left nav ── -->
-    <div class="ug-nav">
-      <div class="ug-nav-list" id="ugNavList">
-        <div class="ug-nl" data-s="v"  onclick="ugVideo()"><i class="ti ti-player-play"></i><span>Demo Video</span></div>
-        <div class="ug-nl on" data-s="1"  onclick="ugNav(1)"><i class="ti ti-info-circle"></i><span>1. Introduction &amp; Purpose</span></div>
-        <div class="ug-nl" data-s="2"  onclick="ugNav(2)"><i class="ti ti-users"></i><span>2. Target Users</span></div>
-        <div class="ug-nl" data-s="3"  onclick="ugNav(3)"><i class="ti ti-key"></i><span>3. Access &amp; Prerequisites</span></div>
-        <div class="ug-nl" data-s="4"  onclick="ugNav(4)"><i class="ti ti-list-numbers"></i><span>4. Step-by-Step Guide</span></div>
-        <div class="ug-nl" data-s="5"  onclick="ugNav(5)"><i class="ti ti-file-download"></i><span>5. Outputs</span></div>
-        <div class="ug-nl" data-s="6"  onclick="ugNav(6)"><i class="ti ti-git-branch"></i><span>6. Use Cases</span></div>
-        <div class="ug-nl" data-s="7"  onclick="ugNav(7)"><i class="ti ti-bulb"></i><span>7. Tips &amp; Best Practices</span></div>
-        <div class="ug-nl" data-s="8"  onclick="ugNav(8)"><i class="ti ti-tool"></i><span>8. Troubleshooting</span></div>
-        <div class="ug-nl" data-s="9"  onclick="ugNav(9)"><i class="ti ti-message-2"></i><span>9. Feedback &amp; Roadmap</span></div>
-        <div class="ug-nl" data-s="10" onclick="ugNav(10)"><i class="ti ti-book"></i><span>10. Glossary</span></div>
-      </div>
-      <div class="ug-qr">
-        <div class="ug-qr-h">Quick reference</div>
-        <div class="ug-qr-r first"><span>Guided steps</span><strong>8 steps</strong></div>
-        <div class="ug-qr-r"><span>Output artefacts</span><strong>5 files</strong></div>
-        <div class="ug-qr-r"><span>ABAP patterns</span><strong>3 patterns</strong></div>
-        <div class="ug-qr-r"><span>Mapping sheet</span><strong>.csv / .tsv</strong></div>
-        <div class="ug-qr-r"><span>TSD template</span><strong>.docx / .md</strong></div>
-        <div class="ug-qr-r"><span>Typical saving</span><strong>4–12d → 2–8d</strong></div>
-        <div class="ug-qr-r"><span>Wizard version</span><strong>v5.12</strong></div>
-      </div>
-    </div>
-
-    <!-- ── content ── -->
-    <div class="ug-cont" id="ugCont">
-
-      <!-- ░░ DEMO VIDEO ░░ -->
-      <div class="ug-sec" id="ugsv">
-        <h3><i class="ti ti-player-play"></i> Demo Video</h3>
-        <p>A full end-to-end walkthrough of the Adobe Form Wizard — from XDP upload through structural changes, ABAP generation and TSD population.</p>
-        <div class="ug-vid-hero">
-          <div class="ug-vid-box" id="ugVideoFrame">
-            <a class="ug-vid-ph" href="https://mediaexchange.accenture.com/media/t/1_q02n66iz" target="_blank" rel="noopener" onclick="return ugPlay(event)">
-              <span class="ug-pl"><i class="ti ti-player-play"></i></span>
-              <span class="ug-pt">Play walkthrough &middot; Accenture MediaExchange</span>
-            </a>
-          </div>
-          <div class="ug-vid-meta">
-            <div>
-              <div class="ug-vm-t">SAP Adobe Form Wizard — end-to-end walkthrough</div>
-              <div class="ug-vm-s">Hosted on Accenture MediaExchange &middot; Accenture network sign-in required</div>
-            </div>
-            <div class="ug-vm-a">
-              <a class="btn p" href="https://mediaexchange.accenture.com/media/t/1_q02n66iz" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> Open in MediaExchange</a>
-              <button class="btn sec" onclick="ugCopyVideo()"><i class="ti ti-copy"></i> Copy link</button>
-            </div>
-          </div>
-        </div>
-        <div class="ug-link-row"><i class="ti ti-link" style="color:var(--txt3)"></i><code>https://mediaexchange.accenture.com/media/t/1_q02n66iz</code></div>
-        <div class="ug-note"><i class="ti ti-info-circle"></i><div>If the inline player stays blank, your browser has blocked the embed or your MediaExchange session has expired — click <strong>Open in MediaExchange</strong> to watch it in a new tab.</div></div>
-      </div>
-
-      <!-- ░░ 1. INTRODUCTION ░░ -->
-      <div class="ug-sec on" id="ugs1">
-        <h3><i class="ti ti-info-circle"></i> 1. Introduction &amp; Purpose</h3>
-        <h4>Purpose of this guide</h4>
-        <p>This guide explains how to use the SAP Adobe Form Wizard — a browser-based, AI-powered tool that accelerates and standardises SAP S/4HANA Public Cloud output form customisation. It covers what the tool does, who it is for, how to access it, and how to complete each of the eight guided steps from initial XDP upload through to a fully documented, SAP-ready form.</p>
-
-        <h4>What is the Adobe Form Wizard?</h4>
-        <p>A structured, eight-step web application that automates the most time-consuming parts of SAP output form customisation:</p>
-        <ul>
-          <li>Applying structural layout changes to XDP files — rename labels, hide fields, add columns</li>
-          <li>Configuring master form properties — logo, footer, sender address, watermarks</li>
-          <li>Auto-populating custom field definitions from a mapping sheet</li>
-          <li>Generating BAdI ABAP implementation code from plain-English derivation logic</li>
-          <li>Assembling a complete RICEFW specification document</li>
-          <li>Auto-populating the <strong>Processing Logic</strong> section of a Technical Specification Document (TSD)</li>
-          <li>Providing a step-by-step SAP configuration pre-requisites checklist</li>
-        </ul>
-        <p>The wizard runs entirely in a browser — no SAP access, no Adobe LiveCycle Designer and no installation required. It connects to Claude AI for code generation, document population and XDP structural changes.</p>
-
-        <h4>Why was it built?</h4>
-        <table class="ug-t2">
-          <thead><tr><th>Problem without wizard</th><th>Solution with wizard</th></tr></thead>
-          <tbody>
-            <tr><td>Manual XDP XML editing in Adobe LiveCycle Designer</td><td>XDP patched automatically in-browser or via Claude Code</td></tr>
-            <tr><td>ABAP hand-coded field by field</td><td>ABAP generated from plain-English derivation logic</td></tr>
-            <tr><td>RICEFW spec written from scratch per engagement</td><td>RICEFW spec auto-assembled in one click</td></tr>
-            <tr><td>TSD Processing Logic written manually</td><td>TSD auto-populated from the mapping sheet</td></tr>
-            <tr><td>Quality varies by consultant experience</td><td>Consistent output regardless of experience level</td></tr>
-            <tr><td><strong>4–12 days</strong> per form engagement</td><td><strong>2–8 days</strong> depending on form complexity</td></tr>
-          </tbody>
-        </table>
-        <div class="ug-note"><i class="ti ti-player-play"></i><div>New to the wizard? Start with the <strong>Demo Video</strong> — a full end-to-end walkthrough. <a href="javascript:void(0)" onclick="ugVideo()">Watch it here</a>.</div></div>
-      </div>
-
-      <!-- ░░ 2. TARGET USERS ░░ -->
-      <div class="ug-sec" id="ugs2">
-        <h3><i class="ti ti-users"></i> 2. Target Users</h3>
-        <p>The wizard is designed for any team member involved in SAP S/4HANA output form customisation.</p>
-        <table class="ug-t2">
-          <thead><tr><th>Role</th><th>Primary steps used</th><th>Key benefit</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Functional Consultant</strong></td><td>Basics, Master, Custom Fields, Review, TSD, Pre-requisites</td><td>Captures form requirements, populates custom fields from the mapping sheet, generates the RICEFW spec and TSD without writing them manually</td></tr>
-            <tr><td><strong>ABAP Developer</strong></td><td>Custom Fields, BAdI</td><td>Complete, ready-to-paste ABAP generated from plain-English derivation logic — no hand-coding SELECT or CONCATENATE statements</td></tr>
-            <tr><td><strong>Form Developer</strong></td><td>All steps</td><td>Full end-to-end workflow — XDP download through patching, spec and TSD — in a single browser session</td></tr>
-            <tr><td><strong>SAP Basis Team</strong></td><td>Pre-requisites</td><td>Step-by-step Fiori app configuration checklist ensures nothing is missed before go-live</td></tr>
-            <tr><td><strong>Hypercare Lead</strong></td><td>All steps</td><td>Consistent, repeatable process lets any team member handle form changes during hypercare</td></tr>
-            <tr><td><strong>Project Manager</strong></td><td>Review (outputs)</td><td>Downloadable RICEFW spec provides a complete audit trail of all customisation decisions</td></tr>
-          </tbody>
-        </table>
-        <div class="ug-note"><i class="ti ti-info-circle"></i><div>Any team member with claude.ai access (Pro, Team or Enterprise) can use the wizard. No SAP access or ABAP knowledge is required for the Basics, Master Form, Review or Pre-requisites steps.</div></div>
-      </div>
-
-      <!-- ░░ 3. ACCESS ░░ -->
-      <div class="ug-sec" id="ugs3">
-        <h3><i class="ti ti-key"></i> 3. Access &amp; Prerequisites</h3>
-        <h4>How to access the wizard</h4>
-        <ol>
-          <li>Open claude.ai in your browser — Chrome or Edge recommended.</li>
-          <li>Open the artifact link shared by your project lead, or ask your lead for the latest version.</li>
-          <li>The wizard loads directly in the browser — no installation, no download required.</li>
-        </ol>
-        <div class="ug-note"><i class="ti ti-device-desktop-code"></i><div>Alternatively, open the wizard <code>.html</code> file in the Claude Code preview pane for direct disk access — this lets Claude Code read and write XDP files on your local machine without copy-paste.</div></div>
-
-        <h4>What you need before starting</h4>
-        <table class="ug-t2">
-          <thead><tr><th>Item</th><th>Format</th><th>Where to get it</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Content form XDP</strong></td><td>.xdp</td><td>Maintain Form Templates Fiori app → Pre-delivered Templates → Download</td></tr>
-            <tr><td><strong>Master form XDP</strong></td><td>.xdp</td><td>Maintain Form Templates → Pre-delivered Templates (e.g. <code>SOMU_FORM_MASTER_A4</code>)</td></tr>
-            <tr><td><strong>Custom field mapping sheet</strong></td><td>.csv / .tsv</td><td>Prepared by the functional consultant — lists all custom fields, data types, CDS views and derivation logic</td></tr>
-            <tr><td><strong>TSD template</strong></td><td>.docx / .md</td><td>Project TSD template with standard sections in place</td></tr>
-            <tr><td><strong>Form requirements</strong></td><td>Text</td><td>Stakeholder requirements — labels to rename, fields to hide, columns to add</td></tr>
-            <tr><td><strong>claude.ai account</strong></td><td>Pro / Team / Enterprise</td><td>Required for AI features — ABAP generation, TSD population, XDP task sending</td></tr>
-          </tbody>
-        </table>
-        <div class="ug-warn"><i class="ti ti-alert-triangle"></i><div>Download the standard XDP files from SAP <strong>before</strong> opening the wizard. Both the content XDP and master XDP must be on your local disk to use the Claude Code patching option in Step 6.</div></div>
-      </div>
-
-      <!-- ░░ 4. STEP BY STEP ░░ -->
-      <div class="ug-sec" id="ugs4">
-        <h3><i class="ti ti-list-numbers"></i> 4. Step-by-Step Guide</h3>
-        <p>The wizard has eight steps accessible from the navigation bar at the top. You can move between steps at any time — data entered is retained for the session.</p>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">1</div><div class="ug-sc-t">Basics &amp; Layout Changes</div><button class="ug-jump" onclick="ugJump(0)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>The starting point. Enter form identification details, upload your XDP files, upload the mapping sheet, and describe all structural layout changes.</p>
-            <ul class="ug-arrows">
-              <li>Select the <strong>Business domain</strong> (Sales, Procurement, Finance…) and <strong>Form type</strong> — the wizard uses these to suggest the correct BAdI name and business context</li>
-              <li>Enter the <strong>Standard content form</strong> name and your <strong>Custom form</strong> name</li>
-              <li>Select <strong>Language</strong> and <strong>Paper size</strong></li>
-              <li>Upload the <strong>Content form XDP</strong> and <strong>Master form XDP</strong></li>
-              <li>Upload the <strong>Mapping sheet</strong> (.csv / .tsv) — this auto-fills all custom fields in Step 3</li>
-              <li>In <strong>Layout changes</strong>, list fields/sections to ADD or MODIFY (one per line) and fields to HIDE or REMOVE</li>
-              <li>Simple forms (1 page): process in a single request &middot; Medium (2+ pages): page by page &middot; Complex (3+ pages): in batches</li>
-            </ul>
-            <div class="ug-note"><i class="ti ti-info-circle"></i><div>Upload the mapping sheet here. The wizard parses it once and reuses it in Custom Fields (3), BAdI ABAP (4), Review (5) and TSD (7).</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">2</div><div class="ug-sc-t">Master Form</div><button class="ug-jump" onclick="ugJump(1)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>Configure the master XDP — the layout template that wraps every page of the form.</p>
-            <ul class="ug-arrows">
-              <li>Enter the <strong>Standard master form</strong> and your <strong>Custom master form</strong> name</li>
-              <li><strong>Form title</strong> — keep as-is, modify position, hide or set inactive</li>
-              <li><strong>Logos</strong> — set count (1–6) and position for portrait and landscape separately</li>
-              <li><strong>Sender address</strong> — keep, modify position or hide</li>
-              <li><strong>Page index</strong> — configure position for portrait and landscape</li>
-              <li><strong>Recipient address</strong> — keep, modify or hide, and set address line captions</li>
-              <li><strong>Watermark</strong> and <strong>folding marks</strong> — keep as-is, hide or set inactive</li>
-              <li><strong>Footer blocks</strong> — number of active blocks (1–4), static or dynamic, apply portrait or landscape defaults</li>
-            </ul>
-            <div class="ug-note"><i class="ti ti-info-circle"></i><div>Master form changes are only needed if you are customising the master XDP layout — moving the logo, changing footer content, adjusting the sender address. If the master form is unchanged, skip this step.</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">3</div><div class="ug-sc-t">Custom Fields</div><button class="ug-jump" onclick="ugJump(2)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>Review and manage all custom fields. If you uploaded a mapping sheet in Step 1, all rows are auto-populated.</p>
-            <ul class="ug-arrows">
-              <li><strong>Business context</strong> — auto-suggested from the domain and form type. Verify it matches exactly in the Custom Fields and Logic app</li>
-              <li>The mapping sheet auto-populates Technical name, Label, Data type, Binding and Derivation logic per field</li>
-              <li>Header-level and item-level custom fields are managed in separate sections</li>
-              <li>Use <strong>+ Add field</strong> to add rows manually</li>
-              <li>Confirm the technical name suffix — <code>YY1_FIELDNAME_PDH</code> (header) / <code>YY1_FIELDNAME_PDI</code> (item) — and the XDP binding path</li>
-              <li>Custom fields must be created in the SAP <strong>Custom Fields and Logic</strong> app before they can be used in the form</li>
-            </ul>
-            <div class="ug-note"><i class="ti ti-table"></i><div>Mapping sheet column headers should include: Technical Field Name, Label/Details, Data Type, CDS View, Logic / Comments. The wizard auto-detects these — exact capitalisation is not required.</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">4</div><div class="ug-sc-t">BAdI ABAP Generation</div><button class="ug-jump" onclick="ugJump(3)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>Generate the complete ABAP implementation for the BAdI from the derivation logic in your custom fields.</p>
-            <ul class="ug-arrows">
-              <li>BAdI name, interface and method are auto-suggested from the domain and form type chosen in Basics</li>
-              <li>Review the header and item BAdI parameters — Importing (read-only context) and Changing (write custom fields here)</li>
-              <li>Add any additional CDS views used in derivation logic</li>
-              <li>Click <strong>Generate</strong> — the wizard reads each field's derivation logic and identifies the pattern:
-                <ul>
-                  <li>Single CDS SELECT — <em>"Get [field] from [CDS] where [condition]"</em></li>
-                  <li>Multi-field CONCATENATE — <em>"Get and concatenate [fields] from [CDS]"</em></li>
-                  <li>Multi-join SELECT chains — <em>"From joining N CDS: [1] where… [2] where…"</em></li>
-                </ul>
-              </li>
-              <li>Click <strong>Copy</strong>, then paste into Custom Fields and Logic app → Create → Open Code Editor</li>
-              <li><strong>Save &amp; Publish</strong>, test via output preview, then transport</li>
-            </ul>
-            <div class="ug-warn"><i class="ti ti-alert-triangle"></i><div>Derivation logic must be written in plain English matching one of the three patterns. Vague or incomplete logic produces incomplete ABAP — always review generated code before pasting into SAP.</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">5</div><div class="ug-sc-t">Review &amp; RICEFW Specification</div><button class="ug-jump" onclick="ugJump(4)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>Auto-generate a complete RICEFW specification from all data entered across Steps 1–4.</p>
-            <ul class="ug-arrows">
-              <li>Click <strong>Generate review</strong> — the wizard assembles the full specification</li>
-              <li>The spec covers form identification, master form configuration, layout changes, header and item custom fields, BAdI details, derivation logic and ABAP code</li>
-              <li>Review in the text area and edit any details as needed</li>
-              <li>Click <strong>Download spec</strong> to save as a <code>.txt</code> file</li>
-              <li>Use it as the formal RICEFW deliverable or paste into project documentation</li>
-            </ul>
-            <div class="ug-note"><i class="ti ti-info-circle"></i><div>Generate the RICEFW spec before moving to Step 6 — it contains all field names and layout change instructions in one place, which is a useful reference when running the XDP task in Claude Code.</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">6</div><div class="ug-sc-t">Generate &amp; Apply XDP</div><button class="ug-jump" onclick="ugJump(5)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>Apply all structural layout changes from Step 1 to the actual XDP file. Three options are available:</p>
-            <ul class="ug-arrows">
-              <li><strong>Option 1 — Apply &amp; Download:</strong> changes applied directly in the browser and the modified XDP downloads immediately. Best for simple rename or hide changes.</li>
-              <li><strong>Option 2 — Send task to Claude:</strong> downloads a structured task file. Share it in a Claude Code session — Claude reads your XDP from disk, applies all changes (rename, hide, add, reorder) and saves the result as <code>_CUSTOM.xdp</code> to your Downloads folder. No XML editing or copy-paste.</li>
-              <li><strong>Option 3 — Apply pasted response:</strong> when using claude.ai chat, paste Claude's response back into the wizard and click <strong>Apply pasted response</strong> — the wizard extracts and saves the modified XDP.</li>
-              <li>Once you have the <code>_CUSTOM.xdp</code>, upload it to Maintain Form Templates (ADLC) → Custom Templates → Upload</li>
-            </ul>
-            <div class="ug-note"><i class="ti ti-info-circle"></i><div>Content XDP and master XDP have separate Generate sections — apply changes to each independently. Content XDP holds the form body; master XDP holds the page layout wrapper.</div></div>
-            <div class="ug-note"><i class="ti ti-device-desktop-code"></i><div>Option 2 is recommended when the XDP is large, has many changes, or when Apply &amp; Download does not produce the expected result. Claude Code reads directly from disk and is more reliable for complex structural changes.</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">7</div><div class="ug-sc-t">TSD Generation</div><button class="ug-jump" onclick="ugJump(6)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>Auto-populate the Processing Logic section of your Technical Specification Document from the mapping sheet.</p>
-            <ul class="ug-arrows">
-              <li>Upload your project <strong>TSD template</strong> (.docx / .md) — the standard template with all sections already in place</li>
-              <li>Specify the exact <strong>section heading</strong> to populate (e.g. <em>Processing Logic</em>) — it must match the template heading text exactly</li>
-              <li>Optionally tick <strong>Delta update</strong> to append to existing content rather than replace it</li>
-              <li>Click <strong>Generate TSD with Claude</strong> — Claude reads the mapping sheet and fills the section with all standard and custom fields, their data bindings and derivation logic</li>
-              <li>The completed TSD saves to Downloads as <code>[TemplateName]_COMPLETED.docx</code></li>
-              <li>All other sections remain unchanged — complete them manually from SAP documentation</li>
-            </ul>
-            <div class="ug-warn"><i class="ti ti-alert-triangle"></i><div>The mapping sheet must be uploaded in Step 1 before TSD generation will work properly. Without it, the wizard generates a TSD from the form details and custom fields entered manually in Step 3.</div></div>
-          </div>
-        </div>
-
-        <div class="ug-sc">
-          <div class="ug-sc-h"><div class="ug-num">8</div><div class="ug-sc-t">SAP Pre-requisites</div><button class="ug-jump" onclick="ugJump(7)"><i class="ti ti-arrow-right"></i> Go</button></div>
-          <div class="ug-sc-b">
-            <p>A step-by-step checklist of the SAP Fiori app configuration required before the customised form can go live.</p>
-            <ul class="ug-arrows">
-              <li><strong>1.</strong> Create a copy of the standard content form — Maintain Form Templates → Pre-delivered Templates → Copy → upload your modified XDP</li>
-              <li><strong>2.</strong> <em>(Optional)</em> Copy the standard master form (e.g. <code>SOMU_FORM_MASTER_A4</code>) and upload your modified master XDP</li>
-              <li><strong>3.</strong> Upload the company logo in the <strong>Manage Logos</strong> app — SVG, PNG, JPG, max 5 MB</li>
-              <li><strong>4.</strong> Create sender address and footer texts in the <strong>Manage Texts</strong> app</li>
-              <li><strong>5.</strong> Configure form assignment — Implementation Activities → Output Management → Assign Form Templates and Define Rules for Master Form Template</li>
-              <li><strong>6.</strong> Assign the form in <strong>Output Parameter Determination</strong> → select business object → Form Template determination step → add rule row → Activate</li>
-            </ul>
-            <div class="ug-note"><i class="ti ti-info-circle"></i><div>Complete these in order. Steps 1 and 2 must be done before configuration in Steps 5 and 6 — the template names created there are referenced in the configuration rules.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ░░ 5. OUTPUTS ░░ -->
-      <div class="ug-sec" id="ugs5">
-        <h3><i class="ti ti-file-download"></i> 5. Outputs</h3>
-        <p>The wizard produces five output artefacts across the eight steps. All are downloadable directly from the wizard.</p>
-        <table class="ug-t2">
-          <thead><tr><th>Output</th><th>File</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Modified content XDP</strong></td><td><code>_CUSTOM.xdp</code></td><td>Structurally updated content form with all rename, hide, add and reorder changes applied to the XFA structure. Upload directly to Maintain Form Templates.</td></tr>
-            <tr><td><strong>Modified master XDP</strong></td><td><code>_CUSTOM.xdp</code></td><td>Updated master form with logo position, footer, watermark and page layout changes applied. Upload alongside the content XDP.</td></tr>
-            <tr><td><strong>RICEFW specification</strong></td><td><code>RICEFW_spec.txt</code></td><td>Complete specification covering form identification, layout changes, all header and item custom fields, BAdI details, derivation logic and generated ABAP.</td></tr>
-            <tr><td><strong>BAdI ABAP code</strong></td><td>Clipboard</td><td>Ready-to-paste implementation covering SELECT, CONCATENATE and multi-join patterns. Paste into the Custom Fields and Logic app Code Editor.</td></tr>
-            <tr><td><strong>TSD document</strong></td><td><code>[Template]_COMPLETED.docx</code></td><td>Your TSD template with the Processing Logic section auto-populated from the mapping sheet. All other sections unchanged.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ░░ 6. USE CASES ░░ -->
-      <div class="ug-sec" id="ugs6">
-        <h3><i class="ti ti-git-branch"></i> 6. Use Cases</h3>
-        <h4>New implementation — full wizard</h4>
-        <p>Use all eight steps when customising a form from scratch for the first time on a new engagement.</p>
-        <table class="ug-t2">
-          <thead><tr><th>Step</th><th>Name</th><th>Action</th></tr></thead>
-          <tbody>
-            <tr><td>1</td><td>Basics</td><td>Upload standard XDP + mapping sheet, select domain, describe changes</td></tr>
-            <tr><td>2</td><td>Master Form</td><td>Configure logo, footer, watermark</td></tr>
-            <tr><td>3</td><td>Custom Fields</td><td>Review auto-populated fields from the mapping sheet</td></tr>
-            <tr><td>4</td><td>BAdI ABAP</td><td>Generate and copy ABAP code</td></tr>
-            <tr><td>5</td><td>Review</td><td>Generate and download the RICEFW spec</td></tr>
-            <tr><td>6</td><td>Generate XDP</td><td>Apply all changes → download <code>_CUSTOM.xdp</code></td></tr>
-            <tr><td>7</td><td>TSD</td><td>Upload template → auto-populate Processing Logic</td></tr>
-            <tr><td>8</td><td>Pre-requisites</td><td>Complete the SAP Fiori configuration checklist</td></tr>
-          </tbody>
-        </table>
-
-        <h4>Enhancement — existing live form</h4>
-        <p>For changes to a form already live in SAP, only the relevant steps need repeating. Upload the existing <code>_CUSTOM.xdp</code> and a mapping sheet containing delta changes only.</p>
-        <ul>
-          <li><strong>Step 1 — Basics:</strong> upload the existing <code>_CUSTOM.xdp</code> and updated mapping sheet, describe the new layout changes</li>
-          <li><strong>Step 3 — Custom Fields:</strong> review new/changed fields; existing unchanged fields can be left as-is</li>
-          <li><strong>Step 4 — BAdI ABAP:</strong> regenerate if new custom fields were added</li>
-          <li><strong>Step 6 — Generate XDP:</strong> apply delta changes to the existing <code>_CUSTOM.xdp</code></li>
-          <li><strong>Step 7 — TSD:</strong> append new fields to the existing Processing Logic section</li>
-        </ul>
-        <div class="ug-warn"><i class="ti ti-alert-triangle"></i><div>When enhancing an existing form, always upload the existing <code>_CUSTOM.xdp</code> — not the standard SAP XDP — to preserve prior customisations.</div></div>
-
-        <h4>Form complexity guide</h4>
-        <table class="ug-t2">
-          <thead><tr><th>Type</th><th>Pages</th><th>Approach</th><th>Typical duration</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Simple</strong></td><td>1 page</td><td>Process the entire form in a single request</td><td>4d → <strong>2d</strong></td></tr>
-            <tr><td><strong>Medium</strong></td><td>2+ pages</td><td>Process page by page to improve accuracy</td><td>8d → <strong>4–5d</strong></td></tr>
-            <tr><td><strong>Complex</strong></td><td>3+ pages</td><td>Process in batches — complete one batch before the next</td><td>12d → <strong>6–7d</strong></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ░░ 7. TIPS ░░ -->
-      <div class="ug-sec" id="ugs7">
-        <h3><i class="ti ti-bulb"></i> 7. Tips &amp; Best Practices</h3>
-        <h4>Mapping sheet</h4>
-        <ul>
-          <li>Maintain the mapping sheet before starting — it drives auto-population in Custom Fields, ABAP generation and TSD</li>
-          <li>Include these columns: Technical Field Name, Label/Details, Data Type, CDS View, Logic / Comments</li>
-          <li>Write derivation logic in plain English matching one of the three ABAP patterns (SELECT, CONCATENATE, multi-join)</li>
-          <li>For standard fields, leave derivation logic blank or write <em>"Standard binding — no derivation needed"</em></li>
-        </ul>
-        <h4>XDP files</h4>
-        <ul>
-          <li>Always download fresh XDP copies from SAP — do not reuse files from a previous engagement</li>
-          <li>Keep the full disk path of the XDP files — the wizard displays these for Claude Code reference</li>
-          <li>For Claude Code patching, keep XDP files in Downloads or another known local folder before sending the task</li>
-          <li>For complex forms with many layout changes, use Option 2 (Send task to Claude Code) for more reliable results</li>
-        </ul>
-        <h4>ABAP code</h4>
-        <ul>
-          <li>Always review generated ABAP before pasting into SAP — check field names, CDS view names and WHERE conditions match exactly</li>
-          <li>If a derivation pattern is not recognised, edit the logic in the Custom Fields step and regenerate</li>
-          <li>Test the BAdI implementation via output preview in SAP before transporting</li>
-        </ul>
-        <h4>Session data</h4>
-        <ul>
-          <li>All wizard data is held in browser memory for the current session — closing the tab loses it</li>
-          <li>Download the RICEFW spec (Step 5) before closing — it captures all your inputs</li>
-          <li>For long sessions, copy the generated ABAP to a text file as a backup</li>
-        </ul>
-        <h4>TSD generation</h4>
-        <ul>
-          <li>The section heading in Step 7 must match the heading in your template exactly — including capitalisation and spacing</li>
-          <li>If your TSD has multiple Processing Logic sub-sections, specify the most specific heading</li>
-          <li>Use delta/append mode when updating an existing TSD with additional fields</li>
-        </ul>
-      </div>
-
-      <!-- ░░ 8. TROUBLESHOOTING ░░ -->
-      <div class="ug-sec" id="ugs8">
-        <h3><i class="ti ti-tool"></i> 8. Troubleshooting</h3>
-        <table class="ug-t2">
-          <thead><tr><th>Issue</th><th>Resolution</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Mapping sheet not auto-filling fields in Step 3</strong></td><td>Ensure the file is .csv or .tsv (not .xlsx). Check column headers contain the keywords <em>Technical</em>, <em>Label</em>, <em>Logic</em>, <em>CDS</em>. Re-upload in the Basics step.</td></tr>
-            <tr><td><strong>ABAP generation produces incomplete code</strong></td><td>The derivation logic does not match a recognised pattern. Rewrite in plain English: <em>"Get [field] from [CDS] where [condition]"</em> for SELECT, or <em>"Get and concatenate…"</em> for CONCATENATE.</td></tr>
-            <tr><td><strong>Apply &amp; Download produces no changes in the XDP</strong></td><td>Field names under Layout Changes → HIDE must match XFA element names exactly (case-sensitive). Use the subform or field name as it appears in Adobe LiveCycle Designer, not the label text.</td></tr>
-            <tr><td><strong>Claude Code task does not find the XDP file</strong></td><td>Check the file path shown in the wizard matches the actual disk location. Edit the path field if the file sits in a subfolder.</td></tr>
-            <tr><td><strong>TSD section not populated correctly</strong></td><td>Verify the section heading in Step 7 matches the template heading exactly. Confirm the mapping sheet is uploaded in Basics. Try delta/append mode instead of replace.</td></tr>
-            <tr><td><strong>BAdI name not auto-suggested</strong></td><td>Select a specific form type — not just the domain — in Basics. The suggestion requires both domain and form type.</td></tr>
-            <tr><td><strong>Generated master XDP has no changes</strong></td><td>Master form changes are only applied if at least one master setting (logo, title, footer…) is set to <em>Modify</em> or <em>Hide</em> in Step 2.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ░░ 9. FEEDBACK ░░ -->
-      <div class="ug-sec" id="ugs9">
-        <h3><i class="ti ti-message-2"></i> 9. Feedback &amp; Roadmap</h3>
-        <h4>Providing feedback</h4>
-        <ul>
-          <li>Use the <strong>Send task to Claude</strong> button inside any wizard step to flag issues, missing patterns or suggestions directly</li>
-          <li>Contact your project lead or the wizard maintainer with form types or ABAP patterns that are not handled</li>
-          <li>Share examples of mapping sheets that did not auto-populate correctly — these improve the column detection logic</li>
-        </ul>
-        <div class="ug-note"><i class="ti ti-info-circle"></i><div>The more specific the feedback, the faster the fix. Include the form type, the derivation logic that didn't generate correctly, and the expected ABAP pattern.</div></div>
-        <h4>Planned enhancements</h4>
-        <ul>
-          <li>Expanded domain coverage — Plant Maintenance, Quality Management, Warehouse Management, Service Management</li>
-          <li>Multi-page XDP batch mode — process complex forms in structured batches with progress tracking</li>
-          <li>Side-by-side XDP comparison viewer — visual diff of AS-IS vs modified XDP</li>
-          <li>XDP upload/download via SAP API — direct Maintain Form Templates integration</li>
-          <li>Team-wide deployment — shared wizard instance across the full project team</li>
-          <li>Automated test case generation from the RICEFW spec</li>
-        </ul>
-        <h4>Version history</h4>
-        <table class="ug-t2">
-          <thead><tr><th>Version</th><th>Date</th><th>Key changes</th></tr></thead>
-          <tbody>
-            <tr><td><strong>v5.12</strong></td><td>2026</td><td>Embedded User Guide panel with in-app demo video, section navigation and jump-to-step links</td></tr>
-            <tr><td><strong>v5.11</strong></td><td>2026</td><td>8 guided steps, mapping sheet auto-fill, BAdI ABAP generation (3 patterns), TSD auto-population, Apply &amp; Download + Claude Code + paste-back options, pre-requisites checklist</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ░░ 10. GLOSSARY ░░ -->
-      <div class="ug-sec" id="ugs10">
-        <h3><i class="ti ti-book"></i> 10. Glossary</h3>
-        <table class="ug-t2">
-          <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-          <tbody>
-            <tr><td><strong>XDP</strong></td><td>XML Data Package — the file format SAP uses for output form templates. Contains the XFA (XML Forms Architecture) structure defining layout and data bindings.</td></tr>
-            <tr><td><strong>ADLC</strong></td><td>Adobe Document Lifecycle — SAP's name for the Maintain Form Templates Fiori app where XDP files are managed.</td></tr>
-            <tr><td><strong>BAdI</strong></td><td>Business Add-In — SAP's extension mechanism allowing custom ABAP logic to be injected into standard processes, including output form data population.</td></tr>
-            <tr><td><strong>CDS View</strong></td><td>Core Data Services View — SAP's data model layer used to expose business data for custom field derivation logic in ABAP.</td></tr>
-            <tr><td><strong>RICEFW</strong></td><td>Reports, Interfaces, Conversions, Enhancements, Forms, Workflows — the standard SAP project artefact classification. Output forms are type <strong>F</strong>.</td></tr>
-            <tr><td><strong>TSD</strong></td><td>Technical Specification Document — the mandatory Accenture deliverable documenting what was built, including Processing Logic for all custom fields.</td></tr>
-            <tr><td><strong><code>_CUSTOM.xdp</code></strong></td><td>Naming convention for a modified XDP produced by the wizard, distinguishing it from the standard SAP pre-delivered XDP.</td></tr>
-            <tr><td><strong>Mapping sheet</strong></td><td>A CSV or TSV file listing all custom fields for a form — technical name, data type, CDS view and derivation logic. The single source of truth for the wizard.</td></tr>
-            <tr><td><strong>Derivation logic</strong></td><td>Plain-English description of how a custom field value is derived from SAP data — used by the wizard to generate ABAP SELECT, CONCATENATE or multi-join code.</td></tr>
-            <tr><td><strong>Claude Code</strong></td><td>Anthropic's command-line AI tool that can read and write files on local disk — used by the wizard for XDP patching and TSD population.</td></tr>
-            <tr><td><strong>Output Parameter Determination</strong></td><td>SAP Fiori app where business rules determine which form template is used for a given output scenario (e.g. by company code, output type).</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="ug-foot">
-    <span class="ug-foot-t">SAP Adobe Form Wizard &middot; User Guide v5.12 &middot; Accenture &middot; 2026 &middot; Confidential</span>
-    <button class="btn p" onclick="ugClose()"><i class="ti ti-x"></i> Close Guide</button>
-  </div>
-
-</div>
-</div>
-
 </div>
 <div class="toast" id="toast"></div>
 
@@ -1413,7 +848,34 @@ function buildWhere(conds,docKey,param,isItem){if(!conds||!conds.length){const d
 function genMultiJoin(p,docKey,param,isItem,dtMap){const steps=p.steps;if(!steps||!steps.length)return`" TODO: multi-join → ${p.fldRef}\n`;const dtype=dtMap[p.dt]||'char 50';const svars=steps.map((_,i)=>`lv_mj${i+1}_${p.vName.slice(-6)}`);let code='';svars.forEach(v=>{code+=`DATA ${v} TYPE ${dtype}.\n`;});let ind='';steps.forEach((s,i)=>{const isLast=i===steps.length-1;const tgt=isLast?(p.targetFields.length?p.targetFields.join(', '):'<field>'):'<key_field>';let wh;if(s.condStr){const condLines=s.condStr.split(/\s+and\s+/i).map((part,pi)=>{const m=part.trim().match(/^(\w+)\s*=\s*(.+)$/);if(!m)return`  " ${part.trim()}`;const key=m[1].toLowerCase(),val=m[2].trim();const pfx=pi===0?'  WHERE ':'    AND ';if(/^['"]/.test(val))return`${pfx}${key} = ${val.replace(/"/g,"'")}`;let refVar=null;for(let j=0;j<i;j++){if(val.toLowerCase().includes(steps[j].cds.replace(/^[izc]_/i,'')))refVar=svars[j];}if(refVar)return`${pfx}${key} = @${refVar}`;const rf=val.match(/[-.](\w+)$/);const fld=(rf?rf[1]:val).toLowerCase();return`${pfx}${key} = @${i===0?(isItem?'<ls_item>':param):svars[i-1]}-${fld}`;});wh=condLines.join('\n');}else{const dk=docKey.toLowerCase();wh=`  WHERE ${dk} = @${isItem?`<ls_item>-${dk}`:`${param}-${dk}`}`;}const whInd=wh.split('\n').map(l=>ind+l).join('\n');code+=`${ind}SELECT SINGLE ${tgt}\n${ind}  FROM ${s.cds}\n${ind}  INTO @${svars[i]}\n${whInd}.\n${ind}IF sy-subrc = 0.\n`;ind+='  ';});if(p.isConcat){code+=`${ind}CONCATENATE ${svars.join(' ')} INTO ${p.fldRef} SEPARATED BY ' '.\n`;}else{code+=`${ind}${p.fldRef} = ${svars[steps.length-1]}.\n`;}for(let i=steps.length;i>0;i--){ind=ind.slice(2);code+=`${ind}ENDIF.\n`;}return code;}
 function genGroupedSelects(fields,param,isItem,docKey){const dtMap={CHAR:'char 50',NUMC:'numc 10',DEC:'p decimals 2',DATS:'dats',CURR:'p decimals 2'};const parsed=fields.map(f=>parseCFSrc(f,param,isItem,docKey));const selTypes=['select','select_nl','select_infer'];const selectable=parsed.filter(p=>selTypes.includes(p.type));const concats=parsed.filter(p=>p.type==='concat');const multiJoins=parsed.filter(p=>p.type==='multi_join');const others=parsed.filter(p=>!selTypes.includes(p.type)&&p.type!=='concat'&&p.type!=='multi_join');const groups=new Map(),groupOrder=[];selectable.forEach(p=>{if(!groups.has(p.wSig)){groups.set(p.wSig,[]);groupOrder.push(p.wSig);}groups.get(p.wSig).push(p);});let code='';groupOrder.forEach(wSig=>{const grp=groups.get(wSig);const cds=grp[0].cds;const conds=grp[0].conds;const wh=buildWhere(conds,docKey,param,isItem);code+=`\n" ${grp.map(p=>p.label).join(' | ')}\n`;if(grp.length===1){const p=grp[0];code+=`DATA ${p.vName} TYPE ${dtMap[p.dt]||'char 50'}.\nSELECT SINGLE ${p.tgt}\n  FROM ${cds}\n  INTO @${p.vName}\n${wh}.\nIF sy-subrc = 0.\n  ${p.fldRef} = ${p.vName}.\nENDIF.\n`;}else{grp.forEach(p=>{code+=`DATA ${p.vName} TYPE ${dtMap[p.dt]||'char 50'}.\n`;});code+=`SELECT SINGLE ${grp.map(p=>p.tgt).join(', ')}\n  FROM ${cds}\n  INTO ( ${grp.map(p=>'@'+p.vName).join(', ')} )\n${wh}.\nIF sy-subrc = 0.\n`;grp.forEach(p=>{code+=`  ${p.fldRef} = ${p.vName}.\n`;});code+=`ENDIF.\n`;}});concats.forEach(p=>{const wh=buildWhere(p.conds,docKey,param,isItem);const vns=p.selFields.map((_,i)=>`lv_cc${i+1}_${p.vName.slice(-4)}`);code+=`\n" ${p.label}\n`;vns.forEach((v,i)=>{code+=`DATA ${v} TYPE ${dtMap[p.dt]||'char 50'}. " ${p.selFields[i]}\n`;});code+=`SELECT SINGLE ${p.selFields.join(', ')}\n  FROM ${p.cds}\n  INTO ( ${vns.map(v=>'@'+v).join(', ')} )\n${wh}.\nIF sy-subrc = 0.\n  CONCATENATE ${vns.join(' ')} INTO ${p.fldRef} SEPARATED BY ' '.\nENDIF.\n`;});multiJoins.forEach(p=>{code+=`\n" ${p.label}\n`+genMultiJoin(p,docKey,param,isItem,dtMap);});others.forEach(p=>{if(p.type==='todo'){code+=`\n" ${p.label}\n" TODO: ${p.fldRef} = ...\n`;}else{code+=`\n" ${p.label}\n" ${(p.src||'').substring(0,120)}\n" TODO: SELECT → ${p.fldRef}\n`;}});return code;}
 function copyAbap(){navigator.clipboard.writeText(v('abap')).then(()=>showToast('ABAP copied'));}
-function loadTSDTemplate(inp){const f=inp.files[0];if(!f)return;const fr=new FileReader();fr.onload=e=>{tsdTemplateText=e.target.result;tsdTemplateName=f.name;document.getElementById('tsdMsg').textContent=f.name+' ready';document.getElementById('tsdInfo').style.display='flex';document.getElementById('dzTsd').style.borderColor='var(--blue)';const guessed=getWizardDir()+'\\'+f.name;document.getElementById('tsdPath').value=guessed;document.getElementById('tsdPathWrap').style.display='block';showToast('TSD template loaded');};fr.readAsText(f);}
+// tsdTemplateIsB64 flags that tsdTemplateText already holds base64 (binary file);
+// task-file builder then embeds it as-is instead of re-encoding via xdpToB64.
+let tsdTemplateIsB64=false;
+function loadTSDTemplate(inp){
+  const f=inp.files[0];if(!f)return;
+  const ext=(f.name.match(/\.[a-z0-9]+$/i)||[''])[0].toLowerCase();
+  const isBinary=(ext==='.docx'||ext==='.doc');
+  const fr=new FileReader();
+  fr.onload=e=>{
+    if(isBinary){
+      // e.target.result is a data URL like "data:...;base64,AAAA..."
+      tsdTemplateText=(e.target.result||'').split(',')[1]||'';
+      tsdTemplateIsB64=true;
+    } else {
+      tsdTemplateText=e.target.result;
+      tsdTemplateIsB64=false;
+    }
+    tsdTemplateName=f.name;
+    document.getElementById('tsdMsg').textContent=f.name+' ready ('+(isBinary?'binary — base64-embedded':'text')+')';
+    document.getElementById('tsdInfo').style.display='flex';
+    document.getElementById('dzTsd').style.borderColor='var(--blue)';
+    const guessed=getWizardDir()+'\\'+f.name;
+    document.getElementById('tsdPath').value=guessed;
+    document.getElementById('tsdPathWrap').style.display='block';
+    showToast('TSD template loaded');
+  };
+  if(isBinary)fr.readAsDataURL(f); else fr.readAsText(f);
+}
 function handleTsdDrop(e){e.preventDefault();const f=e.dataTransfer.files[0];if(!f)return;const dt=new DataTransfer();dt.items.add(f);document.getElementById('tsdTemplateInp').files=dt.files;loadTSDTemplate(document.getElementById('tsdTemplateInp'));}
 function parseTSDCSVLine(line){const result=[];let cur='',inQ=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&!inQ){inQ=true;}else if(c==='"'&&inQ){if(line[i+1]==='"'){cur+='"';i++;}else inQ=false;}else if(c===','&&!inQ){result.push(cur);cur='';}else{cur+=c;}}result.push(cur);return result;}
 function buildTSDNarrativeFromCSV(raw,sectionName){const lines=raw.split(/\r?\n/);if(!lines.length)return '';const headers=parseTSDCSVLine(lines[0]).map(h=>h.trim());const col=(...pats)=>{for(const p of pats){const h=headers.find(h=>h.toLowerCase().includes(p.toLowerCase()));if(h)return h;}return null;};const idxCol=col('Index number','Index');const labelCol=col('Label/Details','Label','Details');const cdsCol=col('CDS View','CDS');const fieldCol=col('Technical Field Name','Technical Field','Field Name');const logicCol=col('Logic / Comments','Logic');const noteCol=col('Note','Description');const extraCol=col('Comments (If Any)','Comments');const posCol=col('Label Position','Position');const g=(row,c)=>c?(row[c]||''):'';const rows=[];for(let i=1;i<lines.length;i++){if(!lines[i].trim())continue;const vals=parseTSDCSVLine(lines[i]);const obj={};headers.forEach((h,j)=>{obj[h]=(vals[j]||'').trim();});rows.push(obj);}const sections=[];let curSec=null;rows.forEach(row=>{const idx=g(row,idxCol);const label=g(row,labelCol);if(idx&&/^\d+$/.test(idx.trim())){curSec={idx:parseInt(idx),label,logic:g(row,logicCol),note:g(row,noteCol),extra:g(row,extraCol),cds:g(row,cdsCol),field:g(row,fieldCol),items:[]};sections.push(curSec);}else if((label||g(row,logicCol))&&curSec){curSec.items.push({label,logic:g(row,logicCol),note:g(row,noteCol),extra:g(row,extraCol),pos:g(row,posCol),cds:g(row,cdsCol),field:g(row,fieldCol)});}});let text='The following describes the '+sectionName+' for the form customisation based on the mapping sheet.\n\n';sections.forEach(sec=>{text+=sec.idx+'.  '+sec.label+'\n';if(sec.logic)text+='          '+sec.logic+'\n';if(sec.note&&sec.note!==sec.logic)text+='          Note: '+sec.note+'\n';text+='\n';let subCount=1;sec.items.forEach(r=>{if(!r.label&&!r.logic)return;const posM=r.pos&&r.pos.match(/(\d+)\.(\d+)/);const subNum=posM?sec.idx+'.'+posM[2]:sec.idx+'.'+subCount;const lo=(r.logic||'').toLowerCase();const isNew=lo.includes('new field');if(r.label){text+='          '+subNum+'  '+r.label+(isNew?' (new field)':'')+'\n';if(r.logic)text+='                    '+r.logic+'\n';if(r.cds)text+='                    CDS View : '+r.cds+'\n';if(r.field)text+='                    Field    : '+r.field+'\n';if(r.note&&r.note!==r.logic)text+='                    Note     : '+r.note+'\n';if(r.extra&&r.extra!==r.note)text+='                    Comment  : '+r.extra+'\n';text+='\n';}else if(r.cds||r.field||r.logic){text+='                    '+r.logic+'\n';if(r.cds)text+='                    CDS View : '+r.cds+'\n';if(r.field)text+='                    Field    : '+r.field+'\n';text+='\n';}subCount++;});});return text;}
@@ -1426,7 +888,105 @@ function buildTSDPS1(narrative,templatePath,savePath,mode){
   const spQ=psSP.includes('$env:')?'"':"'";
   const psLines=narrative.split('\n').map(l=>l.replace(/'/g,"''"));let ps='$templatePath = '+tpQ+psTP.replace(/"/g,'`"')+tpQ+'\n';ps+='$savePath = '+spQ+psSP.replace(/"/g,'`"')+spQ+'\n';ps+='$narrativeLines = @(\n';psLines.forEach((l,i)=>{ps+='    \''+l+'\''+(i<psLines.length-1?',':'')+'\n';});ps+=')\n\n$word = New-Object -ComObject Word.Application\n$word.Visible = $false\n$doc = $word.Documents.Open($templatePath)\n$plIdx = -1; $utIdx = -1\nfor ($i = 1; $i -le $doc.Paragraphs.Count; $i++) {\n    $t = $doc.Paragraphs.Item($i).Range.Text.Trim()\n    if ($t -eq "Processing Logic" -and $plIdx -lt 0) { $plIdx = $i }\n    if ($t -match "^(Unit testing|4\\.1|External processing)" -and $utIdx -lt 0 -and $plIdx -gt 0) { $utIdx = $i }\n}\nif ($plIdx -lt 0) { Write-Host "Section not found"; $doc.Close($false); $word.Quit(); exit 1 }\nif ($utIdx -lt 0) { $utIdx = $doc.Paragraphs.Count + 1 }\n'+(mode==='append'?'$insPara = $doc.Paragraphs.Item($utIdx - 1)\n$rng = $insPara.Range; $rng.Collapse(0)\n$sel = $word.Selection; $sel.SetRange($rng.Start, $rng.End)\n$sel.TypeParagraph()\n':'for ($i = $utIdx - 1; $i -gt $plIdx; $i--) { $doc.Paragraphs.Item($i).Range.Delete() | Out-Null }\n$plPara = $doc.Paragraphs.Item($plIdx)\n$rng = $plPara.Range; $rng.Collapse(0)\n$sel = $word.Selection; $sel.SetRange($rng.Start, $rng.End)\n$sel.TypeParagraph()\n')+'foreach ($line in $narrativeLines) { $sel.TypeText($line); $sel.TypeParagraph() }\n$doc.SaveAs([ref]$savePath)\n$doc.Close()\n$word.Quit()\n[System.Runtime.Interopservices.Marshal]::ReleaseComObject($word) | Out-Null\n$sz = (Get-Item $savePath).Length\nWrite-Host "Saved: $savePath"\nWrite-Host "Size : $sz bytes"\n';return ps;}
 function buildTSDPrompt(){const domain=v('domain')||'(not selected)';const formType=v('formType')||'(not selected)';const lcAdd=(document.getElementById('lcAdd').value||'').trim();const lcHide=(document.getElementById('lcHide').value||'').trim();const hdrCFs=getCFRows('hdr');const itmCFs=getCFRows('itm');const abapCode=(v('abap')||'').trim();const templatePath=(document.getElementById('tsdPath').value||'').trim();const saveDir=getWizardDir();const ext=tsdTemplateName?tsdTemplateName.replace(/^.*(\.\w+)$/,'$1'):'.md';const outName=(tsdTemplateName?tsdTemplateName.replace(/(\.\w+)$/,'_COMPLETED$1'):'TSD_COMPLETED.md');const savePath=saveDir.includes('%USERPROFILE%')?`$env:USERPROFILE\\Downloads\\${outName}`:`${saveDir}\\${outName}`;let p='You are a SAP technical documentation expert running inside Claude Code.\nRead the TSD template from disk, populate all sections with the data below, and save the completed document.\n\n';if(templatePath){p+=`TEMPLATE PATH : ${templatePath}\nSAVE TO       : ${savePath}\n\nINSTRUCTIONS:\n1. Read the TSD template from TEMPLATE PATH\n2. Identify each section / placeholder in the template and fill it with the relevant data provided below\n3. If the template is a .docx, use PowerShell with the Word COM object or Open XML to write the output; if .txt or .md, write the content directly\n4. Save the completed TSD to: ${savePath}\n5. Confirm with the saved file path and size\n\n`;}else{p+=`NOTE: No template uploaded — generate a structured TSD as a Markdown document.\nSAVE TO : ${savePath}\n\n`;}p+='═══════════════════════════════════════════════════\nFORM IDENTIFICATION\n═══════════════════════════════════════════════════\n';p+=`Business Domain  : ${domain}\nForm Type        : ${formType}\n`;if(contentXDPName)p+=`Content XDP      : ${contentXDPName}\n`;if(masterXDPName)p+=`Master XDP       : ${masterXDPName}\n`;p+='\n';p+='═══════════════════════════════════════════════════\nLAYOUT CHANGES\n═══════════════════════════════════════════════════\n';if(lcAdd){p+='STRUCTURAL CHANGES (ADD / MODIFY):\n'+lcAdd+'\n\n';}else{p+='STRUCTURAL CHANGES : None\n\n';}if(lcHide){p+='FIELDS / ELEMENTS TO HIDE:\n';lcHide.split('\n').forEach(n=>{if(n.trim())p+=`  - ${n.trim()}\n`;});p+='\n';}else{p+='FIELDS TO HIDE : None\n\n';}if(hdrCFs.length||itmCFs.length){p+='═══════════════════════════════════════════════════\nCUSTOM FIELDS\n═══════════════════════════════════════════════════\n';if(hdrCFs.length){p+='Header-level custom fields:\n';hdrCFs.forEach((f,i)=>{p+=`\n${i+1}. Technical Name  : ${f.tech}\n`;if(f.label)p+=`   Label           : ${f.label}\n`;p+=`   Data Type        : ${f.dt}\n`;if(f.bind)p+=`   XFA Binding      : ${f.bind}\n`;if(f.src)p+=`   Derivation Logic : ${f.src}\n`;});p+='\n';}if(itmCFs.length){p+='Item-level custom fields:\n';itmCFs.forEach((f,i)=>{p+=`\n${i+1}. Technical Name  : ${f.tech}\n`;if(f.label)p+=`   Label           : ${f.label}\n`;p+=`   Data Type        : ${f.dt}\n`;if(f.bind)p+=`   XFA Binding      : ${f.bind}\n`;if(f.src)p+=`   Derivation Logic : ${f.src}\n`;});p+='\n';}}if(abapCode){p+='═══════════════════════════════════════════════════\nBAdI ABAP IMPLEMENTATION CODE\n═══════════════════════════════════════════════════\n'+abapCode+'\n\n';}const tsdSection=(document.getElementById('tsdSection')?.value||'Processing Logic').trim();if(mappingSheetRaw&&templatePath&&ext.toLowerCase()==='.docx'){const narrative=buildTSDNarrativeFromCSV(mappingSheetRaw,tsdSection);const deltaMode=document.getElementById('tsdDeltaMode')?.checked?'append':'replace';const ps=buildTSDPS1(narrative,templatePath,savePath,deltaMode);const scriptPath=saveDir+'\\apply_tsd.ps1';let r='You are running inside Claude Code.\nSave the PowerShell script below to disk and run it to populate the TSD document.\n\n';r+=`SCRIPT PATH : ${scriptPath}\n\nINSTRUCTIONS:\n1. Save everything between ===SCRIPT START=== and ===SCRIPT END=== to: ${scriptPath}\n2. Run it: powershell -ExecutionPolicy Bypass -File "${scriptPath}"\n3. Confirm with the saved document path and size\n\n===SCRIPT START===\n${ps}===SCRIPT END===\n`;return r;}if(mappingSheetRaw){p+=`═══════════════════════════════════════════════════\nMAPPING SHEET (ALL FIELDS — for "${tsdSection}" section)\n═══════════════════════════════════════════════════\nFind the section named "${tsdSection}" in the template and populate it using this data.\nList ALL fields (standard and custom), their data bindings, and derivation logic.\nStandard fields: describe binding as-is. Custom fields: include full derivation logic.\nDo NOT modify any other section of the template.\n\n`+mappingSheetRaw+'\n\n';}return p;}
-function sendTSDToCI(){const content=buildTSDPrompt();const taskName='TSD_task.txt';const blob=new Blob([content],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=taskName;a.click();URL.revokeObjectURL(a.href);const saveDir=getWizardDir();const taskPath=saveDir.includes('%USERPROFILE%')?`%USERPROFILE%\\Downloads\\${taskName}`:`${saveDir}\\${taskName}`;document.getElementById('tsdCmd').textContent=`@"${taskPath}"`;document.getElementById('tsdWait').style.display='flex';showToast('TSD task file downloaded');}
+function sendTSDToCI(){
+  const content=buildChatTSDTask();
+  const taskName='TSD_task.txt';
+  try{
+    const blob=new Blob([content],{type:'text/plain'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=taskName;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+  }catch(e){showToast('Download failed: '+e.message);return;}
+  document.getElementById('tsdCmd').textContent=taskName;
+  document.getElementById('tsdWait').style.display='flex';
+  showToast('TSD task file downloaded — upload it into Claude chat');
+}
+
+// Self-contained TSD task file for Claude chat:
+// - embeds the uploaded template (base64) if any
+// - embeds the raw mapping sheet
+// - embeds all wizard-collected context
+function buildChatTSDTask(){
+  const domain=v('domain')||'(not selected)';
+  const formType=v('formType')||'(not selected)';
+  const lcAdd=(document.getElementById('lcAdd').value||'').trim();
+  const lcHide=(document.getElementById('lcHide').value||'').trim();
+  const hdrCFs=getCFRows('hdr');
+  const itmCFs=getCFRows('itm');
+  const abapCode=(v('abap')||'').trim();
+  const tsdSection=(document.getElementById('tsdSection')?.value||'Processing Logic').trim();
+  const deltaMode=document.getElementById('tsdDeltaMode')?.checked;
+  const templateName=tsdTemplateName||'';
+  const templateExt=(templateName.match(/\.[a-z0-9]+$/i)||['.md'])[0].toLowerCase();
+  const outName=templateName?templateName.replace(/(\.[^.]+)$/,'_COMPLETED$1'):'TSD_COMPLETED.md';
+
+  let p='';
+  p+='CLAUDE CHAT TASK — SAP TSD GENERATION\n';
+  p+='═══════════════════════════════════════════════════════════════\n';
+  p+='You are running in Claude chat (claude.ai). Populate the TSD template\n';
+  p+='below with the wizard data, then return the completed document.\n\n';
+  p+='TEMPLATE NAME : '+(templateName||'(none — generate as Markdown)')+'\n';
+  p+='OUTPUT NAME   : '+outName+'\n';
+  p+='TARGET SECTION: '+tsdSection+'\n';
+  p+='MODE          : '+(deltaMode?'APPEND to existing section':'REPLACE section contents')+'\n\n';
+  p+='INSTRUCTIONS FOR CLAUDE\n';
+  p+='───────────────────────\n';
+  if(templateName){
+    p+='1. Decode the "===TEMPLATE BASE64 START===" block into a temp file.\n';
+    p+='2. Open it using the appropriate skill:\n';
+    p+='     - .docx → docx skill (python-docx)\n';
+    p+='     - .txt / .md → read as text\n';
+    p+='3. Locate the "'+tsdSection+'" section and '+(deltaMode?'append to it':'replace its contents')+'.\n';
+    p+='4. Fill using the CONTEXT and MAPPING SHEET below. Leave other sections untouched.\n';
+    p+='5. Save the populated document to /mnt/user-data/outputs/'+outName+'\n';
+    p+='6. Present it via present_files.\n\n';
+  } else {
+    p+='1. Generate a structured Markdown TSD from the CONTEXT below.\n';
+    p+='2. Save it to /mnt/user-data/outputs/'+outName+'\n';
+    p+='3. Present it via present_files.\n\n';
+  }
+
+  p+='CONTEXT — FORM IDENTIFICATION\n─────────────────────────────\n';
+  p+='Business Domain : '+domain+'\n';
+  p+='Form Type       : '+formType+'\n';
+  if(contentXDPName)p+='Content XDP     : '+contentXDPName+'\n';
+  if(masterXDPName) p+='Master XDP      : '+masterXDPName+'\n';
+  p+='\n';
+
+  p+='CONTEXT — LAYOUT CHANGES\n────────────────────────\n';
+  p+='ADD / MODIFY:\n'+(lcAdd||'  (none)')+'\n\n';
+  p+='HIDE:\n'+(lcHide?lcHide.split('\n').map(l=>'  - '+l.trim()).filter(x=>x.trim()!='  -').join('\n'):'  (none)')+'\n\n';
+
+  if(hdrCFs.length||itmCFs.length){
+    p+='CONTEXT — CUSTOM FIELDS\n───────────────────────\n';
+    if(hdrCFs.length){p+='Header-level:\n';hdrCFs.forEach((f,i)=>{p+='  '+(i+1)+'. '+f.tech+' | '+f.label+' | '+f.dt+(f.bind?' | bind='+f.bind:'')+(f.src?'\n     Logic: '+f.src:'')+'\n';});p+='\n';}
+    if(itmCFs.length){p+='Item-level:\n';itmCFs.forEach((f,i)=>{p+='  '+(i+1)+'. '+f.tech+' | '+f.label+' | '+f.dt+(f.bind?' | bind='+f.bind:'')+(f.src?'\n     Logic: '+f.src:'')+'\n';});p+='\n';}
+  }
+
+  if(abapCode){p+='CONTEXT — BAdI ABAP CODE\n────────────────────────\n'+abapCode+'\n\n';}
+
+  if(mappingSheetRaw){
+    p+='MAPPING SHEET (raw — use for "'+tsdSection+'" narrative)\n';
+    p+='────────────────────────────────────────────────────────\n';
+    p+=mappingSheetRaw+'\n\n';
+    // Also include the pre-built narrative so Claude has both raw and formatted views
+    try{
+      const narrative=buildTSDNarrativeFromCSV(mappingSheetRaw,tsdSection);
+      p+='PRE-BUILT NARRATIVE (drop into "'+tsdSection+'" verbatim if template is docx/txt/md)\n';
+      p+='────────────────────────────────────────────────────────────────────────────────\n';
+      p+=narrative+'\n\n';
+    }catch(e){}
+  }
+
+  if(templateName&&tsdTemplateText!=null){
+    p+='===TEMPLATE BASE64 START===\n';
+    p+='FILENAME: '+templateName+'\n';
+    p+='EXTENSION: '+templateExt+'\n';
+    p+=(tsdTemplateIsB64?tsdTemplateText:xdpToB64(tsdTemplateText))+'\n';
+    p+='===TEMPLATE BASE64 END===\n';
+  }
+  return p;
+}
 function updateTsdStatus(){const el=document.getElementById('tsdMapStatus');if(!el)return;if(mappingSheetRaw){el.innerHTML='<i class="ti ti-circle-check" style="color:var(--green-txt)"></i><span style="color:var(--green-txt)">Mapping sheet from Basics step will be used to populate <strong>'+(document.getElementById('tsdSection')?.value||'Processing Logic')+'</strong></span>';}else{el.innerHTML='<i class="ti ti-alert-triangle" style="color:var(--orange,#e07b00)"></i><span style="color:var(--txt3)">No mapping sheet uploaded — go to Basics step to upload one before generating</span>';}}
 
 // ── NAV ───────────────────────────────────────────────────────────────────────
@@ -2340,11 +1900,13 @@ function setAIWait(type, show, msg, mode){
   const msgId=type==='content'?'aiContentWaitMsg':'aiMasterWaitMsg';
   const instrId=type==='content'?'aiContentInstruction':'aiMasterInstruction';
   const pasteId=type==='content'?'aiContentPasteArea':'aiMasterPasteArea';
-  document.getElementById(id).style.display=show?'flex':'none';
-  if(msg)document.getElementById(msgId).textContent=msg;
-  if(mode==='instruction'){document.getElementById(instrId).style.display='block';document.getElementById(pasteId).style.display='none';}
-  else if(mode==='paste'){document.getElementById(instrId).style.display='none';document.getElementById(pasteId).style.display='flex';}
-  else if(mode==='none'||!show){document.getElementById(instrId).style.display='none';document.getElementById(pasteId).style.display='none';}
+  const setDisp=(elId,val)=>{const e=document.getElementById(elId);if(e)e.style.display=val;};
+  const setText=(elId,val)=>{const e=document.getElementById(elId);if(e)e.textContent=val;};
+  setDisp(id,show?'flex':'none');
+  if(msg)setText(msgId,msg);
+  if(mode==='instruction'){setDisp(instrId,'block');setDisp(pasteId,'none');}
+  else if(mode==='paste'){setDisp(instrId,'none');setDisp(pasteId,'flex');}
+  else if(mode==='none'||!show){setDisp(instrId,'none');setDisp(pasteId,'none');}
 }
 function copyCmd(id){const el=document.getElementById(id);if(!el)return;const txt=el.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>showToast('Command copied — paste in Claude chat')).catch(()=>copyFallback(txt));}else{copyFallback(txt);}}
 function copyFallback(txt){const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');showToast('Command copied — paste in Claude chat');}catch(e){showToast('Copy failed — select the text manually');}document.body.removeChild(ta);}
@@ -2381,46 +1943,137 @@ window.addEventListener('message',function(e){
   }
 });
 
-// Main entry: send XDP + instructions to Claude AI
+// Main entry: build a self-contained task file with embedded base64 XDP
+// and download it. User then uploads that task file into Claude chat.
 function sendToClaudeAI(type){
   const xdpText=type==='content'?contentXDPText:masterXDPText;
   const xdpName=type==='content'?contentXDPName:masterXDPName;
-  if(!xdpText){showToast('No '+(type==='content'?'content':'master')+' XDP uploaded');return;}
+  if(!xdpText){showToast('Upload the '+(type==='content'?'content':'master')+' XDP in the Basics step first');return;}
   const outName=xdpName.replace(/\.xdp$/i,'')+'_CUSTOM.xdp';
   const taskFile=xdpName.replace(/\.xdp$/i,'')+'_task.txt';
   const cmdId=type==='content'?'aiContentCmd':'aiMasterCmd';
   const outId=type==='content'?'aiContentOutName':'aiMasterOutName';
 
-  const pathInputId=type==='content'?'xdp0Path':'xdp1Path';
-  const confirmedSrcPath=(document.getElementById(pathInputId).value||'').trim();
+  // Always embed the XDP payload — the task file must be self-sufficient in chat.
+  const prompt=buildChatTaskFile(xdpText, xdpName, outName, type);
 
-  if(typeof sendPrompt==='function'){
-    // claude.ai artifact — sendPrompt available, Claude responds with XML in chat
-    const prompt=buildAIPrompt(xdpText, xdpName, type, false, confirmedSrcPath);
-    sendPrompt(prompt);
-    setAIWait(type, true, 'Task sent to Claude — paste the XDP response from the chat into the box below:', 'paste');
-    return;
-  }
-
-  // Claude Code preview panel or standalone browser:
-  // Download the task file, then show the @file reference instruction
-  const prompt=buildAIPrompt(xdpText, xdpName, type, true, confirmedSrcPath);
-  const dlDir=getWizardDir();
-  const taskPath=dlDir.includes('%USERPROFILE%')
-    ?'%USERPROFILE%\\Downloads\\'+taskFile
-    :dlDir+'\\'+taskFile;
-  const atCmd='@"'+taskPath+'"';
-  document.getElementById(cmdId).textContent=atCmd;
+  document.getElementById(cmdId).textContent=taskFile;
   document.getElementById(outId).textContent=outName;
-  setAIWait(type, true, 'Task file downloaded — reference it in the Claude Code chat:', 'instruction');
-  // Trigger browser download of the task file
+  setAIWait(type, true, 'Task file ready — drop it into Claude chat:', 'instruction');
+
   try{
     const blob=new Blob([prompt],{type:'text/plain'});
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');a.href=url;a.download=taskFile;
     document.body.appendChild(a);a.click();document.body.removeChild(a);
     setTimeout(()=>URL.revokeObjectURL(url),3000);
-  }catch(e){showToast('Could not auto-download task file — copy the command above');}
+    showToast('Task file downloaded — upload it into Claude chat');
+  }catch(e){showToast('Download failed: '+e.message);}
+}
+
+// Build a task file targeted at Claude running in claude.ai chat.
+// Contains: instructions, wizard changes, MASTER FORM block (if type=master),
+// and the XDP itself as base64 so Claude can decode it without disk access.
+function buildChatTaskFile(xdpText, xdpName, outName, type){
+  const lcAdd=(v('lcAdd')||'').trim();
+  const lcHide=(v('lcHide')||'').trim();
+  const cmpF=(document.getElementById('cmpFindings').value||'').trim();
+  let p='';
+  p+='CLAUDE CHAT TASK — SAP ADOBE FORM WIZARD\n';
+  p+='═══════════════════════════════════════════════════════════════\n';
+  p+='You are running in Claude chat (claude.ai). Apply the changes below\n';
+  p+='to the XDP embedded at the end of this file, then return the modified\n';
+  p+='XDP as a downloadable file for the user.\n\n';
+  p+='FORM TYPE   : '+(type==='master'?'MASTER form':'CONTENT form')+'\n';
+  p+='INPUT NAME  : '+xdpName+'\n';
+  p+='OUTPUT NAME : '+outName+'\n\n';
+  p+='INSTRUCTIONS FOR CLAUDE\n';
+  p+='───────────────────────\n';
+  p+='1. Locate the block starting with "===XDP BASE64 START===" below.\n';
+  p+='2. Decode the base64 payload (UTF-8) — that is the source XDP XML.\n';
+  p+='3. Apply every change in the CHANGES sections using direct string/XML\n';
+  p+='   manipulation. Preserve the XFA namespace and structure.\n';
+  p+='4. Validate that the result is well-formed XML.\n';
+  p+='5. Write the modified XDP to /mnt/user-data/outputs/'+outName+'\n';
+  p+='6. Present it to the user via present_files so they can download it.\n';
+  p+='7. Report which changes applied and which (if any) could not be located.\n\n';
+  if(lcAdd){p+='STRUCTURAL CHANGES TO APPLY (ADD / MODIFY)\n──────────────────────────────────────────\n'+lcAdd+'\n\n';}
+  if(lcHide){p+='ELEMENTS TO HIDE (set presence="inactive")\n──────────────────────────────────────────\n';lcHide.split('\n').forEach(n=>{if(n.trim())p+='  - '+n.trim()+'\n';});p+='\n';}
+  if(cmpF){p+='COMPARISON FINDINGS (apply RENAME / ADD / HIDE from these)\n──────────────────────────────────────────────────────────\n'+cmpF.split('\n').map(l=>'  '+l).join('\n')+'\n\n';}
+  if(type==='master'){
+    p+='MASTER FORM CHANGES\n───────────────────\n';
+    p+=buildMasterChangeBlock();
+    p+='\n';
+  }
+  p+='NOTES\n─────\n';
+  p+='- HIDE requests: set presence="inactive" on the matching <subform|field|draw name="...">.\n';
+  p+='- RENAME requests: replace label text inside <text>...</text> nodes only; do not touch bindings.\n';
+  p+='- ADD requests: append the new draw/field/subform to the appropriate parent (respect XFA namespace).\n';
+  p+='- If a target element cannot be located, list it as unresolved instead of guessing.\n\n';
+  p+='===XDP BASE64 START===\n';
+  p+=xdpToB64(xdpText)+'\n';
+  p+='===XDP BASE64 END===\n';
+  return p;
+}
+
+// Emit only the master form changes the user actually configured, so the task file is compact.
+function buildMasterChangeBlock(){
+  const lines=[];
+  const tm=v('titleMode'),lm=v('logoMode'),wm=v('wmMode'),fm=v('foldMode');
+  const sm=v('senderMode'),pm=v('pageIdxMode'),rm=v('recipMode');
+  if(tm==='modify'){
+    lines.push('  - Title (txtTitle): modify position');
+    lines.push('      Portrait  → x='+v('titPx')+'mm y='+v('titPy')+'mm w='+v('titPw')+'mm h='+v('titPh')+'mm');
+    lines.push('      Landscape → x='+v('titLx')+'mm y='+v('titLy')+'mm w='+v('titLw')+'mm h='+v('titLh')+'mm');
+  } else if(tm&&tm!=='keep'){lines.push('  - Title (txtTitle): set presence="'+tm+'"');}
+  if(lm==='modify'){
+    const lgN=parseInt(v('logoCount'))||1;
+    for(let i=1;i<=lgN;i++){
+      lines.push('  - Logo '+i+' (imgLogo / $.Logo'+i+'Image): modify position');
+      lines.push('      Portrait  → x='+v('lg'+i+'px')+'mm y='+v('lg'+i+'py')+'mm w='+v('lg'+i+'pw')+'mm h='+v('lg'+i+'ph')+'mm');
+      lines.push('      Landscape → x='+v('lg'+i+'lx')+'mm y='+v('lg'+i+'ly')+'mm w='+v('lg'+i+'lw')+'mm h='+v('lg'+i+'lh')+'mm');
+    }
+  } else if(lm&&lm!=='keep'){lines.push('  - Logo (imgLogo): set presence="'+lm+'"');}
+  if(sm==='modify'){
+    lines.push('  - Sender address (frmSenderAddress_Page): modify position');
+    lines.push('      Portrait (frmSenderAddress_Page) → x='+v('sndrPx')+'mm y='+v('sndrPy')+'mm w='+v('sndrPw')+'mm h='+v('sndrPh')+'mm');
+    lines.push('      Portrait (frmPage inside sender)  → x='+v('pgSndrX')+'mm y='+v('pgSndrY')+'mm w='+v('pgSndrW')+'mm h='+v('pgSndrH')+'mm');
+  } else if(sm&&sm!=='keep'){lines.push('  - Sender address (frmSenderAddress_Page): set presence="'+sm+'"');}
+  if(pm==='modify'){
+    lines.push('  - Page index (frmPage › txtPageIndex): modify position');
+    lines.push('      Portrait  → x='+v('pgPx')+'mm y='+v('pgPy')+'mm w='+v('pgPw')+'mm h='+v('pgPh')+'mm');
+    lines.push('      Landscape → x='+v('pgLx')+'mm y='+v('pgLy')+'mm w='+v('pgLw')+'mm h='+v('pgLh')+'mm');
+  } else if(pm&&pm!=='keep'){lines.push('  - Page index (frmPage › txtPageIndex): set presence="'+pm+'"');}
+  if(rm==='modify'){
+    lines.push('  - Recipient address (frmRecipientAddress): modify position');
+    lines.push('      x='+v('rcPx')+'mm y='+v('rcPy')+'mm w='+v('rcPw')+'mm h='+v('rcPh')+'mm');
+    const rcLbl=v('rcLabel');if(rcLbl)lines.push('      Heading label: "'+rcLbl+'"');
+    const capRows=document.querySelectorAll('#capLines tr');
+    if(capRows.length){
+      const capHdr=[];
+      capRows.forEach((tr,i)=>{
+        const ln=['txtLine1','txtLine2','txtLine3','txtLine4','txtLine5','txtLine6','txtLine7','txtLine8'][i]||('txtLine'+(i+1));
+        const cap=(tr.querySelector('.cap-text')?.value||'').trim();
+        const pos=tr.querySelector('.cap-pos')?.value||'';
+        const res=(tr.querySelector('.cap-res')?.value||'0').trim();
+        capHdr.push('        '+ln+': caption="'+cap+'" align='+(pos||'keep')+' reserve='+res+'mm');
+      });
+      if(capHdr.length)lines.push('      Address line captions:\n'+capHdr.join('\n'));
+    }
+  } else if(rm&&rm!=='keep'){lines.push('  - Recipient address (frmRecipientAddress): set presence="'+rm+'"');}
+  if(wm&&wm!=='keep')lines.push('  - Watermark (txtWatermark): set presence="'+wm+'"');
+  if(fm&&fm!=='keep')lines.push('  - Folding marks (frmFoldingMarks): set presence="'+fm+'"');
+  const fN=parseInt(v('footerN'))||2;
+  for(let i=1;i<=fN;i++){
+    const px=v('fb'+i+'px'),py=v('fb'+i+'py'),pw=v('fb'+i+'pw'),ph=v('fb'+i+'ph');
+    const lx=v('fb'+i+'lx'),ly=v('fb'+i+'ly'),lw=v('fb'+i+'lw'),lh=v('fb'+i+'lh');
+    const font=v('fb'+i+'font')||'',align=v('fb'+i+'align')||'';
+    if(px||py||pw||ph||lx||ly||lw||lh)lines.push('  - Footer Block '+i+': portrait x='+px+'mm y='+py+'mm w='+pw+'mm h='+ph+'mm | landscape x='+lx+'mm y='+ly+'mm w='+lw+'mm h='+lh+'mm | '+font+' '+align);
+  }
+  for(let i=fN+1;i<=4;i++)lines.push('  - Footer Block '+i+': set presence="inactive"');
+  const stdM=v('stdMaster'),custM=v('custMaster');
+  if(stdM||custM)lines.push('  - Master form: standard="'+(stdM||'—')+'" → custom="'+(custM||'—')+'"');
+  return lines.length?lines.join('\n')+'\n':'  (no master changes configured)\n';
 }
 
 // ── DRAG & DROP ───────────────────────────────────────────────────────────────
@@ -2429,78 +2082,795 @@ function sendToClaudeAI(type){
 // INIT
 renderFB();buildCapLines();renderLogos();
 
-// ── ICON FONT AVAILABILITY ──────────────────────────────────
-// Both CDNs can be blocked by a corporate proxy. If the icon font never
-// registers, hide the <i> glyphs so labels stay clean instead of the browser
-// drawing a tofu box for every icon. Note: document.fonts.check() is NOT usable
-// here - it returns true when it silently falls back to a system font.
-(function(){
-  function present(){
-    try{
-      if(!document.fonts || !document.fonts.forEach) return true; // too old to tell - assume ok
-      var found=false;
-      document.fonts.forEach(function(f){
-        if(/tabler/i.test(f.family) && f.status!=='error') found=true;
-      });
-      return found;
-    }catch(e){ return true; }
-  }
-  function mark(){ try{ document.body.classList.toggle('no-ti', !present()); }catch(e){} }
-  try{
-    if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(function(){ mark(); setTimeout(mark, 2500); });
-    } else { setTimeout(mark, 2500); }
-  }catch(e){}
-})();
-
-// ── USER GUIDE ────────────────────────────────────────────────────────────────
-const UG_VIDEO_URL='https://mediaexchange.accenture.com/media/t/1_q02n66iz';
-const UG_VIDEO_EMBED='https://mediaexchange.accenture.com/embed/secure/iframe/entryId/1_q02n66iz';
-const UG_PLACEHOLDER='<a class="ug-vid-ph" href="'+UG_VIDEO_URL+'" target="_blank" rel="noopener" onclick="return ugPlay(event)"><span class="ug-pl"><i class="ti ti-player-play"></i></span><span class="ug-pt">Play walkthrough &middot; Accenture MediaExchange</span></a>';
-
-function ugTop(){try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}}
-function ugOpen(sec){document.body.classList.add('ug-on');ugNav(sec||1);ugTop();}
-function ugClose(){
-  document.body.classList.remove('ug-on');
-  // tear the iframe down so the video stops playing once the guide is closed
-  const w=document.getElementById('ugVideoFrame');
-  if(w&&w.dataset.on==='1'){w.dataset.on='';w.innerHTML=UG_PLACEHOLDER;}
-  ugTop();
+// ── USER GUIDE ───────────────────────────────────────────────────────────────
+function openUserGuide(){document.getElementById('ugOverlay').classList.add('show');document.body.style.overflow='hidden';}
+function closeUserGuide(){document.getElementById('ugOverlay').classList.remove('show');document.body.style.overflow='';}
+function ugNav(idx){
+  document.querySelectorAll('.ug-nav-item[data-sec]').forEach(el=>el.classList.toggle('active',+el.dataset.sec===idx));
+  document.querySelectorAll('.ug-section').forEach((el,i)=>el.classList.toggle('active',i===idx));
 }
-function ugToggle(){document.body.classList.contains('ug-on')?ugClose():ugOpen(1);}
-function ugNav(n){
-  const id='ugs'+n,key=String(n);
-  document.querySelectorAll('.ug-sec').forEach(s=>s.classList.toggle('on',s.id===id));
-  document.querySelectorAll('.ug-nl').forEach(l=>l.classList.toggle('on',l.getAttribute('data-s')===key));
-  const c=document.getElementById('ugCont');if(c)c.scrollTop=0;
-}
-// Demo video — opens the guide if it is closed, then loads the MediaExchange player inline
-function ugVideo(){
-  if(!document.body.classList.contains('ug-on')){document.body.classList.add('ug-on');ugTop();}
-  ugNav('v');ugLoadPlayer();
-}
-function ugLoadPlayer(){
-  const w=document.getElementById('ugVideoFrame');if(!w||w.dataset.on==='1')return;
-  w.dataset.on='1';
-  w.innerHTML='<iframe src="'+UG_VIDEO_EMBED+'" title="SAP Adobe Form Wizard demo video" allow="autoplay *; fullscreen *; encrypted-media *" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>';
-}
-function ugPlay(ev){if(ev){ev.preventDefault();ev.stopPropagation();}ugLoadPlayer();return false;}
-function ugCopyVideo(){
-  const ok=()=>{if(typeof showToast==='function')showToast('Demo video link copied');};
-  try{
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(UG_VIDEO_URL).then(ok,ugCopyFallback);return;}
-    ugCopyFallback();
-  }catch(e){ugCopyFallback();}
-}
-function ugCopyFallback(){
-  try{
-    const t=document.createElement('textarea');t.value=UG_VIDEO_URL;t.style.position='absolute';t.style.left='-9999px';
-    document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);
-    if(typeof showToast==='function')showToast('Demo video link copied');
-  }catch(e){if(typeof showToast==='function')showToast('Copy failed — use Open in MediaExchange');}
-}
-// Jump from the guide straight into a wizard step
-function ugJump(n){ugClose();if(typeof go==='function')go(n);}
 </script>
+
+<!-- ══ USER GUIDE OVERLAY ══════════════════════════════════════════════════ -->
+<div class="ug-overlay" id="ugOverlay" onclick="if(event.target===this)closeUserGuide()">
+<div class="ug-modal">
+
+  <!-- Header -->
+  <div class="ug-hdr">
+    <div class="ug-hdr-icon"><i class="ti ti-book"></i></div>
+    <div class="ug-hdr-titles">
+      <h2>User Guide — SAP Adobe Form Wizard</h2>
+      <p>SAP S/4HANA Public Cloud &middot; RICEFW Type F &middot; v5.12 &middot; Accenture SAP Practice</p>
+    </div>
+    <div class="ug-hdr-btns">
+      <a id="ugDemoBtn" href="https://ts.accenture.com/:v:/r/sites/FY26-27S4_SaaS_DU_Capability/Shared%20Documents/01.FY26-27%20S4_SaaS_DU_Capability/04.S4_SaaS_PoDs/02%20Development%20POD/04%20AI%20Agents/03%20Demo%20Recordings/01%20Adobe%20Form%20Wizard%20Demo.mp4?d=wccafa6f49a8b483b9418ff9cb4ef7d86&csf=1&web=1&e=JWymVU" target="_blank" class="ug-hdr-btn"><i class="ti ti-player-play"></i> Demo Video</a>
+      <button class="ug-hdr-btn close-x" onclick="closeUserGuide()"><i class="ti ti-x"></i> Close</button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="ug-body">
+
+    <!-- Left nav -->
+    <div class="ug-nav">
+      <div class="ug-nav-item active" data-sec="0" onclick="ugNav(0)"><i class="ti ti-info-circle"></i> 1. Introduction &amp; Purpose</div>
+      <div class="ug-nav-item" data-sec="1" onclick="ugNav(1)"><i class="ti ti-users"></i> 2. Target Users</div>
+      <div class="ug-nav-item" data-sec="2" onclick="ugNav(2)"><i class="ti ti-key"></i> 3. Access &amp; Prerequisites</div>
+      <div class="ug-nav-item" data-sec="3" onclick="ugNav(3)"><i class="ti ti-list-numbers"></i> 4. Step-by-Step Guide</div>
+      <div class="ug-nav-item" data-sec="4" onclick="ugNav(4)"><i class="ti ti-file-export"></i> 5. Outputs</div>
+      <div class="ug-nav-item" data-sec="5" onclick="ugNav(5)"><i class="ti ti-bulb"></i> 6. Use Cases</div>
+      <div class="ug-nav-item" data-sec="6" onclick="ugNav(6)"><i class="ti ti-settings-2"></i> 7. Tips &amp; Best Practices</div>
+      <div class="ug-nav-item" data-sec="7" onclick="ugNav(7)"><i class="ti ti-tool"></i> 8. Troubleshooting</div>
+      <div class="ug-nav-item" data-sec="8" onclick="ugNav(8)"><i class="ti ti-message-circle"></i> 9. Feedback &amp; Roadmap</div>
+      <div class="ug-nav-item" data-sec="9" onclick="ugNav(9)"><i class="ti ti-book-2"></i> 10. Glossary</div>
+      <div class="ug-nav-sep">Quick Reference</div>
+      <div style="padding:0 12px 10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;border-bottom:.5px solid var(--bdr1);font-size:12px"><span style="color:var(--txt2)">Guided steps</span><span style="color:var(--blue);font-weight:500">8 steps</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;border-bottom:.5px solid var(--bdr1);font-size:12px"><span style="color:var(--txt2)">Output artefacts</span><span style="color:var(--blue);font-weight:500">5 files</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;border-bottom:.5px solid var(--bdr1);font-size:12px"><span style="color:var(--txt2)">ABAP patterns</span><span style="color:var(--blue);font-weight:500">3 patterns</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;border-bottom:.5px solid var(--bdr1);font-size:12px"><span style="color:var(--txt2)">Mapping sheet</span><span style="color:var(--blue);font-weight:500">.csv / .tsv</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;border-bottom:.5px solid var(--bdr1);font-size:12px"><span style="color:var(--txt2)">TSD template</span><span style="color:var(--blue);font-weight:500">.docx / .md</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;border-bottom:.5px solid var(--bdr1);font-size:12px"><span style="color:var(--txt2)">Typical saving</span><span style="color:var(--blue);font-weight:500">4–12d → 2–8d</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 2px;font-size:12px"><span style="color:var(--txt2)">Wizard version</span><span style="color:var(--blue);font-weight:500">v5.12</span></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="ug-content">
+
+      <!-- Section 1: Introduction & Purpose -->
+      <div class="ug-section active">
+        <h2><i class="ti ti-info-circle" style="color:var(--blue)"></i> 1. Introduction &amp; Purpose</h2>
+        <h3>Purpose of this guide</h3>
+        <p>This guide explains how to use the SAP Adobe Form Wizard — a browser-based, AI-powered tool that accelerates and standardises SAP S/4HANA Public Cloud output form customisation. It covers what the tool does, who it is for, how to access it, and how to complete each of the eight guided steps from initial XDP upload through to a fully documented, SAP-ready form.</p>
+        <h3>What is the Adobe Form Wizard?</h3>
+        <p>A structured, eight-step web application that automates the most time-consuming parts of SAP output form customisation:</p>
+        <ul>
+          <li>Applying structural layout changes to XDP files — rename labels, hide fields, add columns</li>
+          <li>Configuring master form properties — logo, footer, sender address, watermarks</li>
+          <li>Auto-populating custom field definitions from a mapping sheet</li>
+          <li>Generating BAdI ABAP implementation code from plain-English derivation logic</li>
+          <li>Assembling a complete RICEFW specification document</li>
+          <li>Auto-populating the <strong>Processing Logic</strong> section of a Technical Specification Document (TSD)</li>
+          <li>Providing a step-by-step SAP configuration pre-requisites checklist</li>
+        </ul>
+        <p>The wizard runs entirely in a browser — no SAP access, no Adobe LiveCycle Designer and no installation required. It connects to Claude AI for code generation, document population and XDP structural changes.</p>
+        <h3>Why was it built?</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Problem without wizard</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Solution with wizard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Manual XDP XML editing in Adobe LiveCycle Designer</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">XDP patched automatically in-browser or via Claude Code</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">ABAP hand-coded field by field</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">ABAP generated from plain-English derivation logic</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">RICEFW spec written from scratch per engagement</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">RICEFW spec auto-assembled in one click</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">TSD Processing Logic written manually</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">TSD auto-populated from the mapping sheet</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Quality varies by consultant experience</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Consistent output regardless of experience level</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">4–12 days per form engagement</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">2–8 days depending on form complexity</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ibox" style="margin-top:.5rem">
+          <i class="ti ti-player-play"></i>
+          <span>New to the wizard? Start with the Demo Video — a full end-to-end walkthrough. <a href="https://ts.accenture.com/:v:/r/sites/FY26-27S4_SaaS_DU_Capability/Shared%20Documents/01.FY26-27%20S4_SaaS_DU_Capability/04.S4_SaaS_PoDs/02%20Development%20POD/04%20AI%20Agents/03%20Demo%20Recordings/01%20Adobe%20Form%20Wizard%20Demo.mp4?d=wccafa6f49a8b483b9418ff9cb4ef7d86&csf=1&web=1&e=JWymVU" target="_blank" style="color:var(--blue-txt);font-weight:500">Watch it here.</a></span>
+        </div>
+      </div>
+
+      <!-- Section 2: Target Users -->
+      <div class="ug-section">
+        <h2><i class="ti ti-users" style="color:var(--blue)"></i> 2. Target Users</h2>
+        <p>The wizard is designed for any team member involved in SAP S/4HANA output form customisation.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Role</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Primary steps used</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Key benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Functional Consultant</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Basics, Master, Custom Fields, Review, TSD, Pre-requisites</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Captures form requirements, populates custom fields from the mapping sheet, generates the RICEFW spec and TSD without writing them manually</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">ABAP Developer</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Custom Fields, BAdI</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Complete, ready-to-paste ABAP generated from plain-English derivation logic — no hand-coding SELECT or CONCATENATE statements</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Form Developer</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">All steps</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Full end-to-end workflow — XDP download through patching, spec and TSD — in a single browser session</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">SAP Basis Team</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Pre-requisites</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Step-by-step Fiori app configuration checklist ensures nothing is missed before go-live</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Hypercare Lead</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">All steps</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Consistent, repeatable process lets any team member handle form changes during hypercare</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Project Manager</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Review (outputs)</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Downloadable RICEFW spec provides a complete audit trail of all customisation decisions</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="ibox" style="margin-top:.5rem">
+          <i class="ti ti-info-circle"></i>
+          <span>Any team member with claude.ai access (Pro, Team or Enterprise) can use the wizard. No SAP access or ABAP knowledge is required for the Basics, Master Form, Review or Pre-requisites steps.</span>
+        </div>
+      </div>
+
+      <!-- Section 3: Access & Prerequisites -->
+      <div class="ug-section">
+        <h2><i class="ti ti-key" style="color:var(--blue)"></i> 3. Access &amp; Prerequisites</h2>
+        <h3>How to access the wizard</h3>
+        <ol>
+          <li>Open claude.ai in your browser — Chrome or Edge recommended.</li>
+          <li>Open the artifact link shared by your project lead, or ask your lead for the latest version.</li>
+          <li>The wizard loads directly in the browser — no installation, no download required.</li>
+          <li>Alternatively, open the wizard <code>.html</code> file in the Claude Code preview pane for direct disk access — this lets Claude Code read and write XDP files on your local machine without copy-paste.</li>
+        </ol>
+        <h3>What you need before starting</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Item</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Format</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Where to get it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Content form XDP</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>.xdp</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Maintain Form Templates Fiori app → Pre-delivered Templates → Download</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Master form XDP</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>.xdp</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Maintain Form Templates → Pre-delivered Templates (e.g. SOMU_FORM_MASTER_A4)</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Custom field mapping sheet</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>.csv</code> / <code>.tsv</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Prepared by the functional consultant — lists all custom fields, data types, CDS views and derivation logic</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">TSD template</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>.docx</code> / <code>.md</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Project TSD template with standard sections in place</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Form requirements</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Text</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Stakeholder requirements — labels to rename, fields to hide, columns to add</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">claude.ai account</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Pro / Team / Enterprise</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Required for AI features — ABAP generation, TSD population, XDP task sending</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="wbox" style="margin-top:.5rem">
+          <i class="ti ti-alert-triangle"></i>
+          <span>Download the standard XDP files from SAP before opening the wizard. Both the content XDP and master XDP must be on your local disk to use the Claude Code patching option in Step 6.</span>
+        </div>
+      </div>
+
+      <!-- Section 4: Step-by-Step Guide -->
+      <div class="ug-section">
+        <h2><i class="ti ti-list-numbers" style="color:var(--blue)"></i> 4. Step-by-Step Guide</h2>
+        <p>The wizard has eight steps accessible from the navigation bar at the top. You can move between steps at any time — data entered is retained for the session.</p>
+
+        <!-- Step 1 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">1</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">Basics &amp; Layout Changes</span>
+            <button onclick="closeUserGuide();go(0)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">The starting point. Enter form identification details, upload your XDP files, upload the mapping sheet, and describe all structural layout changes.</p>
+            <ul>
+              <li>Select the <strong>Business domain</strong> (Sales, Procurement, Finance…) and <strong>Form type</strong> — the wizard uses these to suggest the correct BAdI name and business context</li>
+              <li>Enter the <strong>Standard content form</strong> name and your <strong>Custom form name</strong></li>
+              <li>Select <strong>Language</strong> and <strong>Paper size</strong></li>
+              <li>Upload the <strong>Content form XDP</strong> and <strong>Master form XDP</strong></li>
+              <li>Upload the <strong>Mapping sheet</strong> (<code>.csv</code> / <code>.tsv</code>) — this auto-fills all custom fields in Step 3</li>
+              <li>In <strong>Layout changes</strong>, list fields/sections to ADD or MODIFY (one per line) and fields to HIDE or REMOVE</li>
+              <li>Simple forms (1 page): process in a single request &nbsp;·&nbsp; Medium (2+ pages): page by page &nbsp;·&nbsp; Complex (3+ pages): in batches</li>
+            </ul>
+            <div class="ibox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-info-circle"></i><span>Upload the mapping sheet here. The wizard parses it once and reuses it in Custom Fields (3), BAdI ABAP (4), Review (5) and TSD (7).</span></div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">2</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">Master Form</span>
+            <button onclick="closeUserGuide();go(1)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">Configure the master XDP — the layout template that wraps every page of the form.</p>
+            <ul>
+              <li>Enter the <strong>Standard master form</strong> and your <strong>Custom master form name</strong></li>
+              <li><strong>Form title</strong> — keep as-is, modify position, hide or set inactive</li>
+              <li><strong>Logos</strong> — set count (1–6) and position for portrait and landscape separately</li>
+              <li><strong>Sender address</strong> — keep, modify position or hide</li>
+              <li><strong>Page index</strong> — configure position for portrait and landscape</li>
+              <li><strong>Recipient address</strong> — keep, modify or hide, and set address line captions</li>
+              <li><strong>Watermark and folding marks</strong> — keep as-is, hide or set inactive</li>
+              <li><strong>Footer blocks</strong> — number of active blocks (1–4), static or dynamic, apply portrait or landscape defaults</li>
+            </ul>
+            <div class="ibox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-info-circle"></i><span>Master form changes are only needed if you are customising the master XDP layout — moving the logo, changing footer content, adjusting the sender address. If the master form is unchanged, skip this step.</span></div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">3</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">Custom Fields</span>
+            <button onclick="closeUserGuide();go(2)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">Review and manage all custom fields. If you uploaded a mapping sheet in Step 1, all rows are auto-populated.</p>
+            <ul>
+              <li><strong>Business context</strong> — auto-suggested from the domain and form type. Verify it matches exactly in the Custom Fields and Logic app</li>
+              <li>The mapping sheet auto-populates <strong>Technical name</strong>, <strong>Label</strong>, <strong>Data type</strong>, <strong>Binding</strong> and <strong>Derivation logic</strong> per field</li>
+              <li>Header-level and item-level custom fields are managed in separate sections</li>
+              <li>Use <strong>+ Add field</strong> to add rows manually</li>
+              <li>Confirm the technical name suffix — <code>YY1_FIELDNAME_PDH</code> (header) / <code>YY1_FIELDNAME_PDI</code> (item) — and the XDP binding path</li>
+              <li>Custom fields must be created in the <strong>SAP Custom Fields and Logic</strong> app before they can be used in the form</li>
+            </ul>
+            <div class="ibox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-info-circle"></i><span>Mapping sheet column headers should include: Technical Field Name, Label/Details, Data Type, CDS View, Logic / Comments. The wizard auto-detects these — exact capitalisation is not required.</span></div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">4</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">BAdI ABAP Generation</span>
+            <button onclick="closeUserGuide();go(3)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">Generate the complete ABAP implementation for the BAdI from the derivation logic in your custom fields.</p>
+            <ul>
+              <li>BAdI name, interface and method are auto-suggested from the domain and form type chosen in Basics</li>
+              <li>Review the header and item BAdI parameters — <strong>Importing</strong> (read-only context) and <strong>Changing</strong> (write custom fields here)</li>
+              <li>Add any additional CDS views used in derivation logic</li>
+              <li>Click <strong>Generate</strong> — the wizard reads each field's derivation logic and identifies the pattern:
+                <ul style="margin-top:5px">
+                  <li>Single CDS SELECT — "Get [field] from [CDS] where [condition]"</li>
+                  <li>Multi-field CONCATENATE — "Get and concatenate [fields] from [CDS]"</li>
+                  <li>Multi-join SELECT chains — "From joining N CDS: [1] where… [2] where…"</li>
+                </ul>
+              </li>
+              <li>Click <strong>Copy</strong>, then paste into <strong>Custom Fields and Logic</strong> app → Create → Open Code Editor</li>
+              <li>Save &amp; Publish, test via output preview, then transport</li>
+            </ul>
+            <div class="wbox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-alert-triangle"></i><span>Derivation logic must be written in plain English matching one of the three patterns. Vague or incomplete logic produces incomplete ABAP — always review generated code before pasting into SAP.</span></div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">5</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">Review &amp; RICEFW Specification</span>
+            <button onclick="closeUserGuide();go(4)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">Auto-generate a complete RICEFW specification from all data entered across Steps 1–4.</p>
+            <ul>
+              <li>Click <strong>Generate review</strong> — the wizard assembles the full specification</li>
+              <li>The spec covers form identification, master form configuration, layout changes, header and item custom fields, BAdI details, derivation logic and ABAP code</li>
+              <li>Review in the text area and edit any details as needed</li>
+              <li>Click <strong>Download spec</strong> to save as a <code>.txt</code> file</li>
+              <li>Use it as the formal RICEFW deliverable or paste into project documentation</li>
+            </ul>
+            <div class="ibox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-info-circle"></i><span>Generate the RICEFW spec before moving to Step 6 — it contains all field names and layout change instructions in one place, which is a useful reference when running the XDP task in Claude Code.</span></div>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">6</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">Generate &amp; Apply XDP</span>
+            <button onclick="closeUserGuide();go(5)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">Apply all structural layout changes from Step 1 to the actual XDP file. Three options are available:</p>
+            <ul>
+              <li><strong>Option 1 — Apply &amp; Download:</strong> changes applied directly in the browser and the modified XDP downloads immediately. Best for simple rename or hide changes.</li>
+              <li><strong>Option 2 — Send task to Claude:</strong> downloads a structured task file. Share it in a Claude Code session — Claude reads your XDP from disk, applies all changes (rename, hide, add, reorder) and saves the result as <code>_CUSTOM.xdp</code> to your Downloads folder. No XML editing or copy-paste.</li>
+              <li><strong>Option 3 — Apply pasted response:</strong> when using claude.ai chat, paste Claude's response back into the wizard and click Apply pasted response — the wizard extracts and saves the modified XDP.</li>
+              <li>Once you have the <code>_CUSTOM.xdp</code>, upload it to <strong>Maintain Form Templates</strong> (ADLC) → Custom Templates → Upload</li>
+            </ul>
+            <div class="ibox" style="margin-top:10px"><i class="ti ti-info-circle"></i><span>Content XDP and master XDP have separate Generate sections — apply changes to each independently. Content XDP holds the form body; master XDP holds the page layout wrapper.</span></div>
+            <div class="wbox" style="margin-bottom:0"><i class="ti ti-alert-triangle"></i><span>Option 2 is recommended when the XDP is large, has many changes, or when Apply &amp; Download does not produce the expected result. Claude Code reads directly from disk and is more reliable for complex structural changes.</span></div>
+          </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">7</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">TSD Generation</span>
+            <button onclick="closeUserGuide();go(6)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">Auto-populate the Processing Logic section of your Technical Specification Document from the mapping sheet.</p>
+            <ul>
+              <li>Upload your project TSD template (<code>.docx</code> / <code>.md</code>) — the standard template with all sections already in place</li>
+              <li>Specify the exact section heading to populate (e.g. <strong>Processing Logic</strong>) — it must match the template heading text exactly</li>
+              <li>Optionally tick <strong>Delta update</strong> to append to existing content rather than replace it</li>
+              <li>Click <strong>Generate TSD with Claude</strong> — Claude reads the mapping sheet and fills the section with all standard and custom fields, their data bindings and derivation logic</li>
+              <li>The completed TSD saves to Downloads as <code>[TemplateName]_COMPLETED.docx</code></li>
+              <li>All other sections remain unchanged — complete them manually from SAP documentation</li>
+            </ul>
+            <div class="ibox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-info-circle"></i><span>The mapping sheet must be uploaded in Step 1 before TSD generation will work properly. Without it, the wizard generates a TSD from the form details and custom fields entered manually in Step 3.</span></div>
+          </div>
+        </div>
+
+        <!-- Step 8 -->
+        <div style="border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden;margin-bottom:4px">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-bg);border-bottom:.5px solid var(--blue-bdr)">
+            <span style="background:var(--blue);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">8</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue-txt);flex:1">SAP Pre-requisites</span>
+            <button onclick="closeUserGuide();go(7)" style="background:var(--blue);color:#fff;border:none;border-radius:var(--r8);padding:3px 12px;font-size:12px;cursor:pointer;font-family:inherit">Go</button>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg1)">
+            <p style="margin-bottom:8px">A step-by-step checklist of the SAP Fiori app configuration required before the customised form can go live.</p>
+            <ol>
+              <li>Create a copy of the standard content form — <strong>Maintain Form Templates</strong> → Pre-delivered Templates → Copy → upload your modified XDP</li>
+              <li>(Optional) Copy the standard master form (e.g. <code>SOMU_FORM_MASTER_A4</code>) and upload your modified master XDP</li>
+              <li>Upload the company logo in the <strong>Manage Logos</strong> app — SVG, PNG, JPG, max 5 MB</li>
+              <li>Create sender address and footer texts in the <strong>Manage Texts</strong> app</li>
+              <li>Configure form assignment — <strong>Implementation Activities</strong> → Output Management → Assign Form Templates and Define Rules for Master Form Template</li>
+              <li>Assign the form in <strong>Output Parameter Determination</strong> → select business object → Form Template determination step → add rule row → Activate</li>
+            </ol>
+            <div class="wbox" style="margin-top:10px;margin-bottom:0"><i class="ti ti-alert-triangle"></i><span>Complete these in order. Steps 1 and 2 must be done before configuration in Steps 5 and 6 — the template names created there are referenced in the configuration rules.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Outputs -->
+      <div class="ug-section">
+        <h2><i class="ti ti-file-export" style="color:var(--blue)"></i> 5. Outputs</h2>
+        <p>The wizard produces five output artefacts across the eight steps. All are downloadable directly from the wizard.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Output</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">File</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Modified content XDP</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>_CUSTOM.xdp</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Structurally updated content form with all rename, hide, add and reorder changes applied to the XFA structure. Upload directly to Maintain Form Templates.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Modified master XDP</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>_CUSTOM.xdp</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Updated master form with logo position, footer, watermark and page layout changes applied. Upload alongside the content XDP.</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">RICEFW specification</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>RICEFW_spec.txt</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Complete specification covering form identification, layout changes, all header and item custom fields, BAdI details, derivation logic and generated ABAP.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">BAdI ABAP code</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Clipboard</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Ready-to-paste implementation covering SELECT, CONCATENATE and multi-join patterns. Paste into the Custom Fields and Logic app Code Editor.</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">TSD document</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)"><code>[Template]_COMPLETED.docx</code></td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Your TSD template with the Processing Logic section auto-populated from the mapping sheet. All other sections unchanged.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 6: Use Cases -->
+      <div class="ug-section">
+        <h2><i class="ti ti-bulb" style="color:var(--blue)"></i> 6. Use Cases</h2>
+
+        <h3>New implementation — full wizard</h3>
+        <p>Use all eight steps when customising a form from scratch for the first time on a new engagement.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;width:50px">Step</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Name</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">1</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Basics</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Upload standard XDP + mapping sheet, select domain, describe changes</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">2</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Master Form</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Configure logo, footer, watermark</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">3</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Custom Fields</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Review auto-populated fields from the mapping sheet</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">4</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">BAdI ABAP</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Generate and copy ABAP code</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">5</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Review</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Generate and download the RICEFW spec</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">6</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Generate XDP</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Apply all changes → download <code>_CUSTOM.xdp</code></td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">7</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">TSD</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Upload template → auto-populate Processing Logic</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);text-align:center;font-weight:700;color:var(--blue)">8</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Pre-requisites</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Complete the SAP Fiori configuration checklist</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Enhancement — existing live form</h3>
+        <p>For changes to a form already live in SAP, only the relevant steps need repeating. Upload the existing <code>_CUSTOM.xdp</code> and a mapping sheet containing delta changes only.</p>
+        <ul>
+          <li><strong>Step 1 — Basics:</strong> upload the existing <code>_CUSTOM.xdp</code> and updated mapping sheet, describe the new layout changes</li>
+          <li><strong>Step 3 — Custom Fields:</strong> review new/changed fields; existing unchanged fields can be left as-is</li>
+          <li><strong>Step 4 — BAdI ABAP:</strong> regenerate if new custom fields were added</li>
+          <li><strong>Step 6 — Generate XDP:</strong> apply delta changes to the existing <code>_CUSTOM.xdp</code></li>
+          <li><strong>Step 7 — TSD:</strong> append new fields to the existing Processing Logic section</li>
+        </ul>
+        <div class="wbox"><i class="ti ti-alert-triangle"></i><span>When enhancing an existing form, always upload the existing <code>_CUSTOM.xdp</code> — not the standard SAP XDP — to preserve prior customisations.</span></div>
+
+        <h3>Form complexity guide</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:4px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Type</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Pages</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Approach</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Typical duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Simple</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">1 page</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Process the entire form in a single request</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">4d → 2d</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Medium</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">2+ pages</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Process page by page to improve accuracy</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">8d → 4–5d</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500">Complex</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">3+ pages</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">Process in batches — complete one batch before the next</td>
+              <td style="padding:7px 12px;border:.5px solid var(--bdr1);color:var(--txt1)">12d → 6–7d</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 7: Tips & Best Practices -->
+      <div class="ug-section">
+        <h2><i class="ti ti-settings-2" style="color:var(--blue)"></i> 7. Tips &amp; Best Practices</h2>
+
+        <h3><i class="ti ti-table" style="color:var(--blue);font-size:13px"></i> Mapping sheet</h3>
+        <ul>
+          <li>Maintain the mapping sheet before starting — it drives auto-population in Custom Fields, ABAP generation and TSD</li>
+          <li>Include these columns: <strong>Technical Field Name</strong>, <strong>Label/Details</strong>, <strong>Data Type</strong>, <strong>CDS View</strong>, <strong>Logic / Comments</strong></li>
+          <li>Write derivation logic in plain English matching one of the three ABAP patterns (SELECT, CONCATENATE, multi-join)</li>
+          <li>For standard fields, leave derivation logic blank or write <em>"Standard binding — no derivation needed"</em></li>
+        </ul>
+
+        <h3><i class="ti ti-file-code" style="color:var(--blue);font-size:13px"></i> XDP files</h3>
+        <ul>
+          <li>Always download fresh XDP copies from SAP — do not reuse files from a previous engagement</li>
+          <li>Keep the full disk path of the XDP files — the wizard displays these for Claude Code reference</li>
+          <li>For Claude Code patching, keep XDP files in Downloads or another known local folder before sending the task</li>
+          <li>For complex forms with many layout changes, use Option 2 (Send task to Claude Code) for more reliable results</li>
+        </ul>
+
+        <h3><i class="ti ti-code" style="color:var(--blue);font-size:13px"></i> ABAP code</h3>
+        <ul>
+          <li>Always review generated ABAP before pasting into SAP — check field names, CDS view names and WHERE conditions match exactly</li>
+          <li>If a derivation pattern is not recognised, edit the logic in the Custom Fields step and regenerate</li>
+          <li>Test the BAdI implementation via output preview in SAP before transporting</li>
+        </ul>
+
+        <h3><i class="ti ti-device-floppy" style="color:var(--blue);font-size:13px"></i> Session data</h3>
+        <ul>
+          <li>All wizard data is held in browser memory for the current session — closing the tab loses it</li>
+          <li>Download the RICEFW spec (Step 5) before closing — it captures all your inputs</li>
+          <li>For long sessions, copy the generated ABAP to a text file as a backup</li>
+        </ul>
+
+        <h3><i class="ti ti-file-text" style="color:var(--blue);font-size:13px"></i> TSD generation</h3>
+        <ul>
+          <li>The section heading in Step 7 must match the heading in your template exactly — including capitalisation and spacing</li>
+          <li>If your TSD has multiple Processing Logic sub-sections, specify the most specific heading</li>
+          <li>Use delta/append mode when updating an existing TSD with additional fields</li>
+        </ul>
+      </div>
+
+      <!-- Section 8: Troubleshooting -->
+      <div class="ug-section">
+        <h2><i class="ti ti-tool" style="color:var(--blue)"></i> 8. Troubleshooting</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:4px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;width:38%">Issue</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Resolution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">Mapping sheet not auto-filling fields in Step 3</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Ensure the file is <code>.csv</code> or <code>.tsv</code> (not <code>.xlsx</code>). Check column headers contain the keywords <strong>Technical</strong>, <strong>Label</strong>, <strong>Logic</strong>, <strong>CDS</strong>. Re-upload in the Basics step.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">ABAP generation produces incomplete code</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">The derivation logic does not match a recognised pattern. Rewrite in plain English: <em>"Get [field] from [CDS] where [condition]"</em> for SELECT, or <em>"Get and concatenate…"</em> for CONCATENATE.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">Apply &amp; Download produces no changes in the XDP</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Field names under Layout Changes → HIDE must match XFA element names exactly (case-sensitive). Use the subform or field name as it appears in Adobe LiveCycle Designer, not the label text.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">Claude Code task does not find the XDP file</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Check the file path shown in the wizard matches the actual disk location. Edit the path field if the file sits in a subfolder.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">TSD section not populated correctly</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Verify the section heading in Step 7 matches the template heading exactly. Confirm the mapping sheet is uploaded in Basics. Try delta/append mode instead of replace.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">BAdI name not auto-suggested</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Select a specific form type — not just the domain — in Basics. The suggestion requires both domain and form type.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:500;vertical-align:top">Generated master XDP has no changes</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Master form changes are only applied if at least one master setting (logo, title, footer…) is set to <strong>Modify</strong> or <strong>Hide</strong> in Step 2.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 9: Feedback & Roadmap -->
+      <div class="ug-section">
+        <h2><i class="ti ti-message-circle" style="color:var(--blue)"></i> 9. Feedback &amp; Roadmap</h2>
+
+        <h3>Providing feedback</h3>
+        <ul>
+          <li>Use the <strong>Send task to Claude</strong> button inside any wizard step to flag issues, missing patterns or suggestions directly</li>
+          <li>Contact your project lead or the wizard maintainer with form types or ABAP patterns that are not handled</li>
+          <li>Share examples of mapping sheets that did not auto-populate correctly — these improve the column detection logic</li>
+        </ul>
+        <div class="ibox"><i class="ti ti-info-circle"></i><span>The more specific the feedback, the faster the fix. Include the form type, the derivation logic that didn't generate correctly, and the expected ABAP pattern.</span></div>
+
+        <h3>Planned enhancements</h3>
+        <ul>
+          <li>Expanded domain coverage — Plant Maintenance, Quality Management, Warehouse Management, Service Management</li>
+          <li>Multi-page XDP batch mode — process complex forms in structured batches with progress tracking</li>
+          <li>Side-by-side XDP comparison viewer — visual diff of AS-IS vs modified XDP</li>
+          <li>XDP upload/download via SAP API — direct Maintain Form Templates integration</li>
+          <li>Team-wide deployment — shared wizard instance across the full project team</li>
+          <li>Automated test case generation from the RICEFW spec</li>
+        </ul>
+
+        <h3>Version history</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:4px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;width:80px">Version</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;width:80px">Date</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Key changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">v5.12</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">2026</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Embedded User Guide panel with in-app demo video, section navigation and jump-to-step links</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">v5.11</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">2026</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">8 guided steps, mapping sheet auto-fill, BAdI ABAP generation (3 patterns), TSD auto-population, Apply &amp; Download + Claude Code + paste-back options, pre-requisites checklist</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 10: Glossary -->
+      <div class="ug-section">
+        <h2><i class="ti ti-book-2" style="color:var(--blue)"></i> 10. Glossary</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:4px">
+          <thead>
+            <tr>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;width:160px">Term</th>
+              <th style="background:var(--bg2);padding:8px 12px;text-align:left;border:.5px solid var(--bdr1);font-weight:600;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:.04em">Definition</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">XDP</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">XML Data Package — the file format SAP uses for output form templates. Contains the XFA (XML Forms Architecture) structure defining layout and data bindings.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">ADLC</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Adobe Document Lifecycle — SAP's name for the Maintain Form Templates Fiori app where XDP files are managed.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">BAdI</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Business Add-In — SAP's extension mechanism allowing custom ABAP logic to be injected into standard processes, including output form data population.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">CDS View</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Core Data Services View — SAP's data model layer used to expose business data for custom field derivation logic in ABAP.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">RICEFW</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Reports, Interfaces, Conversions, Enhancements, Forms, Workflows — the standard SAP project artefact classification. Output forms are type F.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">TSD</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Technical Specification Document — the mandatory Accenture deliverable documenting what was built, including Processing Logic for all custom fields.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top"><code>_CUSTOM.xdp</code></td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Naming convention for a modified XDP produced by the wizard, distinguishing it from the standard SAP pre-delivered XDP.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">Mapping sheet</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">A CSV or TSV file listing all custom fields for a form — technical name, data type, CDS view and derivation logic. The single source of truth for the wizard.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">Derivation logic</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Plain-English description of how a custom field value is derived from SAP data — used by the wizard to generate ABAP SELECT, CONCATENATE or multi-join code.</td>
+            </tr>
+            <tr style="background:var(--bg2)">
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">Claude Code</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">Anthropic's command-line AI tool that can read and write files on local disk — used by the wizard for XDP patching and TSD population.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);font-weight:600;vertical-align:top">Output Parameter Determination</td>
+              <td style="padding:8px 12px;border:.5px solid var(--bdr1);color:var(--txt1);vertical-align:top">SAP Fiori app where business rules determine which form template is used for a given output scenario (e.g. by company code, output type).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 11: Quick Reference -->
+      <div class="ug-section">
+        <h2><i class="ti ti-layout-list" style="color:var(--blue)"></i> Quick Reference</h2>
+        <div style="max-width:420px;border:.5px solid var(--bdr1);border-radius:var(--r12);overflow:hidden">
+          <div style="background:var(--bg2);padding:8px 14px;border-bottom:.5px solid var(--bdr1)">
+            <span style="font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Quick Reference</span>
+          </div>
+          <div style="background:var(--bg1)">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:.5px solid var(--bdr1)">
+              <span style="font-size:13px;color:var(--txt1)">Guided steps</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">8 steps</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:.5px solid var(--bdr1);background:var(--bg2)">
+              <span style="font-size:13px;color:var(--txt1)">Output artefacts</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">5 files</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:.5px solid var(--bdr1)">
+              <span style="font-size:13px;color:var(--txt1)">ABAP patterns</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">3 patterns</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:.5px solid var(--bdr1);background:var(--bg2)">
+              <span style="font-size:13px;color:var(--txt1)">Mapping sheet</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">.csv / .tsv</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:.5px solid var(--bdr1)">
+              <span style="font-size:13px;color:var(--txt1)">TSD template</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">.docx / .md</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:.5px solid var(--bdr1);background:var(--bg2)">
+              <span style="font-size:13px;color:var(--txt1)">Typical saving</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">4–12d → 2–8d</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 14px">
+              <span style="font-size:13px;color:var(--txt1)">Wizard version</span>
+              <span style="font-size:13px;font-weight:500;color:var(--blue)">v5.12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ug-content -->
+  </div><!-- /ug-body -->
+
+  <!-- Footer -->
+  <div class="ug-ftr">
+    <span class="ug-ftr-txt">SAP Adobe Form Wizard &middot; User Guide v5.12 &middot; Accenture &middot; 2026 &middot; Confidential</span>
+    <button class="ug-close-btn" onclick="closeUserGuide()"><i class="ti ti-x"></i> Close Guide</button>
+  </div>
+
+</div><!-- /ug-modal -->
+</div><!-- /ug-overlay -->
+
 </body></html>
 
