@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Accelerator — User Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A0F1E;--navy2:#141C33;--violet:#6941F0;--vlight:#A88BFF;--vpale:#EEE9FE;--amber:#F5A623;--apale:#FEF6E4;--teal:#00B4A0;--tpale:#E0F7F5;--red:#E5484D;--rpale:#FEE8E8;--ink:#1A1A2E;--imid:#3D3D5C;--isoft:#6B6B8A;--ifaint:#A8A8C0;--bd:#E4E4EE;--bd2:#D0D0E0;--surf:#FFFFFF;--surf2:#F4F4F8;--white:#F8F8F6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);font-size:15px;line-height:1.65}
+#pbar{position:fixed;top:0;left:240px;right:0;height:2px;background:var(--vpale);z-index:300}
+#pfill{height:100%;background:var(--violet);width:0;transition:width .1s}
+.shell{display:flex;min-height:100vh}
+/* sidebar */
+.sb{width:240px;flex-shrink:0;background:var(--navy);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--navy2) transparent}
+.sb::-webkit-scrollbar{width:4px}.sb::-webkit-scrollbar-thumb{background:var(--navy2);border-radius:2px}
+.sb-top{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sb-logo{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.sb-icon{width:28px;height:28px;border-radius:7px;background:var(--violet);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sb-name{font-size:13px;font-weight:600;color:#fff;line-height:1.2}
+.sb-sub{font-size:10px;color:rgba(255,255,255,.36);margin-top:2px}
+.sb-ver{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);margin-top:8px}
+.sb-sec{font-family:'DM Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.28);letter-spacing:.06em;padding:13px 16px 4px;text-transform:uppercase}
+.sb-a{display:flex;align-items:center;padding:7px 16px;cursor:pointer;text-decoration:none;color:rgba(255,255,255,.46);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;line-height:1.35}
+.sb-a:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.04)}
+.sb-a.on{color:#C4ADFF;border-left-color:var(--vlight);background:rgba(105,65,240,.12)}
+.sb-foot{margin-top:auto;padding:12px 16px;border-top:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(255,255,255,.18)}
+/* main */
+.main{margin-left:240px;flex:1}
+/* hero */
+.hero{background:var(--navy);padding:52px 60px 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-60px;width:480px;height:480px;background:radial-gradient(circle,rgba(105,65,240,.2) 0%,transparent 65%);pointer-events:none}
+.hero-eye{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.38);margin-bottom:14px;letter-spacing:.04em}
+.hero h1{font-size:36px;font-weight:600;color:#fff;line-height:1.15;margin-bottom:12px;max-width:540px}
+.hero h1 span{color:var(--vlight)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.5);max-width:500px;margin-bottom:32px;line-height:1.6}
+/* agent strip */
+.agents{display:flex;border-top:1px solid rgba(255,255,255,.08)}
+.agent-tab{flex:1;padding:18px 16px 16px;border-right:1px solid rgba(255,255,255,.08);text-decoration:none;transition:background .15s;cursor:pointer}
+.agent-tab:last-child{border-right:none}
+.agent-tab:hover{background:rgba(255,255,255,.04)}
+.at-num{font-family:'DM Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.3);margin-bottom:5px}
+.at-name{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.65);margin-bottom:2px;line-height:1.3}
+.at-sub{font-size:11px;color:rgba(255,255,255,.28)}
+.at-bar{height:2px;background:rgba(255,255,255,.08);border-radius:1px;margin-top:10px}
+.agent-tab.hi .at-name{color:#C4ADFF}.agent-tab.hi .at-bar{background:var(--violet)}.agent-tab.hi{background:rgba(105,65,240,.14)}
+/* content */
+.content{padding:52px 60px 80px;max-width:840px}
+.anch{display:block;height:1px;margin-top:-72px;padding-top:72px}
+.sec{margin-bottom:52px}
+.sec-lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--violet);letter-spacing:.06em;margin-bottom:7px;text-transform:uppercase}
+.sec h2{font-size:25px;font-weight:600;color:var(--ink);margin-bottom:5px;line-height:1.2}
+.sec-desc{font-size:14px;color:var(--isoft);margin-bottom:26px}
+hr.div{border:none;border-top:1px solid var(--bd);margin:50px 0}
+/* steps */
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--bd)}
+.step:last-child{border-bottom:none}
+.sn{width:34px;height:34px;border-radius:50%;background:var(--violet);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.sn.a{background:var(--amber)}.sn.t{background:var(--teal)}
+.sb2{flex:1;padding-top:3px}
+.st{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.sx{font-size:13.5px;color:var(--imid);line-height:1.65}
+.sx code,.st code{font-family:'DM Mono',monospace;font-size:12px;background:var(--surf2);border:1px solid var(--bd);border-radius:4px;padding:1px 5px;color:var(--violet)}
+/* callouts */
+.note,.warn,.tip,.crit{border-radius:8px;padding:13px 15px;margin:12px 0;font-size:13.5px;line-height:1.6;display:flex;gap:11px;align-items:flex-start}
+.note{background:var(--vpale);border-left:3px solid var(--violet);color:#2D1A6E}
+.warn{background:var(--apale);border-left:3px solid var(--amber);color:#7A4D00}
+.tip{background:var(--tpale);border-left:3px solid var(--teal);color:#004D45}
+.crit{background:var(--rpale);border-left:3px solid var(--red);color:#7A1215}
+.ci{font-size:15px;flex-shrink:0;margin-top:1px}
+.cb strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;font-weight:600}
+/* cards */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:10px;padding:17px 19px}
+.ci2{font-size:20px;margin-bottom:9px}
+.ct{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.cx{font-size:13px;color:var(--isoft);line-height:1.55}
+.ccmd{font-family:'DM Mono',monospace;font-size:12px;background:var(--surf2);border:1px solid var(--bd);border-radius:5px;padding:7px 10px;margin-top:9px;color:var(--ink);display:block}
+.ccmd-s{font-size:11px;color:var(--ifaint);margin-top:3px}
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.tbl th{text-align:left;padding:9px 13px;background:var(--navy);color:rgba(255,255,255,.85);font-size:11px;font-weight:500;letter-spacing:.03em}
+.tbl th:first-child{border-radius:7px 0 0 0}.tbl th:last-child{border-radius:0 7px 0 0}
+.tbl td{padding:10px 13px;border-bottom:1px solid var(--bd);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:var(--surf2)}
+.tbl td code{font-family:'DM Mono',monospace;font-size:11.5px;background:var(--vpale);border-radius:3px;padding:1px 5px;color:var(--violet)}
+/* tags */
+.tag{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px}
+.t-once{background:#EFF6FF;color:#1D4ED8}.t-proj{background:var(--tpale);color:#006B62}.t-warn{background:var(--apale);color:#7A4D00}
+/* forbidden table */
+.ftbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+.ftbl th{text-align:left;padding:9px 13px;background:#1A0A3C;color:rgba(255,255,255,.85);font-size:11px;font-weight:500}
+.ftbl th:first-child{border-radius:7px 0 0 0}.ftbl th:last-child{border-radius:0 7px 0 0}
+.ftbl td{padding:10px 13px;border-bottom:1px solid var(--bd);vertical-align:top}
+.ftbl tr:last-child td{border-bottom:none}
+.ftbl tr:nth-child(even) td{background:var(--surf2)}
+.bad{color:var(--red);font-family:'DM Mono',monospace;font-size:12px}
+.good{color:var(--teal);font-size:13px}
+/* console box */
+.console{background:var(--navy);border-radius:8px;padding:14px 18px;margin:12px 0;font-family:'DM Mono',monospace;font-size:12px;color:#A88BFF;line-height:1.7}
+/* pipeline */
+.pipe{display:flex;align-items:stretch;margin:18px 0}
+.pa{flex:1;background:var(--surf);border:1px solid var(--bd);padding:13px 10px;text-align:center}
+.pa:first-child{border-radius:8px 0 0 8px}.pa:last-child{border-radius:0 8px 8px 0}.pa+.pa{border-left:none}
+.pn{width:22px;height:22px;border-radius:50%;background:var(--violet);color:#fff;font-size:11px;font-weight:600;margin:0 auto 6px;display:flex;align-items:center;justify-content:center}
+.pname{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.pfile{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--ifaint)}
+.parr{display:flex;align-items:center;padding:0 3px;color:var(--bd2);font-size:13px;flex-shrink:0}
+/* level table */
+.lvl{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0;margin:14px 0;border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.lh{background:var(--navy);color:rgba(255,255,255,.85);padding:9px 13px;font-size:11px;font-weight:500}
+.lc{padding:10px 13px;border-top:1px solid var(--bd);font-size:13px;vertical-align:top}
+.lbadge{display:inline-block;background:var(--violet);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace}
+/* back to top */
+.btt{position:fixed;bottom:24px;right:24px;width:36px;height:36px;background:var(--violet);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;text-decoration:none;opacity:0;transition:opacity .2s;box-shadow:0 2px 12px rgba(105,65,240,.35)}
+.btt.vis{opacity:1}
+/* footer */
+.ft{margin-top:40px;padding:15px 20px;background:var(--navy);border-radius:10px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.28);text-align:center}
+@media(max-width:860px){.sb{transform:translateX(-100%)}.main{margin-left:0}.hero{padding:30px 22px 0}.content{padding:30px 22px 60px}.cg{grid-template-columns:1fr}#pbar{left:0}.agents{flex-direction:column}}
+</style>
+</head>
+<body>
+<div id="pbar"><div id="pfill"></div></div>
+<div class="shell">
+<nav class="sb">
+  <div class="sb-top">
+    <div class="sb-logo"><div class="sb-icon">⚡</div><div><div class="sb-name">Explore Accelerator</div><div class="sb-sub">SAP S/4HANA Cloud PE</div></div></div>
+    <div class="sb-ver">User Guide · v1.1 · Accenture SAP Practice</div>
+  </div>
+  <div class="sb-sec">Overview</div>
+  <a class="sb-a on" href="#what">What this tool does</a>
+  <a class="sb-a" href="#sysreq">System requirements</a>
+  <div class="sb-sec">Installation</div>
+  <a class="sb-a" href="#install">Step-by-step setup</a>
+  <a class="sb-a" href="#data">Data files & catalog</a>
+  <div class="sb-sec">Agents</div>
+  <a class="sb-a" href="#bpd">BPD Agent</a>
+  <a class="sb-a" href="#kdd">KDD Generator</a>
+  <a class="sb-a" href="#wricef">WRICEF Inventory</a>
+  <a class="sb-a" href="#f2s">F2S Workshop Deck</a>
+  <a class="sb-a" href="#bdcq">BDCQ Enricher</a>
+  <div class="sb-sec">Reference</div>
+  <a class="sb-a" href="#levels">L1–L5 levels explained</a>
+  <a class="sb-a" href="#bpmn">BPMN notation</a>
+  <a class="sb-a" href="#tips">Tips for best results</a>
+  <a class="sb-a" href="#cloudpe">Cloud PE rules</a>
+  <div class="sb-foot">Accenture · SAP Practice · Internal use only</div>
+</nav>
+<div class="main">
+<div class="hero">
+  <div class="hero-eye">accenture sap practice · explore phase accelerator · user guide</div>
+  <h1>From blank page to<br><span>workshop-ready</span> in minutes</h1>
+  <p class="hero-sub">Five AI agents that automate the Explore phase — BPDs, KDD logs, WRICEF registers, F2S decks, and BDCQ briefs. Runs locally on your laptop. All Cloud PE compliant.</p>
+  <div class="agents">
+    <a class="agent-tab hi" href="#bpd"><div class="at-num">Agent 1</div><div class="at-name">BPD Agent</div><div class="at-sub">L2–L5 documentation + swimlanes</div><div class="at-bar"></div></a>
+    <a class="agent-tab" href="#kdd"><div class="at-num">Agent 2</div><div class="at-name">KDD Generator</div><div class="at-sub">15 design decisions per scope item</div><div class="at-bar"></div></a>
+    <a class="agent-tab" href="#wricef"><div class="at-num">Agent 3</div><div class="at-name">WRICEF Inventory</div><div class="at-sub">Custom dev register from KDD log</div><div class="at-bar"></div></a>
+    <a class="agent-tab" href="#f2s"><div class="at-num">Agent 4</div><div class="at-name">F2S Workshop Deck</div><div class="at-sub">Client-ready PowerPoint</div><div class="at-bar"></div></a>
+    <a class="agent-tab" href="#bdcq"><div class="at-num">Agent 5</div><div class="at-name">BDCQ Enricher</div><div class="at-sub">Localised workshop questions</div><div class="at-bar"></div></a>
+  </div>
+</div>
+<div class="content">
+
+<!-- WHAT -->
+<div class="sec"><span class="anch" id="what"></span>
+  <div class="sec-lbl">Overview</div><h2>What this tool does</h2>
+  <p class="sec-desc">Five deliverables. Five agents. One local application.</p>
+  <table class="tbl"><thead><tr><th>Agent</th><th>Deliverable</th></tr></thead><tbody>
+  <tr><td><strong>BPD Agent</strong></td><td>Business Process Documentation — L2 to L5, BPMN swimlanes, FTS assessment, PDF & Word export</td></tr>
+  <tr><td><strong>KDD Generator</strong></td><td>Key Design Decision log — 5-sheet Excel, 15 questions × 10 areas per scope item</td></tr>
+  <tr><td><strong>WRICEF Inventory</strong></td><td>Custom development register — typed, effort-sized, BTP-mapped, auto-built from KDD log</td></tr>
+  <tr><td><strong>F2S Workshop Deck</strong></td><td>Fit-to-Standard workshop PowerPoint — client-ready, BDCQ-grounded, country-localised</td></tr>
+  <tr><td><strong>BDCQ Enricher</strong></td><td>Workshop-ready question briefs with country localisation and Cloud PE constraint flags</td></tr>
+  </tbody></table>
+  <div class="note"><div class="ci">☁️</div><div class="cb"><strong>Cloud PE only</strong>All output strictly enforces SAP S/4HANA Cloud Public Edition (Clean Core). No ABAP, no on-premise transactions, no SAP GUI — SAP Fiori apps and BTP extensions only.</div></div>
+  <div class="note"><div class="ci">🐍</div><div class="cb"><strong>Technology</strong>Python 3 / FastAPI backend · Claude AI (Anthropic) · SAP official scope catalog (657 processes) · Chrome extension for data collection from SAP for Me.</div></div>
+</div>
+
+<hr class="div">
+
+<!-- SYSTEM REQUIREMENTS -->
+<div class="sec"><span class="anch" id="sysreq"></span>
+  <div class="sec-lbl">Before you start</div><h2>System requirements</h2>
+  <table class="tbl"><thead><tr><th>Item</th><th>Minimum</th><th>Notes</th></tr></thead><tbody>
+  <tr><td><strong>Operating system</strong></td><td>Windows 10 or 11 (64-bit)</td><td>Launchers are .bat files</td></tr>
+  <tr><td><strong>Python</strong></td><td>3.9 or higher</td><td>Must be on system PATH. Tick "Add Python to PATH" during install.</td></tr>
+  <tr><td><strong>Browser</strong></td><td>Google Chrome</td><td>Required for the Chrome extension and the application UI</td></tr>
+  <tr><td><strong>Internet</strong></td><td>Stable broadband</td><td>Required for AI generation (Claude API) and SAP portal access</td></tr>
+  <tr><td><strong>Disk space</strong></td><td>~500 MB free</td><td>For Python virtual environment and dependencies</td></tr>
+  </tbody></table>
+  <div class="warn"><div class="ci">⚠️</div><div class="cb"><strong>Check Python first</strong>Open Command Prompt and run <code>python --version</code>. You need 3.9 or higher. If not installed, download from python.org — during installation tick <strong>"Add Python to PATH"</strong>.</div></div>
+</div>
+
+<hr class="div">
+
+<!-- INSTALLATION -->
+<div class="sec"><span class="anch" id="install"></span>
+  <div class="sec-lbl">Setup</div><h2>Installation — step by step</h2>
+  <p class="sec-desc">Four steps, done once per machine.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sb2">
+      <div class="st">Unzip the package</div>
+      <div class="sx">Right-click <code>ExploreAccelerator_SAP_S4HANA.zip</code> → Extract All → choose a permanent destination such as <code>C:\Projects\ExploreAccelerator\</code>. Click Extract.</div>
+      <div class="warn" style="margin-top:10px"><div class="ci">⚠️</div><div class="cb"><strong>Never run from inside the zip</strong>Always extract first. Do not place the folder in OneDrive or Desktop — sync folders can lock files while the app runs.</div></div>
+    </div></div>
+    <div class="step"><div class="sn">2</div><div class="sb2">
+      <div class="st">Run SETUP.bat (once only)</div>
+      <div class="sx">Double-click <code>SETUP.bat</code>. A Command Prompt window opens and installs Python packages — allow 1–3 minutes. When complete you see: <em>✅ Setup complete. Run START.bat to launch.</em> Close the window. If you ever move the folder to a new location, re-run SETUP.bat from there.</div>
+    </div></div>
+    <div class="step"><div class="sn t">3</div><div class="sb2">
+      <div class="st">Install the Chrome extension</div>
+      <div class="sx">Open Chrome → <code>chrome://extensions</code> → enable Developer mode (top-right toggle) → click Load unpacked → navigate to the extracted folder → select the <code>SAPDeckAgent-ChromeExtension</code> sub-folder → Select Folder. The extension icon (◉) appears in your Chrome toolbar.</div>
+      <div class="tip" style="margin-top:10px"><div class="ci">💡</div><div class="cb">If the sub-folder is missing, find <code>SAPDeckAgent-ChromeExtension.zip</code> inside the extracted folder, extract it into a new sub-folder, then load that sub-folder.</div></div>
+    </div></div>
+    <div class="step"><div class="sn t">4</div><div class="sb2">
+      <div class="st">Start the application</div>
+      <div class="sx">Double-click <code>START.bat</code>. A Command Prompt opens — <strong>keep it open</strong> while you work. Chrome opens automatically at <code>http://localhost:3000</code>. You see the Explore Accelerator dashboard with the five agent cards.</div>
+      <div class="console">✅ Explore Accelerator running at http://localhost:3000<br>📚 Scope catalog loaded — 657 processes · Release 2608<br>🤖 Claude CLI detected · AI generation ready</div>
+      <div class="warn" style="margin-top:10px"><div class="ci">⚠️</div><div class="cb">The Command Prompt is the Python server. Closing it stops the application. For every future session: double-click START.bat → work → close browser → close the terminal.</div></div>
+    </div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- DATA FILES -->
+<div class="sec"><span class="anch" id="data"></span>
+  <div class="sec-lbl">Setup</div><h2>Data files and catalog</h2>
+  <p class="sec-desc">Some agents need files from SAP online systems. The catalog ships pre-loaded — re-export every 6 months.</p>
+  <table class="tbl"><thead><tr><th>Agent</th><th>Required file</th><th>Source</th><th>Refresh</th></tr></thead><tbody>
+  <tr><td>BPD Agent</td><td><code>scope-catalog-f2s.json</code></td><td>Included in zip</td><td>None — pre-loaded</td></tr>
+  <tr><td>KDD Generator</td><td><code>scope-catalog.json</code></td><td>SAP for Me Process Navigator</td><td><span class="tag t-once">Every 6 months</span></td></tr>
+  <tr><td>WRICEF Inventory</td><td>Built from KDD log</td><td>Automatic</td><td>None</td></tr>
+  <tr><td>F2S Agent</td><td><code>scope-catalog.json</code> + <code>bdcq/bdcq-questions.json</code></td><td>SAP for Me + Roadmap Viewer</td><td><span class="tag t-once">Every 6 months</span> / <span class="tag t-proj">Per project</span></td></tr>
+  <tr><td>BDCQ Enricher</td><td><code>bdcq/bdcq-questions.json</code></td><td>SAP Roadmap Viewer</td><td><span class="tag t-proj">Per project</span></td></tr>
+  </tbody></table>
+  <div class="tip"><div class="ci">💡</div><div class="cb"><strong>Refreshing scope-catalog.json</strong>Open SAP for Me Process Navigator in Chrome → click the extension icon → Load Full Catalog → Save to Cartridge → select the application folder.</div></div>
+  <div class="tip"><div class="ci">💡</div><div class="cb"><strong>Refreshing bdcq-questions.json</strong>Open SAP Roadmap Viewer in Chrome → Explore phase → Accelerators tab → click the extension icon → Scan → Save BDCQ Files → select the application folder.</div></div>
+</div>
+
+<hr class="div">
+
+<!-- BPD AGENT -->
+<div class="sec"><span class="anch" id="bpd"></span>
+  <div class="sec-lbl">Agent 1</div><h2>BPD Agent — Business Process Documentation</h2>
+  <p class="sec-desc">Generates L2–L5 process documentation, BPMN swimlane diagrams, Fit-to-Standard assessment, and a full PDF and Word export.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sb2">
+      <div class="st">Enter project details</div>
+      <div class="sx">From the dashboard, click BPD Agent. Fill in: Project Name, Client, Module, Process Description, Key Stakeholders, and Integrations.</div>
+      <div class="note" style="margin-top:10px"><div class="ci">✍️</div><div class="cb"><strong>Write a detailed process description</strong>This is the single most important input. A specific, multi-sentence description produces dramatically better output. Include: process type, roles involved, key transactions, integration points, and any client-specific constraints.<br><br><em>Too vague:</em> "We need to document our manufacturing process."<br><br><em>Good:</em> "Implement a full Plan-to-Stock cycle using Discrete Manufacturing. MRP generates Planned Orders from PIRs. The production planner converts to Production Orders. Shop floor confirmation via SAP Fiori. Goods receipt posts on final confirmation. Integration with QM for inspection and SAP IBP for demand forecasting."</div></div>
+    </div></div>
+    <div class="step"><div class="sn">2</div><div class="sb2">
+      <div class="st">Review auto-filled scope items</div>
+      <div class="sx">After pasting your description, the tool automatically detects the module, extracts metadata, and pre-selects relevant scope items within ~3 seconds. Review and untick anything out of scope. Select 3–6 items for the best balance of depth and speed. You can search by ID (e.g., <code>BD6</code>) or keyword (e.g., <code>planned order</code>).</div>
+    </div></div>
+    <div class="step"><div class="sn">3</div><div class="sb2">
+      <div class="st">Generate — approximately 2–4 minutes</div>
+      <div class="sx">Click Generate BPD. The pipeline runs 9 stages with a progress bar.</div>
+      <table class="tbl" style="margin-top:10px"><thead><tr><th>Stage</th><th>What happens</th><th>Time</th></tr></thead><tbody>
+      <tr><td>Catalog lookup</td><td>Pulls L1–L4 structure from scope catalog</td><td>~2s</td></tr>
+      <tr><td>L2 Overview</td><td>Description, scope items, KPIs</td><td>15–25s</td></tr>
+      <tr><td>L3 Process Areas</td><td>One area per scope item + swimlane layout</td><td>20–40s</td></tr>
+      <tr><td>L4 Activities</td><td>Step-by-step user tasks per area</td><td>20–40s</td></tr>
+      <tr><td>L5 Configuration</td><td>Fiori app configuration steps</td><td>15–25s</td></tr>
+      <tr><td>FTS Assessment</td><td>Fit / Partial Fit / Gap per scope item</td><td>15–25s</td></tr>
+      <tr><td>E2E Swimlane</td><td>Full BPMN end-to-end diagram</td><td>10–20s</td></tr>
+      <tr><td>As-Is Process</td><td>Legacy before-state swimlane</td><td>10–20s</td></tr>
+      <tr><td>Next Steps</td><td>Action items, risks, sign-off table</td><td>10–20s</td></tr>
+      </tbody></table>
+    </div></div>
+    <div class="step"><div class="sn t">4</div><div class="sb2">
+      <div class="st">Download PDF and Word</div>
+      <div class="sx">Two download buttons appear in the toolbar. Use <strong>PDF</strong> for client sharing and sign-off. Use <strong>Word (.doc)</strong> for annotation, tracked changes, or incorporating into a larger deliverable.</div>
+      <div class="crit" style="margin-top:10px"><div class="ci">🚨</div><div class="cb"><strong>Download immediately</strong>The BPD is held in browser memory. Navigating away or refreshing the page will lose the generated document. Always download before leaving the BPD Agent tab.</div></div>
+    </div></div>
+  </div>
+  <div class="note"><div class="ci">ℹ️</div><div class="cb"><strong>FTS outcomes</strong> FIT = SAP standard covers the requirement. PARTIAL FIT = Minor configuration needed. GAP = Standard does not cover it — a Cloud PE extension or process change is required. The FTS table is a starting point — validate every GAP and PARTIAL FIT in the workshop.</div></div>
+</div>
+
+<hr class="div">
+
+<!-- KDD GENERATOR -->
+<div class="sec"><span class="anch" id="kdd"></span>
+  <div class="sec-lbl">Agent 2</div><h2>KDD Generator — Key Design Decisions</h2>
+  <p class="sec-desc">Produces a 5-sheet Excel KDD log with 15 design questions across 10 coverage areas per scope item.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sb2">
+      <div class="st">Select scope items and enter project details</div>
+      <div class="sx">Browse or search for scope items by ID, name, or Line of Business. Tick the items you want KDDs for. Enter Client name and Project name — these appear on the Excel cover sheet.</div>
+    </div></div>
+    <div class="step"><div class="sn">2</div><div class="sb2">
+      <div class="st">Generate — 5-stage pipeline per scope item</div>
+      <div class="sx">Click Generate KDD. The pipeline runs five stages per scope item:</div>
+      <div class="pipe" style="margin-top:12px">
+        <div class="pa"><div class="pn">1</div><div class="pname">Cache check</div><div class="pfile">Reuse prior results</div></div>
+        <div class="parr">›</div>
+        <div class="pa"><div class="pn">2</div><div class="pname">Past decisions</div><div class="pfile">Overlay library</div></div>
+        <div class="parr">›</div>
+        <div class="pa"><div class="pn">3</div><div class="pname">Context parse</div><div class="pfile">Catalog extract</div></div>
+        <div class="parr">›</div>
+        <div class="pa"><div class="pn">4</div><div class="pname">KDD generation</div><div class="pfile">Claude AI</div></div>
+        <div class="parr">›</div>
+        <div class="pa"><div class="pn">5</div><div class="pname">Validation</div><div class="pfile">Cloud PE check</div></div>
+      </div>
+      <div class="sx" style="margin-top:8px">The 10 KDD coverage areas generated per scope item: Fiori configuration · Master data setup · Approval workflow · Output management · Integration points · Reporting requirements · Authorisations & roles · Data migration · Organisational structure · Number ranges & document types.</div>
+    </div></div>
+    <div class="step"><div class="sn">3</div><div class="sb2">
+      <div class="st">Review in the KDD Editor</div>
+      <div class="sx">Open the KDD Editor tab to set Fit/Gap, assign Decision Owner, add Decision notes, set WRICEF Type on Gap rows (W/R/I/C/E/F), add RICEF ID and Title, set Effort Estimate (S/M/L/XL).</div>
+    </div></div>
+    <div class="step"><div class="sn t">4</div><div class="sb2">
+      <div class="st">Download the 5-sheet Excel</div>
+      <table class="tbl" style="margin-top:8px"><thead><tr><th>Sheet</th><th>Contents</th></tr></thead><tbody>
+      <tr><td>Cover</td><td>Project name, client, generation date, scope item count, SAP release</td></tr>
+      <tr><td>Instructions</td><td>Facilitator guide — how to use the KDD log in workshops</td></tr>
+      <tr><td>Scope Overview</td><td>One row per scope item — process description, LOB, benefits</td></tr>
+      <tr><td>KDD Master Log</td><td>All design questions with fit/gap, complexity, owner, phase, rationale, impact, WRICEF</td></tr>
+      <tr><td>Summary</td><td>FIT/PARTIAL FIT/GAP counts by LOB, WRICEF type breakdown</td></tr>
+      </tbody></table>
+    </div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- WRICEF -->
+<div class="sec"><span class="anch" id="wricef"></span>
+  <div class="sec-lbl">Agent 3</div><h2>WRICEF Inventory — Custom Development Register</h2>
+  <p class="sec-desc">Automatically compiled from your KDD log. Every Gap and Partial Fit classified by type, sized by effort, and mapped to a BTP delivery service.</p>
+  <table class="tbl"><thead><tr><th>Type</th><th>What it covers</th><th>Cloud PE delivery</th></tr></thead><tbody>
+  <tr><td><strong>W — Workflow</strong></td><td>Custom approval workflows, escalation rules, notifications</td><td>SAP Build Process Automation on BTP</td></tr>
+  <tr><td><strong>R — Report</strong></td><td>Custom analytical reports, dashboards</td><td>SAP Analytics Cloud, Embedded Analytics, CDS Views</td></tr>
+  <tr><td><strong>I — Interface</strong></td><td>Inbound/outbound integrations with external systems</td><td>SAP Integration Suite on BTP</td></tr>
+  <tr><td><strong>C — Conversion</strong></td><td>Data migration objects, legacy data loads</td><td>SAP S/4HANA Migration Cockpit, SAP Data Services</td></tr>
+  <tr><td><strong>E — Extension (RAP)</strong></td><td>UI extensions, field extensions, business logic</td><td>ABAP Cloud RESTful Application Programming Model</td></tr>
+  <tr><td><strong>E — Extension (CAPM)</strong></td><td>Side-by-side apps, microservices, new UIs</td><td>SAP Cloud Application Programming Model on BTP</td></tr>
+  <tr><td><strong>F — Form</strong></td><td>Output forms — invoices, POs, delivery notes</td><td>SAP Forms by Adobe, SAP Document Management</td></tr>
+  </tbody></table>
+  <div class="tip"><div class="ci">💡</div><div class="cb"><strong>Set WRICEF type on all Gap rows</strong>The inventory only populates from rows where WRICEF Type is set in the KDD Editor. Review every Gap and Partial Fit row after generation and assign the correct type.</div></div>
+  <p style="font-size:13.5px;color:var(--imid);margin-top:16px">View the inventory in the <strong>KDD Analysis</strong> tab. The summary dashboard shows Fit/Partial Fit/Gap/RICEF counts, effort tiles, scope item risk table (ranked by gap count and RAG status), and the full filterable WRICEF register.</p>
+</div>
+
+<hr class="div">
+
+<!-- F2S -->
+<div class="sec"><span class="anch" id="f2s"></span>
+  <div class="sec-lbl">Agent 4</div><h2>F2S Agent — Fit-to-Standard Workshop Deck</h2>
+  <p class="sec-desc">Client-ready workshop PowerPoint in 30–90 seconds. Scope catalog + BDCQ questions + KDD cache + country localisation assembled into a structured presentation.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sb2">
+      <div class="st">Enter workshop details</div>
+      <table class="tbl" style="margin-top:8px"><thead><tr><th>Field</th><th>Example</th></tr></thead><tbody>
+      <tr><td>Workshop Title</td><td>Fit-to-Standard Workshop — Finance</td></tr>
+      <tr><td>Client Name</td><td>ABC Manufacturing Ltd</td></tr>
+      <tr><td>Facilitator</td><td>Jane Smith</td></tr>
+      <tr><td>Customer Process Owner</td><td>John Davies</td></tr>
+      <tr><td>Workshop Date</td><td>15 October 2026</td></tr>
+      <tr><td>Countries</td><td>United Kingdom, Germany</td></tr>
+      <tr><td>Brand Colour</td><td>#A100FF (Accenture purple — default)</td></tr>
+      </tbody></table>
+    </div></div>
+    <div class="step"><div class="sn">2</div><div class="sb2">
+      <div class="st">Enter scope item IDs and check the preview</div>
+      <div class="sx">Enter scope IDs comma-separated (e.g., <code>BD6, J59, BJ5</code>). The preview table confirms: whether each ID is in catalog, BDCQ question counts (L1/L2/L3), and KDD rows cached. Validate before generating.</div>
+    </div></div>
+    <div class="step"><div class="sn t">3</div><div class="sb2">
+      <div class="st">Generate and download</div>
+      <div class="sx">Click Generate Workshop Deck. Generation takes 30–90 seconds. Click Download PPTX when complete. The deck contains: cover slide, agenda, one section per scope item (process overview, BDCQ questions at L1/L2/L3, pre-filled KDD discussion points, country-specific compliance notes), and sign-off slide.</div>
+    </div></div>
+  </div>
+  <div class="note"><div class="ci">ℹ️</div><div class="cb"><strong>When to use which agent</strong> F2S Agent = discovery workshop with client (run first). BPD Agent = process documentation after workshop. KDD Generator = formal decision recording. WRICEF Inventory = sizing custom development.</div></div>
+</div>
+
+<hr class="div">
+
+<!-- BDCQ -->
+<div class="sec"><span class="anch" id="bdcq"></span>
+  <div class="sec-lbl">Agent 5</div><h2>BDCQ Enricher — Workshop Preparation</h2>
+  <p class="sec-desc">Enriches SAP BDCQ questions with country localisation, industry context, and Cloud PE constraint flags — telling you not just what to ask but what answer to expect.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sb2">
+      <div class="st">Collect BDCQ files from SAP Roadmap Viewer</div>
+      <div class="sx">Open SAP Roadmap Viewer in Chrome → Explore phase → Accelerators tab → click the extension icon → Scan → Save BDCQ Files → select the application folder. The file <code>bdcq/bdcq-questions.json</code> is created automatically.</div>
+    </div></div>
+    <div class="step"><div class="sn t">2</div><div class="sb2">
+      <div class="st">Run the enricher</div>
+      <div class="sx">In a Claude Code session, type <code>/s4pc-bdcq-enricher</code>. The agent prompts for client country and client industry. Output is a structured workshop brief — one section per BDCQ question — with mandatory localisation flags, industry-specific sub-questions, Cloud PE constraint warnings, and recommended configuration or extension paths.</div>
+    </div></div>
+  </div>
+  <div class="note"><div class="ci">ℹ️</div><div class="cb"><strong>Three enrichment lenses</strong> Country localisation — mandatory statutory items (VAT, GST, e-invoicing, withholding tax) with the legal basis and Cloud PE config path. Industry context — vertical-specific sub-questions and emphasis notes. Cloud PE constraints — where client expectations differ from Public Edition capability.</div></div>
+</div>
+
+<hr class="div">
+
+<!-- LEVELS -->
+<div class="sec"><span class="anch" id="levels"></span>
+  <div class="sec-lbl">Reference</div><h2>Understanding L1–L5 levels</h2>
+  <table class="tbl"><thead><tr><th>Level</th><th>Name</th><th>What it describes</th><th>Example</th></tr></thead><tbody>
+  <tr><td><strong>L1</strong></td><td>Line of Business</td><td>Overall SAP functional area</td><td>Manufacturing</td></tr>
+  <tr><td><strong>L2</strong></td><td>End-to-End Process</td><td>Complete business scenario</td><td>Plan-to-Stock</td></tr>
+  <tr><td><strong>L3</strong></td><td>Process Area</td><td>Logical grouping of activities</td><td>Production Order Management</td></tr>
+  <tr><td><strong>L4</strong></td><td>Activity</td><td>Specific task in a Fiori app</td><td>Convert Planned Order to Production Order</td></tr>
+  <tr><td><strong>L5</strong></td><td>Business Configuration</td><td>Fiori-based configuration step</td><td>Set MRP Controller in Manage Production Orders</td></tr>
+  </tbody></table>
+</div>
+
+<hr class="div">
+
+<!-- BPMN -->
+<div class="sec"><span class="anch" id="bpmn"></span>
+  <div class="sec-lbl">Reference</div><h2>BPMN 2.0 swimlane notation</h2>
+  <table class="tbl"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody>
+  <tr><td>Rounded rectangle</td><td>User task — performed in a SAP Fiori app</td></tr>
+  <tr><td>Diamond</td><td>Gateway — decision point or process branch</td></tr>
+  <tr><td>Thin-border circle</td><td>Start event</td></tr>
+  <tr><td>Thick-border circle</td><td>End event</td></tr>
+  <tr><td>Solid arrow</td><td>Sequence flow — direction of the process</td></tr>
+  <tr><td>Dashed arrow</td><td>Message flow — system-to-system or cross-pool communication</td></tr>
+  </tbody></table>
+</div>
+
+<hr class="div">
+
+<!-- TIPS -->
+<div class="sec"><span class="anch" id="tips"></span>
+  <div class="sec-lbl">Reference</div><h2>Tips for best results</h2>
+  <div class="steps">
+    <div class="step"><div class="sn t">✓</div><div class="sb2"><div class="st">Write a detailed process description (BPD Agent)</div><div class="sx">The description feeds every section. A specific multi-sentence paragraph produces significantly better swimlanes, L3 areas, and FTS assessments than a vague summary. Include process type, roles, integration points, and client-specific nuance.</div></div></div>
+    <div class="step"><div class="sn t">✓</div><div class="sb2"><div class="st">Use 3–6 scope items per generation run</div><div class="sx">Fewer than 3 may miss key sub-processes. More than 6 increases generation time significantly and dilutes workshop focus. For large programmes, generate one BPD or KDD batch per functional area.</div></div></div>
+    <div class="step"><div class="sn t">✓</div><div class="sb2"><div class="st">Check the preview before generating the F2S deck</div><div class="sx">The preview confirms valid scope IDs and shows BDCQ question counts. Items showing 0 scope-specific questions will use LOB-level questions — valid but less targeted.</div></div></div>
+    <div class="step"><div class="sn t">✓</div><div class="sb2"><div class="st">Enrich BDCQ questions before the F2S workshop</div><div class="sx">Run the BDCQ Enricher first to add country and industry context. Use the enriched brief alongside the deck during the workshop.</div></div></div>
+    <div class="step"><div class="sn t">✓</div><div class="sb2"><div class="st">Set WRICEF type on all Gap rows</div><div class="sx">The WRICEF Inventory only populates from rows where WRICEF Type is set. Review every Gap and Partial Fit row in the KDD Editor after generation.</div></div></div>
+    <div class="step"><div class="sn t">✓</div><div class="sb2"><div class="st">Download BPD documents immediately</div><div class="sx">The BPD is held in browser memory — it is lost if you navigate away or refresh. Always download PDF and Word before leaving the BPD Agent tab.</div></div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- CLOUD PE RULES -->
+<div class="sec"><span class="anch" id="cloudpe"></span>
+  <div class="sec-lbl">Reference</div><h2>Cloud PE rules — what to expect</h2>
+  <p class="sec-desc">These terms never appear in any generated output. When a requirement cannot be met by standard, the tool flags it as GAP and recommends the correct Cloud PE delivery path.</p>
+  <table class="ftbl"><thead><tr><th>Forbidden term</th><th>Why excluded</th><th>Correct alternative</th></tr></thead><tbody>
+  <tr><td><span class="bad">ABAP customisation</span></td><td>Not permitted in Cloud PE standard tier</td><td><span class="good">Key User Extensions or BTP Side-by-Side</span></td></tr>
+  <tr><td><span class="bad">User exits / BAdIs</span></td><td>Replaced by the SAP extension framework</td><td><span class="good">BTP Side-by-Side Extensions</span></td></tr>
+  <tr><td><span class="bad">SAP GUI / SAPGUI</span></td><td>Cloud PE is Fiori-only</td><td><span class="good">SAP Fiori web apps</span></td></tr>
+  <tr><td><span class="bad">SM30 / SM31 / SM34</span></td><td>Table maintenance transactions not available</td><td><span class="good">Fiori-based customising apps</span></td></tr>
+  <tr><td><span class="bad">SE16 / SE38 / SE80</span></td><td>ABAP workbench tools not available</td><td><span class="good">ABAP Cloud development tools</span></td></tr>
+  <tr><td><span class="bad">On-premise</span></td><td>Different SAP deployment model</td><td><span class="good">SAP S/4HANA Cloud Public Edition</span></td></tr>
+  <tr><td><span class="bad">ECC / R/3</span></td><td>Legacy system names</td><td><span class="good">"source system" or "legacy system"</span></td></tr>
+  <tr><td><span class="bad">LSMW / BDC / batch input</span></td><td>Legacy data migration tools</td><td><span class="good">SAP S/4HANA Migration Cockpit</span></td></tr>
+  <tr><td><span class="bad">Private Cloud / Private Edition</span></td><td>A different SAP edition</td><td><span class="good">SAP S/4HANA Cloud Public Edition</span></td></tr>
+  </tbody></table>
+  <div class="ft">Explore Accelerator · Accenture SAP Practice · SAP S/4HANA Cloud Public Edition<br>Backend: Python 3 / FastAPI · AI: Claude (Anthropic) · Catalog: SAP for Me · Standards: SAP Activate / Clean Core<br>For support, contact the Accenture SAP Capability Network.</div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /shell -->
+<a class="btt" id="btt" href="#">↑</a>
+<script>
+window.addEventListener('scroll',function(){
+  var d=document.documentElement,s=d.scrollTop,t=d.scrollHeight-d.clientHeight;
+  document.getElementById('pfill').style.width=(s/t*100)+'%';
+  var b=document.getElementById('btt');
+  s>400?b.classList.add('vis'):b.classList.remove('vis');
+  var anchors=document.querySelectorAll('.anch'),cur='';
+  anchors.forEach(function(a){if(d.scrollTop>=a.offsetTop-90)cur=a.id});
+  if(cur)document.querySelectorAll('.sb-a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
+});
+</script>
+</body>
+</html>
