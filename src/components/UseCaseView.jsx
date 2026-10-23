@@ -26,6 +26,10 @@ const IPOV_SLIDES = {
   'rcefw-builder':           ['/CodeX/ipov/rcefw-rap.png', '/CodeX/ipov/rcefw-cap.png', '/CodeX/ipov/rcefw-ui.png'],
   'kdd-creation':            ['/CodeX/ipov/kdd-creation.png'],
   'pmo-project-charter':     ['/CodeX/ipov/pmo-project-charter.png'],
+  'pmo-l4-plan':             ['/CodeX/ipov/pmo-l4-plan.png'],
+  'pmo-onboarding-kit':      ['/CodeX/ipov/pmo-onboarding-kit.png'],
+  'fulcrum-user-guide':      ['/CodeX/ipov/fulcrum-user-guide.png'],
+  'config-wizard':           ['/CodeX/ipov/config-wizard.png'],
   'cpi-tdd-integration':     ['/CodeX/ipov/cpi-tdd-integration.png'],
   'roles-auth-matrix':       ['/CodeX/ipov/roles-auth-matrix.png'],
   'functional-design-phase2':['/CodeX/ipov/functional-design-phase2.png'],
@@ -191,6 +195,8 @@ export default function UseCaseView({ useCase, phaseColor, onBack }) {
             ) : (
               <ArtifactLauncher useCase={current} phaseColor={phaseColor} />
             )
+          ) : current.docs ? (
+            <DocsLauncher useCase={current} phaseColor={phaseColor} />
           ) : Component ? (
             <div style={{ flex: 1, overflow: 'auto' }}>
               <Component onSendPrompt={null} height="calc(100vh - 65px)" style={{ height: 'calc(100vh - 65px)' }} />
@@ -819,6 +825,61 @@ function ArtifactLauncher({ useCase, phaseColor }) {
         </div>
       </div>
 
+    </div>
+  )
+}
+
+function DocsLauncher({ useCase, phaseColor }) {
+  return (
+    <div style={{ flex: 1, overflow: 'auto', padding: '40px 48px', background: '#f0f0f8' }}>
+      <div style={{ maxWidth: 680, margin: '0 auto' }}>
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase', color: phaseColor, marginBottom: 6 }}>Documentation</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: '#1e1b4b' }}>{useCase.title}</div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {useCase.docs.map((doc, i) => (
+            <a
+              key={i}
+              href={doc.url}
+              target="_blank"
+              rel="noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 20,
+                background: '#fff', borderRadius: 14, padding: '20px 24px',
+                border: `1.5px solid ${phaseColor}22`,
+                boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+                transition: 'box-shadow 0.15s',
+                cursor: 'pointer',
+              }}>
+                <div style={{
+                  width: 52, height: 52, borderRadius: 12, flexShrink: 0,
+                  background: `linear-gradient(135deg, ${phaseColor}, ${phaseColor}bb)`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 22, color: '#fff',
+                }}>
+                  {doc.icon || '📄'}
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: '#1e1b4b', marginBottom: 3 }}>
+                    {String(i + 1).padStart(2, '0')} — {doc.title}
+                  </div>
+                  <div style={{ fontSize: 12, color: '#6b7280' }}>{doc.subtitle}</div>
+                </div>
+                <div style={{
+                  fontSize: 11, fontWeight: 700, color: phaseColor,
+                  background: phaseColor + '15', borderRadius: 20, padding: '5px 14px',
+                  textTransform: 'uppercase', letterSpacing: 0.6, flexShrink: 0,
+                }}>
+                  {doc.cta || 'Open PDF'} ↗
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

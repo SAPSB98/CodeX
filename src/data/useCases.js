@@ -1,4 +1,3 @@
-
 export const phases = [
   {
     id: 'discover-prepare',
@@ -11,12 +10,17 @@ export const phases = [
         name: 'PMO Agent',
         count: 5,
         useCases: [
-          { id: 'pmo-project-charter', title: 'PMO Agent – Project Charter',        status: 'released', artifactUrl: 'https://claude.ai/artifacts/latest/b8dc19d0-ab38-4752-8a24-1175dc77a9ed' },
-          { id: 'pmo-kickoff-deck',    title: 'PMO Agent – Project Kick Off Deck',  status: 'ideation' },
-          { id: 'pmo-l4-plan',         title: 'L4 Plan (MVP)',                      status: 'ideation' },
-          { id: 'pmo-onboarding-kit',  title: 'PMO Agent – Onboarding Kit',         status: 'ideation' },
-          { id: 'pmo-steerco',         title: 'PMO Agent – Steerco Agent',          status: 'ideation' },
-        ]
+          {
+            id: 'pmo-project-charter',
+            title: 'PMO Agent – Project Charter',
+            status: 'released',
+            artifactUrl: 'https://claude.ai/artifacts/latest/b8dc19d0-ab38-4752-8a24-1175dc77a9ed',
+          },
+          { id: 'pmo-kickoff-deck', title: 'PMO Agent – Project Kick Off Deck', status: 'ideation' },
+          { id: 'pmo-l4-plan', title: 'L4 Plan (MVP)', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/L4_Plan_Agent_MVP.html' },
+          { id: 'pmo-onboarding-kit', title: 'PMO Agent – Onboarding Kit', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/S4HANA_Onboarding_Walkthrough.html' },
+          { id: 'pmo-steerco', title: 'PMO Agent – Steerco Agent', status: 'ideation' },
+        ],
       },
       {
         name: 'Security Agent',
@@ -28,57 +32,74 @@ export const phases = [
             status: 'released',
             subAgents: [
               {
-                id: 'orion-sbpa-mtar', title: 'Orion - SBPA Automation Project MTAR - For Developers', status: 'ideation',
+                id: 'orion-sbpa-mtar',
+                title: 'Orion - SBPA Automation Project MTAR - For Developers',
+                status: 'ideation',
                 subFolders: [
-                  { id: 'orion-sbpa-demo',  title: 'Demo Video',              icon: '🎬' },
+                  { id: 'orion-sbpa-demo', title: 'Demo Video', icon: '🎬' },
                   { id: 'orion-sbpa-guide', title: 'Inputs & User Guidelines', icon: '📋' },
-                ]
+                ],
               },
               {
-                id: 'orion-calm-setup', title: 'Orion BOT - CALM Project Set-up', status: 'ideation',
+                id: 'orion-calm-setup',
+                title: 'Orion BOT - CALM Project Set-up',
+                status: 'ideation',
                 subFolders: [
-                  { id: 'orion-calm-demo',  title: 'Demo Video',              icon: '🎬' },
+                  { id: 'orion-calm-demo', title: 'Demo Video', icon: '🎬' },
                   { id: 'orion-calm-guide', title: 'Inputs & User Guidelines', icon: '📋' },
-                ]
+                ],
               },
               {
-                id: 'orion-cbc-setup', title: 'Orion BOT - CBC Set-up', status: 'ideation',
+                id: 'orion-cbc-setup',
+                title: 'Orion BOT - CBC Set-up',
+                status: 'ideation',
                 subFolders: [
-                  { id: 'orion-cbc-demo',  title: 'Demo Video',              icon: '🎬' },
+                  { id: 'orion-cbc-demo', title: 'Demo Video', icon: '🎬' },
                   { id: 'orion-cbc-guide', title: 'Inputs & User Guidelines', icon: '📋' },
-                ]
+                ],
               },
               {
-                id: 'orion-joule', title: 'Orion BOT - Joule Enablement', status: 'released',
+                id: 'orion-joule',
+                title: 'Orion BOT - Joule Enablement',
+                status: 'released',
                 subFolders: [
                   {
-                    id: 'orion-joule-demo', title: 'Demo Video', icon: '🎬',
+                    id: 'orion-joule-demo',
+                    title: 'Demo Video',
+                    icon: '🎬',
                     videoUrls: [
                       { label: 'Video 1', url: 'https://mediaexchange.accenture.com/media/t/1_a1b302ez' },
                       { label: 'Video 2', url: 'https://mediaexchange.accenture.com/media/t/1_9rjs8afv' },
                       { label: 'Video 3', url: 'https://mediaexchange.accenture.com/media/t/1_n2arhwi7' },
                       { label: 'Video 4', url: 'https://mediaexchange.accenture.com/media/t/1_auibky2u' },
                       { label: 'Video 5', url: 'https://mediaexchange.accenture.com/media/t/1_3v7xli7o' },
-                    ]
+                    ],
                   },
                   { id: 'orion-joule-guide', title: 'Inputs & User Guidelines', icon: '📋', componentKey: 'orion-joule-guide' },
-                ]
+                ],
               },
               {
-                id: 'orion-user-provisioning', title: 'Orion BOT - User Provisioning', status: 'released',
+                id: 'orion-user-provisioning',
+                title: 'Orion BOT - User Provisioning',
+                status: 'released',
                 subFolders: [
-                  { id: 'orion-prov-demo',  title: 'Demo Video',              icon: '🎬', videoUrl: 'https://ts.accenture.com/sites/Global_S4HPC_CoP/_layouts/15/stream.aspx?id=%2Fsites%2FGlobal%5FS4HPC%5FCoP%2FShared%20Documents%2FGeneral%2FADVANCE%20Delivery%20Documents%2F04%2E%20Orion%5FBOT%2FAdvance%20%2D%20Orion%20BOT%20%2D%20User%20Creation%20Demo%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2Edd232171%2D4477%2D49df%2Db3d1%2Db444edcfb4bb' },
+                  {
+                    id: 'orion-prov-demo',
+                    title: 'Demo Video',
+                    icon: '🎬',
+                    videoUrl: 'https://ts.accenture.com/sites/Global_S4HPC_CoP/_layouts/15/stream.aspx?id=%2Fsites%2FGlobal%5FS4HPC%5FCoP%2FShared%20Documents%2FGeneral%2FADVANCE%20Delivery%20Documents%2F04%2E%20Orion%5FBOT%2FAdvance%20%2D%20Orion%20BOT%20%2D%20User%20Creation%20Demo%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2Edd232171%2D4477%2D49df%2Db3d1%2Db444edcfb4bb',
+                  },
                   { id: 'orion-prov-guide', title: 'Inputs & User Guidelines', icon: '📋', componentKey: 'orion-user-provisioning-guide' },
-                ]
+                ],
               },
-            ]
+            ],
           },
-          { id: 'orion-phase-2',       title: 'Orion Agent – Prepare Phase II',     status: 'in-progress' },
-          { id: 'roles-auth-matrix',   title: 'Roles & Authorization Matrix',       status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/BRRGM.html' },
-          { id: 'system-roles-update', title: 'System Update of Roles Matrix',      status: 'in-progress' },
-        ]
-      }
-    ]
+          { id: 'orion-phase-2', title: 'Orion Agent – Prepare Phase II', status: 'in-progress' },
+          { id: 'roles-auth-matrix', title: 'Roles & Authorization Matrix', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/BRRGM.html' },
+          { id: 'system-roles-update', title: 'System Update of Roles Matrix', status: 'in-progress' },
+        ],
+      },
+    ],
   },
   {
     id: 'explore',
@@ -91,27 +112,61 @@ export const phases = [
         name: 'Solution Confirmation Agent',
         count: 8,
         useCases: [
-          { id: 'bdcq-agent',          title: 'BDCQ Agent',                            status: 'ideation' },
-          { id: 'fit-to-standard',     title: 'Fit to Standard – Material Generation', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/FitToStandard_v5_BDCQ.html' },
-          { id: 'fulcrum-user-guide',  title: 'KDD & BDCQ User Guide',                 status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/ExploreAccelerator/SAP_S4HANA_CloudPE_ExploreAccelerator_UserGuide.html', description: 'SAP S/4HANA Cloud PE Explore Accelerator – full user guide' },
-          { id: 'workshop-analysis',   title: 'Workshop Analysis Utility Agent',       status: 'ideation' },
-          { id: 'user-stories',        title: 'User Stories',                          status: 'ideation' },
-          { id: 'bp-design-l1-l5',    title: 'Business Process Design L1 to L5',      status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/816f329f-30c7-4c38-b4cf-fa144db9b464' },
-          { id: 'architecture-design', title: 'Architecture Design Agent',             status: 'ideation' },
-          { id: 'wricef-inventory',    title: 'WRICEF Inventory Generator',            status: 'ideation' },
-        ]
+          { id: 'bdcq-agent', title: 'BDCQ Agent', status: 'ideation' },
+          { id: 'fit-to-standard', title: 'Fit to Standard – Material Generation', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/FitToStandard_v5_BDCQ.html' },
+          {
+            id: 'fulcrum-user-guide',
+            title: 'KDD & BDCQ User Guide',
+            status: 'released',
+            artifactUrl: 'https://sapsb98.github.io/CodeX/ExploreAccelerator/SAP_S4HANA_CloudPE_ExploreAccelerator_UserGuide.html',
+            description: 'SAP S/4HANA Cloud PE Explore Accelerator – full user guide',
+          },
+          { id: 'workshop-analysis', title: 'Workshop Analysis Utility Agent', status: 'ideation' },
+          { id: 'user-stories', title: 'User Stories', status: 'ideation' },
+          {
+            id: 'bp-design-l1-l5',
+            title: 'Business Process Design L1 to L5',
+            status: 'released',
+            artifactUrl: 'https://claude.ai/artifacts/latest/816f329f-30c7-4c38-b4cf-fa144db9b464',
+          },
+          { id: 'architecture-design', title: 'Architecture Design Agent', status: 'ideation' },
+          { id: 'wricef-inventory', title: 'WRICEF Inventory Generator', status: 'ideation' },
+        ],
       },
       {
         name: 'Functional Agent',
         count: 4,
         useCases: [
-          { id: 'functional-design-doc',    title: 'Functional Design Document Phase 1', status: 'released',  artifactUrl: 'https://claude.ai/artifacts/latest/bc95ba51-4b37-42e9-b98d-29b0f00aa11d' },
-          { id: 'functional-design-phase2', title: 'Functional Design Document-Phase 2', status: 'released',  artifactUrl: 'https://claude.ai/artifacts/latest/ad106cf1-ab6a-430f-b6f8-42eb50e654cc', description: 'RICEFW FD Studio · Wave 1 Form Specialist · XDP/XSD Parser · Word Export' },
-          { id: 'config-rationale',         title: 'Config Rationale',                   status: 'in-progress' },
-          { id: 'config-wizard',            title: 'Config Wizard Agent',                status: 'in-progress' },
-        ]
-      }
-    ]
+          {
+            id: 'functional-design-doc',
+            title: 'Functional Design Document Phase 1',
+            status: 'released',
+            artifactUrl: 'https://claude.ai/artifacts/latest/bc95ba51-4b37-42e9-b98d-29b0f00aa11d',
+          },
+          {
+            id: 'functional-design-phase2',
+            title: 'Functional Design Document-Phase 2',
+            status: 'released',
+            artifactUrl: 'https://claude.ai/artifacts/latest/ad106cf1-ab6a-430f-b6f8-42eb50e654cc',
+            description: 'RICEFW FD Studio · Wave 1 Form Specialist · XDP/XSD Parser · Word Export',
+          },
+          { id: 'config-rationale', title: 'Config Rationale', status: 'in-progress' },
+          {
+            id: 'config-wizard',
+            title: 'Config Wizard Agent',
+            status: 'released',
+            docs: [
+              {
+                title: 'Setup Guide',
+                subtitle: 'Installation & First-Time Configuration · Version 1.0',
+                url: 'https://sapsb98.github.io/CodeX/docs/SAP-Config-Agent-Setup-Guide.pdf',
+              },
+              { title: 'User Guide', subtitle: 'For Functional Consultants · Version 1.0', url: 'https://sapsb98.github.io/CodeX/docs/SAP-Config-Agent-User-Guide.pdf' },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     id: 'realize',
@@ -132,35 +187,54 @@ export const phases = [
             agentCount: 4,
             artifactUrl: 'https://claude.ai/artifacts/latest/66e02cb5-7040-436b-9bbe-63f191f0469b',
           },
-          { id: 'form-wizard',           title: 'Form Wizard',                           status: 'released',    artifactUrl: 'https://sapsb98.github.io/CodeX/SAP_Adobe_Form_Wizard_v5.12.html' },
-          { id: 'cpi-tdd-integration',   title: 'Technical Design-Integration',          status: 'released',    componentKey: 'cpi-tdd-agent' },
-          { id: 'interface-mapper',      title: 'Interface Mapper',                      status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/bc95ba51-4b37-42e9-b98d-29b0f00aa11d' },
-          { id: 'integration-flow',   title: 'Integration Flow Builder & Deployment', status: 'in-progress' },
-          { id: 'code-quality',       title: 'Code Quality / Impact Analysis',        status: 'in-progress' },
-          { id: 'technical-strategy', title: 'Technical Strategy Builder',            status: 'in-progress' },
-        ]
+          { id: 'form-wizard', title: 'Form Wizard', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/SAP_Adobe_Form_Wizard_v5.12.html' },
+          {
+            id: 'cpi-tdd-integration',
+            title: 'Technical Design-Integration',
+            status: 'released',
+            artifactUrl: 'https://claude.ai/artifacts/latest/f17e6bb8-3334-4173-9827-e9a2a0564993',
+          },
+          { id: 'interface-mapper', title: 'Interface Mapper', status: 'released', artifactUrl: 'https://claude.ai/artifacts/latest/bc95ba51-4b37-42e9-b98d-29b0f00aa11d' },
+          { id: 'integration-flow', title: 'Integration Flow Builder & Deployment', status: 'in-progress' },
+          {
+            id: 'code-quality',
+            title: 'Code Quality / Impact Analysis',
+            description: 'SAP Code Reviewer · Clean-Core review · PDF + Excel findings reports',
+            status: 'released',
+            docs: [
+              { title: 'Demo Video', subtitle: 'SAP Code Reviewer walkthrough · Accenture Media Exchange', url: 'https://mediaexchange.accenture.com/media/t/1_01eujj32', icon: '🎬', cta: 'Watch Video' },
+              { title: 'User Guide', subtitle: 'Tool overview, prerequisites, installation & known limitations', url: 'https://sapsb98.github.io/CodeX/docs/SAP-Code-Reviewer-User-Guide.html', icon: '📄', cta: 'Open Guide' },
+            ],
+          },
+          { id: 'technical-strategy', title: 'Technical Strategy Builder', status: 'in-progress' },
+        ],
       },
       {
         name: 'Data Agent',
         count: 4,
         useCases: [
-          { id: 'data-migration-agent', title: 'S/4HANA Public Cloud Data Migration Agent', status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/79ef1661-25be-4c47-927a-9fd3188abd83' },
-          { id: 'data-strategy',        title: 'Data Strategy Builder',                     status: 'in-progress' },
-          { id: 'data-cleansing',       title: 'Data Cleansing & Enrichment Agent',         status: 'in-progress' },
-          { id: 'data-profiler',        title: 'Accenture Data Profiler (ADCMC)',            status: 'in-progress' },
-        ]
+          {
+            id: 'data-migration-agent',
+            title: 'S/4HANA Public Cloud Data Migration Agent',
+            status: 'released',
+            artifactUrl: 'https://sapsb98.github.io/CodeX/S4HANA_DataMigration_Walkthrough.html',
+          },
+          { id: 'data-strategy', title: 'Data Strategy Builder', status: 'in-progress' },
+          { id: 'data-cleansing', title: 'Data Cleansing & Enrichment Agent', status: 'in-progress' },
+          { id: 'data-profiler', title: 'Accenture Data Profiler (ADCMC)', status: 'in-progress' },
+        ],
       },
       {
         name: 'Quality Engineering Agent',
         count: 4,
         useCases: [
-          { id: 'defect-resolver-qe',    title: 'Defect Resolver',               status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/d9a7f4f1-c8cf-4583-9698-90423f2c1ec2' },
-          { id: 'test-strategy-builder', title: 'Test Strategy Builder',         status: 'in-progress' },
-          { id: 'test-case-generator',   title: 'Test Case / Script Generator',  status: 'in-progress' },
-          { id: 'test-data',             title: 'Test Data',                     status: 'ideation' },
-        ]
-      }
-    ]
+          { id: 'defect-resolver-qe', title: 'Defect Resolver', status: 'released', artifactUrl: 'https://claude.ai/artifacts/latest/d9a7f4f1-c8cf-4583-9698-90423f2c1ec2' },
+          { id: 'test-strategy-builder', title: 'Test Strategy Builder', status: 'in-progress' },
+          { id: 'test-case-generator', title: 'Test Case / Script Generator', status: 'in-progress' },
+          { id: 'test-data', title: 'Test Data', status: 'ideation' },
+        ],
+      },
+    ],
   },
   {
     id: 'deploy',
@@ -173,22 +247,22 @@ export const phases = [
         name: 'Change & Talent Agent',
         count: 5,
         useCases: [
-          { id: 'change-impact',    title: 'Change Impact Agent',                    status: 'in-progress' },
-          { id: 'change-strategy',  title: 'Change Strategy Agent',                  status: 'ideation' },
-          { id: 'talent-training',  title: 'Talent Agent – Training Plan & Material', status: 'ideation' },
-          { id: 'comms-template',   title: 'Communication Template Generation Agent', status: 'ideation' },
-          { id: 'kut-eut-training', title: 'KUT / EUT Training Material Agent',      status: 'ideation' },
-        ]
+          { id: 'change-impact', title: 'Change Impact Agent', status: 'in-progress' },
+          { id: 'change-strategy', title: 'Change Strategy Agent', status: 'ideation' },
+          { id: 'talent-training', title: 'Talent Agent – Training Plan & Material', status: 'ideation' },
+          { id: 'comms-template', title: 'Communication Template Generation Agent', status: 'ideation' },
+          { id: 'kut-eut-training', title: 'KUT / EUT Training Material Agent', status: 'ideation' },
+        ],
       },
       {
         name: 'Deployment Agent',
         count: 2,
         useCases: [
-          { id: 'cutover-plan',   title: 'Cutover Approach & Plan / Task Generator', status: 'ideation' },
-          { id: 'copy-reference', title: 'Copy Reference',                           status: 'ideation' },
-        ]
-      }
-    ]
+          { id: 'cutover-plan', title: 'Cutover Approach & Plan / Task Generator', status: 'ideation' },
+          { id: 'copy-reference', title: 'Copy Reference', status: 'ideation' },
+        ],
+      },
+    ],
   },
   {
     id: 'run',
@@ -201,14 +275,14 @@ export const phases = [
         name: 'Run Support Agent',
         count: 4,
         useCases: [
-          { id: 'defect-resolver-run',  title: 'Defect Resolver',                        status: 'released',    artifactUrl: 'https://claude.ai/artifacts/latest/d9a7f4f1-c8cf-4583-9698-90423f2c1ec2' },
-          { id: 'autonomous-ops',       title: 'Autonomous Ops / Knowledge Steward',     status: 'ideation' },
-          { id: 'incident-resolution',  title: 'Incident Resolution / Service Requests', status: 'ideation' },
-          { id: 'release-impact',       title: 'Release Impact Agent',                   status: 'ideation' },
-        ]
-      }
-    ]
-  }
+          { id: 'defect-resolver-run', title: 'Defect Resolver', status: 'released', artifactUrl: 'https://claude.ai/artifacts/latest/d9a7f4f1-c8cf-4583-9698-90423f2c1ec2' },
+          { id: 'autonomous-ops', title: 'Autonomous Ops / Knowledge Steward', status: 'ideation' },
+          { id: 'incident-resolution', title: 'Incident Resolution / Service Requests', status: 'ideation' },
+          { id: 'release-impact', title: 'Release Impact Agent', status: 'ideation' },
+        ],
+      },
+    ],
+  },
 ]
 
 export const useCaseMap = Object.fromEntries(
