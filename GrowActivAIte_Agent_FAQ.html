@@ -461,6 +461,9 @@
     <a class="toc-link" href="#agent-22">
       <span class="toc-num">22</span>SAP Code Reviewer (Code Quality / Impact Analysis)
     </a>
+    <a class="toc-link" href="#agent-23">
+      <span class="toc-num">23</span>Test Strategy Generator (Quality Engineering)
+    </a>
 
     <div class="toc-section-label">Phase: Run</div>
     <a class="toc-link" href="#agent-21">
@@ -3400,6 +3403,189 @@
       </div>
     </div>
   </div><!-- /#agent-22 -->
+
+  <div class="agent-card" id="agent-23" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🧪</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 23</div>
+        <div class="agent-name">Test Strategy Generator (Quality Engineering)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Test Strategy</span>
+          <span class="tag tag-group">Quality Engineering Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>Does anything leave my machine?</summary>
+          <div class="answer">
+            <p>Not when you run the agent on your machine (start.bat). Documents are read there, the narrative comes from a local model (Ollama), and work is saved in your browser and in a folder on your machine. The claude.ai artifact is different: Claude reads every document you add. Use it only with documents your engagement allows to be processed by Claude.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Does the agent learn from one client's SOW for the next?</summary>
+          <div class="answer">
+            <p>No. Saving a project stores that project only. Nothing from one engagement is used to fill in another.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Where is my work saved, and how do I share it?</summary>
+          <div class="answer">
+            <p>It's autosaved in the browser and, on your machine, on disk; the header shows when it last saved. <strong>⬇ Export file</strong> writes the whole project as one JSON file that a colleague can open with <strong>⬆ Import file</strong>. In Claude, the <strong>Saved Projects</strong> card also keeps named versions.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Why does a section show UNREAD?</summary>
+          <div class="answer">
+            <p>The readers found no table or wording they recognise for it. That's different from <em>none stated</em>, where the SOW genuinely doesn't cover the topic. Look for the section in the SOW. If it's there, note the page and layout and raise it, so the reader can learn that layout. The slide shows what's missing rather than a default.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Why is the RACI the "standard matrix"?</summary>
+          <div class="answer">
+            <p>The SOW states no RACI that the reader could find for testing. When it does — numbered rows by workstream, or a table by activity ("Phase | Activity | Description | Responsibility") — the strategy uses the SOW's own SIT and UAT rows, under the parties the SOW names, with each code as printed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Why are interfaces and integrations shown as one figure?</summary>
+          <div class="answer">
+            <p>They're the same objects. The figure comes from the SOW's RICEFW, in the SOW's own word ("Interfaces" or "Integrations"). The interface table only names the systems. The connected systems are a breakdown, never a second count. Integration scope items stay scope items.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>A scope item's name is flagged as "swapped" or "not SAP's". What does that mean?</summary>
+          <div class="answer">
+            <p>The SOW's name for that ID matches SAP's name for a <em>different</em> ID, or two rows carry each other's names. That's a question for the client, because the contract may mean either item. The agent tests the IDs as the SOW states them and never changes the SOW's names.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>A later document states a different number of scope items. Which is right?</summary>
+          <div class="answer">
+            <p>The SOW is the contract. The review lists the later document's total and each line of business that differs, as information, and the Open Points slide asks you to confirm the difference is understood. A typical cause is an item added or confirmed after the earlier document was written.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>I added a Fit-to-Standard document. Why weren't its changes applied?</summary>
+          <div class="answer">
+            <p>A later document only <em>proposes</em> changes. Tick the ones that are agreed in <strong>Changes since the SOW</strong> and click <strong>✓ Apply ticked changes</strong>. Unticked proposals become open points. A change request's changes start ticked, because a signed change request is contractual.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>What does "Before the SOW — tick to adopt" mean?</summary>
+          <div class="answer">
+            <p>The document is dated before the SOW, so the SOW supersedes it. Its differences are information unless you tick one to adopt it, and they're never ticked for you. If the date was read wrongly, correct it in the file list before comparing.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>Can a later document make the agent add acronyms or page numbers as scope items?</summary>
+          <div class="answer">
+            <p>No. In a document without a scope table, a three-character code counts as a scope item only if your SOW or SAP's index lists it. The review names the codes it set aside.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Why are some entry and exit criteria marked PROPOSED?</summary>
+          <div class="answer">
+            <p>The SOW doesn't state them. A criterion the SOW doesn't contain, such as a pass rate or a defect threshold, is only a suggestion until both sides agree it. Printing it as a criterion could become a go-live roadblock, so the agent keeps it below a "requires agreement" line. To record an agreement, use <strong>Edit Strategy</strong> and mark it <strong>AGREED</strong>, with who agreed it and when.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>How is the estimated number of test cases calculated?</summary>
+          <div class="answer">
+            <ul><li>One full SIT pass = scope items (one positive path each) + negative paths (one per positive path, PROPOSED unless the SOW requires negative testing) + interfaces (one case each) + custom objects (the non-interface RICEFW objects, a Complex one counted twice).</li><li>SIT 1 runs the full pass, and later SIT cycles run 60% of it for regression.</li><li>Each UAT cycle = the end-to-end scenarios + the user-facing RICEFW objects.</li><li>The <strong>How calculated</strong> line on the Test Plan slide shows the arithmetic for your SOW.</li></ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>Where do the number of cycles come from?</summary>
+          <div class="answer">
+            <p>From the SOW: its billing milestones, or the cycles it names in its milestones or test timeline (SIT 1, SIT 2, UAT). A model is asked only when the SOW names none, and anything it returns that isn't a test cycle is left out and named in the review. Check <strong>Cycles &amp; Gates</strong> if a count looks wrong.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Why does a custom object count twice?</summary>
+          <div class="answer">
+            <p>Complex objects need more cases. The agent uses each object's own complexity, or, where the RICEFW register states none, the Complex count the SOW's RICEFW summary gives for that type. A complexity the SOW doesn't state shows as "Not stated", never as a default.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>How are the UAT scenarios estimated?</summary>
+          <div class="answer">
+            <p>Until you enter the Fit-to-Standard scenarios, UAT is sized on a PROPOSED estimate: one scenario per business area SAP files the scope items under, or the SOW's line of business where SAP doesn't list them. Enter the real scenarios on <strong>Capacity Planning</strong>, one per line as "Name: scope item IDs".</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Can I change the assumptions (testers, hours per case, factors)?</summary>
+          <div class="answer">
+            <p>Yes. Change them on <strong>Capacity Planning → Tentative Test Plan</strong>. The deck slide and the Word section update with them.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>What's the difference between "Automate later" and a custom automate?</summary>
+          <div class="answer">
+            <p>They answer different questions:</p>
+            <ul><li><strong>Automate later</strong> is <em>when</em>. It's a verdict for a candidate worth automating once it has settled, from SIT 2 on.</li><li><strong>Custom automate</strong> is <em>how</em>. It's an automate the project would record and maintain itself in SAP TAT, because SAP ships none for that scope item.</li></ul>
+            <p>The strategy plans a scope item without an SAP-delivered automate as manual, since the SOW doesn't assume custom automates, so the two counts don't need to match.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Why are no scope items automated?</summary>
+          <div class="answer">
+            <p>SAP's automate index (S4H_640) isn't loaded. On your machine, run npm run kb:fetch once. Until then, automate availability is "not checked" and scope items are planned as manual. The artifact in Claude doesn't include SAP's index.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>Why is the first extraction so slow?</summary>
+          <div class="answer">
+            <p>On a laptop the local model runs on the CPU, so a large SOW takes minutes. Keep the tool's window open. A re-run of the same document is answered from the cache in seconds.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>The status chip says "Check setup" or "Not ready".</summary>
+          <div class="answer">
+            <p>Click it to see what's missing (Node, Ollama, a model) and how to fix it. If its details say the model is busy, an extraction is running. Wait for it to finish.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I use the agent in Claude instead?</summary>
+          <div class="answer">
+            <p>Yes, with the claude.ai artifact build. It's the same app, but Claude reads the documents, and the local extras (OCR, the local model, SAP's index, saved work on disk) aren't part of it. See the user guide, section 2.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>What goes into the Excel working pack?</summary>
+          <div class="answer">
+            <p>Scope, the test plan, the RTM, automation, dependencies, the RASCI, deliverables and milestones, plus SAP's <strong>Test Schedule (S4H_438)</strong>. You can import that sheet into SAP Cloud ALM, and once statuses are filled in, import it back on <strong>Cycles &amp; Gates</strong> to evaluate the gates.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-23 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
