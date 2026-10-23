@@ -426,6 +426,9 @@
     <a class="toc-link" href="#agent-10">
       <span class="toc-num">10</span>Functional Design Document – Phase 2 (Form FD Generator)
     </a>
+    <a class="toc-link" href="#agent-24">
+      <span class="toc-num">24</span>Explore Accelerator (BPD · KDD · F2S · BDCQ)
+    </a>
 
     <div class="toc-section-label">Phase: Realize</div>
     <a class="toc-link" href="#agent-11">
@@ -3586,6 +3589,285 @@
       </div>
     </div>
   </div><!-- /#agent-23 -->
+
+  <div class="agent-card" id="agent-24" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">⚡</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 24</div>
+        <div class="agent-name">Explore Accelerator (BPD · KDD · F2S · BDCQ)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">Accelerator</span>
+          <span class="tag tag-group">Solution Confirmation Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What is the Explore Accelerator and who is it for?</summary>
+          <div class="answer">
+            <p>It is an AI-powered tool for Accenture SAP consultants working on SAP S/4HANA Cloud Public Edition implementations. It automates Business Process Documentation (BPD), Key Design Decisions (KDD), WRICEF registers, F2S workshop decks, and BDCQ workshop preparation during the SAP Activate Explore phase. Designed for functional consultants, solution architects, and project leads — no technical or coding knowledge required.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Does this tool work for SAP S/4HANA On-Premise or Private Cloud?</summary>
+          <div class="answer">
+            <p>No. The Explore Accelerator is built exclusively for <strong>SAP S/4HANA Cloud Public Edition</strong>. All output strictly follows Clean Core standards. On-premise configuration paths, custom ABAP, and traditional transactions (SE16, SM30, etc.) are never referenced.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Is the output AI-generated or does it come from SAP official content?</summary>
+          <div class="answer">
+            <p>Both. The process structure (L1 through L4) is grounded in the <strong>official SAP scope catalog</strong> — 657 processes from SAP for Me Process Navigator. The AI enriches this with swimlane layouts, activity steps, configuration guidance, and FTS assessments. Scope item IDs, process names, LOB groupings, and high-level flows always match SAP's own documentation.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>How long does it take to generate a BPD?</summary>
+          <div class="answer">
+            <p>Typically <strong>2–4 minutes</strong> for 3–5 scope items. Time scales with the number of items selected. You can monitor progress via the on-screen status bar.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Can I generate outputs for multiple modules in one session?</summary>
+          <div class="answer">
+            <p>Each BPD generation is for one module at a time. If your project spans multiple modules (e.g., Manufacturing + Sourcing &amp; Procurement), generate a separate BPD per module and combine them in the final deliverable.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>How do I keep the scope catalog up to date?</summary>
+          <div class="answer">
+            <p>SAP releases a new catalog version every February and August. If your catalog is more than 6 months old, a warning banner appears. Re-export by opening SAP for Me Process Navigator in Chrome → click the extension icon → Load Full Catalog → Save to Cartridge → select the application folder.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>When should I use each agent?</summary>
+          <div class="answer">
+            <ul><li>📋 <strong>F2S Agent</strong> — Run first. Discovery workshop with the client to confirm fit/gap.</li><li>📄 <strong>BPD Agent</strong> — After the workshop. Detailed L2–L5 process documentation.</li><li>📊 <strong>KDD Generator</strong> — Formal recording and tracking of design decisions.</li><li>🔧 <strong>WRICEF Inventory</strong> — Sizing and classifying custom development objects.</li><li>❓ <strong>BDCQ Enricher</strong> — Pre-workshop preparation of localised question briefs.</li></ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Is the generated content confidential? Does it get sent to external servers?</summary>
+          <div class="answer">
+            <p>The tool sends your prompts to Anthropic's Claude AI API to generate content. Your prompt text, including the process description and client name, is sent to Anthropic's infrastructure. Do not include highly sensitive personal data, unreleased financial results, or content covered by a client NDA that prohibits sharing with third-party AI services. Refer to your engagement's data handling guidelines.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>The auto-fill selected the wrong module. What should I do?</summary>
+          <div class="answer">
+            <p>Change the Module dropdown manually. Once corrected, scope item suggestions automatically refresh. Any items pre-selected from the previous module are cleared — review and re-select the relevant ones.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>The auto-fill pre-selected scope items that are not relevant. Is that expected?</summary>
+          <div class="answer">
+            <p>Yes — auto-selection is a suggestion, not a final answer. It scores scope items based on keyword overlap between your description and the scope catalog. Review the pre-selected items and untick anything out of scope. It is normal to remove 1–3 suggestions and add 1–2 that were missed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>I pasted my description but nothing happened — the form did not auto-fill.</summary>
+          <div class="answer">
+            <p>Auto-fill triggers approximately 1.2 seconds after you stop typing. If nothing happens after 5 seconds, check: <ol><li>The server is running — status indicator should be green at the top of the page</li><li>Your description is at least a few sentences — very short inputs may not have enough context</li><li>Click somewhere else on the page after pasting to ensure the input event fires</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Generation stopped partway through and showed an error. What do I do?</summary>
+          <div class="answer">
+            <p>Click <strong>Generate BPD</strong> again — the pipeline picks up from where it left off using intermediate caching. If the error repeats, check: <ol><li>The server is still running (check the terminal opened via START.bat)</li><li>Your internet connection is stable — AI calls need network access</li><li>If the error mentions "timed out", try reducing scope items and generating again</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>The swimlane diagram looks empty or shows an error.</summary>
+          <div class="answer">
+            <p>Swimlane generation depends on the process having clearly defined roles and steps. If the generated L3 areas have very little content (unusual scope items or very generic descriptions), the swimlane may be sparse. Enrich your description with more role-specific detail — for example: "the production planner runs the MRP job, the shop floor supervisor confirms the production order."</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>The FTS assessment shows everything as FIT. Is that accurate?</summary>
+          <div class="answer">
+            <p>This can happen when the process description closely matches standard SAP functionality. The AI is conservative — it flags GAP only when there is a clear mismatch between the described requirement and what Cloud PE delivers out of the box. Review GAP and PARTIAL FIT rows critically in your workshop. If you believe something should be flagged, note it manually in the Word document.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Can I edit the generated BPD before downloading?</summary>
+          <div class="answer">
+            <p>The on-screen output is not directly editable. Download the <strong>Word document (.doc)</strong> and edit it in Microsoft Word — you can add, remove, or modify any section, add client comments, or apply your firm's document template.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>The PDF looks different from the Word document. Which should I use?</summary>
+          <div class="answer">
+            <p>Use <strong>PDF</strong> for sharing with clients in read-only format — presentations, email attachments, formal sign-off. Use <strong>Word</strong> when you need to annotate, track changes, or incorporate the content into a larger document. The content is the same in both — formatting differs slightly due to different rendering engines.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>I navigated away from the BPD Agent and my document is gone. Can I recover it?</summary>
+          <div class="answer">
+            <p>No — the generated BPD is held in browser memory and is lost when you navigate away or refresh. Always download your PDF and Word documents immediately after generation before doing anything else in the app.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>Can I generate a BPD for a custom process not in the SAP scope catalog?</summary>
+          <div class="answer">
+            <p>The tool is optimised for standard SAP scope items. If you select scope items that are close to your process (even if not an exact match) and provide a detailed description, the AI will adapt accordingly. For highly custom processes with no analogous standard scope item, output quality will be lower.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>How do I know if my scope-catalog.json is up to date?</summary>
+          <div class="answer">
+            <p>The tool checks the SAP release embedded in the catalog and compares it to the current expected release. SAP releases every February and August. If your catalog is more than 6 months old, a warning banner appears showing which release your catalog is on. Re-export from SAP for Me Process Navigator using the Chrome extension.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>The KDD log has some answers pre-filled. Where did they come from?</summary>
+          <div class="answer">
+            <p>Pre-filled answers come from the <strong>past decisions library</strong> — approved design decisions from previous Accenture SAP Cloud PE projects. These represent common patterns grounded in real client decisions. Review each pre-filled answer to confirm it is appropriate for your specific client context before presenting in a workshop.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Some KDD rows say "RICEF" in the notes. What does that mean?</summary>
+          <div class="answer">
+            <p>RICEF stands for Reports, Interfaces, Conversions, Extensions, and Forms — the classification for custom development work. The KDD Generator automatically classifies GAP and PARTIAL FIT decisions by RICEF type so the project team can estimate effort. In Cloud PE, RICEF items are delivered via SAP BTP or Key User Extensions — never traditional ABAP.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I regenerate KDDs for the same scope item to get different output?</summary>
+          <div class="answer">
+            <p>Yes, but the cache means you will get the same output unless you clear it first. Go to <strong>Settings → Clear KDD Cache</strong> and clear the relevant entries, then regenerate.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>The Excel downloaded but some cells are empty. Is that a problem?</summary>
+          <div class="answer">
+            <p>A small number of empty cells is normal — not every design question applies to every process. Fields like "Integration Impact" or "Output Format" may be blank for processes with no outputs or integrations. If entire rows are empty (KDD ID but no content), this may indicate a generation error — try regenerating just those scope items individually.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>What is the difference between the F2S Agent and the BPD Agent?</summary>
+          <div class="answer">
+            <p>The <strong>F2S Agent</strong> generates a workshop facilitation deck — a PowerPoint you run with the client to discover requirements and confirm fit/gap against SAP standard. The <strong>BPD Agent</strong> generates process documentation — a detailed L2–L5 design document you produce after the workshop to record the agreed process. Use F2S first, then BPD.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>The preview table shows 0 BDCQ questions for a scope item. Will the deck still work?</summary>
+          <div class="answer">
+            <p>Yes. When no questions are matched by scope item ID, the tool automatically falls back to questions at the LOB level, then at the full domain level. The deck will still contain relevant questions — just drawn from the broader LOB pool rather than being specific to that exact scope item. To get more targeted questions, ensure your <code>bdcq/bdcq-questions.json</code> is up to date.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>What does the "Countries" field do in the F2S Agent?</summary>
+          <div class="answer">
+            <p>Entering one or more countries enables localisation of workshop questions. For example, entering "United Kingdom" flags VAT-relevant questions as mandatory; "Germany" flags e-invoicing and GoBD compliance questions. Multiple countries can be entered for multi-country rollouts — the deck notes which questions are country-specific and which are global.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>The F2S deck does not include questions for one of my scope items. Why?</summary>
+          <div class="answer">
+            <p>Check the preview table before generating. If a scope item shows "Not in catalog" the ID is not found in either the scope catalog or the F2S index. Verify the ID is correct — IDs are case-sensitive and must match the SAP catalog format exactly (e.g., <code>BD6</code> not <code>bd6</code>). If correct, your catalog may be outdated — re-export from SAP for Me Process Navigator.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Can I change the brand colour in the deck?</summary>
+          <div class="answer">
+            <p>Yes. The <strong>Brand Colour</strong> field accepts any hex colour code (e.g., <code>#A100FF</code> for Accenture purple, <code>#0070F3</code> for blue). The colour is applied to the cover slide, section headers, and table header rows throughout the deck. The default is Accenture purple (<code>#A100FF</code>).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>How long does the F2S deck take to generate?</summary>
+          <div class="answer">
+            <p>Typically <strong>30–90 seconds</strong> for 3–6 scope items. Generation time scales with scope item count and the volume of BDCQ questions available. The status bar shows progress during generation.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q30</span>Where do I get the BDCQ questions from?</summary>
+          <div class="answer">
+            <p>The BDCQ questions are published by SAP in the Roadmap Viewer. Use the Chrome extension to collect them: <ol><li>Open SAP Roadmap Viewer in Chrome</li><li>Navigate to Explore phase → Accelerators tab</li><li>Click the extension icon → Scan → Save BDCQ Files</li><li>Select the application folder — the file <code>bdcq/bdcq-questions.json</code> is created automatically</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>The enricher does not know my country's specific tax rules. What should I do?</summary>
+          <div class="answer">
+            <p>The tool covers statutory requirements for the most common implementation countries (US, UK, Germany, France, Netherlands, Australia, India, UAE, Saudi Arabia, Singapore, and others). If your country is not listed or has recently changed its regulations, add a note in the workshop brief and verify specific requirements with your local SAP tax consultant.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>The enriched BDCQ flagged several items as MANDATORY. What does that mean?</summary>
+          <div class="answer">
+            <p>MANDATORY items are statutory requirements — legal obligations the client must configure correctly regardless of preference. Typically tax-related (VAT, GST, withholding tax, e-invoicing) or local regulatory requirements (GDPR data residency, country-specific payment formats). Prioritise these in the workshop and confirm sign-off by the client's finance or legal team.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>The application does not start when I run START.bat.</summary>
+          <div class="answer">
+            <p>Check the following: <ol><li>Python is installed — open Command Prompt and type <code>python --version</code> (should show 3.9 or higher)</li><li>SETUP.bat was run first to create the virtual environment</li><li>Port 3000 is not in use by another application — try opening <code>http://localhost:3000</code> in a browser; if something else responds, stop that application first</li><li>Look at the terminal window opened by START.bat for red error messages — these describe the specific issue</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q34</span>Can multiple people use the tool at the same time?</summary>
+          <div class="answer">
+            <p>The application runs locally on a single laptop. For team use, one team member runs the server and shares their screen, or each consultant runs their own local instance. There is no shared server deployment in the current release.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>The Chrome extension is not showing up in my browser.</summary>
+          <div class="answer">
+            <p>Check that: <ol><li>Developer mode is enabled in <code>chrome://extensions</code></li><li>The extension was loaded from the correct folder (the <code>SAPDeckAgent-ChromeExtension</code> directory, not the zip file)</li><li>The extension does not show any error badge — if it does, click on it to see the error detail</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q36</span>How do I update the tool when a new version is released?</summary>
+          <div class="answer">
+            <p>Pull the latest code from the project repository and re-run <code>SETUP.bat</code> to pick up any new Python dependencies. Your existing <code>scope-catalog.json</code> and <code>bdcq/bdcq-questions.json</code> files are preserved — you do not need to re-export them unless they are outdated.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q37</span>What port does the application run on? Can I change it?</summary>
+          <div class="answer">
+            <p>The application runs on port <code>3000</code> by default and is accessible at <code>http://localhost:3000</code>. If port 3000 is in use, check the <code>START.bat</code> or configuration file for a port override option — or stop the conflicting application and restart.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-24 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
