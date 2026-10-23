@@ -33,6 +33,7 @@ const IPOV_SLIDES = {
   'cpi-tdd-integration':     ['/CodeX/ipov/cpi-tdd-integration.png'],
   'roles-auth-matrix':       ['/CodeX/ipov/roles-auth-matrix.png'],
   'functional-design-phase2':['/CodeX/ipov/functional-design-phase2.png'],
+  'code-quality':            ['/CodeX/ipov/code-quality.png'],
 }
 
 export default function UseCaseView({ useCase, phaseColor, onBack }) {
