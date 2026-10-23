@@ -458,6 +458,9 @@
     <a class="toc-link" href="#agent-20">
       <span class="toc-num">20</span>Technical Design-Integration (CPI TDD Agent)
     </a>
+    <a class="toc-link" href="#agent-22">
+      <span class="toc-num">22</span>SAP Code Reviewer (Code Quality / Impact Analysis)
+    </a>
 
     <div class="toc-section-label">Phase: Run</div>
     <a class="toc-link" href="#agent-21">
@@ -3202,6 +3205,201 @@
       </div>
     </div>
   </div><!-- /#agent-20 -->
+
+  <div class="agent-card" id="agent-22" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🔍</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 22</div>
+        <div class="agent-name">SAP Code Reviewer (Code Quality / Impact Analysis)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Code Review</span>
+          <span class="tag tag-group">Intelligent Build Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What is the SAP Code Reviewer?</summary>
+          <div class="answer">
+            <p>An automated code-review workspace built on Claude Code. It reviews SAP applications — SAPUI5/Fiori, CAP (CAPM), RAP and ABAP Cloud — against SAP best practices and produces a structured findings report.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Which technologies are supported?</summary>
+          <div class="answer">
+            <p>SAPUI5 / Fiori (manifest, views, controllers, i18n, OData bindings), CAP (CDS models, service handlers, actions, projections), RAP (behavior definitions/implementations, EML, service bindings) and ABAP Cloud (released APIs, clean-core rules, CDS view entities).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Does the agent modify my source code?</summary>
+          <div class="answer">
+            <p>No. Reviews are strictly <strong>read-only</strong>. Uploaded files are never changed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Can one upload contain several technologies?</summary>
+          <div class="answer">
+            <p>Yes. For example, a CAP <code>srv/</code> layer plus a UI5 <code>app/</code> layer. Each layer is reviewed with its matching ruleset.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>What do I need to install?</summary>
+          <div class="answer">
+            <p>Node.js 20+ and npm, the Claude Code CLI (<code>npm install -g @anthropic-ai/claude-code</code>), and a modern browser (Chrome, Edge or Firefox). Run <code>npm install</code> once inside the project folder.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>How do I launch the tool?</summary>
+          <div class="answer">
+            <p>Double-click <code>start.cmd</code> (Windows). It opens the browser upload UI (<code>editer.html</code>) and starts Claude Code in the project. Alternatively run <code>npm start</code> to launch the local server.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>How do I run a review?</summary>
+          <div class="answer">
+            <p>1) Enter a project name and upload a folder, ZIP or individual files in the UI. 2) Files are saved under <code>uploads/&lt;project-name&gt;/</code>. 3) Run <code>/sap-code-reviewer &lt;project-name&gt;</code> in Claude Code (or start the review from the UI). 4) Read the findings or export them to Excel.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Which file formats can I upload?</summary>
+          <div class="answer">
+            <p>A folder, a ZIP, or individual source files. Client suggestions accept <code>.txt</code> and <code>.xlsx</code> only.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>Which agents are available?</summary>
+          <div class="answer">
+            <p><code>/sap-code-reviewer</code> (auto-detects technology and reviews everything), <code>/sap-ui5-reviewer</code>, <code>/sap-capm-reviewer</code>, <code>/sap-rap-reviewer</code> and <code>/sap-abap-cloud-reviewer</code> (deep, technology-specific reviews).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>How does the agent detect the technology?</summary>
+          <div class="answer">
+            <p>From file signatures: <code>manifest.json</code> with <code>sap.ui5</code>, <code>.view.xml</code> and <code>.controller.js</code> for UI5; <code>.cds</code> files, <code>srv/</code> + <code>db/</code> folders and <code>@sap/cds</code> in <code>package.json</code> for CAP; <em>define behavior for</em> and service definitions/bindings for RAP; CDS view entities, <code>@AccessControl</code> and released-API usage for ABAP Cloud. See <code>docs/file-type-detection.md</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>When should I use a technology-specific agent?</summary>
+          <div class="answer">
+            <p>When you already know the technology and want a deeper, more focused review than the auto-detecting dispatcher gives.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Where are the results stored?</summary>
+          <div class="answer">
+            <p>In <code>reports/&lt;project-name&gt;-findings.json</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>What does a finding contain?</summary>
+          <div class="answer">
+            <p><code>id</code>, <code>severity</code>, <code>layer</code>, <code>technology</code>, <code>file</code>, <code>line</code>, <code>category</code>, <code>title</code>, <code>issue</code>, <code>severityRationale</code>, <code>recommendation</code>, <code>codeSnippet</code> and <code>referenceLink</code>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>What severity levels are used?</summary>
+          <div class="answer">
+            <p><strong>High, Medium and Low</strong> only. Critical is never used. Each finding carries a severity rationale explaining why it meets the threshold.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Is there a limit on the number of findings?</summary>
+          <div class="answer">
+            <p>Yes. At most <strong>32 findings per file</strong>; the highest-impact ones are prioritised.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>How do I get an Excel report?</summary>
+          <div class="answer">
+            <p>Run <code>node scripts/export-excel.js &lt;project-name&gt;</code>. The output is <code>reports/&lt;project-name&gt;-review.xlsx</code> with Summary, All Findings, High, Medium, Low and one sheet per detected technology.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Can I get a PDF report?</summary>
+          <div class="answer">
+            <p>Yes, via <code>scripts/export-pdf.js</code>, which produces a PDF from the findings JSON.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>Can the agent produce wrong findings?</summary>
+          <div class="answer">
+            <p>The agent never fabricates findings. If a rule cannot be verified from code alone (for example destination configuration or transports), the finding is marked <strong>PLAUSIBLE</strong> and the recommendation says so. Always have a developer validate findings before acting.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Is my code sent anywhere?</summary>
+          <div class="answer">
+            <p>Code is read by Claude Code in your local session and processed by the Claude model. Check your organisation's policy before uploading client code.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>Can sensitive values be masked?</summary>
+          <div class="answer">
+            <p>Yes. <code>scripts/mask.js</code> supports masking driven by a <code>mask.config.json</code> file (see <code>mask.config.example.json</code>). The real <code>mask.config.json</code> is git-ignored.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Are generated reports committed to git?</summary>
+          <div class="answer">
+            <p>JSON, XLSX, PDF and HTML reports in <code>reports/</code> are git-ignored by default.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>'claude: command not found'</summary>
+          <div class="answer">
+            <p>Install the CLI with <code>npm install -g @anthropic-ai/claude-code</code> and reopen the terminal.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>'Cannot find module' errors</summary>
+          <div class="answer">
+            <p>Run <code>npm install</code> inside the project folder.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>The Excel export fails or the JSON is missing</summary>
+          <div class="answer">
+            <p>Run the review agent first; it produces the JSON that the export scripts read.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>A trust dialog blocks file access</summary>
+          <div class="answer">
+            <p>Accept the trust dialog on first launch when Claude Code prompts for the project folder.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-22 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
