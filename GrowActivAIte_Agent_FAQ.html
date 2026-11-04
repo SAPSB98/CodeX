@@ -464,6 +464,9 @@
     <a class="toc-link" href="#agent-23">
       <span class="toc-num">23</span>Test Strategy Generator (Quality Engineering)
     </a>
+    <a class="toc-link" href="#agent-25">
+      <span class="toc-num">25</span>Data Strategy Builder (Data Agent)
+    </a>
 
     <div class="toc-section-label">Phase: Run</div>
     <a class="toc-link" href="#agent-21">
@@ -3492,6 +3495,341 @@
       </div>
     </div>
   </div><!-- /#agent-24 -->
+
+  <div class="agent-card" id="agent-25" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🗃️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 25</div>
+        <div class="agent-name">Data Strategy Builder (Data Agent)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Data Strategy</span>
+          <span class="tag tag-group">Data Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>How do I open the app?</summary>
+          <div class="answer">
+            <p>On the machine where it is installed, double-click <strong>Start_Previous_Version.bat</strong>, keep the console window open, and browse to <strong>http://127.0.0.2:8101</strong> in Edge or Chrome.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Do I need to install anything on my own laptop?</summary>
+          <div class="answer">
+            <p>No - the app runs in the browser. It needs the server running on the machine where it is installed, plus Microsoft Word there for PDF export.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>How long does a first strategy take?</summary>
+          <div class="answer">
+            <p>About 30-45 minutes to enter the inputs, plus four to five minutes for the AI to draft all sections.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Is there a demo?</summary>
+          <div class="answer">
+            <p>Yes - <strong>demo\Data_Strategy_Builder_Demo.mp4</strong> in the app folder walks through every step with narration, and the User Guide shows every screen.</p><h1><a id="_Toc243594244"></a>2. Accounts and security</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I get an account?</summary>
+          <div class="answer">
+            <p>Click <strong>Create account</strong> on the sign-in screen: full name, work email and a password of at least 8 characters.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Can colleagues see my strategies?</summary>
+          <div class="answer">
+            <p>No. Every strategy, upload, template and export belongs to the account that created it; nobody else can see or open it. Only the SAP migration-object catalogue is shared by everyone.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>I forgot my password - can I reset it?</summary>
+          <div class="answer">
+            <p>There is no self-service reset (the app has no mail server). Ask the administrator to remove your account so you can register again with the same email; your strategies stay attached to that email.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Why is my account locked?</summary>
+          <div class="answer">
+            <p>Five wrong passwords lock the account for five minutes. Wait and try again.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>How long do I stay signed in?</summary>
+          <div class="answer">
+            <p>Seven days on the same browser. Sign out from your initials at the top right.</p><h1><a id="_Toc243594245"></a>3. Data and privacy</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>Where is my data stored?</summary>
+          <div class="answer">
+            <p>In the app's local database on the machine where it runs. Exports are saved there too.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>What is sent to Claude?</summary>
+          <div class="answer">
+            <p>The strategy facts you enter (project, sources, scope, objects, owners, principles, mock plan, roles) and the first part of the uploaded SOW text. Do not upload production data or personal data.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Is the SOW file kept?</summary>
+          <div class="answer">
+            <p>No - only its text is kept; the file itself is not stored. The first part of the text is given to the drafting agents as context.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>Are commercial terms from the SOW used?</summary>
+          <div class="answer">
+            <p>No - the agents are instructed never to copy fees, rates or other commercial terms.</p><h1><a id="_Toc243594246"></a>4. Inputs and uploads</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>Which files can I upload?</summary>
+          <div class="answer">
+            <p>SOW: .docx, .pdf, .txt (max 20 MB) · RACI: .docx or .xlsx (max 10 MB) · Source systems: .xlsx or .csv (max 5 MB) · Scope IDs: .xlsx, .csv or text (max 5 MB) · Countries: .xlsx, .csv or .txt (max 5 MB) · Client Word template: .docx or .dotx (max 20 MB).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Why are my countries not recognised?</summary>
+          <div class="answer">
+            <p>Countries are recognised by their <strong>full name</strong> only (for example Germany, United States of America). Codes such as DE or US are not accepted. A country not in the list can be added under <strong>Others…</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>What should I write under Extraction?</summary>
+          <div class="answer">
+            <p>How the client provides its <strong>raw source extracts</strong>: format, frequency and timing. The client does not prepare load templates - transformation is done by the migration workstream.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Which source types are available?</summary>
+          <div class="answer">
+            <p>SAP ECC, SAP S/4HANA (on-premise), SAP S/4HANA Public Cloud, Non-SAP ERP, Excel / files and Other. Direct Transfer needs an SAP ERP source; a Public Cloud source does not count for it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>Do I have to upload a RACI?</summary>
+          <div class="answer">
+            <p>No. Without an upload the strategy uses the standard RACI for the governance roles you tick in Step 5.</p><h1><a id="_Toc243594247"></a>5. Scope, objects and sequence</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Where do the migration objects come from?</summary>
+          <div class="answer">
+            <p>From SAP's Migration Cockpit object list (release 2608, 249 objects, 257 scope items). Each selected scope item brings its objects, and mandatory predecessors are added automatically.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>Can I add an object that no scope item brings in?</summary>
+          <div class="answer">
+            <p>Yes - <strong>+ Add object</strong> in Step 4. It stays whatever the scope items do.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Why are some objects switched off?</summary>
+          <div class="answer">
+            <p>Country-specific objects (for example for Brazil or Russia) are switched off when their country is not in scope.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I change the migration sequence?</summary>
+          <div class="answer">
+            <p>No - it is read-only and computed from SAP's predecessors, so an invalid order cannot be built. If an order is wrong, raise it for SME review; it is corrected in the reference catalogue.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>What does the Depends On column show?</summary>
+          <div class="answer">
+            <p>The <strong>Predecessor Object</strong> of each object as given in the dependency workbook (Available Migration Objects with Dependency.xlsx) - "mandatory" follows a mandatory predecessor; "Not applicable" is shown where the workbook says so.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>Why does an object say "class to be confirmed"?</summary>
+          <div class="answer">
+            <p>Its master/transactional class is being confirmed by an SME. Until then it is placed by SAP's own object type.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>What are design decisions?</summary>
+          <div class="answer">
+            <p>Object-level choices that shape mapping and loads - for example internal or external number ranges. Recorded choices are stated as agreed; unanswered ones appear as proposed (with the Accenture recommendation) or open.</p><h1><a id="_Toc243594248"></a>6. Principles and mock loads</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>What if I change an Accenture default?</summary>
+          <div class="answer">
+            <p>The app asks for a justification, which is written into the document.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>Where do the mock load systems come from?</summary>
+          <div class="answer">
+            <p>From the <strong>Mock load plan</strong> in Step 5. Defaults: Mock 1 DEV, further mocks QA, Dress Rehearsal Pre-Prod, Production Cutover Production. Change them per engagement; the document uses exactly what you enter.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Why did the number of mock cycles change?</summary>
+          <div class="answer">
+            <p>The cycles follow the <strong>Mock loads</strong> and <strong>Dress rehearsal</strong> principles above the plan.</p><h1><a id="_Toc243594249"></a>7. Drafting and AI</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>Which AI writes the strategy?</summary>
+          <div class="answer">
+            <p>Claude (Anthropic). The header badge shows the model and the connection in use.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q30</span>Does the AI invent facts?</summary>
+          <div class="answer">
+            <p>It is instructed to use only your inputs. Anything missing is written as <strong>[TBC: …]</strong>. Tables such as scope, objects and the migration sequence are built by the app, not the AI.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>Will a redraft overwrite my edits?</summary>
+          <div class="answer">
+            <p>A redraft replaces the text of every <strong>unlocked</strong> section. Lock the sections you have edited or approved.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>I changed my inputs - is the draft updated?</summary>
+          <div class="answer">
+            <p>No. Regenerate the affected sections, or click <strong>Redraft unlocked sections</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>What if Claude is not connected?</summary>
+          <div class="answer">
+            <p>The app still works. Drafts are skeletons marked OFFLINE for you to complete. Click the header badge to test the connection.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q34</span>What is the AI Copilot?</summary>
+          <div class="answer">
+            <p>The chat panel on the right. It answers questions about your strategy and the SAP catalogue and proposes changes as buttons - nothing changes until you click one.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>Drafting failed for a section - what now?</summary>
+          <div class="answer">
+            <p>Click <strong>↻</strong> on that section to retry. If every section fails, test the Claude connection with the header badge.</p><h1><a id="_Toc243594250"></a>8. Review and export</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q36</span>What does the review check?</summary>
+          <div class="answer">
+            <p>Rule-based checks of your inputs (owners, open decisions, missing predecessors, [TBC] count) plus an optional AI review of the whole draft against your inputs.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q37</span>Which formats can I export?</summary>
+          <div class="answer">
+            <p>Word (the editable master), PDF (converted from Word, page for page) and PowerPoint (an executive summary deck).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q38</span>The table of contents is empty in Word.</summary>
+          <div class="answer">
+            <p>Allow Word to update the fields when it opens the document, or right-click the table of contents and choose <strong>Update Field</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q39</span>Can I use the client's Word template?</summary>
+          <div class="answer">
+            <p>Yes - upload a .docx or .dotx in Step 8 and select it. Its styles, headers and page setup are used.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q40</span>PDF export is slow or fails.</summary>
+          <div class="answer">
+            <p>The PDF is produced by Microsoft Word on the server; the first one can take about a minute. Without Word (or LibreOffice) on the server, export Word and save it as PDF yourself.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q41</span>Where are earlier versions?</summary>
+          <div class="answer">
+            <p>Step 8 · <strong>Version history</strong> keeps every export with a link to each format.</p><h1><a id="_Toc243594251"></a>9. Troubleshooting</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q42</span>The page does not open.</summary>
+          <div class="answer">
+            <p>The app is not running: start <strong>Start_Previous_Version.bat</strong> and keep its window open.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q43</span>The header says Save failed.</summary>
+          <div class="answer">
+            <p>The connection to the app was lost. Check the console window is still open, then click <strong>Save now</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q44</span>I see an old screen after an update.</summary>
+          <div class="answer">
+            <p>Refresh the page (Ctrl + F5).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q45</span>Who do I contact?</summary>
+          <div class="answer">
+            <p>The administrator of your Data Strategy Builder installation.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-25 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
