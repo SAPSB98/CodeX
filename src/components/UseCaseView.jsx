@@ -23,7 +23,7 @@ const IPOV_SLIDES = {
   'defect-resolver-run':     ['/CodeX/ipov/defect-resolver.png'],
   'form-wizard':             ['/CodeX/ipov/form-wizard.png'],
   'interface-mapper':        ['/CodeX/ipov/interface-mapper.png'],
-  'rcefw-builder':           ['/CodeX/ipov/rcefw-rap.png', '/CodeX/ipov/rcefw-cap.png', '/CodeX/ipov/rcefw-ui.png'],
+  'rcefw-builder':           ['/CodeX/ipov/rcefw-new-rap.png', '/CodeX/ipov/rcefw-new-cap.png', '/CodeX/ipov/rcefw-new-ui.png', '/CodeX/ipov/rcefw-enh-rap.png', '/CodeX/ipov/rcefw-enh-cap.png', '/CodeX/ipov/rcefw-enh-ui.png'],
   'kdd-creation':            ['/CodeX/ipov/kdd-creation.png'],
   'pmo-project-charter':     ['/CodeX/ipov/pmo-project-charter.png'],
   'pmo-l4-plan':             ['/CodeX/ipov/pmo-l4-plan.png'],
@@ -34,6 +34,9 @@ const IPOV_SLIDES = {
   'roles-auth-matrix':       ['/CodeX/ipov/roles-auth-matrix.png'],
   'functional-design-phase2':['/CodeX/ipov/functional-design-phase2.png'],
   'code-quality':            ['/CodeX/ipov/code-quality.png'],
+  'test-strategy-builder':   ['/CodeX/ipov/test-strategy-builder.png'],
+  'explore-accelerator':     ['/CodeX/ipov/ea-bpd-l1-l5.png', '/CodeX/ipov/ea-fit-to-standard.png', '/CodeX/ipov/ea-kdd-creation.png', '/CodeX/ipov/ea-bdcq-agent.png'],
+  'data-strategy':           ['/CodeX/ipov/data-strategy.png'],
 }
 
 export default function UseCaseView({ useCase, phaseColor, onBack }) {
@@ -708,8 +711,7 @@ function InlineLauncher({ useCase, phaseColor, onLaunch }) {
 }
 
 function ArtifactLauncher({ useCase, phaseColor }) {
-  function launch() {
-    const url = useCase.artifactUrl
+  function openUrl(url) {
     if (window.electronAPI?.openExternal) {
       window.electronAPI.openExternal(url)
     } else {
@@ -717,7 +719,17 @@ function ArtifactLauncher({ useCase, phaseColor }) {
     }
   }
 
+  function launch() {
+    openUrl(useCase.artifactUrl)
+  }
+
   const agents = (useCase.description || '').split('·').map(s => s.trim()).filter(Boolean)
+
+  // Secondary buttons: the single demo video (legacy field) plus any extra links
+  const extraLinks = [
+    ...(useCase.demoVideoUrl ? [{ icon: '🎬', label: 'Watch Demo Video', url: useCase.demoVideoUrl }] : []),
+    ...(useCase.links || []),
+  ]
 
   return (
     <div style={{
@@ -823,6 +835,34 @@ function ArtifactLauncher({ useCase, phaseColor }) {
             Launch Agent
             <span style={{ fontSize: 13, opacity: 0.8, fontWeight: 600 }}>↗</span>
           </button>
+
+          {extraLinks.map((link, i) => (
+            <button
+              key={i}
+              onClick={() => openUrl(link.url)}
+              style={{
+                width: '100%',
+                marginTop: 12,
+                padding: '13px 24px',
+                background: '#fff',
+                color: phaseColor,
+                border: `1.5px solid ${phaseColor}44`,
+                borderRadius: 14,
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+                letterSpacing: 0.3,
+              }}
+            >
+              <span style={{ fontSize: 16 }}>{link.icon || '🔗'}</span>
+              {link.label}
+              <span style={{ fontSize: 13, opacity: 0.7, fontWeight: 600 }}>↗</span>
+            </button>
+          ))}
         </div>
       </div>
 
@@ -831,6 +871,8 @@ function ArtifactLauncher({ useCase, phaseColor }) {
 }
 
 function DocsLauncher({ useCase, phaseColor }) {
+  const includes = (useCase.description || '').split('·').map(s => s.trim()).filter(Boolean)
+
   return (
     <div style={{ flex: 1, overflow: 'auto', padding: '40px 48px', background: '#f0f0f8' }}>
       <div style={{ maxWidth: 680, margin: '0 auto' }}>
@@ -838,6 +880,24 @@ function DocsLauncher({ useCase, phaseColor }) {
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase', color: phaseColor, marginBottom: 6 }}>Documentation</div>
           <div style={{ fontSize: 22, fontWeight: 800, color: '#1e1b4b' }}>{useCase.title}</div>
         </div>
+        {includes.length > 1 && (
+          <div style={{
+            background: '#fff', borderRadius: 14, padding: '20px 24px', marginBottom: 20,
+            border: `1.5px solid ${phaseColor}22`, boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase', color: '#9ca3af', marginBottom: 10 }}>
+              Includes
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {includes.map((a, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: phaseColor, flexShrink: 0 }} />
+                  <span style={{ fontSize: 13.5, color: '#374151', fontWeight: 500 }}>{a}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {useCase.docs.map((doc, i) => (
             <a

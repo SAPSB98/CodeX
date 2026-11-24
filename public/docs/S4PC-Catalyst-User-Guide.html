@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>S4PC Catalyst — User Guide</title>
+<style>
+  :root { --accent: #9333EA; --ink: #1e1b4b; --muted: #6b7280; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f0f0f8; color: var(--ink);
+         font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; line-height: 1.65; }
+  .hero { background: linear-gradient(135deg, var(--accent), #6d28d9); color: #fff; padding: 44px 48px 38px; }
+  .hero .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; opacity: .85; }
+  .hero h1 { margin: 8px 0 6px; font-size: 30px; font-weight: 800; letter-spacing: -.3px; }
+  .hero .sub { font-size: 14px; opacity: .9; }
+  main { max-width: 900px; margin: -18px auto 64px; background: #fff; border-radius: 16px;
+         box-shadow: 0 4px 24px rgba(0,0,0,.08); padding: 40px 48px 52px; }
+  main h1 { font-size: 20px; font-weight: 800; margin: 34px 0 10px; padding-top: 18px;
+            border-top: 1.5px solid #ece9fb; color: var(--ink); }
+  main > h1:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+  main h2 { font-size: 15px; font-weight: 700; margin: 22px 0 6px; color: var(--accent);
+            text-transform: uppercase; letter-spacing: .6px; }
+  p { margin: 10px 0; font-size: 14.5px; }
+  ul, ol { margin: 10px 0 10px 22px; padding: 0; }
+  li { margin: 7px 0; font-size: 14.5px; }
+  strong { color: var(--ink); font-weight: 700; }
+  em { color: var(--muted); }
+  code { background: #f4f2fd; border: 1px solid #e7e2fa; border-radius: 4px;
+         padding: 1px 5px; font-family: Consolas, "Courier New", monospace; font-size: 13px; color: #4c1d95; }
+  pre { background: #1e1b4b; color: #ede9fe; border-radius: 10px; padding: 14px 18px; overflow-x: auto;
+        font-family: Consolas, "Courier New", monospace; font-size: 13px; line-height: 1.6; }
+  pre code { background: none; border: none; color: inherit; padding: 0; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 13.5px; }
+  th { background: #f4f2fd; color: var(--ink); text-align: left; font-weight: 700; font-size: 12px;
+       text-transform: uppercase; letter-spacing: .5px; padding: 10px 12px; border-bottom: 2px solid #e7e2fa; }
+  td { padding: 10px 12px; border-bottom: 1px solid #efedf8; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  td.wrap:first-child { white-space: normal; }
+  .note { background: #f8f7ff; border: 1px solid #e7e2fa; border-left: 3px solid var(--accent);
+          border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 14px; }
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 0 0 40px; }
+  @media (max-width: 760px) {
+    .hero { padding: 32px 22px; } main { padding: 28px 22px 36px; margin: -12px 12px 40px; }
+    td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="eyebrow">Realize · Intelligent Build Agent</div>
+    <h1>S4PC Catalyst</h1>
+    <div class="sub">User Guide · Install on your desktop and run both pipelines — 12-step pipeline (new development) &amp; Enhancement Pipeline (6 steps, existing code)</div>
+  </div>
+  <main>
+
+<p>How to download S4PC Catalyst, set it up on your own Windows laptop, and run both pipelines.</p>
+<p>Both run on your laptop. They don't need a connection to an SAP tenant, and they don't use API keys. Both stop at three checkpoints where you decide; neither carries on without your decision.</p>
+
+<table>
+  <thead><tr><th>Pipeline</th><th>Use it when</th><th>You provide</th><th>You get</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="wrap">12-step pipeline<br />(new development)</td>
+      <td>Something new has to be built: an enhancement, report, interface, form or workflow</td>
+      <td>A Functional Design (FD)</td>
+      <td>Solution proposal, code, lint report, unit tests, Technical Design (TD), package with a tenant checklist</td>
+    </tr>
+    <tr>
+      <td class="wrap">Enhancement Pipeline<br />(6 steps)</td>
+      <td>Code that already exists has to change: a change request, an AMS enhancement or a bug fix, often on code another team built</td>
+      <td>The new requirement, the existing TD and the current code</td>
+      <td>Analysis of what the code does today, the change as a diff, review and tests, a revised TD, a deployment package</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>1. Before you start</h1>
+<table>
+  <thead><tr><th>You need</th><th>How to check</th><th>If it's missing</th></tr></thead>
+  <tbody>
+    <tr><td class="wrap">Windows 10 or 11 laptop</td><td>—</td><td>—</td></tr>
+    <tr><td class="wrap">Python 3.9 or newer</td><td>Open Command Prompt and run <code>python --version</code></td><td>Install from python.org/downloads. On the first installer screen, tick "Add python.exe to PATH".</td></tr>
+    <tr><td class="wrap">Claude Code, signed in with your organisation's account</td><td>Run <code>claude --version</code></td><td>Install it the way your organisation provides it (setup guide), then run <code>claude</code> once and sign in.</td></tr>
+    <tr><td class="wrap">Claude Code version 2.1.280 or newer</td><td><code>claude --version</code> shows the number</td><td>Run <code>claude update</code></td></tr>
+    <tr><td class="wrap">A browser (Chrome or Edge)</td><td>—</td><td>—</td></tr>
+  </tbody>
+</table>
+<p>Nothing else is installed: no pip packages, no Node.js, no admin rights.</p>
+
+<h1>2. Download</h1>
+<p>Get the tool from your lead in one of two ways:</p>
+<ul>
+  <li><strong>Zip file:</strong> unzip it into a short local folder, for example <code>C:\S4PC-Catalyst</code>.</li>
+  <li><strong>Git repository</strong> (if you've been given access): <code>git clone &lt;repository URL&gt; C:\S4PC-Catalyst</code></li>
+</ul>
+<div class="note">Use a folder that isn't synced by OneDrive. Syncing can lock files while the pipeline writes them.</div>
+<p>You should see <code>START.cmd</code>, <code>SHUTDOWN.cmd</code>, <code>webapp\</code>, <code>mcp-server\</code> and <code>ams\</code> in the folder.</p>
+
+<h1>3. Start the dashboard</h1>
+<ol>
+  <li>Open the folder in File Explorer and double-click <code>START.cmd</code>.</li>
+  <li>A black window opens, and your browser opens at <code>http://127.0.0.1:8321</code>.</li>
+  <li>Leave the black window open while you work. Closing it stops the dashboard.</li>
+</ol>
+<p>If port 8321 is already in use, for example because you have a tunnel to the shared dashboard open, start on another port. Open Command Prompt and run:</p>
+<pre><code>cd /d C:\S4PC-Catalyst
+set S4PC_UI_PORT=8322
+START.cmd</code></pre>
+<p>Then open <code>http://127.0.0.1:8322</code>.</p>
+<div class="note"><strong>Quick check that it works:</strong> open <strong>Playground</strong> in the sidebar, run a release check on <code>I_MaterialStock</code>, and you should get <strong>LIKELY_RELEASED</strong> with evidence <code>catalog_hit</code>.</div>
+
+<h1>4. Run the 12-step pipeline (new development)</h1>
+
+<h2>4.1 Start a run</h2>
+<ol>
+  <li>Open <strong>FD Intake</strong> in the sidebar.</li>
+  <li>Under <strong>Add an FD document</strong>, pick your FD (<code>.docx</code>, <code>.pdf</code>, <code>.txt</code> or <code>.md</code>) or paste its text.</li>
+  <li>Click <strong>▶ Run pipeline</strong>.</li>
+  <li>Open <strong>Workflow Explorer</strong> and pick your run. The step cards update as the run progresses.</li>
+</ol>
+
+<h2>4.2 What each step does and what you get</h2>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Output in <code>output\&lt;RUN-ID&gt;\</code></th></tr></thead>
+  <tbody>
+    <tr><td class="wrap">1 Intake</td><td>Classifies the object (RICEFW type), maps scope items, lists open questions for the functional consultant</td><td><code>01-discovery.md</code></td></tr>
+    <tr><td class="wrap">2 Solution Proposal</td><td>Splits the requirement into capabilities and rates each option (key user, developer, side-by-side or a mix) on feasibility, fit and cost; proposes the names of every custom object</td><td><code>02-solution-proposal.md</code></td></tr>
+    <tr><td class="wrap">3 Object Inventory</td><td>Checks every SAP object in the design against the released-object catalog</td><td><code>03-release-verdicts.md</code></td></tr>
+    <tr><td class="wrap">4 Gate 1 · Release Check</td><td>Blocks the run if any object is not released</td><td>—</td></tr>
+    <tr><td class="wrap">5 ✋ Checkpoint 1 · Solution</td><td>You approve the approach and lock the object names</td><td><code>decisions\</code></td></tr>
+    <tr><td class="wrap">6 Build</td><td>Writes the code from the approved proposal, using the locked names</td><td><code>04-build.md</code></td></tr>
+    <tr><td class="wrap">7 Gate 2 · Code Review + ✋ Checkpoint 2</td><td>Clean-core and security review; findings are fixed and re-reviewed; you approve the code</td><td><code>05-code-review.md</code></td></tr>
+    <tr><td class="wrap">8 Lint</td><td>Scans the code against the ABAP Cloud rules</td><td><code>06-lint.md</code></td></tr>
+    <tr><td class="wrap">9 Unit Test Design</td><td>ABAP Unit tests mapped to the acceptance criteria</td><td><code>07-unit-tests.md</code></td></tr>
+    <tr><td class="wrap">10 Technical Design</td><td>The TD, written from the code that was built, with a tenant verification checklist</td><td><code>08-technical-design.md</code></td></tr>
+    <tr><td class="wrap">11 Gate 3 · Peer Review + ✋ Checkpoint 3</td><td>A challenger tries to break the design; you accept the delivery</td><td><code>09-peer-review.md</code></td></tr>
+    <tr><td class="wrap">12 Package</td><td>Deliverables list, transport order, go-live checklist; lessons saved for future runs</td><td><code>10-package.md</code></td></tr>
+  </tbody>
+</table>
+
+<h2>4.3 Answering a checkpoint</h2>
+<p>When the run reaches a checkpoint, an amber decision panel appears at the top of the run in Workflow Explorer:</p>
+<ul>
+  <li><strong>✓ Approve:</strong> the run continues.</li>
+  <li><strong>✎ Adjust:</strong> write what should change in the notes. The pipeline reworks that part and asks again.</li>
+  <li><strong>✕ Reject:</strong> the run stops at this point.</li>
+</ul>
+<p>At Checkpoint 1 you also lock the custom object names (<strong>Approve &amp; lock names</strong>). At Checkpoint 2 you can comment on individual files, or <strong>Approve code as-is</strong>.</p>
+
+<h1>5. Run the Enhancement Pipeline (existing code)</h1>
+
+<h2>5.1 Try the demo first</h2>
+<p>Open <strong>Enhancement Pipeline</strong> in the sidebar. Under <strong>Bundles</strong> you'll find <code>AMS-DEMO-001</code>, a small supplier-rating app with a change request ("low ratings need a comment"). Press <strong>Start run</strong> and follow it through to the end once before using your own code.</p>
+
+<h2>5.2 Create your enhancement</h2>
+<p>Under <strong>Enhancement</strong>, fill in:</p>
+<table>
+  <thead><tr><th>Field</th><th>What to give</th></tr></thead>
+  <tbody>
+    <tr><td class="wrap">Enhancement ID</td><td>Your ticket or CR number, for example <code>CR-1234</code></td></tr>
+    <tr><td class="wrap">1 · Requirement or CR document</td><td>Exactly one file: <code>.docx</code>, <code>.pdf</code>, <code>.md</code> or <code>.txt</code></td></tr>
+    <tr><td class="wrap">2 · Existing technical design</td><td>The TD as it is, even if it's out of date (recommended)</td></tr>
+    <tr><td class="wrap">3 · Current code</td><td>The source of the objects being changed, as files or one <code>.zip</code>. Only the objects being changed are needed; if more turn out to be needed, the pipeline asks for them by name at Checkpoint 1.</td></tr>
+    <tr><td class="wrap">Code copied from tenant</td><td>Which tenant the code came from, for example <em>development</em></td></tr>
+    <tr><td class="wrap">Same as production?</td><td>Yes, no or not sure</td></tr>
+  </tbody>
+</table>
+<p>Click <strong>Create bundle</strong>. The enhancement then appears under <strong>Bundles</strong>; press <strong>Start run</strong>.</p>
+<div class="note"><strong>Why the code and not only the TD:</strong> the TD says what was designed, but the code is what actually runs. A hotfix nobody documented lives only in the code, and a change built from the TD alone would quietly remove it.</div>
+<div class="note">Never upload passwords, keys, tokens, or business data with personal details. The upload blocks the credentials it recognises.</div>
+
+<h2>5.3 What each step does and what you get</h2>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Output in <code>ams\output\&lt;ID&gt;\</code></th></tr></thead>
+  <tbody>
+    <tr><td class="wrap">0 Baseline analysis</td><td>Freezes a copy of your inputs, works out what the code does today rule by rule, and lists where the TD and the code disagree. Problems already in the code are recorded as pre-existing findings, not fixed without being asked.</td><td><code>00-as-built.md</code></td></tr>
+    <tr><td class="wrap">1 Intake and impact</td><td>Bug or change request, what changes, what depends on it, size SMALL or LARGE</td><td><code>01-intake-impact.md</code></td></tr>
+    <tr><td class="wrap">2 Change design</td><td>The exact change for each acceptance criterion, regression scope, names. For a bug fix: the root cause and the minimal fix.</td><td><code>02-change-design.md</code></td></tr>
+    <tr><td class="wrap">✋ Checkpoint 1</td><td>You confirm the pipeline understood the code, and approve the design</td><td><code>cp1.md</code></td></tr>
+    <tr><td class="wrap">3 Build</td><td>The change is applied to copies of your files. Lines that aren't part of the change stay byte-for-byte identical.</td><td><code>changed\</code>, <code>diffs\</code>, <code>03-change-set.md</code></td></tr>
+    <tr><td class="wrap">4 Review and tests</td><td>Clean-core and security review of the diffs; tests per acceptance criterion plus regression tests</td><td><code>04-review-and-tests.md</code></td></tr>
+    <tr><td class="wrap">✋ Checkpoint 2</td><td>You approve the code changes and the test evidence</td><td><code>cp2.md</code></td></tr>
+    <tr><td class="wrap">5 Package</td><td>Revised TD, objects to transport, retest steps, rollback plan</td><td><code>05-package.md</code>, <code>05-td-revision.md</code></td></tr>
+    <tr><td class="wrap">✋ Checkpoint 3</td><td>You accept the delivery</td><td><code>cp3.md</code></td></tr>
+  </tbody>
+</table>
+
+<h2>5.4 Answering a checkpoint</h2>
+<p>The checkpoint box says in plain English what was done and what you need to decide. Answer with <strong>Approve</strong>, <strong>Adjust</strong> (with notes) or <strong>Reject</strong>.</p>
+<p>Under <strong>Deliverables</strong>, <strong>Documents</strong> holds the main reports and <strong>Code changes</strong> shows what changed in each file. The <strong>Technical files</strong> list can usually be ignored.</p>
+<p>If a step fails before it reaches its checkpoint, the page shows the error and a <strong>Retry phase</strong> button. Retrying never records a decision twice.</p>
+
+<h1>6. Running from Claude Code instead of the dashboard</h1>
+<p>From the tool folder, in Claude Code:</p>
+<ul>
+  <li><strong>12-step pipeline:</strong> <code>/run-pipeline input/&lt;your FD file&gt;</code></li>
+  <li><strong>Enhancement Pipeline:</strong> <code>/ams-change ams/input/&lt;ID&gt;</code> (create the folder first with <code>python -I ams/ams_tool.py init &lt;ID&gt;</code>)</li>
+</ul>
+<p>You then answer the checkpoints in the chat.</p>
+
+<h1>7. Stopping</h1>
+<ul>
+  <li>Double-click <code>SHUTDOWN.cmd</code>, or close the black window.</li>
+  <li>If you started on a different port (section 3), <code>SHUTDOWN.cmd</code> reports "not running". Close the black window, or press <kbd>Ctrl+C</kbd> in it, instead.</li>
+</ul>
+<p>Your runs stay in <code>output\</code> and <code>ams\output\</code> and are there the next time you start.</p>
+
+<h1>8. Troubleshooting</h1>
+<table>
+  <thead><tr><th>What you see</th><th>What to do</th></tr></thead>
+  <tbody>
+    <tr><td class="wrap">Python 3 not found</td><td>Install Python (section 1) with "Add python.exe to PATH" ticked, then open a new window</td></tr>
+    <tr><td class="wrap">The system cannot find the file START.cmd</td><td>You're in the wrong folder. Run <code>cd /d C:\S4PC-Catalyst</code> first.</td></tr>
+    <tr><td class="wrap">The browser shows another dashboard, or the page won't load</td><td>Port 8321 is in use. Start on 8322 (section 3).</td></tr>
+    <tr><td class="wrap">Pages stay on "Loading…"</td><td>Refresh the page. If it persists, stop and start the dashboard.</td></tr>
+    <tr><td class="wrap">▶ Run pipeline says the CLI isn't found</td><td>Check that <code>claude --version</code> works in a new Command Prompt. If Claude Code is installed somewhere unusual, run <code>set S4PC_CLAUDE_BIN=&lt;full path to claude.exe&gt;</code> before <code>START.cmd</code>.</td></tr>
+    <tr><td class="wrap">A step fails with "version 2.1.280 or newer is required"</td><td>Run <code>claude update</code>, then <strong>Retry phase</strong> (Enhancement) or <strong>Re-run</strong> (12-step)</td></tr>
+    <tr><td class="wrap">"The latest phase ran without the MCP server"</td><td>Expected on managed laptops, where policy blocks the governance server in background runs. The checks still run through the tool's command-line channel, and the note shows how many were made.</td></tr>
+    <tr><td class="wrap">A Word document can't be read</td><td>Save it as PDF or plain text and upload that instead</td></tr>
+  </tbody>
+</table>
+
+<h1>9. Good to know</h1>
+<ul>
+  <li><strong>Clean core is enforced:</strong> only SAP-released APIs, CDS views and BAdIs are used. No BAPIs and no classical ABAP.</li>
+  <li><strong>The results still need checking in your tenant:</strong> each package ends with a tenant verification checklist. Tests are designed and checked by the pipeline but run in ADT, in your system.</li>
+  <li><strong>Your files stay on your laptop:</strong> inputs, outputs and decisions are files in the tool folder, and every decision is recorded in the run's <code>run.json</code> and <code>decisions\</code> folder. To do the work, the text of your documents and code is processed by Claude through your organisation's Claude Code account.</li>
+  <li>Confidential, internal use only. See <code>ACCESS-AND-IP.md</code>.</li>
+</ul>
+
+  </main>
+  <footer>
+    S4PC Catalyst · User Guide · Version 1.0 · October 2026<br />
+    GrowActivAIte · CodeX — Accenture SAP CoE · Confidential, internal use only
+  </footer>
+</body>
+</html>

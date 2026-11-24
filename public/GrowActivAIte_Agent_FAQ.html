@@ -420,11 +420,11 @@
     <a class="toc-link" href="#agent-08">
       <span class="toc-num">8</span>Functional Design Document Phase 1
     </a>
-    <a class="toc-link" href="#agent-09">
-      <span class="toc-num">9</span>KDD &amp; BDCQ User Guide – Explore Phase Accelerator
-    </a>
     <a class="toc-link" href="#agent-10">
       <span class="toc-num">10</span>Functional Design Document – Phase 2 (Form FD Generator)
+    </a>
+    <a class="toc-link" href="#agent-24">
+      <span class="toc-num">24</span>Explore Accelerator (BPD · KDD · F2S · BDCQ)
     </a>
 
     <div class="toc-section-label">Phase: Realize</div>
@@ -460,6 +460,15 @@
     </a>
     <a class="toc-link" href="#agent-22">
       <span class="toc-num">22</span>SAP Code Reviewer (Code Quality / Impact Analysis)
+    </a>
+    <a class="toc-link" href="#agent-23">
+      <span class="toc-num">23</span>Test Strategy Generator (Quality Engineering)
+    </a>
+    <a class="toc-link" href="#agent-25">
+      <span class="toc-num">25</span>Data Strategy Builder (Data Agent)
+    </a>
+    <a class="toc-link" href="#agent-26">
+      <span class="toc-num">26</span>S4PC Catalyst – RCEFW Builder (both pipelines)
     </a>
 
     <div class="toc-section-label">Phase: Run</div>
@@ -1576,379 +1585,6 @@
   </div><!-- /#agent-08 -->
 
   <!-- AGENT 9: KDD & BDCQ USER GUIDE -->
-  <div class="agent-card" id="agent-09" style="margin-top:24px; border-radius:12px;">
-    <div class="agent-header">
-      <div class="agent-icon">🔍</div>
-      <div class="agent-header-text">
-        <div class="agent-number">Agent 09</div>
-        <div class="agent-name">KDD &amp; BDCQ User Guide – SAP S/4HANA Cloud PE Explore Phase Accelerator</div>
-        <div class="agent-tags">
-          <span class="tag tag-phase">Explore</span>
-          <span class="tag tag-type">KDD Generation</span>
-          <span class="tag tag-group">Solution Confirmation Agent</span>
-        </div>
-      </div>
-    </div>
-    <div class="agent-body">
-      <div class="faq-list">
-
-        <p style="margin:16px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Getting Started</p>
-
-        <details open>
-          <summary><span class="q-label">Q1</span>Do I need to pay for anything?</summary>
-          <div class="answer">
-            <p>You need a <strong>Claude subscription</strong> (claude.ai — any paid plan). The tool uses your existing subscription with no extra charges per use and no API key required. Node.js is free. The tool itself is free.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q2</span>What exactly do I need to install before I can use this?</summary>
-          <div class="answer">
-            <p>Three things, in this order:</p>
-            <ol>
-              <li><strong>Node.js</strong> (LTS) — from nodejs.org. One-time install.</li>
-              <li><strong>Claude CLI</strong> — from claude.ai/code. One-time install. Sign in once when prompted.</li>
-              <li><strong>The tool itself</strong> — unzip, run <code>SETUP.bat</code> once, then <code>START.bat</code> every time you use it.</li>
-              <li><strong>SAP Deck Agent Chrome extension</strong> — only needed to download SAP data files. Load it once in Chrome.</li>
-            </ol>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q3</span>How do I verify everything is installed correctly?</summary>
-          <div class="answer">
-            <p>Open a new terminal and run these two commands:</p>
-            <p><code>node --version</code> → should return something like <code>v20.x.x</code></p>
-            <p><code>claude --version</code> → should return something like <code>2.x.x (Claude Code)</code></p>
-            <p>If both work, run <code>START.bat</code> and open <code>http://localhost:8321</code> in your browser.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q4</span>Can I install this on my Accenture laptop?</summary>
-          <div class="answer">
-            <p>Yes. It runs entirely locally, installs nothing to the Windows registry, and doesn't require admin rights beyond the initial Node.js and Claude CLI installers. If IT restrictions block those installers, ask your project lead to raise a request.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q5</span>Do I need to run SETUP.bat every time?</summary>
-          <div class="answer">
-            <p>No — only once after first unzip, and once again after any update. <code>SETUP.bat</code> installs the app's libraries. After that, just use <code>START.bat</code>.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q6</span>Can multiple people on the project use this?</summary>
-          <div class="answer">
-            <p>Currently each person installs and runs their own copy locally. The tool is designed for one user per machine. A shared hosted version is on the roadmap.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Chrome Extension (SAP Deck Agent)</p>
-
-        <details>
-          <summary><span class="q-label">Q7</span>Which browser does the Chrome extension work in?</summary>
-          <div class="answer">
-            <p>Chrome only. The web app itself at <code>localhost:8321</code> works in any modern browser, but the SAP Deck Agent extension that downloads SAP data files requires Chrome.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q8</span>The extension opened an SAP login tab and the file wasn't saved.</summary>
-          <div class="answer">
-            <p>This is an SAP SSO session refresh. The current version handles this automatically — it waits for the login tab to close, then retries the download. If it still stalls after the tab closes: confirm you are logged into SAP, then click the save button again. Do not close the extension popup while waiting.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q9</span>I clicked Save and the folder picker appeared, but the file still didn't save.</summary>
-          <div class="answer">
-            <p>Make sure you selected the <strong>tool folder</strong> (the one containing <code>server.js</code> and <code>START.bat</code>) when the folder picker opened. The extension writes directly into that folder. If you selected the wrong folder, click save again and pick the correct one.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q10</span>The extension says "Folder access expired."</summary>
-          <div class="answer">
-            <p>Browser permissions for folder access time out between sessions. Click the save button again — the extension will re-open the folder picker. This is normal browser security behaviour.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q11</span>The extension scanned the page but found no files.</summary>
-          <div class="answer">
-            <p>Three things to check:</p>
-            <ol>
-              <li>You are on the correct SAP page — Roadmap Viewer for BDCQ, Process Navigator for scope catalog.</li>
-              <li><strong>Developer mode</strong> is turned on in <code>chrome://extensions</code>.</li>
-              <li>The file list is visible and fully loaded on screen — scroll down so items render, then click <strong>Scan Again</strong>.</li>
-            </ol>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q12</span>How often do I need to re-download SAP data?</summary>
-          <div class="answer">
-            <p><strong>BDCQ questions:</strong> once per project — they don't change between sessions.</p>
-            <p><strong>Scope catalog:</strong> every 6 months, when SAP releases a new version (February and August). The app will warn you if your catalog is outdated.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">BDCQ Enrichment</p>
-
-        <details>
-          <summary><span class="q-label">Q13</span>What does "enrichment" actually add to the BDCQ questions?</summary>
-          <div class="answer">
-            <p>Three lenses applied to every question:</p>
-            <ul>
-              <li><strong>Country localisation</strong> — flags statutory/mandatory items for the client's country (tax, payroll, banking regulations). Mandatory items come pre-answered.</li>
-              <li><strong>Industry context</strong> — adds sub-questions and considerations specific to the client's sector (Manufacturing, Retail, Pharma etc.).</li>
-              <li><strong>Cloud PE constraints</strong> — highlights where standard SAP configuration is fixed and where BTP extensions are the only path.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q14</span>Can I enrich just some domains, not all of them?</summary>
-          <div class="answer">
-            <p>Yes. On the BDCQ screen you can select specific domains before enriching. You don't have to process the entire questionnaire at once.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q15</span>What do the "mandatory" flags mean in the output?</summary>
-          <div class="answer">
-            <p>A question marked mandatory has a statutory requirement in the client's country that must be answered in a specific way — for example India GST e-invoicing or Germany XRechnung compliance. These are pre-answered based on localisation rules so you don't have to research them during the workshop.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q16</span>Can I run BDCQ enrichment for multiple countries on one project?</summary>
-          <div class="answer">
-            <p>Yes. Select all relevant countries before generating — the enrichment runs in one pass and adds country-specific rows (tagged "Local – India", "Local – Germany" etc.) for each selected country. Useful for rollout projects covering multiple regions.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">KDD Generation</p>
-
-        <details>
-          <summary><span class="q-label">Q17</span>How long does KDD generation take?</summary>
-          <div class="answer">
-            <p>Roughly <strong>60–105 seconds per scope item</strong> in AI mode. Up to 3 scope items run in parallel, so larger sets don't scale linearly. Cache hits (scope items generated before) complete in <strong>under 5 seconds</strong> with no AI call at all. You can monitor live progress in the status panel.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q18</span>What is the difference between Fast mode and AI mode?</summary>
-          <div class="answer">
-            <p><strong>Fast mode</strong> — returns cached results instantly. No Claude call is made, no tokens used. Use this when you have already generated for these scope items and want the Excel quickly.</p>
-            <p><strong>AI mode</strong> — runs the full 5-agent pipeline (Cache → Library → Context → Generation → Validation). Use this for first-time generation or when you want fresh, up-to-date output.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q19</span>How many scope items should I do in one run?</summary>
-          <div class="answer">
-            <p>5–10 is comfortable. You can do more, but very large sets (20+) take longer and are harder to review in one sitting. Run scope items in batches and combine the outputs in the KDD editor.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q20</span>Generation finished but I got 0 KDDs for one scope item.</summary>
-          <div class="answer">
-            <p>Claude's output failed the validation check twice (the tool retries automatically once). Most common causes are an unusually short process description in the catalog or a timeout. Use the <strong>Retry</strong> button on that item in the KDD editor to regenerate it individually.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q21</span>Can I stop a generation halfway through?</summary>
-          <div class="answer">
-            <p>Closing the browser tab stops the display, but the server continues generating in the background. To cancel completely, close the <code>START.bat</code> console window. Partially completed items are cached — restarting and generating again will only re-run the incomplete ones.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q22</span>Can I regenerate just one question without redoing everything?</summary>
-          <div class="answer">
-            <p>Yes. In the KDD editor, click the <strong>retry icon</strong> on any individual row to regenerate that specific question. The rest of the log is untouched.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q23</span>The tool keeps generating on-premise terms like ABAP or SAP GUI.</summary>
-          <div class="answer">
-            <p>This shouldn't happen — the Validation Agent automatically catches and replaces 25 forbidden on-premise terms. If you do see them in output, use the <strong>AI Suggest</strong> feature on that row for a Cloud PE-compliant replacement, or edit manually. If this happens frequently, let the tool owner know — the validation rules may need updating.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Output &amp; Files</p>
-
-        <details>
-          <summary><span class="q-label">Q24</span>Where does the Excel file go?</summary>
-          <div class="answer">
-            <p>All output files are saved to the <code>output\</code> folder inside the tool folder, and are also downloadable from the Output Files page in the app.</p>
-            <p>Filename format: <code>Accenture_KDD_&lt;Client&gt;_&lt;Project&gt;_&lt;Date&gt;.xlsx</code></p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q25</span>Can I re-export to Excel without regenerating?</summary>
-          <div class="answer">
-            <p>Yes. In the KDD editor, use the <strong>Export Excel</strong> button at any time. It exports the current state of the editor — including any manual edits — without calling Claude again.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q26</span>What are the 5 sheets in the Excel?</summary>
-          <div class="answer">
-            <ol>
-              <li><strong>Cover</strong> — client, project, date, scope count.</li>
-              <li><strong>Instructions</strong> — column guide and Cloud PE disclaimer.</li>
-              <li><strong>Scope Overview</strong> — one row per scope item with process summary.</li>
-              <li><strong>KDD Master Log</strong> — all KDD rows with every field, RAG status, RICEF classification, and workshop outcome columns.</li>
-              <li><strong>Summary</strong> — aggregated counts (Fit/Gap/Partial, RAG breakdown, complexity, RICEF types).</li>
-            </ol>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q27</span>What do the RAG colours mean?</summary>
-          <div class="answer">
-            <ul>
-              <li><strong>🟢 Green – Fit:</strong> Standard SAP configuration covers the requirement. No extension needed.</li>
-              <li><strong>🟡 Amber – Partial Fit:</strong> Some configuration or minor extension needed.</li>
-              <li><strong>🔴 Red – Gap:</strong> A gap requiring extension or a design decision with significant delivery impact.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q28</span>Can I export to PowerPoint?</summary>
-          <div class="answer">
-            <p>Yes — use the <strong>Export PPT</strong> button in the KDD editor. It generates a slide deck from the KDD log suitable for a workshop or steering committee presentation.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q29</span>My Excel export failed or is empty.</summary>
-          <div class="answer">
-            <p>Make sure <code>SETUP.bat</code> completed successfully — it installs the Excel builder. Do not delete the <code>output\</code> folder. If the problem persists, check the <code>START.bat</code> console window for an error message and share it with the tool owner.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Performance &amp; Quality</p>
-
-        <details>
-          <summary><span class="q-label">Q30</span>How accurate is the generated output? Do I need to review it?</summary>
-          <div class="answer">
-            <p>Always review before using in a workshop or sharing with a client. The tool generates a strong first draft grounded in the SAP process catalog and Cloud PE rules — but it does not know your specific client requirements. Treat the output as an intelligent starting point, not a finished deliverable.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q31</span>Generation is very slow or timed out.</summary>
-          <div class="answer">
-            <p>Check your internet connection first. If the connection is fine, the Claude service may be under load — wait a few minutes and retry. Individual scope items that time out will be flagged; use the Retry button on those items.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q32</span>Does the tool learn from my corrections?</summary>
-          <div class="answer">
-            <p>Yes. When you mark a decision as approved in the KDD editor, it is saved to the decisions library. The next time you generate KDDs for the same scope item on any project, the tool surfaces those past decisions as context so Claude produces more consistent, grounded output over time.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q33</span>Can I use the output directly in a client workshop?</summary>
-          <div class="answer">
-            <p>The Excel and PPT are formatted for professional use, but always review and apply your own judgement before presenting to a client. Adjust scope, complexity ratings, and decision options to match your specific engagement context.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Data &amp; Security</p>
-
-        <details>
-          <summary><span class="q-label">Q34</span>Does my client's data get sent anywhere?</summary>
-          <div class="answer">
-            <p>The only external call is to <strong>Claude</strong> (via the Claude CLI) for AI generation — the same as any Claude Code session. No data is sent to any other server. The Chrome extension communicates only with SAP domains. Everything else stays on your laptop.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q35</span>Where is my data stored?</summary>
-          <div class="answer">
-            <p>Entirely in the tool folder on your disk:</p>
-            <ul>
-              <li><code>bdcq\</code> — BDCQ question files</li>
-              <li><code>output\</code> — generated Excel and PPT files</li>
-              <li><code>decisions\</code> — saved approved decisions (the learning memory)</li>
-              <li><code>scope-catalog.json</code> — SAP process catalog</li>
-            </ul>
-            <p>Nothing is written to the cloud by the tool itself.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q36</span>Can someone else on the network access my running instance?</summary>
-          <div class="answer">
-            <p>No. The app binds to <code>127.0.0.1</code> (loopback only). It is not accessible from any other machine on your network — office, VPN, or client site.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q37</span>Is it safe to use on a client engagement?</summary>
-          <div class="answer">
-            <p>Follow your engagement's data-handling rules for anything you input and export. When processing client-confidential material, check with your project lead first. The tool itself does not log or transmit data beyond the Claude call needed for generation.</p>
-          </div>
-        </details>
-
-        <p style="margin:20px 0 8px; font-weight:700; font-size:0.8rem; color:#4F46E5; text-transform:uppercase; letter-spacing:0.07em; border-bottom:1px solid #E0E7FF; padding-bottom:4px;">Common Errors</p>
-
-        <details>
-          <summary><span class="q-label">Q38</span>"Claude CLI not installed" or "Claude CLI not found"</summary>
-          <div class="answer">
-            <ol>
-              <li>Install Claude CLI from claude.ai/code if you haven't already.</li>
-              <li>Open a <strong>new</strong> terminal and run <code>claude --version</code>.</li>
-              <li>If that works but the app still shows the error, close the <code>START.bat</code> console and reopen it — it needs to restart to pick up the updated PATH.</li>
-              <li>If Claude is installed in a non-standard location, set the environment variable <code>CLAUDE_PATH</code> to the full path of <code>claude.exe</code> before running <code>START.bat</code>.</li>
-            </ol>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q39</span>"Port 8321 is already in use"</summary>
-          <div class="answer">
-            <p>Another copy of the app is already running. Either use that instance by opening <code>http://localhost:8321</code>, or close the other console window and start again.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q40</span>"npm install failed" in SETUP.bat</summary>
-          <div class="answer">
-            <p>Node.js is not installed or not on your PATH. Install LTS from nodejs.org, open a fresh terminal, confirm <code>node --version</code> returns a version number, then re-run <code>SETUP.bat</code>.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q41</span>Page loads but shows a blank screen or spinner that never finishes.</summary>
-          <div class="answer">
-            <p>The server is still starting up. Wait 5–10 seconds and refresh the browser. If it still doesn't load, check the <code>START.bat</code> console window for errors.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary><span class="q-label">Q42</span>"No WRICEF items" when exporting the WRICEF inventory.</summary>
-          <div class="answer">
-            <p>WRICEF items only appear for rows classified as <strong>Gap</strong> or <strong>Partial</strong> with a WRICEF type assigned. Go to the KDD editor, find your Gap rows, and set the <strong>WRICEF Type</strong> column before exporting.</p>
-          </div>
-        </details>
-
-      </div>
-    </div>
-  </div><!-- /#agent-09 -->
 
   <!-- AGENT 10: FUNCTIONAL DESIGN PHASE 2 -->
   <div class="agent-card" id="agent-10" style="margin-top:24px; border-radius:12px;">
@@ -3400,6 +3036,1099 @@
       </div>
     </div>
   </div><!-- /#agent-22 -->
+
+  <div class="agent-card" id="agent-23" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🧪</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 23</div>
+        <div class="agent-name">Test Strategy Generator (Quality Engineering)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Test Strategy</span>
+          <span class="tag tag-group">Quality Engineering Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>Does anything leave my machine?</summary>
+          <div class="answer">
+            <p>Not when you run the agent on your machine (start.bat). Documents are read there, the narrative comes from a local model (Ollama), and work is saved in your browser and in a folder on your machine. The claude.ai artifact is different: Claude reads every document you add. Use it only with documents your engagement allows to be processed by Claude.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Does the agent learn from one client's SOW for the next?</summary>
+          <div class="answer">
+            <p>No. Saving a project stores that project only. Nothing from one engagement is used to fill in another.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Where is my work saved, and how do I share it?</summary>
+          <div class="answer">
+            <p>It's autosaved in the browser and, on your machine, on disk; the header shows when it last saved. <strong>⬇ Export file</strong> writes the whole project as one JSON file that a colleague can open with <strong>⬆ Import file</strong>. In Claude, the <strong>Saved Projects</strong> card also keeps named versions.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Why does a section show UNREAD?</summary>
+          <div class="answer">
+            <p>The readers found no table or wording they recognise for it. That's different from <em>none stated</em>, where the SOW genuinely doesn't cover the topic. Look for the section in the SOW. If it's there, note the page and layout and raise it, so the reader can learn that layout. The slide shows what's missing rather than a default.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Why is the RACI the "standard matrix"?</summary>
+          <div class="answer">
+            <p>The SOW states no RACI that the reader could find for testing. When it does — numbered rows by workstream, or a table by activity ("Phase | Activity | Description | Responsibility") — the strategy uses the SOW's own SIT and UAT rows, under the parties the SOW names, with each code as printed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Why are interfaces and integrations shown as one figure?</summary>
+          <div class="answer">
+            <p>They're the same objects. The figure comes from the SOW's RICEFW, in the SOW's own word ("Interfaces" or "Integrations"). The interface table only names the systems. The connected systems are a breakdown, never a second count. Integration scope items stay scope items.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>A scope item's name is flagged as "swapped" or "not SAP's". What does that mean?</summary>
+          <div class="answer">
+            <p>The SOW's name for that ID matches SAP's name for a <em>different</em> ID, or two rows carry each other's names. That's a question for the client, because the contract may mean either item. The agent tests the IDs as the SOW states them and never changes the SOW's names.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>A later document states a different number of scope items. Which is right?</summary>
+          <div class="answer">
+            <p>The SOW is the contract. The review lists the later document's total and each line of business that differs, as information, and the Open Points slide asks you to confirm the difference is understood. A typical cause is an item added or confirmed after the earlier document was written.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>I added a Fit-to-Standard document. Why weren't its changes applied?</summary>
+          <div class="answer">
+            <p>A later document only <em>proposes</em> changes. Tick the ones that are agreed in <strong>Changes since the SOW</strong> and click <strong>✓ Apply ticked changes</strong>. Unticked proposals become open points. A change request's changes start ticked, because a signed change request is contractual.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>What does "Before the SOW — tick to adopt" mean?</summary>
+          <div class="answer">
+            <p>The document is dated before the SOW, so the SOW supersedes it. Its differences are information unless you tick one to adopt it, and they're never ticked for you. If the date was read wrongly, correct it in the file list before comparing.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>Can a later document make the agent add acronyms or page numbers as scope items?</summary>
+          <div class="answer">
+            <p>No. In a document without a scope table, a three-character code counts as a scope item only if your SOW or SAP's index lists it. The review names the codes it set aside.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Why are some entry and exit criteria marked PROPOSED?</summary>
+          <div class="answer">
+            <p>The SOW doesn't state them. A criterion the SOW doesn't contain, such as a pass rate or a defect threshold, is only a suggestion until both sides agree it. Printing it as a criterion could become a go-live roadblock, so the agent keeps it below a "requires agreement" line. To record an agreement, use <strong>Edit Strategy</strong> and mark it <strong>AGREED</strong>, with who agreed it and when.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>How is the estimated number of test cases calculated?</summary>
+          <div class="answer">
+            <ul><li>One full SIT pass = scope items (one positive path each) + negative paths (one per positive path, PROPOSED unless the SOW requires negative testing) + interfaces (one case each) + custom objects (the non-interface RICEFW objects, a Complex one counted twice).</li><li>SIT 1 runs the full pass, and later SIT cycles run 60% of it for regression.</li><li>Each UAT cycle = the end-to-end scenarios + the user-facing RICEFW objects.</li><li>The <strong>How calculated</strong> line on the Test Plan slide shows the arithmetic for your SOW.</li></ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>Where do the number of cycles come from?</summary>
+          <div class="answer">
+            <p>From the SOW: its billing milestones, or the cycles it names in its milestones or test timeline (SIT 1, SIT 2, UAT). A model is asked only when the SOW names none, and anything it returns that isn't a test cycle is left out and named in the review. Check <strong>Cycles &amp; Gates</strong> if a count looks wrong.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Why does a custom object count twice?</summary>
+          <div class="answer">
+            <p>Complex objects need more cases. The agent uses each object's own complexity, or, where the RICEFW register states none, the Complex count the SOW's RICEFW summary gives for that type. A complexity the SOW doesn't state shows as "Not stated", never as a default.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>How are the UAT scenarios estimated?</summary>
+          <div class="answer">
+            <p>Until you enter the Fit-to-Standard scenarios, UAT is sized on a PROPOSED estimate: one scenario per business area SAP files the scope items under, or the SOW's line of business where SAP doesn't list them. Enter the real scenarios on <strong>Capacity Planning</strong>, one per line as "Name: scope item IDs".</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Can I change the assumptions (testers, hours per case, factors)?</summary>
+          <div class="answer">
+            <p>Yes. Change them on <strong>Capacity Planning → Tentative Test Plan</strong>. The deck slide and the Word section update with them.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>What's the difference between "Automate later" and a custom automate?</summary>
+          <div class="answer">
+            <p>They answer different questions:</p>
+            <ul><li><strong>Automate later</strong> is <em>when</em>. It's a verdict for a candidate worth automating once it has settled, from SIT 2 on.</li><li><strong>Custom automate</strong> is <em>how</em>. It's an automate the project would record and maintain itself in SAP TAT, because SAP ships none for that scope item.</li></ul>
+            <p>The strategy plans a scope item without an SAP-delivered automate as manual, since the SOW doesn't assume custom automates, so the two counts don't need to match.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Why are no scope items automated?</summary>
+          <div class="answer">
+            <p>SAP's automate index (S4H_640) isn't loaded. On your machine, run npm run kb:fetch once. Until then, automate availability is "not checked" and scope items are planned as manual. The artifact in Claude doesn't include SAP's index.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>Why is the first extraction so slow?</summary>
+          <div class="answer">
+            <p>On a laptop the local model runs on the CPU, so a large SOW takes minutes. Keep the tool's window open. A re-run of the same document is answered from the cache in seconds.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>The status chip says "Check setup" or "Not ready".</summary>
+          <div class="answer">
+            <p>Click it to see what's missing (Node, Ollama, a model) and how to fix it. If its details say the model is busy, an extraction is running. Wait for it to finish.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I use the agent in Claude instead?</summary>
+          <div class="answer">
+            <p>Yes, with the claude.ai artifact build. It's the same app, but Claude reads the documents, and the local extras (OCR, the local model, SAP's index, saved work on disk) aren't part of it. See the user guide, section 2.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>What goes into the Excel working pack?</summary>
+          <div class="answer">
+            <p>Scope, the test plan, the RTM, automation, dependencies, the RASCI, deliverables and milestones, plus SAP's <strong>Test Schedule (S4H_438)</strong>. You can import that sheet into SAP Cloud ALM, and once statuses are filled in, import it back on <strong>Cycles &amp; Gates</strong> to evaluate the gates.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-23 -->
+
+  <div class="agent-card" id="agent-24" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">⚡</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 24</div>
+        <div class="agent-name">Explore Accelerator (BPD · KDD · F2S · BDCQ)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Explore</span>
+          <span class="tag tag-type">Accelerator</span>
+          <span class="tag tag-group">Solution Confirmation Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What is the Explore Accelerator and who is it for?</summary>
+          <div class="answer">
+            <p>It is an AI-powered tool for Accenture SAP consultants working on SAP S/4HANA Cloud Public Edition implementations. It automates Business Process Documentation (BPD), Key Design Decisions (KDD), WRICEF registers, F2S workshop decks, and BDCQ workshop preparation during the SAP Activate Explore phase. Designed for functional consultants, solution architects, and project leads — no technical or coding knowledge required.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Does this tool work for SAP S/4HANA On-Premise or Private Cloud?</summary>
+          <div class="answer">
+            <p>No. The Explore Accelerator is built exclusively for <strong>SAP S/4HANA Cloud Public Edition</strong>. All output strictly follows Clean Core standards. On-premise configuration paths, custom ABAP, and traditional transactions (SE16, SM30, etc.) are never referenced.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Is the output AI-generated or does it come from SAP official content?</summary>
+          <div class="answer">
+            <p>Both. The process structure (L1 through L4) is grounded in the <strong>official SAP scope catalog</strong> — 657 processes from SAP for Me Process Navigator. The AI enriches this with swimlane layouts, activity steps, configuration guidance, and FTS assessments. Scope item IDs, process names, LOB groupings, and high-level flows always match SAP's own documentation.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>How long does it take to generate a BPD?</summary>
+          <div class="answer">
+            <p>Typically <strong>2–4 minutes</strong> for 3–5 scope items. Time scales with the number of items selected. You can monitor progress via the on-screen status bar.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>Can I generate outputs for multiple modules in one session?</summary>
+          <div class="answer">
+            <p>Each BPD generation is for one module at a time. If your project spans multiple modules (e.g., Manufacturing + Sourcing &amp; Procurement), generate a separate BPD per module and combine them in the final deliverable.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>How do I keep the scope catalog up to date?</summary>
+          <div class="answer">
+            <p>SAP releases a new catalog version every February and August. If your catalog is more than 6 months old, a warning banner appears. Re-export by opening SAP for Me Process Navigator in Chrome → click the extension icon → Load Full Catalog → Save to Cartridge → select the application folder.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>When should I use each agent?</summary>
+          <div class="answer">
+            <ul><li>📋 <strong>F2S Agent</strong> — Run first. Discovery workshop with the client to confirm fit/gap.</li><li>📄 <strong>BPD Agent</strong> — After the workshop. Detailed L2–L5 process documentation.</li><li>📊 <strong>KDD Generator</strong> — Formal recording and tracking of design decisions.</li><li>🔧 <strong>WRICEF Inventory</strong> — Sizing and classifying custom development objects.</li><li>❓ <strong>BDCQ Enricher</strong> — Pre-workshop preparation of localised question briefs.</li></ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Is the generated content confidential? Does it get sent to external servers?</summary>
+          <div class="answer">
+            <p>The tool sends your prompts to Anthropic's Claude AI API to generate content. Your prompt text, including the process description and client name, is sent to Anthropic's infrastructure. Do not include highly sensitive personal data, unreleased financial results, or content covered by a client NDA that prohibits sharing with third-party AI services. Refer to your engagement's data handling guidelines.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>The auto-fill selected the wrong module. What should I do?</summary>
+          <div class="answer">
+            <p>Change the Module dropdown manually. Once corrected, scope item suggestions automatically refresh. Any items pre-selected from the previous module are cleared — review and re-select the relevant ones.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>The auto-fill pre-selected scope items that are not relevant. Is that expected?</summary>
+          <div class="answer">
+            <p>Yes — auto-selection is a suggestion, not a final answer. It scores scope items based on keyword overlap between your description and the scope catalog. Review the pre-selected items and untick anything out of scope. It is normal to remove 1–3 suggestions and add 1–2 that were missed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>I pasted my description but nothing happened — the form did not auto-fill.</summary>
+          <div class="answer">
+            <p>Auto-fill triggers approximately 1.2 seconds after you stop typing. If nothing happens after 5 seconds, check: <ol><li>The server is running — status indicator should be green at the top of the page</li><li>Your description is at least a few sentences — very short inputs may not have enough context</li><li>Click somewhere else on the page after pasting to ensure the input event fires</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Generation stopped partway through and showed an error. What do I do?</summary>
+          <div class="answer">
+            <p>Click <strong>Generate BPD</strong> again — the pipeline picks up from where it left off using intermediate caching. If the error repeats, check: <ol><li>The server is still running (check the terminal opened via START.bat)</li><li>Your internet connection is stable — AI calls need network access</li><li>If the error mentions "timed out", try reducing scope items and generating again</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>The swimlane diagram looks empty or shows an error.</summary>
+          <div class="answer">
+            <p>Swimlane generation depends on the process having clearly defined roles and steps. If the generated L3 areas have very little content (unusual scope items or very generic descriptions), the swimlane may be sparse. Enrich your description with more role-specific detail — for example: "the production planner runs the MRP job, the shop floor supervisor confirms the production order."</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>The FTS assessment shows everything as FIT. Is that accurate?</summary>
+          <div class="answer">
+            <p>This can happen when the process description closely matches standard SAP functionality. The AI is conservative — it flags GAP only when there is a clear mismatch between the described requirement and what Cloud PE delivers out of the box. Review GAP and PARTIAL FIT rows critically in your workshop. If you believe something should be flagged, note it manually in the Word document.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Can I edit the generated BPD before downloading?</summary>
+          <div class="answer">
+            <p>The on-screen output is not directly editable. Download the <strong>Word document (.doc)</strong> and edit it in Microsoft Word — you can add, remove, or modify any section, add client comments, or apply your firm's document template.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>The PDF looks different from the Word document. Which should I use?</summary>
+          <div class="answer">
+            <p>Use <strong>PDF</strong> for sharing with clients in read-only format — presentations, email attachments, formal sign-off. Use <strong>Word</strong> when you need to annotate, track changes, or incorporate the content into a larger document. The content is the same in both — formatting differs slightly due to different rendering engines.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>I navigated away from the BPD Agent and my document is gone. Can I recover it?</summary>
+          <div class="answer">
+            <p>No — the generated BPD is held in browser memory and is lost when you navigate away or refresh. Always download your PDF and Word documents immediately after generation before doing anything else in the app.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>Can I generate a BPD for a custom process not in the SAP scope catalog?</summary>
+          <div class="answer">
+            <p>The tool is optimised for standard SAP scope items. If you select scope items that are close to your process (even if not an exact match) and provide a detailed description, the AI will adapt accordingly. For highly custom processes with no analogous standard scope item, output quality will be lower.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>How do I know if my scope-catalog.json is up to date?</summary>
+          <div class="answer">
+            <p>The tool checks the SAP release embedded in the catalog and compares it to the current expected release. SAP releases every February and August. If your catalog is more than 6 months old, a warning banner appears showing which release your catalog is on. Re-export from SAP for Me Process Navigator using the Chrome extension.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>The KDD log has some answers pre-filled. Where did they come from?</summary>
+          <div class="answer">
+            <p>Pre-filled answers come from the <strong>past decisions library</strong> — approved design decisions from previous Accenture SAP Cloud PE projects. These represent common patterns grounded in real client decisions. Review each pre-filled answer to confirm it is appropriate for your specific client context before presenting in a workshop.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Some KDD rows say "RICEF" in the notes. What does that mean?</summary>
+          <div class="answer">
+            <p>RICEF stands for Reports, Interfaces, Conversions, Extensions, and Forms — the classification for custom development work. The KDD Generator automatically classifies GAP and PARTIAL FIT decisions by RICEF type so the project team can estimate effort. In Cloud PE, RICEF items are delivered via SAP BTP or Key User Extensions — never traditional ABAP.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I regenerate KDDs for the same scope item to get different output?</summary>
+          <div class="answer">
+            <p>Yes, but the cache means you will get the same output unless you clear it first. Go to <strong>Settings → Clear KDD Cache</strong> and clear the relevant entries, then regenerate.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>The Excel downloaded but some cells are empty. Is that a problem?</summary>
+          <div class="answer">
+            <p>A small number of empty cells is normal — not every design question applies to every process. Fields like "Integration Impact" or "Output Format" may be blank for processes with no outputs or integrations. If entire rows are empty (KDD ID but no content), this may indicate a generation error — try regenerating just those scope items individually.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>What is the difference between the F2S Agent and the BPD Agent?</summary>
+          <div class="answer">
+            <p>The <strong>F2S Agent</strong> generates a workshop facilitation deck — a PowerPoint you run with the client to discover requirements and confirm fit/gap against SAP standard. The <strong>BPD Agent</strong> generates process documentation — a detailed L2–L5 design document you produce after the workshop to record the agreed process. Use F2S first, then BPD.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>The preview table shows 0 BDCQ questions for a scope item. Will the deck still work?</summary>
+          <div class="answer">
+            <p>Yes. When no questions are matched by scope item ID, the tool automatically falls back to questions at the LOB level, then at the full domain level. The deck will still contain relevant questions — just drawn from the broader LOB pool rather than being specific to that exact scope item. To get more targeted questions, ensure your <code>bdcq/bdcq-questions.json</code> is up to date.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>What does the "Countries" field do in the F2S Agent?</summary>
+          <div class="answer">
+            <p>Entering one or more countries enables localisation of workshop questions. For example, entering "United Kingdom" flags VAT-relevant questions as mandatory; "Germany" flags e-invoicing and GoBD compliance questions. Multiple countries can be entered for multi-country rollouts — the deck notes which questions are country-specific and which are global.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>The F2S deck does not include questions for one of my scope items. Why?</summary>
+          <div class="answer">
+            <p>Check the preview table before generating. If a scope item shows "Not in catalog" the ID is not found in either the scope catalog or the F2S index. Verify the ID is correct — IDs are case-sensitive and must match the SAP catalog format exactly (e.g., <code>BD6</code> not <code>bd6</code>). If correct, your catalog may be outdated — re-export from SAP for Me Process Navigator.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Can I change the brand colour in the deck?</summary>
+          <div class="answer">
+            <p>Yes. The <strong>Brand Colour</strong> field accepts any hex colour code (e.g., <code>#A100FF</code> for Accenture purple, <code>#0070F3</code> for blue). The colour is applied to the cover slide, section headers, and table header rows throughout the deck. The default is Accenture purple (<code>#A100FF</code>).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>How long does the F2S deck take to generate?</summary>
+          <div class="answer">
+            <p>Typically <strong>30–90 seconds</strong> for 3–6 scope items. Generation time scales with scope item count and the volume of BDCQ questions available. The status bar shows progress during generation.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q30</span>Where do I get the BDCQ questions from?</summary>
+          <div class="answer">
+            <p>The BDCQ questions are published by SAP in the Roadmap Viewer. Use the Chrome extension to collect them: <ol><li>Open SAP Roadmap Viewer in Chrome</li><li>Navigate to Explore phase → Accelerators tab</li><li>Click the extension icon → Scan → Save BDCQ Files</li><li>Select the application folder — the file <code>bdcq/bdcq-questions.json</code> is created automatically</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>The enricher does not know my country's specific tax rules. What should I do?</summary>
+          <div class="answer">
+            <p>The tool covers statutory requirements for the most common implementation countries (US, UK, Germany, France, Netherlands, Australia, India, UAE, Saudi Arabia, Singapore, and others). If your country is not listed or has recently changed its regulations, add a note in the workshop brief and verify specific requirements with your local SAP tax consultant.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>The enriched BDCQ flagged several items as MANDATORY. What does that mean?</summary>
+          <div class="answer">
+            <p>MANDATORY items are statutory requirements — legal obligations the client must configure correctly regardless of preference. Typically tax-related (VAT, GST, withholding tax, e-invoicing) or local regulatory requirements (GDPR data residency, country-specific payment formats). Prioritise these in the workshop and confirm sign-off by the client's finance or legal team.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>The application does not start when I run START.bat.</summary>
+          <div class="answer">
+            <p>Check the following: <ol><li>Python is installed — open Command Prompt and type <code>python --version</code> (should show 3.9 or higher)</li><li>SETUP.bat was run first to create the virtual environment</li><li>Port 3000 is not in use by another application — try opening <code>http://localhost:3000</code> in a browser; if something else responds, stop that application first</li><li>Look at the terminal window opened by START.bat for red error messages — these describe the specific issue</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q34</span>Can multiple people use the tool at the same time?</summary>
+          <div class="answer">
+            <p>The application runs locally on a single laptop. For team use, one team member runs the server and shares their screen, or each consultant runs their own local instance. There is no shared server deployment in the current release.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>The Chrome extension is not showing up in my browser.</summary>
+          <div class="answer">
+            <p>Check that: <ol><li>Developer mode is enabled in <code>chrome://extensions</code></li><li>The extension was loaded from the correct folder (the <code>SAPDeckAgent-ChromeExtension</code> directory, not the zip file)</li><li>The extension does not show any error badge — if it does, click on it to see the error detail</li></ol></p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q36</span>How do I update the tool when a new version is released?</summary>
+          <div class="answer">
+            <p>Pull the latest code from the project repository and re-run <code>SETUP.bat</code> to pick up any new Python dependencies. Your existing <code>scope-catalog.json</code> and <code>bdcq/bdcq-questions.json</code> files are preserved — you do not need to re-export them unless they are outdated.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q37</span>What port does the application run on? Can I change it?</summary>
+          <div class="answer">
+            <p>The application runs on port <code>3000</code> by default and is accessible at <code>http://localhost:3000</code>. If port 3000 is in use, check the <code>START.bat</code> or configuration file for a port override option — or stop the conflicting application and restart.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-24 -->
+
+  <div class="agent-card" id="agent-25" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">🗃️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 25</div>
+        <div class="agent-name">Data Strategy Builder (Data Agent)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">Data Strategy</span>
+          <span class="tag tag-group">Data Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>How do I open the app?</summary>
+          <div class="answer">
+            <p>On the machine where it is installed, double-click <strong>Start_Previous_Version.bat</strong>, keep the console window open, and browse to <strong>http://127.0.0.2:8101</strong> in Edge or Chrome.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Do I need to install anything on my own laptop?</summary>
+          <div class="answer">
+            <p>No - the app runs in the browser. It needs the server running on the machine where it is installed, plus Microsoft Word there for PDF export.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>How long does a first strategy take?</summary>
+          <div class="answer">
+            <p>About 30-45 minutes to enter the inputs, plus four to five minutes for the AI to draft all sections.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Is there a demo?</summary>
+          <div class="answer">
+            <p>Yes - <strong>demo\Data_Strategy_Builder_Demo.mp4</strong> in the app folder walks through every step with narration, and the User Guide shows every screen.</p><h1><a id="_Toc243594244"></a>2. Accounts and security</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>How do I get an account?</summary>
+          <div class="answer">
+            <p>Click <strong>Create account</strong> on the sign-in screen: full name, work email and a password of at least 8 characters.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Can colleagues see my strategies?</summary>
+          <div class="answer">
+            <p>No. Every strategy, upload, template and export belongs to the account that created it; nobody else can see or open it. Only the SAP migration-object catalogue is shared by everyone.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>I forgot my password - can I reset it?</summary>
+          <div class="answer">
+            <p>There is no self-service reset (the app has no mail server). Ask the administrator to remove your account so you can register again with the same email; your strategies stay attached to that email.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Why is my account locked?</summary>
+          <div class="answer">
+            <p>Five wrong passwords lock the account for five minutes. Wait and try again.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>How long do I stay signed in?</summary>
+          <div class="answer">
+            <p>Seven days on the same browser. Sign out from your initials at the top right.</p><h1><a id="_Toc243594245"></a>3. Data and privacy</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>Where is my data stored?</summary>
+          <div class="answer">
+            <p>In the app's local database on the machine where it runs. Exports are saved there too.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>What is sent to Claude?</summary>
+          <div class="answer">
+            <p>The strategy facts you enter (project, sources, scope, objects, owners, principles, mock plan, roles) and the first part of the uploaded SOW text. Do not upload production data or personal data.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>Is the SOW file kept?</summary>
+          <div class="answer">
+            <p>No - only its text is kept; the file itself is not stored. The first part of the text is given to the drafting agents as context.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>Are commercial terms from the SOW used?</summary>
+          <div class="answer">
+            <p>No - the agents are instructed never to copy fees, rates or other commercial terms.</p><h1><a id="_Toc243594246"></a>4. Inputs and uploads</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>Which files can I upload?</summary>
+          <div class="answer">
+            <p>SOW: .docx, .pdf, .txt (max 20 MB) · RACI: .docx or .xlsx (max 10 MB) · Source systems: .xlsx or .csv (max 5 MB) · Scope IDs: .xlsx, .csv or text (max 5 MB) · Countries: .xlsx, .csv or .txt (max 5 MB) · Client Word template: .docx or .dotx (max 20 MB).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>Why are my countries not recognised?</summary>
+          <div class="answer">
+            <p>Countries are recognised by their <strong>full name</strong> only (for example Germany, United States of America). Codes such as DE or US are not accepted. A country not in the list can be added under <strong>Others…</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>What should I write under Extraction?</summary>
+          <div class="answer">
+            <p>How the client provides its <strong>raw source extracts</strong>: format, frequency and timing. The client does not prepare load templates - transformation is done by the migration workstream.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Which source types are available?</summary>
+          <div class="answer">
+            <p>SAP ECC, SAP S/4HANA (on-premise), SAP S/4HANA Public Cloud, Non-SAP ERP, Excel / files and Other. Direct Transfer needs an SAP ERP source; a Public Cloud source does not count for it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>Do I have to upload a RACI?</summary>
+          <div class="answer">
+            <p>No. Without an upload the strategy uses the standard RACI for the governance roles you tick in Step 5.</p><h1><a id="_Toc243594247"></a>5. Scope, objects and sequence</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Where do the migration objects come from?</summary>
+          <div class="answer">
+            <p>From SAP's Migration Cockpit object list (release 2608, 249 objects, 257 scope items). Each selected scope item brings its objects, and mandatory predecessors are added automatically.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>Can I add an object that no scope item brings in?</summary>
+          <div class="answer">
+            <p>Yes - <strong>+ Add object</strong> in Step 4. It stays whatever the scope items do.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Why are some objects switched off?</summary>
+          <div class="answer">
+            <p>Country-specific objects (for example for Brazil or Russia) are switched off when their country is not in scope.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>Can I change the migration sequence?</summary>
+          <div class="answer">
+            <p>No - it is read-only and computed from SAP's predecessors, so an invalid order cannot be built. If an order is wrong, raise it for SME review; it is corrected in the reference catalogue.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>What does the Depends On column show?</summary>
+          <div class="answer">
+            <p>The <strong>Predecessor Object</strong> of each object as given in the dependency workbook (Available Migration Objects with Dependency.xlsx) - "mandatory" follows a mandatory predecessor; "Not applicable" is shown where the workbook says so.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>Why does an object say "class to be confirmed"?</summary>
+          <div class="answer">
+            <p>Its master/transactional class is being confirmed by an SME. Until then it is placed by SAP's own object type.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>What are design decisions?</summary>
+          <div class="answer">
+            <p>Object-level choices that shape mapping and loads - for example internal or external number ranges. Recorded choices are stated as agreed; unanswered ones appear as proposed (with the Accenture recommendation) or open.</p><h1><a id="_Toc243594248"></a>6. Principles and mock loads</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>What if I change an Accenture default?</summary>
+          <div class="answer">
+            <p>The app asks for a justification, which is written into the document.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>Where do the mock load systems come from?</summary>
+          <div class="answer">
+            <p>From the <strong>Mock load plan</strong> in Step 5. Defaults: Mock 1 DEV, further mocks QA, Dress Rehearsal Pre-Prod, Production Cutover Production. Change them per engagement; the document uses exactly what you enter.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Why did the number of mock cycles change?</summary>
+          <div class="answer">
+            <p>The cycles follow the <strong>Mock loads</strong> and <strong>Dress rehearsal</strong> principles above the plan.</p><h1><a id="_Toc243594249"></a>7. Drafting and AI</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>Which AI writes the strategy?</summary>
+          <div class="answer">
+            <p>Claude (Anthropic). The header badge shows the model and the connection in use.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q30</span>Does the AI invent facts?</summary>
+          <div class="answer">
+            <p>It is instructed to use only your inputs. Anything missing is written as <strong>[TBC: …]</strong>. Tables such as scope, objects and the migration sequence are built by the app, not the AI.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>Will a redraft overwrite my edits?</summary>
+          <div class="answer">
+            <p>A redraft replaces the text of every <strong>unlocked</strong> section. Lock the sections you have edited or approved.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>I changed my inputs - is the draft updated?</summary>
+          <div class="answer">
+            <p>No. Regenerate the affected sections, or click <strong>Redraft unlocked sections</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>What if Claude is not connected?</summary>
+          <div class="answer">
+            <p>The app still works. Drafts are skeletons marked OFFLINE for you to complete. Click the header badge to test the connection.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q34</span>What is the AI Copilot?</summary>
+          <div class="answer">
+            <p>The chat panel on the right. It answers questions about your strategy and the SAP catalogue and proposes changes as buttons - nothing changes until you click one.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>Drafting failed for a section - what now?</summary>
+          <div class="answer">
+            <p>Click <strong>↻</strong> on that section to retry. If every section fails, test the Claude connection with the header badge.</p><h1><a id="_Toc243594250"></a>8. Review and export</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q36</span>What does the review check?</summary>
+          <div class="answer">
+            <p>Rule-based checks of your inputs (owners, open decisions, missing predecessors, [TBC] count) plus an optional AI review of the whole draft against your inputs.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q37</span>Which formats can I export?</summary>
+          <div class="answer">
+            <p>Word (the editable master), PDF (converted from Word, page for page) and PowerPoint (an executive summary deck).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q38</span>The table of contents is empty in Word.</summary>
+          <div class="answer">
+            <p>Allow Word to update the fields when it opens the document, or right-click the table of contents and choose <strong>Update Field</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q39</span>Can I use the client's Word template?</summary>
+          <div class="answer">
+            <p>Yes - upload a .docx or .dotx in Step 8 and select it. Its styles, headers and page setup are used.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q40</span>PDF export is slow or fails.</summary>
+          <div class="answer">
+            <p>The PDF is produced by Microsoft Word on the server; the first one can take about a minute. Without Word (or LibreOffice) on the server, export Word and save it as PDF yourself.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q41</span>Where are earlier versions?</summary>
+          <div class="answer">
+            <p>Step 8 · <strong>Version history</strong> keeps every export with a link to each format.</p><h1><a id="_Toc243594251"></a>9. Troubleshooting</h1>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q42</span>The page does not open.</summary>
+          <div class="answer">
+            <p>The app is not running: start <strong>Start_Previous_Version.bat</strong> and keep its window open.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q43</span>The header says Save failed.</summary>
+          <div class="answer">
+            <p>The connection to the app was lost. Check the console window is still open, then click <strong>Save now</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q44</span>I see an old screen after an update.</summary>
+          <div class="answer">
+            <p>Refresh the page (Ctrl + F5).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q45</span>Who do I contact?</summary>
+          <div class="answer">
+            <p>The administrator of your Data Strategy Builder installation.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-25 -->
+
+  <div class="agent-card" id="agent-26" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">⚙️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 26</div>
+        <div class="agent-name">S4PC Catalyst – RCEFW Builder (both pipelines)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">RICEFW Delivery</span>
+          <span class="tag tag-group">Intelligent Build Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What is S4PC Catalyst?</summary>
+          <div class="answer">
+            <p>A delivery assistant for SAP S/4HANA Cloud, Public Edition. It runs on your laptop with Claude Code and takes a requirement through design, build, review, tests and documentation. Only clean-core techniques are used, and it stops at three checkpoints where you decide.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Which pipeline should I use?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Something new has to be built from a Functional Design</strong> → 12-step pipeline (FD Intake page).</li>
+              <li><strong>Existing code has to change: a change request or an AMS enhancement</strong> → Enhancement Pipeline.</li>
+              <li><strong>Existing code has a bug</strong> → Enhancement Pipeline. It classifies the ticket as a bug fix, finds the root cause, makes the smallest fix, and writes a test that fails on the old code.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Does it replace the developer?</summary>
+          <div class="answer">
+            <p>No. It does the groundwork: analysis, a first build, reviews, tests and documents. You make the decisions at the three checkpoints. You also create the objects in ADT, run the tests and transport.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Which kinds of objects can it deliver?</summary>
+          <div class="answer">
+            <p>All RICEFW types: reports, interfaces, conversions, enhancements, forms and workflows. Each requirement is split into capabilities, and each capability gets the right mode: key user, developer (ABAP Cloud / RAP) or side-by-side on SAP BTP. Many solutions mix modes.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>What do I need on my laptop?</summary>
+          <div class="answer">
+            <p>Python 3.9 or newer, and Claude Code (version 2.1.280 or newer) signed in with your organisation's account. Nothing else: no pip packages, no Node.js, no admin rights. See section 1 of the User Guide.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Does it work on macOS or Linux?</summary>
+          <div class="answer">
+            <p>Yes. Run <code>./start.sh</code> instead of <code>START.cmd</code>. The User Guide describes Windows, because most of the team uses it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>Do I need a connection to an SAP tenant?</summary>
+          <div class="answer">
+            <p>No. Release checks use a catalog of SAP's released objects that ships with the tool. The tool has an optional, read-only live mode for a tenant, but neither pipeline needs it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Do I need an API key?</summary>
+          <div class="answer">
+            <p>No. Claude Code is the AI runtime, and it uses your organisation's Claude Code account. No API keys go into any file.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>What does the 12-step pipeline need?</summary>
+          <div class="answer">
+            <p>One Functional Design as <code>.docx</code>, <code>.pdf</code>, <code>.txt</code> or <code>.md</code>, or pasted text. Only the text of the document is read. If a diagram or screenshot carries important information, describe it in words in the FD.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>What does the Enhancement Pipeline need?</summary>
+          <div class="answer">
+            <p>Three inputs and two answers:</p>
+            <ul>
+              <li>the new requirement or CR document (exactly one file)</li>
+              <li>the existing Technical Design, as it is, even if it's out of date</li>
+              <li>the current code of the objects being changed</li>
+              <li>which tenant the code came from, and whether it matches production</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>Why does it need the code? Isn't the TD enough?</summary>
+          <div class="answer">
+            <p>The TD describes what was designed; the code is what actually runs. A hotfix nobody documented exists only in the code, and a change built from the TD alone would quietly remove it. The pipeline builds on the code and reports where the TD has drifted from it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>In what format should I give the code?</summary>
+          <div class="answer">
+            <p>Separate files, one <code>.zip</code>, or a single <code>.txt</code> with all the sources pasted in. File names don't matter, because the pipeline recognises classes, behaviour definitions, CDS views and CAP files by their content. Only the objects being changed are needed. If it needs another one, it asks for it by name at Checkpoint 1.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>What must I never upload?</summary>
+          <div class="answer">
+            <p>Passwords, keys, tokens, and business data with personal details. The Enhancement upload blocks credentials it recognises, but don't rely on that alone.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>What are the three checkpoints?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Checkpoint 1</strong> — <em>12-step:</em> approve the solution approach and lock the custom object names. <em>Enhancement:</em> confirm the pipeline understood the existing code, and approve the change design.</li>
+              <li><strong>Checkpoint 2</strong> — <em>12-step:</em> approve the built code (you can comment per file). <em>Enhancement:</em> approve the code changes and the test evidence.</li>
+              <li><strong>Checkpoint 3</strong> — both pipelines: accept the delivery.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>What do Approve, Adjust and Reject do?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Approve:</strong> the pipeline continues to the next step.</li>
+              <li><strong>Adjust:</strong> you write what should change. The pipeline reworks that part and comes back to the same checkpoint.</li>
+              <li><strong>Reject:</strong> the run stops at that point.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>Can the pipeline continue without me?</summary>
+          <div class="answer">
+            <p>It's designed to stop and wait at every checkpoint. Every decision is recorded with who made it and when. You can see it in the run's <strong>Human-in-the-loop decisions</strong> panel, and in <code>run.json</code> and the <code>decisions</code> folder. Check that panel before signing off a run: each checkpoint should show a person's decision.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Can I change the object names it proposes?</summary>
+          <div class="answer">
+            <p>Yes, at Checkpoint 1, before anything is built. After you lock the names, the build uses them exactly.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>How does it avoid unreleased or made-up SAP objects?</summary>
+          <div class="answer">
+            <p>Every SAP object is checked against the released-object catalog before it's used. The catalog comes from the SAP Business Accelerator Hub (api.sap.com) and is refreshed monthly. Each check returns a verdict and its evidence:</p>
+            <ul>
+              <li><strong>LIKELY_RELEASED with evidence <code>catalog_hit</code></strong> — found in the released catalog. Treated as released.</li>
+              <li><strong>LIKELY_RELEASED with evidence <code>naming_heuristic_only</code></strong> — only the name looks right; there's no catalog entry. Treated as unconfirmed and put on the tenant checklist.</li>
+              <li><strong>NOT_VERIFIED</strong> — can't be confirmed offline; to be checked in the tenant.</li>
+              <li><strong>NOT_AVAILABLE</strong> — not allowed (for example a BAPI or a classical table), or retired from the catalog. The design must change.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Is the generated code ready to transport?</summary>
+          <div class="answer">
+            <p>Not without your checks. The code passes an ABAP Cloud lint, a clean-core and security review, and a peer review. But the unit tests are designed, not executed; they have to run green in ADT. Every package also ends with a tenant verification checklist of things only your system can confirm.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>What does "pre-existing finding" mean in the Enhancement Pipeline?</summary>
+          <div class="answer">
+            <p>A problem that was already in the code before your change, for example a missing authorisation check. The pipeline records it so it isn't blamed on your change, and it doesn't fix it unless you bring it into scope at Checkpoint 1.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Will the Enhancement Pipeline touch code it wasn't asked to change?</summary>
+          <div class="answer">
+            <p>No. The change is applied as a diff to a copy of your code. Lines that aren't part of the approved design stay byte-for-byte identical, and the original files are kept for rollback.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>What do SMALL and LARGE mean?</summary>
+          <div class="answer">
+            <p>The size of the change. SMALL changes stay inside existing objects. LARGE changes create new objects with logic, change the extensibility mode or an interface contract. These get a fuller design with options and costs, and an extra challenger review.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>How long does a run take?</summary>
+          <div class="answer">
+            <p>It depends on the size of the requirement. The Smart Search example took about 70 minutes from start to finish in the 12-step pipeline, including the time at the first checkpoint. Time you spend deciding at a checkpoint is added on top.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>Can I run more than one pipeline at a time?</summary>
+          <div class="answer">
+            <p>Yes, up to two runs at once by default. They share the limit across both pipelines. A third waits until one finishes.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>Can I close the browser while it runs?</summary>
+          <div class="answer">
+            <p>Yes. The run continues as long as the black <code>START.cmd</code> window stays open and the laptop stays awake. Open the page again and pick the run.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>A step failed. What now?</summary>
+          <div class="answer">
+            <p>The page shows the step's own error. In the Enhancement Pipeline, press <strong>Retry phase</strong>; decisions already recorded are not repeated. In the 12-step pipeline, use <strong>Re-run</strong> to start a new version. Most failures are an outdated Claude Code (run <code>claude update</code>) or the laptop going to sleep.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>Why does it say "ran without the MCP server"?</summary>
+          <div class="answer">
+            <p>On managed laptops, company policy blocks the tool's governance server in background runs. The checks still run through the tool's command-line channel, and the note shows how many were made. Nothing needs fixing on your side.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Can I use it from Claude Code without the dashboard?</summary>
+          <div class="answer">
+            <p>Yes. Run <code>/run-pipeline input/&lt;FD file&gt;</code> or <code>/ams-change ams/input/&lt;ID&gt;</code> in Claude Code. You then answer the checkpoints in the chat.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>Does it deploy to the tenant?</summary>
+          <div class="answer">
+            <p>No. It produces the code, the documents and a package with a transport order. You create the objects in ADT and transport them. The only exception is side-by-side BTP solutions, which have an optional deploy step that needs its own approval.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q30</span>Where are my results?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>12-step pipeline:</strong> <code>output\&lt;RUN-ID&gt;\</code> in the tool folder.</li>
+              <li><strong>Enhancement Pipeline:</strong> <code>ams\output\&lt;ID&gt;\</code> in the tool folder.</li>
+            </ul>
+            <p>You can also read every document from the dashboard. On the Enhancement page, <strong>Documents</strong> holds the main reports and <strong>Code changes</strong> shows what changed in each file.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>Which documents should I read first?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>12-step:</strong> the solution proposal (02), the code review (05), the Technical Design (08) and the package (10).</li>
+              <li><strong>Enhancement:</strong> What the code does today, Change design, Review and tests, the Updated technical design and the Deployment package.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>Can I edit the documents?</summary>
+          <div class="answer">
+            <p>Yes. They're plain Markdown files. Edits you make outside the pipeline are not checked by it, so mention them at the next checkpoint or in your handover.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>Where does my data go?</summary>
+          <div class="answer">
+            <p>Your files and results are stored only in the tool folder on your laptop. To do the work, the text of your documents and code is processed by Claude through your organisation's Claude Code account, under your organisation's agreement for that service. The tool itself doesn't upload your files anywhere else.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q34</span>What does it cost?</summary>
+          <div class="answer">
+            <p>The tool itself costs nothing. Runs use your Claude Code allowance. Key-user and developer extensibility are included in the S/4HANA Cloud subscription. When a solution needs SAP BTP services, the proposal names each service, its pricing metric and its SAP Discovery Center page, so the cost is visible before you approve.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>Who do I contact with a problem or an idea?</summary>
+          <div class="answer">
+            <p>Your S4PC Catalyst lead. Include the run ID and the error shown on the page.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-26 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
