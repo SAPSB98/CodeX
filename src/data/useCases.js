@@ -184,12 +184,11 @@ export const phases = [
             description: 'Technical Design · RAP Code Generation · CAP Code Generation · UI Code Generation',
             status: 'released',
             agentCount: 4,
-            artifactUrl: 'https://claude.ai/artifacts/latest/66e02cb5-7040-436b-9bbe-63f191f0469b',
-            links: [
-              { icon: '🎬', label: 'Watch Demo Video · Part 1', url: 'https://mediaexchange.accenture.com/media/t/1_6qxk5vzb' },
-              { icon: '🎬', label: 'Watch Demo Video · Part 2', url: 'https://mediaexchange.accenture.com/media/t/1_1rhhze2n' },
-              { icon: '📄', label: 'S4PC Catalyst – User Guide', url: 'https://sapsb98.github.io/CodeX/docs/S4PC-Catalyst-User-Guide.html' },
-              { icon: '❓', label: 'S4PC Catalyst – FAQ', url: 'https://sapsb98.github.io/CodeX/GrowActivAIte_Agent_FAQ.html#agent-26' },
+            docs: [
+              { title: 'Demo Video · Part 1', subtitle: 'S4PC Catalyst walkthrough · Accenture Media Exchange', url: 'https://mediaexchange.accenture.com/media/t/1_6qxk5vzb', icon: '🎬', cta: 'Watch Video' },
+              { title: 'Demo Video · Part 2', subtitle: 'S4PC Catalyst walkthrough · Accenture Media Exchange', url: 'https://mediaexchange.accenture.com/media/t/1_1rhhze2n', icon: '🎬', cta: 'Watch Video' },
+              { title: 'User Guide', subtitle: 'Install, run both pipelines, checkpoints & troubleshooting', url: 'https://sapsb98.github.io/CodeX/docs/S4PC-Catalyst-User-Guide.html', icon: '📄', cta: 'Open Guide' },
+              { title: 'FAQ', subtitle: '35 questions on both pipelines · Agent 26 in the FAQ guide', url: 'https://sapsb98.github.io/CodeX/GrowActivAIte_Agent_FAQ.html#agent-26', icon: '❓', cta: 'Open FAQ' },
             ],
           },
           { id: 'form-wizard', title: 'Form Wizard', status: 'released', artifactUrl: 'https://sapsb98.github.io/CodeX/SAP_Adobe_Form_Wizard_v5.12.html', demoVideoUrl: 'https://mediaexchange.accenture.com/media/t/1_ld072i7e/412014342' },
