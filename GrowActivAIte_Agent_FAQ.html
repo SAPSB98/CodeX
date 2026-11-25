@@ -467,6 +467,9 @@
     <a class="toc-link" href="#agent-25">
       <span class="toc-num">25</span>Data Strategy Builder (Data Agent)
     </a>
+    <a class="toc-link" href="#agent-26">
+      <span class="toc-num">26</span>S4PC Catalyst – RCEFW Builder (both pipelines)
+    </a>
 
     <div class="toc-section-label">Phase: Run</div>
     <a class="toc-link" href="#agent-21">
@@ -3830,6 +3833,302 @@
       </div>
     </div>
   </div><!-- /#agent-25 -->
+
+  <div class="agent-card" id="agent-26" style="margin-top:24px; border-radius:12px;">
+    <div class="agent-header">
+      <div class="agent-icon">⚙️</div>
+      <div class="agent-header-text">
+        <div class="agent-number">Agent 26</div>
+        <div class="agent-name">S4PC Catalyst – RCEFW Builder (both pipelines)</div>
+        <div class="agent-tags">
+          <span class="tag tag-phase">Realize</span>
+          <span class="tag tag-type">RICEFW Delivery</span>
+          <span class="tag tag-group">Intelligent Build Agent</span>
+        </div>
+      </div>
+    </div>
+    <div class="agent-body">
+      <div class="faq-list">
+
+        <details open>
+          <summary><span class="q-label">Q1</span>What is S4PC Catalyst?</summary>
+          <div class="answer">
+            <p>A delivery assistant for SAP S/4HANA Cloud, Public Edition. It runs on your laptop with Claude Code and takes a requirement through design, build, review, tests and documentation. Only clean-core techniques are used, and it stops at three checkpoints where you decide.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q2</span>Which pipeline should I use?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Something new has to be built from a Functional Design</strong> → 12-step pipeline (FD Intake page).</li>
+              <li><strong>Existing code has to change: a change request or an AMS enhancement</strong> → Enhancement Pipeline.</li>
+              <li><strong>Existing code has a bug</strong> → Enhancement Pipeline. It classifies the ticket as a bug fix, finds the root cause, makes the smallest fix, and writes a test that fails on the old code.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q3</span>Does it replace the developer?</summary>
+          <div class="answer">
+            <p>No. It does the groundwork: analysis, a first build, reviews, tests and documents. You make the decisions at the three checkpoints. You also create the objects in ADT, run the tests and transport.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q4</span>Which kinds of objects can it deliver?</summary>
+          <div class="answer">
+            <p>All RICEFW types: reports, interfaces, conversions, enhancements, forms and workflows. Each requirement is split into capabilities, and each capability gets the right mode: key user, developer (ABAP Cloud / RAP) or side-by-side on SAP BTP. Many solutions mix modes.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q5</span>What do I need on my laptop?</summary>
+          <div class="answer">
+            <p>Python 3.9 or newer, and Claude Code (version 2.1.280 or newer) signed in with your organisation's account. Nothing else: no pip packages, no Node.js, no admin rights. See section 1 of the User Guide.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q6</span>Does it work on macOS or Linux?</summary>
+          <div class="answer">
+            <p>Yes. Run <code>./start.sh</code> instead of <code>START.cmd</code>. The User Guide describes Windows, because most of the team uses it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q7</span>Do I need a connection to an SAP tenant?</summary>
+          <div class="answer">
+            <p>No. Release checks use a catalog of SAP's released objects that ships with the tool. The tool has an optional, read-only live mode for a tenant, but neither pipeline needs it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q8</span>Do I need an API key?</summary>
+          <div class="answer">
+            <p>No. Claude Code is the AI runtime, and it uses your organisation's Claude Code account. No API keys go into any file.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q9</span>What does the 12-step pipeline need?</summary>
+          <div class="answer">
+            <p>One Functional Design as <code>.docx</code>, <code>.pdf</code>, <code>.txt</code> or <code>.md</code>, or pasted text. Only the text of the document is read. If a diagram or screenshot carries important information, describe it in words in the FD.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q10</span>What does the Enhancement Pipeline need?</summary>
+          <div class="answer">
+            <p>Three inputs and two answers:</p>
+            <ul>
+              <li>the new requirement or CR document (exactly one file)</li>
+              <li>the existing Technical Design, as it is, even if it's out of date</li>
+              <li>the current code of the objects being changed</li>
+              <li>which tenant the code came from, and whether it matches production</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q11</span>Why does it need the code? Isn't the TD enough?</summary>
+          <div class="answer">
+            <p>The TD describes what was designed; the code is what actually runs. A hotfix nobody documented exists only in the code, and a change built from the TD alone would quietly remove it. The pipeline builds on the code and reports where the TD has drifted from it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q12</span>In what format should I give the code?</summary>
+          <div class="answer">
+            <p>Separate files, one <code>.zip</code>, or a single <code>.txt</code> with all the sources pasted in. File names don't matter, because the pipeline recognises classes, behaviour definitions, CDS views and CAP files by their content. Only the objects being changed are needed. If it needs another one, it asks for it by name at Checkpoint 1.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q13</span>What must I never upload?</summary>
+          <div class="answer">
+            <p>Passwords, keys, tokens, and business data with personal details. The Enhancement upload blocks credentials it recognises, but don't rely on that alone.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q14</span>What are the three checkpoints?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Checkpoint 1</strong> — <em>12-step:</em> approve the solution approach and lock the custom object names. <em>Enhancement:</em> confirm the pipeline understood the existing code, and approve the change design.</li>
+              <li><strong>Checkpoint 2</strong> — <em>12-step:</em> approve the built code (you can comment per file). <em>Enhancement:</em> approve the code changes and the test evidence.</li>
+              <li><strong>Checkpoint 3</strong> — both pipelines: accept the delivery.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q15</span>What do Approve, Adjust and Reject do?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Approve:</strong> the pipeline continues to the next step.</li>
+              <li><strong>Adjust:</strong> you write what should change. The pipeline reworks that part and comes back to the same checkpoint.</li>
+              <li><strong>Reject:</strong> the run stops at that point.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q16</span>Can the pipeline continue without me?</summary>
+          <div class="answer">
+            <p>It's designed to stop and wait at every checkpoint. Every decision is recorded with who made it and when. You can see it in the run's <strong>Human-in-the-loop decisions</strong> panel, and in <code>run.json</code> and the <code>decisions</code> folder. Check that panel before signing off a run: each checkpoint should show a person's decision.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q17</span>Can I change the object names it proposes?</summary>
+          <div class="answer">
+            <p>Yes, at Checkpoint 1, before anything is built. After you lock the names, the build uses them exactly.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q18</span>How does it avoid unreleased or made-up SAP objects?</summary>
+          <div class="answer">
+            <p>Every SAP object is checked against the released-object catalog before it's used. The catalog comes from the SAP Business Accelerator Hub (api.sap.com) and is refreshed monthly. Each check returns a verdict and its evidence:</p>
+            <ul>
+              <li><strong>LIKELY_RELEASED with evidence <code>catalog_hit</code></strong> — found in the released catalog. Treated as released.</li>
+              <li><strong>LIKELY_RELEASED with evidence <code>naming_heuristic_only</code></strong> — only the name looks right; there's no catalog entry. Treated as unconfirmed and put on the tenant checklist.</li>
+              <li><strong>NOT_VERIFIED</strong> — can't be confirmed offline; to be checked in the tenant.</li>
+              <li><strong>NOT_AVAILABLE</strong> — not allowed (for example a BAPI or a classical table), or retired from the catalog. The design must change.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q19</span>Is the generated code ready to transport?</summary>
+          <div class="answer">
+            <p>Not without your checks. The code passes an ABAP Cloud lint, a clean-core and security review, and a peer review. But the unit tests are designed, not executed; they have to run green in ADT. Every package also ends with a tenant verification checklist of things only your system can confirm.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q20</span>What does "pre-existing finding" mean in the Enhancement Pipeline?</summary>
+          <div class="answer">
+            <p>A problem that was already in the code before your change, for example a missing authorisation check. The pipeline records it so it isn't blamed on your change, and it doesn't fix it unless you bring it into scope at Checkpoint 1.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q21</span>Will the Enhancement Pipeline touch code it wasn't asked to change?</summary>
+          <div class="answer">
+            <p>No. The change is applied as a diff to a copy of your code. Lines that aren't part of the approved design stay byte-for-byte identical, and the original files are kept for rollback.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q22</span>What do SMALL and LARGE mean?</summary>
+          <div class="answer">
+            <p>The size of the change. SMALL changes stay inside existing objects. LARGE changes create new objects with logic, change the extensibility mode or an interface contract. These get a fuller design with options and costs, and an extra challenger review.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q23</span>How long does a run take?</summary>
+          <div class="answer">
+            <p>It depends on the size of the requirement. The Smart Search example took about 70 minutes from start to finish in the 12-step pipeline, including the time at the first checkpoint. Time you spend deciding at a checkpoint is added on top.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q24</span>Can I run more than one pipeline at a time?</summary>
+          <div class="answer">
+            <p>Yes, up to two runs at once by default. They share the limit across both pipelines. A third waits until one finishes.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q25</span>Can I close the browser while it runs?</summary>
+          <div class="answer">
+            <p>Yes. The run continues as long as the black <code>START.cmd</code> window stays open and the laptop stays awake. Open the page again and pick the run.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q26</span>A step failed. What now?</summary>
+          <div class="answer">
+            <p>The page shows the step's own error. In the Enhancement Pipeline, press <strong>Retry phase</strong>; decisions already recorded are not repeated. In the 12-step pipeline, use <strong>Re-run</strong> to start a new version. Most failures are an outdated Claude Code (run <code>claude update</code>) or the laptop going to sleep.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q27</span>Why does it say "ran without the MCP server"?</summary>
+          <div class="answer">
+            <p>On managed laptops, company policy blocks the tool's governance server in background runs. The checks still run through the tool's command-line channel, and the note shows how many were made. Nothing needs fixing on your side.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q28</span>Can I use it from Claude Code without the dashboard?</summary>
+          <div class="answer">
+            <p>Yes. Run <code>/run-pipeline input/&lt;FD file&gt;</code> or <code>/ams-change ams/input/&lt;ID&gt;</code> in Claude Code. You then answer the checkpoints in the chat.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q29</span>Does it deploy to the tenant?</summary>
+          <div class="answer">
+            <p>No. It produces the code, the documents and a package with a transport order. You create the objects in ADT and transport them. The only exception is side-by-side BTP solutions, which have an optional deploy step that needs its own approval.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q30</span>Where are my results?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>12-step pipeline:</strong> <code>output\&lt;RUN-ID&gt;\</code> in the tool folder.</li>
+              <li><strong>Enhancement Pipeline:</strong> <code>ams\output\&lt;ID&gt;\</code> in the tool folder.</li>
+            </ul>
+            <p>You can also read every document from the dashboard. On the Enhancement page, <strong>Documents</strong> holds the main reports and <strong>Code changes</strong> shows what changed in each file.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q31</span>Which documents should I read first?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>12-step:</strong> the solution proposal (02), the code review (05), the Technical Design (08) and the package (10).</li>
+              <li><strong>Enhancement:</strong> What the code does today, Change design, Review and tests, the Updated technical design and the Deployment package.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q32</span>Can I edit the documents?</summary>
+          <div class="answer">
+            <p>Yes. They're plain Markdown files. Edits you make outside the pipeline are not checked by it, so mention them at the next checkpoint or in your handover.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q33</span>Where does my data go?</summary>
+          <div class="answer">
+            <p>Your files and results are stored only in the tool folder on your laptop. To do the work, the text of your documents and code is processed by Claude through your organisation's Claude Code account, under your organisation's agreement for that service. The tool itself doesn't upload your files anywhere else.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q34</span>What does it cost?</summary>
+          <div class="answer">
+            <p>The tool itself costs nothing. Runs use your Claude Code allowance. Key-user and developer extensibility are included in the S/4HANA Cloud subscription. When a solution needs SAP BTP services, the proposal names each service, its pricing metric and its SAP Discovery Center page, so the cost is visible before you approve.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="q-label">Q35</span>Who do I contact with a problem or an idea?</summary>
+          <div class="answer">
+            <p>Your S4PC Catalyst lead. Include the run ID and the error shown on the page.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </div><!-- /#agent-26 -->
 </section>
 
 <!-- ===== BACK TO TOP ===== -->
